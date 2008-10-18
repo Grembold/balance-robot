@@ -1,0 +1,13 @@
+#summary Beschreibung selbstentwickelter Encoder für RB40 Motoren
+#labels Encoder,Lichtschranke,Drehzahl
+
+= Introduction =
+
+Hier möchte ich beschreiben wie wir eigene Encoder für RB40 DC-Motoren entwickelt haben. Ein besonderer Augenmerk liegt hierbei auf die Befestigung der Encoder-Scheiben am Motor und der Lichtschranke aus herkömmlichen IR-Leuchtdioden. Aufgrund des kleinen Bauraums, hat der Encoder lediglich eine Bauhöhe von 14mm!
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
