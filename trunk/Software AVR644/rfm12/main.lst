@@ -1,0 +1,1023 @@
+   1               		.file	"main.c"
+   2               		.arch atmega644
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	rf12m_send
+  20               	rf12m_send:
+  21               	.LFB10:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LVL0:
+  26               	/* epilogue: frame size=0 */
+  27 0000 0895      		ret
+  28               	/* epilogue end (size=1) */
+  29               	/* function rf12m_send size 1 (0) */
+  30               	.LFE10:
+  32               	.global	rfm12_wrt_cmd
+  34               	rfm12_wrt_cmd:
+  35               	.LFB9:
+  36               	.LM2:
+  37               	/* prologue: frame size=0 */
+  38 0002 EF92      		push r14
+  39 0004 FF92      		push r15
+  40 0006 0F93      		push r16
+  41 0008 1F93      		push r17
+  42               	/* prologue end (size=4) */
+  43               	.LVL1:
+  44 000a 8C01      		movw r16,r24
+  45               	.LM3:
+  46 000c 2C98      		cbi 37-0x20,4
+  47               	.LM4:
+  48 000e 892F      		mov r24,r25
+  49 0010 9927      		clr r25
+  50               	.LVL2:
+  51 0012 0E94 0000 		call spi_putc
+  52 0016 E82E      		mov r14,r24
+  53               	.LVL3:
+  54               	.LM5:
+  55 0018 802F      		mov r24,r16
+  56 001a 0E94 0000 		call spi_putc
+  57               	.LM6:
+  58 001e 2C9A      		sbi 37-0x20,4
+  59 0020 FF24      		clr r15
+  60 0022 FE2C      		mov r15,r14
+  61 0024 EE24      		clr r14
+  62               	.LVL4:
+  63               	.LM7:
+  64 0026 E80E      		add r14,r24
+  65 0028 F11C      		adc r15,__zero_reg__
+  66 002a C701      		movw r24,r14
+  67               	/* epilogue: frame size=0 */
+  68 002c 1F91      		pop r17
+  69 002e 0F91      		pop r16
+  70 0030 FF90      		pop r15
+  71 0032 EF90      		pop r14
+  72 0034 0895      		ret
+  73               	/* epilogue end (size=5) */
+  74               	/* function rfm12_wrt_cmd size 26 (17) */
+  75               	.LFE9:
+  77               	.global	rfm12_readStatus
+  79               	rfm12_readStatus:
+  80               	.LFB8:
+  81               	.LM8:
+  82               	/* prologue: frame size=0 */
+  83 0036 0F93      		push r16
+  84 0038 1F93      		push r17
+  85               	/* prologue end (size=2) */
+  86               	.LM9:
+  87 003a 2C98      		cbi 37-0x20,4
+  88               	.LM10:
+  89 003c 80E0      		ldi r24,lo8(0)
+  90 003e 0E94 0000 		call spi_putc
+  91 0042 082F      		mov r16,r24
+  92               	.LVL5:
+  93               	.LM11:
+  94 0044 80E0      		ldi r24,lo8(0)
+  95 0046 0E94 0000 		call spi_putc
+  96               	.LM12:
+  97 004a 2C9A      		sbi 37-0x20,4
+  98 004c 1127      		clr r17
+  99 004e 102F      		mov r17,r16
+ 100 0050 0027      		clr r16
+ 101               	.LVL6:
+ 102               	.LM13:
+ 103 0052 080F      		add r16,r24
+ 104 0054 111D      		adc r17,__zero_reg__
+ 105 0056 C801      		movw r24,r16
+ 106               	/* epilogue: frame size=0 */
+ 107 0058 1F91      		pop r17
+ 108 005a 0F91      		pop r16
+ 109 005c 0895      		ret
+ 110               	/* epilogue end (size=3) */
+ 111               	/* function rfm12_readStatus size 20 (15) */
+ 112               	.LFE8:
+ 114               		.data
+ 115               	.LC0:
+ 116 0000 0A0D 00   		.string	"\n\r"
+ 117               		.text
+ 118               	.global	main
+ 120               	main:
+ 121               	.LFB7:
+ 122               	.LM14:
+ 123               	/* prologue: frame size=0 */
+ 124 005e 0F93      		push r16
+ 125 0060 1F93      		push r17
+ 126               	/* prologue end (size=2) */
+ 127               	.LM15:
+ 128 0062 0E94 0000 		call uart_init
+ 129               	.LM16:
+ 130 0066 2C9A      		sbi 37-0x20,4
+ 131               	.LM17:
+ 132 0068 0E94 0000 		call spi_init
+ 133               	.LBB36:
+ 134               	.LBB37:
+ 135               	.LM18:
+ 136 006c 2C98      		cbi 37-0x20,4
+ 137               	.LBE37:
+ 138               	.LM19:
+ 139 006e 80E0      		ldi r24,lo8(0)
+ 140 0070 0E94 0000 		call spi_putc
+ 141 0074 082F      		mov r16,r24
+ 142               	.LVL7:
+ 143               	.LM20:
+ 144 0076 80E0      		ldi r24,lo8(0)
+ 145 0078 0E94 0000 		call spi_putc
+ 146               	.LBB38:
+ 147               	.LM21:
+ 148 007c 2C9A      		sbi 37-0x20,4
+ 149               	.LM22:
+ 150 007e 1127      		clr r17
+ 151 0080 102F      		mov r17,r16
+ 152 0082 0027      		clr r16
+ 153               	.LVL8:
+ 154 0084 080F      		add r16,r24
+ 155 0086 111D      		adc r17,__zero_reg__
+ 156               	.LBE38:
+ 157               	.LBE36:
+ 158               	.LM23:
+ 159 0088 C801      		movw r24,r16
+ 160 008a 8827      		clr r24
+ 161 008c 990F      		lsl r25
+ 162 008e 881F      		rol r24
+ 163 0090 9927      		clr r25
+ 164 0092 0E94 0000 		call uart_puti
+ 165 0096 C801      		movw r24,r16
+ 166 0098 84E0      		ldi r24,0x04
+ 167 009a 989F      		mul r25,r24
+ 168 009c 812D      		mov r24,r1
+ 169 009e 9927      		clr r25
+ 170 00a0 1124      		clr __zero_reg__
+ 171 00a2 8170      		andi r24,lo8(1)
+ 172 00a4 9070      		andi r25,hi8(1)
+ 173 00a6 0E94 0000 		call uart_puti
+ 174 00aa C801      		movw r24,r16
+ 175 00ac 892F      		mov r24,r25
+ 176 00ae 9927      		clr r25
+ 177 00b0 8295      		swap r24
+ 178 00b2 8695      		lsr r24
+ 179 00b4 8770      		andi r24,0x07
+ 180 00b6 8170      		andi r24,lo8(1)
+ 181 00b8 9070      		andi r25,hi8(1)
+ 182 00ba 0E94 0000 		call uart_puti
+ 183 00be C801      		movw r24,r16
+ 184 00c0 892F      		mov r24,r25
+ 185 00c2 9927      		clr r25
+ 186 00c4 8295      		swap r24
+ 187 00c6 8F70      		andi r24,0x0f
+ 188 00c8 8170      		andi r24,lo8(1)
+ 189 00ca 9070      		andi r25,hi8(1)
+ 190 00cc 0E94 0000 		call uart_puti
+ 191 00d0 C801      		movw r24,r16
+ 192 00d2 892F      		mov r24,r25
+ 193 00d4 9927      		clr r25
+ 194 00d6 8695      		lsr r24
+ 195 00d8 8695      		lsr r24
+ 196 00da 8695      		lsr r24
+ 197 00dc 8170      		andi r24,lo8(1)
+ 198 00de 9070      		andi r25,hi8(1)
+ 199 00e0 0E94 0000 		call uart_puti
+ 200 00e4 C801      		movw r24,r16
+ 201 00e6 892F      		mov r24,r25
+ 202 00e8 9927      		clr r25
+ 203 00ea 8695      		lsr r24
+ 204 00ec 8695      		lsr r24
+ 205 00ee 8170      		andi r24,lo8(1)
+ 206 00f0 9070      		andi r25,hi8(1)
+ 207 00f2 0E94 0000 		call uart_puti
+ 208 00f6 C801      		movw r24,r16
+ 209 00f8 892F      		mov r24,r25
+ 210 00fa 9927      		clr r25
+ 211 00fc 8695      		lsr r24
+ 212 00fe 8170      		andi r24,lo8(1)
+ 213 0100 9070      		andi r25,hi8(1)
+ 214 0102 0E94 0000 		call uart_puti
+ 215 0106 812F      		mov r24,r17
+ 216 0108 9927      		clr r25
+ 217 010a 8170      		andi r24,lo8(1)
+ 218 010c 9070      		andi r25,hi8(1)
+ 219 010e 0E94 0000 		call uart_puti
+ 220 0112 C801      		movw r24,r16
+ 221 0114 880F      		lsl r24
+ 222 0116 892F      		mov r24,r25
+ 223 0118 881F      		rol r24
+ 224 011a 990B      		sbc r25,r25
+ 225 011c 9195      		neg r25
+ 226 011e 8170      		andi r24,lo8(1)
+ 227 0120 9070      		andi r25,hi8(1)
+ 228 0122 0E94 0000 		call uart_puti
+ 229 0126 C801      		movw r24,r16
+ 230 0128 0024      		clr __tmp_reg__
+ 231 012a 880F      		lsl r24
+ 232 012c 991F      		rol r25
+ 233 012e 001C      		rol __tmp_reg__
+ 234 0130 880F      		lsl r24
+ 235 0132 991F      		rol r25
+ 236 0134 001C      		rol __tmp_reg__
+ 237 0136 892F      		mov r24,r25
+ 238 0138 902D      		mov r25,__tmp_reg__
+ 239 013a 8170      		andi r24,lo8(1)
+ 240 013c 9070      		andi r25,hi8(1)
+ 241 013e 0E94 0000 		call uart_puti
+ 242 0142 C801      		movw r24,r16
+ 243 0144 9695      		lsr r25
+ 244 0146 8795      		ror r24
+ 245 0148 9295      		swap r25
+ 246 014a 8295      		swap r24
+ 247 014c 8F70      		andi r24,0x0f
+ 248 014e 8927      		eor r24,r25
+ 249 0150 9F70      		andi r25,0x0f
+ 250 0152 8927      		eor r24,r25
+ 251 0154 8170      		andi r24,lo8(1)
+ 252 0156 9070      		andi r25,hi8(1)
+ 253 0158 0E94 0000 		call uart_puti
+ 254 015c C801      		movw r24,r16
+ 255 015e 9295      		swap r25
+ 256 0160 8295      		swap r24
+ 257 0162 8F70      		andi r24,0x0f
+ 258 0164 8927      		eor r24,r25
+ 259 0166 9F70      		andi r25,0x0f
+ 260 0168 8927      		eor r24,r25
+ 261 016a 8170      		andi r24,lo8(1)
+ 262 016c 9070      		andi r25,hi8(1)
+ 263 016e 0E94 0000 		call uart_puti
+ 264 0172 C801      		movw r24,r16
+ 265 0174 9695      		lsr r25
+ 266 0176 8795      		ror r24
+ 267 0178 9695      		lsr r25
+ 268 017a 8795      		ror r24
+ 269 017c 9695      		lsr r25
+ 270 017e 8795      		ror r24
+ 271 0180 8170      		andi r24,lo8(1)
+ 272 0182 9070      		andi r25,hi8(1)
+ 273 0184 0E94 0000 		call uart_puti
+ 274 0188 C801      		movw r24,r16
+ 275 018a 9695      		lsr r25
+ 276 018c 8795      		ror r24
+ 277 018e 9695      		lsr r25
+ 278 0190 8795      		ror r24
+ 279 0192 8170      		andi r24,lo8(1)
+ 280 0194 9070      		andi r25,hi8(1)
+ 281 0196 0E94 0000 		call uart_puti
+ 282 019a C801      		movw r24,r16
+ 283 019c 9695      		lsr r25
+ 284 019e 8795      		ror r24
+ 285 01a0 8170      		andi r24,lo8(1)
+ 286 01a2 9070      		andi r25,hi8(1)
+ 287 01a4 0E94 0000 		call uart_puti
+ 288 01a8 C801      		movw r24,r16
+ 289 01aa 8170      		andi r24,lo8(1)
+ 290 01ac 9070      		andi r25,hi8(1)
+ 291 01ae 0E94 0000 		call uart_puti
+ 292               	.LM24:
+ 293 01b2 80E0      		ldi r24,lo8(.LC0)
+ 294 01b4 90E0      		ldi r25,hi8(.LC0)
+ 295 01b6 0E94 0000 		call uart_puts
+ 296               	.LBB39:
+ 297               	.LBB40:
+ 298               	.LM25:
+ 299 01ba 2C98      		cbi 37-0x20,4
+ 300               	.LBE40:
+ 301               	.LM26:
+ 302 01bc 80E8      		ldi r24,lo8(-128)
+ 303 01be 0E94 0000 		call spi_putc
+ 304               	.LM27:
+ 305 01c2 87ED      		ldi r24,lo8(-41)
+ 306 01c4 0E94 0000 		call spi_putc
+ 307               	.LBB41:
+ 308               	.LM28:
+ 309 01c8 2C9A      		sbi 37-0x20,4
+ 310               	.LBE41:
+ 311               	.LBE39:
+ 312               	.LBB42:
+ 313               	.LBB43:
+ 314               	.LM29:
+ 315 01ca 2C98      		cbi 37-0x20,4
+ 316               	.LBE43:
+ 317               	.LM30:
+ 318 01cc 82E8      		ldi r24,lo8(-126)
+ 319 01ce 0E94 0000 		call spi_putc
+ 320               	.LM31:
+ 321 01d2 89E3      		ldi r24,lo8(57)
+ 322 01d4 0E94 0000 		call spi_putc
+ 323               	.LBB44:
+ 324               	.LM32:
+ 325 01d8 2C9A      		sbi 37-0x20,4
+ 326               	.LBE44:
+ 327               	.LBE42:
+ 328               	.LBB45:
+ 329               	.LBB46:
+ 330               	.LM33:
+ 331 01da 2C98      		cbi 37-0x20,4
+ 332               	.LBE46:
+ 333               	.LM34:
+ 334 01dc 81EA      		ldi r24,lo8(-95)
+ 335 01de 0E94 0000 		call spi_putc
+ 336               	.LM35:
+ 337 01e2 80E4      		ldi r24,lo8(64)
+ 338 01e4 0E94 0000 		call spi_putc
+ 339               	.LBB47:
+ 340               	.LM36:
+ 341 01e8 2C9A      		sbi 37-0x20,4
+ 342               	.LBE47:
+ 343               	.LBE45:
+ 344               	.LBB48:
+ 345               	.LBB49:
+ 346               	.LM37:
+ 347 01ea 2C98      		cbi 37-0x20,4
+ 348               	.LBE49:
+ 349               	.LM38:
+ 350 01ec 86EC      		ldi r24,lo8(-58)
+ 351 01ee 0E94 0000 		call spi_putc
+ 352               	.LM39:
+ 353 01f2 87E4      		ldi r24,lo8(71)
+ 354 01f4 0E94 0000 		call spi_putc
+ 355               	.LBB50:
+ 356               	.LM40:
+ 357 01f8 2C9A      		sbi 37-0x20,4
+ 358               	.LBE50:
+ 359               	.LBE48:
+ 360               	.LBB51:
+ 361               	.LBB52:
+ 362               	.LM41:
+ 363 01fa 2C98      		cbi 37-0x20,4
+ 364               	.LBE52:
+ 365               	.LM42:
+ 366 01fc 84E9      		ldi r24,lo8(-108)
+ 367 01fe 0E94 0000 		call spi_putc
+ 368               	.LM43:
+ 369 0202 80EA      		ldi r24,lo8(-96)
+ 370 0204 0E94 0000 		call spi_putc
+ 371               	.LBB53:
+ 372               	.LM44:
+ 373 0208 2C9A      		sbi 37-0x20,4
+ 374               	.LBE53:
+ 375               	.LBE51:
+ 376               	.LBB54:
+ 377               	.LBB55:
+ 378               	.LM45:
+ 379 020a 2C98      		cbi 37-0x20,4
+ 380               	.LBE55:
+ 381               	.LM46:
+ 382 020c 82EC      		ldi r24,lo8(-62)
+ 383 020e 0E94 0000 		call spi_putc
+ 384               	.LM47:
+ 385 0212 8BEA      		ldi r24,lo8(-85)
+ 386 0214 0E94 0000 		call spi_putc
+ 387               	.LBB56:
+ 388               	.LM48:
+ 389 0218 2C9A      		sbi 37-0x20,4
+ 390               	.LBE56:
+ 391               	.LBE54:
+ 392               	.LBB57:
+ 393               	.LBB58:
+ 394               	.LM49:
+ 395 021a 2C98      		cbi 37-0x20,4
+ 396               	.LBE58:
+ 397               	.LM50:
+ 398 021c 8AEC      		ldi r24,lo8(-54)
+ 399 021e 0E94 0000 		call spi_putc
+ 400               	.LM51:
+ 401 0222 81E8      		ldi r24,lo8(-127)
+ 402 0224 0E94 0000 		call spi_putc
+ 403               	.LBB59:
+ 404               	.LM52:
+ 405 0228 2C9A      		sbi 37-0x20,4
+ 406               	.LBE59:
+ 407               	.LBE57:
+ 408               	.LBB60:
+ 409               	.LBB61:
+ 410               	.LM53:
+ 411 022a 2C98      		cbi 37-0x20,4
+ 412               	.LBE61:
+ 413               	.LM54:
+ 414 022c 84EC      		ldi r24,lo8(-60)
+ 415 022e 0E94 0000 		call spi_putc
+ 416               	.LM55:
+ 417 0232 87EF      		ldi r24,lo8(-9)
+ 418 0234 0E94 0000 		call spi_putc
+ 419               	.LBB62:
+ 420               	.LM56:
+ 421 0238 2C9A      		sbi 37-0x20,4
+ 422               	.LBE62:
+ 423               	.LBE60:
+ 424               	.LBB63:
+ 425               	.LBB64:
+ 426               	.LM57:
+ 427 023a 2C98      		cbi 37-0x20,4
+ 428               	.LBE64:
+ 429               	.LM58:
+ 430 023c 88E9      		ldi r24,lo8(-104)
+ 431 023e 0E94 0000 		call spi_putc
+ 432               	.LM59:
+ 433 0242 80E9      		ldi r24,lo8(-112)
+ 434 0244 0E94 0000 		call spi_putc
+ 435               	.LBB65:
+ 436               	.LM60:
+ 437 0248 2C9A      		sbi 37-0x20,4
+ 438               	.LBE65:
+ 439               	.LBE63:
+ 440               	.LBB66:
+ 441               	.LBB67:
+ 442               	.LM61:
+ 443 024a 2C98      		cbi 37-0x20,4
+ 444               	.LBE67:
+ 445               	.LM62:
+ 446 024c 80EC      		ldi r24,lo8(-64)
+ 447 024e 0E94 0000 		call spi_putc
+ 448               	.LM63:
+ 449 0252 8CEF      		ldi r24,lo8(-4)
+ 450 0254 0E94 0000 		call spi_putc
+ 451               	.LBB68:
+ 452               	.LM64:
+ 453 0258 2C9A      		sbi 37-0x20,4
+ 454               	.LBE68:
+ 455               	.LBE66:
+ 456               	.LBB69:
+ 457               	.LBB70:
+ 458               	.LM65:
+ 459 025a 2C98      		cbi 37-0x20,4
+ 460               	.LBE70:
+ 461               	.LM66:
+ 462 025c 80E0      		ldi r24,lo8(0)
+ 463 025e 0E94 0000 		call spi_putc
+ 464 0262 082F      		mov r16,r24
+ 465               	.LVL9:
+ 466               	.LM67:
+ 467 0264 80E0      		ldi r24,lo8(0)
+ 468 0266 0E94 0000 		call spi_putc
+ 469               	.LBB71:
+ 470               	.LM68:
+ 471 026a 2C9A      		sbi 37-0x20,4
+ 472               	.LM69:
+ 473 026c 1127      		clr r17
+ 474 026e 102F      		mov r17,r16
+ 475 0270 0027      		clr r16
+ 476               	.LVL10:
+ 477 0272 080F      		add r16,r24
+ 478 0274 111D      		adc r17,__zero_reg__
+ 479               	.LBE71:
+ 480               	.LBE69:
+ 481               	.LM70:
+ 482 0276 C801      		movw r24,r16
+ 483 0278 8827      		clr r24
+ 484 027a 990F      		lsl r25
+ 485 027c 881F      		rol r24
+ 486 027e 9927      		clr r25
+ 487 0280 0E94 0000 		call uart_puti
+ 488 0284 C801      		movw r24,r16
+ 489 0286 84E0      		ldi r24,0x04
+ 490 0288 989F      		mul r25,r24
+ 491 028a 812D      		mov r24,r1
+ 492 028c 9927      		clr r25
+ 493 028e 1124      		clr __zero_reg__
+ 494 0290 8170      		andi r24,lo8(1)
+ 495 0292 9070      		andi r25,hi8(1)
+ 496 0294 0E94 0000 		call uart_puti
+ 497 0298 C801      		movw r24,r16
+ 498 029a 892F      		mov r24,r25
+ 499 029c 9927      		clr r25
+ 500 029e 8295      		swap r24
+ 501 02a0 8695      		lsr r24
+ 502 02a2 8770      		andi r24,0x07
+ 503 02a4 8170      		andi r24,lo8(1)
+ 504 02a6 9070      		andi r25,hi8(1)
+ 505 02a8 0E94 0000 		call uart_puti
+ 506 02ac C801      		movw r24,r16
+ 507 02ae 892F      		mov r24,r25
+ 508 02b0 9927      		clr r25
+ 509 02b2 8295      		swap r24
+ 510 02b4 8F70      		andi r24,0x0f
+ 511 02b6 8170      		andi r24,lo8(1)
+ 512 02b8 9070      		andi r25,hi8(1)
+ 513 02ba 0E94 0000 		call uart_puti
+ 514 02be C801      		movw r24,r16
+ 515 02c0 892F      		mov r24,r25
+ 516 02c2 9927      		clr r25
+ 517 02c4 8695      		lsr r24
+ 518 02c6 8695      		lsr r24
+ 519 02c8 8695      		lsr r24
+ 520 02ca 8170      		andi r24,lo8(1)
+ 521 02cc 9070      		andi r25,hi8(1)
+ 522 02ce 0E94 0000 		call uart_puti
+ 523 02d2 C801      		movw r24,r16
+ 524 02d4 892F      		mov r24,r25
+ 525 02d6 9927      		clr r25
+ 526 02d8 8695      		lsr r24
+ 527 02da 8695      		lsr r24
+ 528 02dc 8170      		andi r24,lo8(1)
+ 529 02de 9070      		andi r25,hi8(1)
+ 530 02e0 0E94 0000 		call uart_puti
+ 531 02e4 C801      		movw r24,r16
+ 532 02e6 892F      		mov r24,r25
+ 533 02e8 9927      		clr r25
+ 534 02ea 8695      		lsr r24
+ 535 02ec 8170      		andi r24,lo8(1)
+ 536 02ee 9070      		andi r25,hi8(1)
+ 537 02f0 0E94 0000 		call uart_puti
+ 538 02f4 812F      		mov r24,r17
+ 539 02f6 9927      		clr r25
+ 540 02f8 8170      		andi r24,lo8(1)
+ 541 02fa 9070      		andi r25,hi8(1)
+ 542 02fc 0E94 0000 		call uart_puti
+ 543 0300 C801      		movw r24,r16
+ 544 0302 880F      		lsl r24
+ 545 0304 892F      		mov r24,r25
+ 546 0306 881F      		rol r24
+ 547 0308 990B      		sbc r25,r25
+ 548 030a 9195      		neg r25
+ 549 030c 8170      		andi r24,lo8(1)
+ 550 030e 9070      		andi r25,hi8(1)
+ 551 0310 0E94 0000 		call uart_puti
+ 552 0314 C801      		movw r24,r16
+ 553 0316 0024      		clr __tmp_reg__
+ 554 0318 880F      		lsl r24
+ 555 031a 991F      		rol r25
+ 556 031c 001C      		rol __tmp_reg__
+ 557 031e 880F      		lsl r24
+ 558 0320 991F      		rol r25
+ 559 0322 001C      		rol __tmp_reg__
+ 560 0324 892F      		mov r24,r25
+ 561 0326 902D      		mov r25,__tmp_reg__
+ 562 0328 8170      		andi r24,lo8(1)
+ 563 032a 9070      		andi r25,hi8(1)
+ 564 032c 0E94 0000 		call uart_puti
+ 565 0330 C801      		movw r24,r16
+ 566 0332 9695      		lsr r25
+ 567 0334 8795      		ror r24
+ 568 0336 9295      		swap r25
+ 569 0338 8295      		swap r24
+ 570 033a 8F70      		andi r24,0x0f
+ 571 033c 8927      		eor r24,r25
+ 572 033e 9F70      		andi r25,0x0f
+ 573 0340 8927      		eor r24,r25
+ 574 0342 8170      		andi r24,lo8(1)
+ 575 0344 9070      		andi r25,hi8(1)
+ 576 0346 0E94 0000 		call uart_puti
+ 577 034a C801      		movw r24,r16
+ 578 034c 9295      		swap r25
+ 579 034e 8295      		swap r24
+ 580 0350 8F70      		andi r24,0x0f
+ 581 0352 8927      		eor r24,r25
+ 582 0354 9F70      		andi r25,0x0f
+ 583 0356 8927      		eor r24,r25
+ 584 0358 8170      		andi r24,lo8(1)
+ 585 035a 9070      		andi r25,hi8(1)
+ 586 035c 0E94 0000 		call uart_puti
+ 587 0360 C801      		movw r24,r16
+ 588 0362 9695      		lsr r25
+ 589 0364 8795      		ror r24
+ 590 0366 9695      		lsr r25
+ 591 0368 8795      		ror r24
+ 592 036a 9695      		lsr r25
+ 593 036c 8795      		ror r24
+ 594 036e 8170      		andi r24,lo8(1)
+ 595 0370 9070      		andi r25,hi8(1)
+ 596 0372 0E94 0000 		call uart_puti
+ 597 0376 C801      		movw r24,r16
+ 598 0378 9695      		lsr r25
+ 599 037a 8795      		ror r24
+ 600 037c 9695      		lsr r25
+ 601 037e 8795      		ror r24
+ 602 0380 8170      		andi r24,lo8(1)
+ 603 0382 9070      		andi r25,hi8(1)
+ 604 0384 0E94 0000 		call uart_puti
+ 605 0388 C801      		movw r24,r16
+ 606 038a 9695      		lsr r25
+ 607 038c 8795      		ror r24
+ 608 038e 8170      		andi r24,lo8(1)
+ 609 0390 9070      		andi r25,hi8(1)
+ 610 0392 0E94 0000 		call uart_puti
+ 611 0396 C801      		movw r24,r16
+ 612 0398 8170      		andi r24,lo8(1)
+ 613 039a 9070      		andi r25,hi8(1)
+ 614 039c 0E94 0000 		call uart_puti
+ 615               	.LM71:
+ 616 03a0 80E0      		ldi r24,lo8(.LC0)
+ 617 03a2 90E0      		ldi r25,hi8(.LC0)
+ 618 03a4 0E94 0000 		call uart_puts
+ 619               	.LBB72:
+ 620               	.LBB73:
+ 621               	.LM72:
+ 622 03a8 2C98      		cbi 37-0x20,4
+ 623               	.LBE73:
+ 624               	.LM73:
+ 625 03aa 88EB      		ldi r24,lo8(-72)
+ 626 03ac 0E94 0000 		call spi_putc
+ 627               	.LM74:
+ 628 03b0 8AEA      		ldi r24,lo8(-86)
+ 629 03b2 0E94 0000 		call spi_putc
+ 630               	.LBB74:
+ 631               	.LM75:
+ 632 03b6 2C9A      		sbi 37-0x20,4
+ 633               	.LBE74:
+ 634               	.LBE72:
+ 635               	.LBB75:
+ 636               	.LBB76:
+ 637               	.LM76:
+ 638 03b8 2C98      		cbi 37-0x20,4
+ 639               	.LBE76:
+ 640               	.LM77:
+ 641 03ba 80E0      		ldi r24,lo8(0)
+ 642 03bc 0E94 0000 		call spi_putc
+ 643 03c0 082F      		mov r16,r24
+ 644               	.LVL11:
+ 645               	.LM78:
+ 646 03c2 80E0      		ldi r24,lo8(0)
+ 647 03c4 0E94 0000 		call spi_putc
+ 648               	.LBB77:
+ 649               	.LM79:
+ 650 03c8 2C9A      		sbi 37-0x20,4
+ 651               	.LM80:
+ 652 03ca 1127      		clr r17
+ 653 03cc 102F      		mov r17,r16
+ 654 03ce 0027      		clr r16
+ 655               	.LVL12:
+ 656 03d0 080F      		add r16,r24
+ 657 03d2 111D      		adc r17,__zero_reg__
+ 658               	.LBE77:
+ 659               	.LBE75:
+ 660               	.LM81:
+ 661 03d4 C801      		movw r24,r16
+ 662 03d6 8827      		clr r24
+ 663 03d8 990F      		lsl r25
+ 664 03da 881F      		rol r24
+ 665 03dc 9927      		clr r25
+ 666 03de 0E94 0000 		call uart_puti
+ 667 03e2 C801      		movw r24,r16
+ 668 03e4 84E0      		ldi r24,0x04
+ 669 03e6 989F      		mul r25,r24
+ 670 03e8 812D      		mov r24,r1
+ 671 03ea 9927      		clr r25
+ 672 03ec 1124      		clr __zero_reg__
+ 673 03ee 8170      		andi r24,lo8(1)
+ 674 03f0 9070      		andi r25,hi8(1)
+ 675 03f2 0E94 0000 		call uart_puti
+ 676 03f6 C801      		movw r24,r16
+ 677 03f8 892F      		mov r24,r25
+ 678 03fa 9927      		clr r25
+ 679 03fc 8295      		swap r24
+ 680 03fe 8695      		lsr r24
+ 681 0400 8770      		andi r24,0x07
+ 682 0402 8170      		andi r24,lo8(1)
+ 683 0404 9070      		andi r25,hi8(1)
+ 684 0406 0E94 0000 		call uart_puti
+ 685 040a C801      		movw r24,r16
+ 686 040c 892F      		mov r24,r25
+ 687 040e 9927      		clr r25
+ 688 0410 8295      		swap r24
+ 689 0412 8F70      		andi r24,0x0f
+ 690 0414 8170      		andi r24,lo8(1)
+ 691 0416 9070      		andi r25,hi8(1)
+ 692 0418 0E94 0000 		call uart_puti
+ 693 041c C801      		movw r24,r16
+ 694 041e 892F      		mov r24,r25
+ 695 0420 9927      		clr r25
+ 696 0422 8695      		lsr r24
+ 697 0424 8695      		lsr r24
+ 698 0426 8695      		lsr r24
+ 699 0428 8170      		andi r24,lo8(1)
+ 700 042a 9070      		andi r25,hi8(1)
+ 701 042c 0E94 0000 		call uart_puti
+ 702 0430 C801      		movw r24,r16
+ 703 0432 892F      		mov r24,r25
+ 704 0434 9927      		clr r25
+ 705 0436 8695      		lsr r24
+ 706 0438 8695      		lsr r24
+ 707 043a 8170      		andi r24,lo8(1)
+ 708 043c 9070      		andi r25,hi8(1)
+ 709 043e 0E94 0000 		call uart_puti
+ 710 0442 C801      		movw r24,r16
+ 711 0444 892F      		mov r24,r25
+ 712 0446 9927      		clr r25
+ 713 0448 8695      		lsr r24
+ 714 044a 8170      		andi r24,lo8(1)
+ 715 044c 9070      		andi r25,hi8(1)
+ 716 044e 0E94 0000 		call uart_puti
+ 717 0452 812F      		mov r24,r17
+ 718 0454 9927      		clr r25
+ 719 0456 8170      		andi r24,lo8(1)
+ 720 0458 9070      		andi r25,hi8(1)
+ 721 045a 0E94 0000 		call uart_puti
+ 722 045e C801      		movw r24,r16
+ 723 0460 880F      		lsl r24
+ 724 0462 892F      		mov r24,r25
+ 725 0464 881F      		rol r24
+ 726 0466 990B      		sbc r25,r25
+ 727 0468 9195      		neg r25
+ 728 046a 8170      		andi r24,lo8(1)
+ 729 046c 9070      		andi r25,hi8(1)
+ 730 046e 0E94 0000 		call uart_puti
+ 731 0472 C801      		movw r24,r16
+ 732 0474 0024      		clr __tmp_reg__
+ 733 0476 880F      		lsl r24
+ 734 0478 991F      		rol r25
+ 735 047a 001C      		rol __tmp_reg__
+ 736 047c 880F      		lsl r24
+ 737 047e 991F      		rol r25
+ 738 0480 001C      		rol __tmp_reg__
+ 739 0482 892F      		mov r24,r25
+ 740 0484 902D      		mov r25,__tmp_reg__
+ 741 0486 8170      		andi r24,lo8(1)
+ 742 0488 9070      		andi r25,hi8(1)
+ 743 048a 0E94 0000 		call uart_puti
+ 744 048e C801      		movw r24,r16
+ 745 0490 9695      		lsr r25
+ 746 0492 8795      		ror r24
+ 747 0494 9295      		swap r25
+ 748 0496 8295      		swap r24
+ 749 0498 8F70      		andi r24,0x0f
+ 750 049a 8927      		eor r24,r25
+ 751 049c 9F70      		andi r25,0x0f
+ 752 049e 8927      		eor r24,r25
+ 753 04a0 8170      		andi r24,lo8(1)
+ 754 04a2 9070      		andi r25,hi8(1)
+ 755 04a4 0E94 0000 		call uart_puti
+ 756 04a8 C801      		movw r24,r16
+ 757 04aa 9295      		swap r25
+ 758 04ac 8295      		swap r24
+ 759 04ae 8F70      		andi r24,0x0f
+ 760 04b0 8927      		eor r24,r25
+ 761 04b2 9F70      		andi r25,0x0f
+ 762 04b4 8927      		eor r24,r25
+ 763 04b6 8170      		andi r24,lo8(1)
+ 764 04b8 9070      		andi r25,hi8(1)
+ 765 04ba 0E94 0000 		call uart_puti
+ 766 04be C801      		movw r24,r16
+ 767 04c0 9695      		lsr r25
+ 768 04c2 8795      		ror r24
+ 769 04c4 9695      		lsr r25
+ 770 04c6 8795      		ror r24
+ 771 04c8 9695      		lsr r25
+ 772 04ca 8795      		ror r24
+ 773 04cc 8170      		andi r24,lo8(1)
+ 774 04ce 9070      		andi r25,hi8(1)
+ 775 04d0 0E94 0000 		call uart_puti
+ 776 04d4 C801      		movw r24,r16
+ 777 04d6 9695      		lsr r25
+ 778 04d8 8795      		ror r24
+ 779 04da 9695      		lsr r25
+ 780 04dc 8795      		ror r24
+ 781 04de 8170      		andi r24,lo8(1)
+ 782 04e0 9070      		andi r25,hi8(1)
+ 783 04e2 0E94 0000 		call uart_puti
+ 784 04e6 C801      		movw r24,r16
+ 785 04e8 9695      		lsr r25
+ 786 04ea 8795      		ror r24
+ 787 04ec 8170      		andi r24,lo8(1)
+ 788 04ee 9070      		andi r25,hi8(1)
+ 789 04f0 0E94 0000 		call uart_puti
+ 790 04f4 C801      		movw r24,r16
+ 791 04f6 8170      		andi r24,lo8(1)
+ 792 04f8 9070      		andi r25,hi8(1)
+ 793 04fa 0E94 0000 		call uart_puti
+ 794               	.LM82:
+ 795 04fe 80E0      		ldi r24,lo8(.LC0)
+ 796 0500 90E0      		ldi r25,hi8(.LC0)
+ 797 0502 0E94 0000 		call uart_puts
+ 798 0506 80E0      		ldi r24,lo8(0)
+ 799 0508 90E0      		ldi r25,hi8(0)
+ 800               	.LVL13:
+ 801               	.L8:
+ 802               	.LM83:
+ 803               	/* #APP */
+ 804 050a 0000      		nop
+ 805               	.LM84:
+ 806               	/* #NOAPP */
+ 807 050c 0196      		adiw r24,1
+ 808 050e 893C      		cpi r24,201
+ 809 0510 9105      		cpc r25,__zero_reg__
+ 810 0512 01F4      		brne .L8
+ 811               	.LBB78:
+ 812               	.LBB79:
+ 813               	.LM85:
+ 814 0514 2C98      		cbi 37-0x20,4
+ 815               	.LBE79:
+ 816               	.LM86:
+ 817 0516 80E0      		ldi r24,lo8(0)
+ 818               	.LVL14:
+ 819 0518 0E94 0000 		call spi_putc
+ 820 051c 082F      		mov r16,r24
+ 821               	.LVL15:
+ 822               	.LM87:
+ 823 051e 80E0      		ldi r24,lo8(0)
+ 824 0520 0E94 0000 		call spi_putc
+ 825               	.LBB80:
+ 826               	.LM88:
+ 827 0524 2C9A      		sbi 37-0x20,4
+ 828               	.LM89:
+ 829 0526 1127      		clr r17
+ 830 0528 102F      		mov r17,r16
+ 831 052a 0027      		clr r16
+ 832               	.LVL16:
+ 833 052c 080F      		add r16,r24
+ 834 052e 111D      		adc r17,__zero_reg__
+ 835               	.LBE80:
+ 836               	.LBE78:
+ 837               	.LM90:
+ 838 0530 C801      		movw r24,r16
+ 839 0532 8827      		clr r24
+ 840 0534 990F      		lsl r25
+ 841 0536 881F      		rol r24
+ 842 0538 9927      		clr r25
+ 843 053a 0E94 0000 		call uart_puti
+ 844 053e C801      		movw r24,r16
+ 845 0540 84E0      		ldi r24,0x04
+ 846 0542 989F      		mul r25,r24
+ 847 0544 812D      		mov r24,r1
+ 848 0546 9927      		clr r25
+ 849 0548 1124      		clr __zero_reg__
+ 850 054a 8170      		andi r24,lo8(1)
+ 851 054c 9070      		andi r25,hi8(1)
+ 852 054e 0E94 0000 		call uart_puti
+ 853 0552 C801      		movw r24,r16
+ 854 0554 892F      		mov r24,r25
+ 855 0556 9927      		clr r25
+ 856 0558 8295      		swap r24
+ 857 055a 8695      		lsr r24
+ 858 055c 8770      		andi r24,0x07
+ 859 055e 8170      		andi r24,lo8(1)
+ 860 0560 9070      		andi r25,hi8(1)
+ 861 0562 0E94 0000 		call uart_puti
+ 862 0566 C801      		movw r24,r16
+ 863 0568 892F      		mov r24,r25
+ 864 056a 9927      		clr r25
+ 865 056c 8295      		swap r24
+ 866 056e 8F70      		andi r24,0x0f
+ 867 0570 8170      		andi r24,lo8(1)
+ 868 0572 9070      		andi r25,hi8(1)
+ 869 0574 0E94 0000 		call uart_puti
+ 870 0578 C801      		movw r24,r16
+ 871 057a 892F      		mov r24,r25
+ 872 057c 9927      		clr r25
+ 873 057e 8695      		lsr r24
+ 874 0580 8695      		lsr r24
+ 875 0582 8695      		lsr r24
+ 876 0584 8170      		andi r24,lo8(1)
+ 877 0586 9070      		andi r25,hi8(1)
+ 878 0588 0E94 0000 		call uart_puti
+ 879 058c C801      		movw r24,r16
+ 880 058e 892F      		mov r24,r25
+ 881 0590 9927      		clr r25
+ 882 0592 8695      		lsr r24
+ 883 0594 8695      		lsr r24
+ 884 0596 8170      		andi r24,lo8(1)
+ 885 0598 9070      		andi r25,hi8(1)
+ 886 059a 0E94 0000 		call uart_puti
+ 887 059e C801      		movw r24,r16
+ 888 05a0 892F      		mov r24,r25
+ 889 05a2 9927      		clr r25
+ 890 05a4 8695      		lsr r24
+ 891 05a6 8170      		andi r24,lo8(1)
+ 892 05a8 9070      		andi r25,hi8(1)
+ 893 05aa 0E94 0000 		call uart_puti
+ 894 05ae 812F      		mov r24,r17
+ 895 05b0 9927      		clr r25
+ 896 05b2 8170      		andi r24,lo8(1)
+ 897 05b4 9070      		andi r25,hi8(1)
+ 898 05b6 0E94 0000 		call uart_puti
+ 899 05ba C801      		movw r24,r16
+ 900 05bc 880F      		lsl r24
+ 901 05be 892F      		mov r24,r25
+ 902 05c0 881F      		rol r24
+ 903 05c2 990B      		sbc r25,r25
+ 904 05c4 9195      		neg r25
+ 905 05c6 8170      		andi r24,lo8(1)
+ 906 05c8 9070      		andi r25,hi8(1)
+ 907 05ca 0E94 0000 		call uart_puti
+ 908 05ce C801      		movw r24,r16
+ 909 05d0 0024      		clr __tmp_reg__
+ 910 05d2 880F      		lsl r24
+ 911 05d4 991F      		rol r25
+ 912 05d6 001C      		rol __tmp_reg__
+ 913 05d8 880F      		lsl r24
+ 914 05da 991F      		rol r25
+ 915 05dc 001C      		rol __tmp_reg__
+ 916 05de 892F      		mov r24,r25
+ 917 05e0 902D      		mov r25,__tmp_reg__
+ 918 05e2 8170      		andi r24,lo8(1)
+ 919 05e4 9070      		andi r25,hi8(1)
+ 920 05e6 0E94 0000 		call uart_puti
+ 921 05ea C801      		movw r24,r16
+ 922 05ec 9695      		lsr r25
+ 923 05ee 8795      		ror r24
+ 924 05f0 9295      		swap r25
+ 925 05f2 8295      		swap r24
+ 926 05f4 8F70      		andi r24,0x0f
+ 927 05f6 8927      		eor r24,r25
+ 928 05f8 9F70      		andi r25,0x0f
+ 929 05fa 8927      		eor r24,r25
+ 930 05fc 8170      		andi r24,lo8(1)
+ 931 05fe 9070      		andi r25,hi8(1)
+ 932 0600 0E94 0000 		call uart_puti
+ 933 0604 C801      		movw r24,r16
+ 934 0606 9295      		swap r25
+ 935 0608 8295      		swap r24
+ 936 060a 8F70      		andi r24,0x0f
+ 937 060c 8927      		eor r24,r25
+ 938 060e 9F70      		andi r25,0x0f
+ 939 0610 8927      		eor r24,r25
+ 940 0612 8170      		andi r24,lo8(1)
+ 941 0614 9070      		andi r25,hi8(1)
+ 942 0616 0E94 0000 		call uart_puti
+ 943 061a C801      		movw r24,r16
+ 944 061c 9695      		lsr r25
+ 945 061e 8795      		ror r24
+ 946 0620 9695      		lsr r25
+ 947 0622 8795      		ror r24
+ 948 0624 9695      		lsr r25
+ 949 0626 8795      		ror r24
+ 950 0628 8170      		andi r24,lo8(1)
+ 951 062a 9070      		andi r25,hi8(1)
+ 952 062c 0E94 0000 		call uart_puti
+ 953 0630 C801      		movw r24,r16
+ 954 0632 9695      		lsr r25
+ 955 0634 8795      		ror r24
+ 956 0636 9695      		lsr r25
+ 957 0638 8795      		ror r24
+ 958 063a 8170      		andi r24,lo8(1)
+ 959 063c 9070      		andi r25,hi8(1)
+ 960 063e 0E94 0000 		call uart_puti
+ 961 0642 C801      		movw r24,r16
+ 962 0644 9695      		lsr r25
+ 963 0646 8795      		ror r24
+ 964 0648 8170      		andi r24,lo8(1)
+ 965 064a 9070      		andi r25,hi8(1)
+ 966 064c 0E94 0000 		call uart_puti
+ 967 0650 C801      		movw r24,r16
+ 968 0652 8170      		andi r24,lo8(1)
+ 969 0654 9070      		andi r25,hi8(1)
+ 970 0656 0E94 0000 		call uart_puti
+ 971               	.LM91:
+ 972 065a 80E0      		ldi r24,lo8(.LC0)
+ 973 065c 90E0      		ldi r25,hi8(.LC0)
+ 974 065e 0E94 0000 		call uart_puts
+ 975               	.LBB81:
+ 976               	.LBB82:
+ 977               	.LM92:
+ 978 0662 2C98      		cbi 37-0x20,4
+ 979               	.LBE82:
+ 980               	.LM93:
+ 981 0664 88EB      		ldi r24,lo8(-72)
+ 982 0666 0E94 0000 		call spi_putc
+ 983               	.LM94:
+ 984 066a 8AEA      		ldi r24,lo8(-86)
+ 985 066c 0E94 0000 		call spi_putc
+ 986               	.LBB83:
+ 987               	.LM95:
+ 988 0670 2C9A      		sbi 37-0x20,4
+ 989               	.LBE83:
+ 990               	.LBE81:
+ 991               	.LBB84:
+ 992               	.LBB85:
+ 993               	.LM96:
+ 994 0672 2C98      		cbi 37-0x20,4
+ 995               	.LBE85:
+ 996               	.LM97:
+ 997 0674 88EB      		ldi r24,lo8(-72)
+ 998 0676 0E94 0000 		call spi_putc
+ 999               	.LM98:
+ 1000 067a 8AEA      		ldi r24,lo8(-86)
+ 1001 067c 0E94 0000 		call spi_putc
+ 1002               	.LBB86:
+ 1003               	.LM99:
+ 1004 0680 2C9A      		sbi 37-0x20,4
+ 1005               	.LBE86:
+ 1006               	.LBE84:
+ 1007               	.LM100:
+ 1008 0682 80E0      		ldi r24,lo8(0)
+ 1009 0684 90E0      		ldi r25,hi8(0)
+ 1010               	/* epilogue: frame size=0 */
+ 1011 0686 1F91      		pop r17
+ 1012 0688 0F91      		pop r16
+ 1013 068a 0895      		ret
+ 1014               	/* epilogue end (size=3) */
+ 1015               	/* function main size 792 (787) */
+ 1016               	.LFE7:
+ 1066               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:20     .text:00000000 rf12m_send
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:34     .text:00000002 rfm12_wrt_cmd
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:79     .text:00000036 rfm12_readStatus
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccaYWsiv.s:120    .text:0000005e main
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+spi_putc
+uart_init
+spi_init
+uart_puti
+uart_puts

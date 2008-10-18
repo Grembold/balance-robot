@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: lcd.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_6bb2651bc0a152aa2f3f5a312f6d27ea.html">nbot_lib</a></div>
+<h1>lcd.h</h1><a href="lcd_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/****************************************************************************/</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#ifndef F_CPU 11059000</span>
+<a name="l00019"></a><a class="code" href="lcd_8h.html#43bafb28b29491ec7f871319b5a3b2f8">00019</a> <span class="preprocessor"></span><span class="preprocessor">#define F_CPU 11059000</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span>
+<a name="l00022"></a>00022 <span class="comment">// Hardware pin definitions</span>
+<a name="l00023"></a>00023 
+<a name="l00024"></a><a class="code" href="lcd_8h.html#077def6ebb43bf9aee4e7cad468ed726">00024</a> <span class="preprocessor">#define LCD_DATA_PORT           PORTC   </span>
+<a name="l00025"></a><a class="code" href="lcd_8h.html#1143c980a176ee75faa6bbb908f2ff65">00025</a> <span class="preprocessor">#define LCD_DATA_OFFSET         4               </span>
+<a name="l00026"></a><a class="code" href="lcd_8h.html#10f66499a3b1e8388d4f380e784d2149">00026</a> <span class="preprocessor">#define LCD_CTRL_PORT           PORTC   </span>
+<a name="l00027"></a><a class="code" href="lcd_8h.html#74b224af2a7729172a64fbf0e5c2d400">00027</a> <span class="preprocessor">#define LCD_PIN_RW                      1               </span>
+<a name="l00028"></a><a class="code" href="lcd_8h.html#6ac777950db576df62346a5a7da5b3a7">00028</a> <span class="preprocessor">#define LCD_PIN_RS                      0               </span>
+<a name="l00029"></a><a class="code" href="lcd_8h.html#05b1bf55f9a3a1a47b2c7b581f4b2ce0">00029</a> <span class="preprocessor">#define LCD_PIN_E1                      3               </span>
+<a name="l00030"></a><a class="code" href="lcd_8h.html#e0219bbb995729c477feeab487f561b5">00030</a> <span class="preprocessor">#define LCD_PIN_E2                      2               </span>
+<a name="l00032"></a><a class="code" href="lcd_8h.html#e4b2126af013234c4ae3e99be25f8793">00032</a> <span class="preprocessor">#define LCD_WORD_WRAP           1               </span>
+<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="comment">/*-------------------------------------------------------------------------------------</span>
+<a name="l00036"></a>00036 <span class="comment">        LCD Commands, use with lcd_command()</span>
+<a name="l00037"></a>00037 <span class="comment">-------------------------------------------------------------------------------------*/</span>
+<a name="l00038"></a><a class="code" href="lcd_8h.html#6aa8aa2057294b7d06088e834299b369">00038</a> <span class="preprocessor">#define LCD_CLEAR                               0x01    </span>
+<a name="l00039"></a><a class="code" href="lcd_8h.html#e0e309ccad89222eb3457f2da9f2bb8d">00039</a> <span class="preprocessor">#define LCD_HOME                                0x02    </span>
+<a name="l00041"></a>00041 <span class="preprocessor">// set entry mode: display shift on/off, dec/inc cursor move direction </span>
+<a name="l00042"></a><a class="code" href="lcd_8h.html#9688e0299083510cbd9dd8cce0768b74">00042</a> <span class="preprocessor"></span><span class="preprocessor">#define LCD_ENTRY_CRSR_LEFT             0x04    </span>
+<a name="l00043"></a><a class="code" href="lcd_8h.html#ac809d7ba809aa6dc7f32568f0d8b1d6">00043</a> <span class="preprocessor">#define LCD_ENTRY_DSPL_LEFT             0x05    </span>
+<a name="l00044"></a><a class="code" href="lcd_8h.html#e89d6c54161660ff78992dc188f72315">00044</a> <span class="preprocessor">#define LCD_ENTRY_CRSR_RIGHT    0x06    </span>
+<a name="l00045"></a><a class="code" href="lcd_8h.html#0f215bd06bdfe0d388b078cd26f18c8c">00045</a> <span class="preprocessor">#define LCD_ENTRY_DSPL_RIGHT    0x07    </span>
+<a name="l00047"></a>00047 <span class="preprocessor">// display on/off, cursor on/off, blinking char at cursor position</span>
+<a name="l00048"></a><a class="code" href="lcd_8h.html#a2966175115943883f51e9c90478540c">00048</a> <span class="preprocessor"></span><span class="preprocessor">#define LCD_DISP_OFF                    0x08    </span>
+<a name="l00049"></a><a class="code" href="lcd_8h.html#5163a96b133868975c0738e180b30cb8">00049</a> <span class="preprocessor">#define LCD_DISP_ON                             0x0C    </span>
+<a name="l00050"></a><a class="code" href="lcd_8h.html#36c772275a428c41b815e9e6ed2d50ee">00050</a> <span class="preprocessor">#define LCD_DISP_ON_CRSR                0x0E    </span>
+<a name="l00051"></a><a class="code" href="lcd_8h.html#470cef85de53e37356b22c66a357a764">00051</a> <span class="preprocessor">#define LCD_DISP_ON_BLINK               0x0F    </span>
+<a name="l00053"></a>00053 <span class="preprocessor">// move cursor/shift display</span>
+<a name="l00054"></a><a class="code" href="lcd_8h.html#de3a089319b3e44fdad3e5b1193a415b">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define LCD_MOVE_CRSR_LEFT              0x10    </span>
+<a name="l00055"></a><a class="code" href="lcd_8h.html#9f71f78462519e37d761b3012abedb70">00055</a> <span class="preprocessor">#define LCD_MOVE_CRSR_RIGHT             0x14    </span>
+<a name="l00056"></a><a class="code" href="lcd_8h.html#f55268b08f5949594a87a0f8de564c83">00056</a> <span class="preprocessor">#define LCD_MOVE_DSPL_LEFT              0x18    </span>
+<a name="l00057"></a><a class="code" href="lcd_8h.html#2acc54c0918bff5506f7727681397074">00057</a> <span class="preprocessor">#define LCD_MOVE_DSPL_RIGHT             0x1C    </span>
+<a name="l00059"></a>00059 <span class="preprocessor">// set RAM addresses</span>
+<a name="l00060"></a><a class="code" href="lcd_8h.html#eb37f5be802499adedd4f9366797bf0a">00060</a> <span class="preprocessor"></span><span class="preprocessor">#define LCD_SET_CGRAM                   0x40    </span>
+<a name="l00061"></a><a class="code" href="lcd_8h.html#fd34054a824de29fcbd441ee67faaf14">00061</a> <span class="preprocessor">#define LCD_SET_DDRAM                   0x80    </span>
+<a name="l00063"></a><a class="code" href="lcd_8h.html#1849e2087d3034a3fffa67444beed109">00063</a> <span class="preprocessor">#define LCD_MODE_DEFAULT                LCD_ENTRY_CRSR_RIGHT</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#3afa3406e59f5137c3ba14e89f493cd0">lcd_init</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> cmd);
+<a name="l00067"></a>00067 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#7570f3657d5468148afe4f2e356bc41a">lcd_command</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> cmd);
+<a name="l00068"></a>00068 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s);
+<a name="l00069"></a>00069 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#cb11e5a7e15154c8b4d1bb05f307483b">lcd_puts_P</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *progmem_s);
+<a name="l00070"></a>00070 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#fa7e36b95c43d603f510273ad077cbbe">lcd_putc</a>(<span class="keywordtype">char</span> c);
+<a name="l00071"></a>00071 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#f8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a>(<span class="keywordtype">void</span>);
+<a name="l00072"></a>00072 <span class="keyword">extern</span> <span class="keywordtype">void</span> <a class="code" href="lcd_8c.html#dbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> x, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> y);
+</pre></div><hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Apr 8 18:04:14 2007 für nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

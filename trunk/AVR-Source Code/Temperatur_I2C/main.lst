@@ -1,0 +1,99 @@
+   1               		.file	"main.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	main
+  20               	main:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 1F93      		push r17
+  25               	/* prologue end (size=1) */
+  26               	.LM2:
+  27 0002 1FEF      		ldi r17,lo8(-1)
+  28 0004 17BB      		out 55-0x20,r17
+  29               	.LM3:
+  30 0006 18BA      		out 56-0x20,__zero_reg__
+  31               	.LM4:
+  32 0008 1ABB      		out 58-0x20,r17
+  33               	.LM5:
+  34 000a 1BBA      		out 59-0x20,__zero_reg__
+  35               	.LM6:
+  36 000c 0E94 0000 		call i2c_init
+  37               	.LM7:
+  38 0010 80E9      		ldi r24,lo8(-112)
+  39 0012 0E94 0000 		call i2c_start
+  40 0016 282F      		mov r18,r24
+  41 0018 3327      		clr r19
+  42 001a 3093 0000 		sts (ret)+1,r19
+  43 001e 2093 0000 		sts ret,r18
+  44               	.LM8:
+  45 0022 8823      		tst r24
+  46 0024 01F0      		breq .L2
+  47               	.LM9:
+  48 0026 0E94 0000 		call i2c_stop
+  49               	.LM10:
+  50 002a 18BB      		out 56-0x20,r17
+  51 002c 00C0      		rjmp .L4
+  52               	.L2:
+  53               	.LM11:
+  54 002e 80E0      		ldi r24,lo8(0)
+  55 0030 0E94 0000 		call i2c_write
+  56               	.LM12:
+  57 0034 81E9      		ldi r24,lo8(-111)
+  58 0036 0E94 0000 		call i2c_rep_start
+  59               	.LM13:
+  60 003a 0E94 0000 		call i2c_readAck
+  61 003e 9927      		clr r25
+  62 0040 9093 0000 		sts (ret)+1,r25
+  63 0044 8093 0000 		sts ret,r24
+  64               	.LM14:
+  65 0048 8BBB      		out 59-0x20,r24
+  66               	.LM15:
+  67 004a 0E94 0000 		call i2c_readNak
+  68 004e 9927      		clr r25
+  69 0050 9093 0000 		sts (ret)+1,r25
+  70 0054 8093 0000 		sts ret,r24
+  71               	.LM16:
+  72 0058 0E94 0000 		call i2c_stop
+  73               	.LM17:
+  74 005c 8091 0000 		lds r24,ret
+  75 0060 88BB      		out 56-0x20,r24
+  76               	.L4:
+  77               	.LM18:
+  78 0062 80E0      		ldi r24,lo8(0)
+  79 0064 90E0      		ldi r25,hi8(0)
+  80               	/* epilogue: frame size=0 */
+  81 0066 1F91      		pop r17
+  82 0068 0895      		ret
+  83               	/* epilogue end (size=2) */
+  84               	/* function main size 53 (50) */
+  85               	.LFE2:
+  87               		.comm ret,2,1
+ 112               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/ccJ0Va3h.s:20     .text:00000000 main
+                            *COM*:00000002 ret
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+i2c_init
+i2c_start
+i2c_stop
+i2c_write
+i2c_rep_start
+i2c_readAck
+i2c_readNak

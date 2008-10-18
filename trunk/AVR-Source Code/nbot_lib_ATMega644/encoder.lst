@@ -1,0 +1,293 @@
+   1               		.file	"encoder.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	encoderGet
+  20               	encoderGet:
+  21               	.LFB5:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 2FB7      		in r18,95-0x20
+  27               	.LM3:
+  28               	/* #APP */
+  29 0002 F894      		cli
+  30               	.LM4:
+  31               	/* #NOAPP */
+  32 0004 E82F      		mov r30,r24
+  33 0006 FF27      		clr r31
+  34 0008 EE0F      		add r30,r30
+  35 000a FF1F      		adc r31,r31
+  36 000c E050      		subi r30,lo8(-(enc_delta))
+  37 000e F040      		sbci r31,hi8(-(enc_delta))
+  38 0010 8081      		ld r24,Z
+  39 0012 9181      		ldd r25,Z+1
+  40               	.LM5:
+  41 0014 1182      		std Z+1,__zero_reg__
+  42 0016 1082      		st Z,__zero_reg__
+  43               	.LM6:
+  44 0018 2FBF      		out 95-0x20,r18
+  45               	/* epilogue: frame size=0 */
+  46 001a 0895      		ret
+  47               	/* epilogue end (size=1) */
+  48               	/* function encoderGet size 15 (14) */
+  49               	.LFE5:
+  51               	.global	encoder_init
+  53               	encoder_init:
+  54               	.LFB4:
+  55               	.LM7:
+  56               	/* prologue: frame size=0 */
+  57               	/* prologue end (size=0) */
+  58               	.LM8:
+  59 001c 64B3      		in r22,52-0x20
+  60 001e 607F      		andi r22,lo8(-16)
+  61 0020 64BB      		out 52-0x20,r22
+  62               	.LM9:
+  63 0022 35B3      		in r19,53-0x20
+  64 0024 3F60      		ori r19,lo8(15)
+  65 0026 35BB      		out 53-0x20,r19
+  66               	.LBB2:
+  67               	.LBB3:
+  68               	.LM10:
+  69 0028 5FB7      		in r21,95-0x20
+  70               	.LM11:
+  71               	/* #APP */
+  72 002a F894      		cli
+  73               	.LM12:
+  74               	/* #NOAPP */
+  75 002c E0E0      		ldi r30,lo8(enc_delta)
+  76 002e F0E0      		ldi r31,hi8(enc_delta)
+  77 0030 2081      		ld r18,Z
+  78 0032 3181      		ldd r19,Z+1
+  79               	.LM13:
+  80 0034 1182      		std Z+1,__zero_reg__
+  81 0036 1082      		st Z,__zero_reg__
+  82               	.LM14:
+  83 0038 5FBF      		out 95-0x20,r21
+  84               	.LBE3:
+  85               	.LBE2:
+  86               	.LBB4:
+  87               	.LBB5:
+  88               	.LM15:
+  89 003a 4FB7      		in r20,95-0x20
+  90               	.LM16:
+  91               	/* #APP */
+  92 003c F894      		cli
+  93               	.LM17:
+  94               	/* #NOAPP */
+  95 003e E1E0      		ldi r30,lo8(1)
+  96 0040 F0E0      		ldi r31,hi8(1)
+  97 0042 EE0F      		add r30,r30
+  98 0044 FF1F      		adc r31,r31
+  99 0046 E050      		subi r30,lo8(-(enc_delta))
+ 100 0048 F040      		sbci r31,hi8(-(enc_delta))
+ 101 004a 2081      		ld r18,Z
+ 102 004c 3181      		ldd r19,Z+1
+ 103               	.LM18:
+ 104 004e 1182      		std Z+1,__zero_reg__
+ 105 0050 1082      		st Z,__zero_reg__
+ 106               	.LM19:
+ 107 0052 4FBF      		out 95-0x20,r20
+ 108               	.LBE5:
+ 109               	.LBE4:
+ 110               	.LM20:
+ 111 0054 22E0      		ldi r18,lo8(2)
+ 112 0056 23BF      		out 83-0x20,r18
+ 113               	.LM21:
+ 114 0058 89B7      		in r24,89-0x20
+ 115 005a 8160      		ori r24,lo8(1)
+ 116 005c 89BF      		out 89-0x20,r24
+ 117               	/* epilogue: frame size=0 */
+ 118 005e 0895      		ret
+ 119               	/* epilogue end (size=1) */
+ 120               	/* function encoder_init size 36 (35) */
+ 121               	.LFE4:
+ 123               	.global	encoderToMM
+ 125               	encoderToMM:
+ 126               	.LFB6:
+ 127               	.LM22:
+ 128               	/* prologue: frame size=0 */
+ 129               	/* prologue end (size=0) */
+ 130 0060 DC01      		movw r26,r24
+ 131 0062 CB01      		movw r24,r22
+ 132               	.LM23:
+ 133 0064 BC01      		movw r22,r24
+ 134 0066 CD01      		movw r24,r26
+ 135 0068 28EE      		ldi r18,lo8(1000)
+ 136 006a 33E0      		ldi r19,hi8(1000)
+ 137 006c 40E0      		ldi r20,hlo8(1000)
+ 138 006e 50E0      		ldi r21,hhi8(1000)
+ 139 0070 0E94 0000 		call __mulsi3
+ 140 0074 DC01      		movw r26,r24
+ 141 0076 CB01      		movw r24,r22
+ 142 0078 BC01      		movw r22,r24
+ 143 007a CD01      		movw r24,r26
+ 144 007c 22E2      		ldi r18,lo8(4898)
+ 145 007e 33E1      		ldi r19,hi8(4898)
+ 146 0080 40E0      		ldi r20,hlo8(4898)
+ 147 0082 50E0      		ldi r21,hhi8(4898)
+ 148 0084 0E94 0000 		call __divmodsi4
+ 149               	.LM24:
+ 150 0088 CA01      		movw r24,r20
+ 151 008a B901      		movw r22,r18
+ 152               	/* epilogue: frame size=0 */
+ 153 008c 0895      		ret
+ 154               	/* epilogue end (size=1) */
+ 155               	/* function encoderToMM size 23 (22) */
+ 156               	.LFE6:
+ 158               		.data
+ 161               	enc_last.0:
+ 162 0000 01        		.byte	1
+ 163 0001 01        		.byte	1
+ 164               		.text
+ 165               	.global	__vector_9
+ 167               	__vector_9:
+ 168               	.LFB7:
+ 169               	.LM25:
+ 170               	/* prologue: frame size=0 */
+ 171 008e 1F92      		push __zero_reg__
+ 172 0090 0F92      		push __tmp_reg__
+ 173 0092 0FB6      		in __tmp_reg__,__SREG__
+ 174 0094 0F92      		push __tmp_reg__
+ 175 0096 1124      		clr __zero_reg__
+ 176 0098 2F93      		push r18
+ 177 009a 3F93      		push r19
+ 178 009c 4F93      		push r20
+ 179 009e 5F93      		push r21
+ 180 00a0 6F93      		push r22
+ 181 00a2 8F93      		push r24
+ 182 00a4 9F93      		push r25
+ 183 00a6 AF93      		push r26
+ 184 00a8 BF93      		push r27
+ 185 00aa EF93      		push r30
+ 186 00ac FF93      		push r31
+ 187               	/* prologue end (size=16) */
+ 188               	.LM26:
+ 189 00ae 40E0      		ldi r20,lo8(0)
+ 190 00b0 50E0      		ldi r21,hi8(0)
+ 191               	.LM27:
+ 192 00b2 9A99      		sbic 51-0x20,2
+ 193               	.LM28:
+ 194 00b4 41E0      		ldi r20,lo8(1)
+ 195               	.L7:
+ 196               	.LM29:
+ 197 00b6 9B9B      		sbis 51-0x20,3
+ 198 00b8 02C0      		rjmp .L8
+ 199               	.LM30:
+ 200 00ba 83E0      		ldi r24,lo8(3)
+ 201 00bc 4827      		eor r20,r24
+ 202               	.L8:
+ 203               	.LM31:
+ 204 00be 9899      		sbic 51-0x20,0
+ 205               	.LM32:
+ 206 00c0 51E0      		ldi r21,lo8(1)
+ 207               	.L9:
+ 208               	.LM33:
+ 209 00c2 999B      		sbis 51-0x20,1
+ 210 00c4 02C0      		rjmp .L10
+ 211               	.LM34:
+ 212 00c6 23E0      		ldi r18,lo8(3)
+ 213 00c8 5227      		eor r21,r18
+ 214               	.L10:
+ 215               	.LM35:
+ 216 00ca 9091 0000 		lds r25,enc_last.0
+ 217 00ce 642F      		mov r22,r20
+ 218 00d0 691B      		sub r22,r25
+ 219               	.LM36:
+ 220 00d2 262F      		mov r18,r22
+ 221 00d4 3327      		clr r19
+ 222 00d6 27FD      		sbrc r18,7
+ 223 00d8 3095      		com r19
+ 224 00da 20FF      		sbrs r18,0
+ 225 00dc 10C0      		rjmp .L11
+ 226               	.LM37:
+ 227 00de 960F      		add r25,r22
+ 228 00e0 9093 0000 		sts enc_last.0,r25
+ 229               	.LM38:
+ 230 00e4 2270      		andi r18,lo8(2)
+ 231 00e6 3070      		andi r19,hi8(2)
+ 232 00e8 A091 0000 		lds r26,enc_delta
+ 233 00ec B091 0000 		lds r27,(enc_delta)+1
+ 234 00f0 A20F      		add r26,r18
+ 235 00f2 B31F      		adc r27,r19
+ 236 00f4 1197      		sbiw r26,1
+ 237 00f6 B093 0000 		sts (enc_delta)+1,r27
+ 238 00fa A093 0000 		sts enc_delta,r26
+ 239               	.L11:
+ 240               	.LM39:
+ 241 00fe 9091 0000 		lds r25,enc_last.0+1
+ 242 0102 452F      		mov r20,r21
+ 243 0104 491B      		sub r20,r25
+ 244               	.LM40:
+ 245 0106 242F      		mov r18,r20
+ 246 0108 3327      		clr r19
+ 247 010a 27FD      		sbrc r18,7
+ 248 010c 3095      		com r19
+ 249 010e 20FF      		sbrs r18,0
+ 250 0110 10C0      		rjmp .L6
+ 251               	.LM41:
+ 252 0112 940F      		add r25,r20
+ 253 0114 9093 0000 		sts enc_last.0+1,r25
+ 254               	.LM42:
+ 255 0118 2270      		andi r18,lo8(2)
+ 256 011a 3070      		andi r19,hi8(2)
+ 257 011c E091 0000 		lds r30,enc_delta+2
+ 258 0120 F091 0000 		lds r31,(enc_delta+2)+1
+ 259 0124 E20F      		add r30,r18
+ 260 0126 F31F      		adc r31,r19
+ 261 0128 3197      		sbiw r30,1
+ 262 012a F093 0000 		sts (enc_delta+2)+1,r31
+ 263 012e E093 0000 		sts enc_delta+2,r30
+ 264               	.L6:
+ 265               	/* epilogue: frame size=0 */
+ 266 0132 FF91      		pop r31
+ 267 0134 EF91      		pop r30
+ 268 0136 BF91      		pop r27
+ 269 0138 AF91      		pop r26
+ 270 013a 9F91      		pop r25
+ 271 013c 8F91      		pop r24
+ 272 013e 6F91      		pop r22
+ 273 0140 5F91      		pop r21
+ 274 0142 4F91      		pop r20
+ 275 0144 3F91      		pop r19
+ 276 0146 2F91      		pop r18
+ 277 0148 0F90      		pop __tmp_reg__
+ 278 014a 0FBE      		out __SREG__,__tmp_reg__
+ 279 014c 0F90      		pop __tmp_reg__
+ 280 014e 1F90      		pop __zero_reg__
+ 281 0150 1895      		reti
+ 282               	/* epilogue end (size=16) */
+ 283               	/* function __vector_9 size 100 (68) */
+ 284               	.LFE7:
+ 286               		.comm count36kHz,1,1
+ 287               		.comm timebase,4,1
+ 288               		.comm enc_delta,4,1
+ 289               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 encoder.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:20     .text:00000000 encoderGet
+                            *COM*:00000004 enc_delta
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:53     .text:0000001c encoder_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:125    .text:00000060 encoderToMM
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:161    .data:00000000 enc_last.0
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc4waaaa.s:167    .text:0000008e __vector_9
+                            *COM*:00000001 count36kHz
+                            *COM*:00000004 timebase
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__mulsi3
+__divmodsi4

@@ -1,0 +1,537 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003a0  00000000  00000000  00000094  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  000003a0  00000434  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000007  00800060  00800060  00000434  2**0
+                  ALLOC
+  3 .noinit       00000000  00800067  00800067  00000434  2**0
+                  CONTENTS
+  4 .eeprom       00000000  00810000  00810000  00000434  2**0
+                  CONTENTS
+  5 .stab         0000036c  00000000  00000000  00000434  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  6 .stabstr      00000084  00000000  00000000  000007a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 0000003c  00000000  00000000  00000824  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_pubnames 000000d9  00000000  00000000  00000860  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   00000486  00000000  00000000  00000939  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 0000013e  00000000  00000000  00000dbf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   000002f7  00000000  00000000  00000efd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_str    00000009  00000000  00000000  000011f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54 <__ctors_end>
+   4:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+   8:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+   c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  10:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  14:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  18:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  1c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  20:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  24:	0c 94 95 01 	jmp	0x32a <__vector_9>
+  28:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  2c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  30:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  34:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  38:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  3c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  40:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  44:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  48:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  4c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  50:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 ea       	ldi	r30, 0xA0	; 160
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a7 36       	cpi	r26, 0x67	; 103
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0c 94 63 00 	jmp	0xc6 <main>
+
+0000008a <__bad_interrupt>:
+  8a:	0c 94 00 00 	jmp	0x0 <__vectors>
+
+0000008e <io_init>:
+
+
+
+static void io_init(void) 
+{ 
+  8e:	cf 93       	push	r28
+  90:	df 93       	push	r29
+  92:	cd b7       	in	r28, 0x3d	; 61
+  94:	de b7       	in	r29, 0x3e	; 62
+
+	// PortD 
+	DDRD |= (1<<PD4)|(1<<PD5); 	//ausgänge 
+  96:	80 91 31 00 	lds	r24, 0x0031
+  9a:	80 63       	ori	r24, 0x30	; 48
+  9c:	80 93 31 00 	sts	0x0031, r24
+	
+	/* normale 10-bit PWM aktivieren ( nicht invertiert ) */ 
+	TCCR1A = (1<<WGM10)|(1<<WGM11); 
+  a0:	83 e0       	ldi	r24, 0x03	; 3
+  a2:	80 93 4f 00 	sts	0x004F, r24
+	/* Einstellen der PWM-Frequenz auf ca. 172kHz kHz ( Prescaler = 64 ) */ 
+	TCCR1B = (1<<CS11)|(1<<CS10); 
+  a6:	83 e0       	ldi	r24, 0x03	; 3
+  a8:	80 93 4e 00 	sts	0x004E, r24
+	/* PWN einschalten -- > PIN mit PWM verbinden */ 
+	PWM_LINKS_ON; 
+  ac:	80 91 4f 00 	lds	r24, 0x004F
+  b0:	80 68       	ori	r24, 0x80	; 128
+  b2:	80 93 4f 00 	sts	0x004F, r24
+	PWM_RECHTS_ON; 
+  b6:	80 91 4f 00 	lds	r24, 0x004F
+  ba:	80 62       	ori	r24, 0x20	; 32
+  bc:	80 93 4f 00 	sts	0x004F, r24
+  c0:	df 91       	pop	r29
+  c2:	cf 91       	pop	r28
+  c4:	08 95       	ret
+
+000000c6 <main>:
+} 
+
+
+int main(void) 
+{ 
+  c6:	cf e5       	ldi	r28, 0x5F	; 95
+  c8:	d4 e0       	ldi	r29, 0x04	; 4
+  ca:	de bf       	out	0x3e, r29	; 62
+  cc:	cd bf       	out	0x3d, r28	; 61
+	DDRA &=~((1<<TASTE0)|(1<<TASTE1)|(1<<TASTE2));
+  ce:	80 91 3a 00 	lds	r24, 0x003A
+  d2:	88 7f       	andi	r24, 0xF8	; 248
+  d4:	80 93 3a 00 	sts	0x003A, r24
+	PORTA |=(1<<TASTE0)|(1<<TASTE1)|(1<<TASTE2);
+  d8:	80 91 3b 00 	lds	r24, 0x003B
+  dc:	87 60       	ori	r24, 0x07	; 7
+  de:	80 93 3b 00 	sts	0x003B, r24
+	DDRD |=(1<<PD2)|(1<<PD3)|(1<<PD6)|(1<<PD7); //Achtung an PD0 und PD1 ist UART angeschlossen
+  e2:	80 91 31 00 	lds	r24, 0x0031
+  e6:	8c 6c       	ori	r24, 0xCC	; 204
+  e8:	80 93 31 00 	sts	0x0031, r24
+	PORTD &=~((1<<PD2)|(1<<PD3)|(1<<PD6)|(1<<PD7));
+  ec:	93 e3       	ldi	r25, 0x33	; 51
+  ee:	80 91 32 00 	lds	r24, 0x0032
+  f2:	89 23       	and	r24, r25
+  f4:	80 93 32 00 	sts	0x0032, r24
+    io_init(); 
+  f8:	0e 94 47 00 	call	0x8e <io_init>
+
+	timer0_init();
+  fc:	0e 94 81 01 	call	0x302 <timer0_init>
+
+	//Motor B Rechtsherum!
+	PORTD |=(1<<PD2);
+ 100:	80 91 32 00 	lds	r24, 0x0032
+ 104:	84 60       	ori	r24, 0x04	; 4
+ 106:	80 93 32 00 	sts	0x0032, r24
+	PORTD &= ~(1<<PD3);
+ 10a:	80 91 32 00 	lds	r24, 0x0032
+ 10e:	87 7f       	andi	r24, 0xF7	; 247
+ 110:	80 93 32 00 	sts	0x0032, r24
+	PWM_RECHTS = 0;
+ 114:	10 92 49 00 	sts	0x0049, r1
+ 118:	10 92 48 00 	sts	0x0048, r1
+
+	//Motor A Links und an
+	PORTD |=(1<<PD7);
+ 11c:	80 91 32 00 	lds	r24, 0x0032
+ 120:	80 68       	ori	r24, 0x80	; 128
+ 122:	80 93 32 00 	sts	0x0032, r24
+	PORTD &= ~(1<<PD6);
+ 126:	80 91 32 00 	lds	r24, 0x0032
+ 12a:	8f 7b       	andi	r24, 0xBF	; 191
+ 12c:	80 93 32 00 	sts	0x0032, r24
+	PWM_LINKS = 0;
+ 130:	10 92 4b 00 	sts	0x004B, r1
+ 134:	10 92 4a 00 	sts	0x004A, r1
+   
+   while(1) 
+   { 
+		if( get_key_press( 1<<TASTE0))			// press Key 0:
+ 138:	81 e0       	ldi	r24, 0x01	; 1
+ 13a:	0e 94 3b 01 	call	0x276 <get_key_press>
+ 13e:	88 23       	and	r24, r24
+ 140:	49 f0       	breq	.+18     	; 0x154 <main+0x8e>
+			{
+				PWM_LINKS-=10;
+ 142:	80 91 4a 00 	lds	r24, 0x004A
+ 146:	90 91 4b 00 	lds	r25, 0x004B
+ 14a:	0a 97       	sbiw	r24, 0x0a	; 10
+ 14c:	90 93 4b 00 	sts	0x004B, r25
+ 150:	80 93 4a 00 	sts	0x004A, r24
+	
+			}
+		if( get_key_press( 1<<TASTE2))			// press Key 0:
+ 154:	84 e0       	ldi	r24, 0x04	; 4
+ 156:	0e 94 3b 01 	call	0x276 <get_key_press>
+ 15a:	88 23       	and	r24, r24
+ 15c:	c1 f0       	breq	.+48     	; 0x18e <main+0xc8>
+			{
+				PORTD ^=~(1<<PD2);
+ 15e:	90 91 32 00 	lds	r25, 0x0032
+ 162:	8b ef       	ldi	r24, 0xFB	; 251
+ 164:	89 27       	eor	r24, r25
+ 166:	80 93 32 00 	sts	0x0032, r24
+				PORTD ^=~(1<<PD3);
+ 16a:	90 91 32 00 	lds	r25, 0x0032
+ 16e:	87 ef       	ldi	r24, 0xF7	; 247
+ 170:	89 27       	eor	r24, r25
+ 172:	80 93 32 00 	sts	0x0032, r24
+				PORTD ^=~(1<<PD6);
+ 176:	90 91 32 00 	lds	r25, 0x0032
+ 17a:	8f eb       	ldi	r24, 0xBF	; 191
+ 17c:	89 27       	eor	r24, r25
+ 17e:	80 93 32 00 	sts	0x0032, r24
+				PORTD ^=~(1<<PD7);
+ 182:	9f e7       	ldi	r25, 0x7F	; 127
+ 184:	80 91 32 00 	lds	r24, 0x0032
+ 188:	89 27       	eor	r24, r25
+ 18a:	80 93 32 00 	sts	0x0032, r24
+	
+			}
+		// repeat on long press:
+		if( get_key_press( 1<<TASTE1) || get_key_rpt( 1<<TASTE1 ))			// long press Key 1:
+ 18e:	82 e0       	ldi	r24, 0x02	; 2
+ 190:	0e 94 3b 01 	call	0x276 <get_key_press>
+ 194:	88 23       	and	r24, r24
+ 196:	31 f4       	brne	.+12     	; 0x1a4 <main+0xde>
+ 198:	82 e0       	ldi	r24, 0x02	; 2
+ 19a:	0e 94 5e 01 	call	0x2bc <get_key_rpt>
+ 19e:	88 23       	and	r24, r24
+ 1a0:	09 f4       	brne	.+2      	; 0x1a4 <main+0xde>
+ 1a2:	ca cf       	rjmp	.-108    	; 0x138 <main+0x72>
+			{
+				PWM_RECHTS-=10;	
+ 1a4:	80 91 48 00 	lds	r24, 0x0048
+ 1a8:	90 91 49 00 	lds	r25, 0x0049
+ 1ac:	0a 97       	sbiw	r24, 0x0a	; 10
+ 1ae:	90 93 49 00 	sts	0x0049, r25
+ 1b2:	80 93 48 00 	sts	0x0048, r24
+ 1b6:	c0 cf       	rjmp	.-128    	; 0x138 <main+0x72>
+
+000001b8 <tasten>:
+volatile char key_state, key_press, key_rpt;
+
+
+void tasten( void )
+{
+ 1b8:	cf 93       	push	r28
+ 1ba:	df 93       	push	r29
+ 1bc:	cd b7       	in	r28, 0x3d	; 61
+ 1be:	de b7       	in	r29, 0x3e	; 62
+ 1c0:	21 97       	sbiw	r28, 0x01	; 1
+ 1c2:	0f b6       	in	r0, 0x3f	; 63
+ 1c4:	f8 94       	cli
+ 1c6:	de bf       	out	0x3e, r29	; 62
+ 1c8:	0f be       	out	0x3f, r0	; 63
+ 1ca:	cd bf       	out	0x3d, r28	; 61
+  static char ct0, ct1, rpt;
+  char i;
+
+  i = key_state ^ ~KEY_INPUT;	// key changed ?
+ 1cc:	80 91 39 00 	lds	r24, 0x0039
+ 1d0:	98 2f       	mov	r25, r24
+ 1d2:	90 95       	com	r25
+ 1d4:	80 91 66 00 	lds	r24, 0x0066
+ 1d8:	89 27       	eor	r24, r25
+ 1da:	89 83       	std	Y+1, r24	; 0x01
+  ct0 = ~( ct0 & i );			// reset or count ct0
+ 1dc:	90 91 60 00 	lds	r25, 0x0060
+ 1e0:	89 81       	ldd	r24, Y+1	; 0x01
+ 1e2:	89 23       	and	r24, r25
+ 1e4:	80 95       	com	r24
+ 1e6:	80 93 60 00 	sts	0x0060, r24
+  ct1 = (ct0 ^ ct1) & i;		// reset or count ct1
+ 1ea:	90 91 60 00 	lds	r25, 0x0060
+ 1ee:	80 91 61 00 	lds	r24, 0x0061
+ 1f2:	98 27       	eor	r25, r24
+ 1f4:	89 81       	ldd	r24, Y+1	; 0x01
+ 1f6:	89 23       	and	r24, r25
+ 1f8:	80 93 61 00 	sts	0x0061, r24
+  i &= ct0 & ct1;				// count until roll over 
+ 1fc:	90 91 60 00 	lds	r25, 0x0060
+ 200:	80 91 61 00 	lds	r24, 0x0061
+ 204:	98 23       	and	r25, r24
+ 206:	89 81       	ldd	r24, Y+1	; 0x01
+ 208:	89 23       	and	r24, r25
+ 20a:	89 83       	std	Y+1, r24	; 0x01
+  key_state ^= i;				// then toggle debounced state
+ 20c:	90 91 66 00 	lds	r25, 0x0066
+ 210:	89 81       	ldd	r24, Y+1	; 0x01
+ 212:	89 27       	eor	r24, r25
+ 214:	80 93 66 00 	sts	0x0066, r24
+  key_press |= key_state & i;	// 0->1: key pressing detect
+ 218:	90 91 66 00 	lds	r25, 0x0066
+ 21c:	89 81       	ldd	r24, Y+1	; 0x01
+ 21e:	98 23       	and	r25, r24
+ 220:	80 91 65 00 	lds	r24, 0x0065
+ 224:	89 2b       	or	r24, r25
+ 226:	80 93 65 00 	sts	0x0065, r24
+
+  if( (key_state & REPEAT_MASK) == 0 )	// check repeat function
+ 22a:	80 91 66 00 	lds	r24, 0x0066
+ 22e:	99 27       	eor	r25, r25
+ 230:	86 70       	andi	r24, 0x06	; 6
+ 232:	90 70       	andi	r25, 0x00	; 0
+ 234:	00 97       	sbiw	r24, 0x00	; 0
+ 236:	19 f4       	brne	.+6      	; 0x23e <tasten+0x86>
+    rpt = REPEAT_START;			// start delay
+ 238:	8d e7       	ldi	r24, 0x7D	; 125
+ 23a:	80 93 62 00 	sts	0x0062, r24
+  if( --rpt == 0 ){
+ 23e:	80 91 62 00 	lds	r24, 0x0062
+ 242:	81 50       	subi	r24, 0x01	; 1
+ 244:	80 93 62 00 	sts	0x0062, r24
+ 248:	88 23       	and	r24, r24
+ 24a:	61 f4       	brne	.+24     	; 0x264 <tasten+0xac>
+    rpt = REPEAT_NEXT;			// repeat delay
+ 24c:	89 e1       	ldi	r24, 0x19	; 25
+ 24e:	80 93 62 00 	sts	0x0062, r24
+    key_rpt |= key_state & REPEAT_MASK;
+ 252:	80 91 66 00 	lds	r24, 0x0066
+ 256:	98 2f       	mov	r25, r24
+ 258:	96 70       	andi	r25, 0x06	; 6
+ 25a:	80 91 64 00 	lds	r24, 0x0064
+ 25e:	89 2b       	or	r24, r25
+ 260:	80 93 64 00 	sts	0x0064, r24
+ 264:	21 96       	adiw	r28, 0x01	; 1
+ 266:	0f b6       	in	r0, 0x3f	; 63
+ 268:	f8 94       	cli
+ 26a:	de bf       	out	0x3e, r29	; 62
+ 26c:	0f be       	out	0x3f, r0	; 63
+ 26e:	cd bf       	out	0x3d, r28	; 61
+ 270:	df 91       	pop	r29
+ 272:	cf 91       	pop	r28
+ 274:	08 95       	ret
+
+00000276 <get_key_press>:
+  }
+}
+
+
+
+char get_key_press( char key_mask )
+{
+ 276:	cf 93       	push	r28
+ 278:	df 93       	push	r29
+ 27a:	cd b7       	in	r28, 0x3d	; 61
+ 27c:	de b7       	in	r29, 0x3e	; 62
+ 27e:	21 97       	sbiw	r28, 0x01	; 1
+ 280:	0f b6       	in	r0, 0x3f	; 63
+ 282:	f8 94       	cli
+ 284:	de bf       	out	0x3e, r29	; 62
+ 286:	0f be       	out	0x3f, r0	; 63
+ 288:	cd bf       	out	0x3d, r28	; 61
+ 28a:	89 83       	std	Y+1, r24	; 0x01
+  cli();
+ 28c:	f8 94       	cli
+  key_mask &= key_press;                        // read key(s)
+ 28e:	99 81       	ldd	r25, Y+1	; 0x01
+ 290:	80 91 65 00 	lds	r24, 0x0065
+ 294:	89 23       	and	r24, r25
+ 296:	89 83       	std	Y+1, r24	; 0x01
+  key_press ^= key_mask;                        // clear key(s)
+ 298:	90 91 65 00 	lds	r25, 0x0065
+ 29c:	89 81       	ldd	r24, Y+1	; 0x01
+ 29e:	89 27       	eor	r24, r25
+ 2a0:	80 93 65 00 	sts	0x0065, r24
+  sei();
+ 2a4:	78 94       	sei
+  return key_mask;
+ 2a6:	89 81       	ldd	r24, Y+1	; 0x01
+ 2a8:	99 27       	eor	r25, r25
+ 2aa:	21 96       	adiw	r28, 0x01	; 1
+ 2ac:	0f b6       	in	r0, 0x3f	; 63
+ 2ae:	f8 94       	cli
+ 2b0:	de bf       	out	0x3e, r29	; 62
+ 2b2:	0f be       	out	0x3f, r0	; 63
+ 2b4:	cd bf       	out	0x3d, r28	; 61
+ 2b6:	df 91       	pop	r29
+ 2b8:	cf 91       	pop	r28
+ 2ba:	08 95       	ret
+
+000002bc <get_key_rpt>:
+}
+char get_key_rpt( char key_mask )
+{
+ 2bc:	cf 93       	push	r28
+ 2be:	df 93       	push	r29
+ 2c0:	cd b7       	in	r28, 0x3d	; 61
+ 2c2:	de b7       	in	r29, 0x3e	; 62
+ 2c4:	21 97       	sbiw	r28, 0x01	; 1
+ 2c6:	0f b6       	in	r0, 0x3f	; 63
+ 2c8:	f8 94       	cli
+ 2ca:	de bf       	out	0x3e, r29	; 62
+ 2cc:	0f be       	out	0x3f, r0	; 63
+ 2ce:	cd bf       	out	0x3d, r28	; 61
+ 2d0:	89 83       	std	Y+1, r24	; 0x01
+  cli();
+ 2d2:	f8 94       	cli
+  key_mask &= key_rpt;                        	// read key(s)
+ 2d4:	99 81       	ldd	r25, Y+1	; 0x01
+ 2d6:	80 91 64 00 	lds	r24, 0x0064
+ 2da:	89 23       	and	r24, r25
+ 2dc:	89 83       	std	Y+1, r24	; 0x01
+  key_rpt ^= key_mask;                        	// clear key(s)
+ 2de:	90 91 64 00 	lds	r25, 0x0064
+ 2e2:	89 81       	ldd	r24, Y+1	; 0x01
+ 2e4:	89 27       	eor	r24, r25
+ 2e6:	80 93 64 00 	sts	0x0064, r24
+  sei();
+ 2ea:	78 94       	sei
+  return key_mask;
+ 2ec:	89 81       	ldd	r24, Y+1	; 0x01
+ 2ee:	99 27       	eor	r25, r25
+ 2f0:	21 96       	adiw	r28, 0x01	; 1
+ 2f2:	0f b6       	in	r0, 0x3f	; 63
+ 2f4:	f8 94       	cli
+ 2f6:	de bf       	out	0x3e, r29	; 62
+ 2f8:	0f be       	out	0x3f, r0	; 63
+ 2fa:	cd bf       	out	0x3d, r28	; 61
+ 2fc:	df 91       	pop	r29
+ 2fe:	cf 91       	pop	r28
+ 300:	08 95       	ret
+
+00000302 <timer0_init>:
+#include "timer0.h"
+
+/* Timer0 initialisieren */
+void timer0_init(void)
+{
+ 302:	cf 93       	push	r28
+ 304:	df 93       	push	r29
+ 306:	cd b7       	in	r28, 0x3d	; 61
+ 308:	de b7       	in	r29, 0x3e	; 62
+	/* alle 6,35msEinstellen der Frequenz auf 157Hz ( Prescaler = 256  * 256 bis Überlauf ) */
+	TCCR0 = (1<<CS02);
+ 30a:	84 e0       	ldi	r24, 0x04	; 4
+ 30c:	80 93 53 00 	sts	0x0053, r24
+
+	/* Interrupts für Timer0 aktivieren */	
+	TIMSK |= (1<<TOIE0);
+ 310:	80 91 59 00 	lds	r24, 0x0059
+ 314:	81 60       	ori	r24, 0x01	; 1
+ 316:	80 93 59 00 	sts	0x0059, r24
+	
+	DDRB |= (1<<PB3);
+ 31a:	80 91 37 00 	lds	r24, 0x0037
+ 31e:	88 60       	ori	r24, 0x08	; 8
+ 320:	80 93 37 00 	sts	0x0037, r24
+ 324:	df 91       	pop	r29
+ 326:	cf 91       	pop	r28
+ 328:	08 95       	ret
+
+0000032a <__vector_9>:
+
+}	
+
+ISR(TIMER0_OVF_vect) /* veraltet: SIGNAL(SIG_OVERFLOW1) */
+{
+ 32a:	1f 92       	push	r1
+ 32c:	0f 92       	push	r0
+ 32e:	0f b6       	in	r0, 0x3f	; 63
+ 330:	0f 92       	push	r0
+ 332:	11 24       	eor	r1, r1
+ 334:	2f 93       	push	r18
+ 336:	3f 93       	push	r19
+ 338:	4f 93       	push	r20
+ 33a:	5f 93       	push	r21
+ 33c:	6f 93       	push	r22
+ 33e:	7f 93       	push	r23
+ 340:	8f 93       	push	r24
+ 342:	9f 93       	push	r25
+ 344:	af 93       	push	r26
+ 346:	bf 93       	push	r27
+ 348:	ef 93       	push	r30
+ 34a:	ff 93       	push	r31
+ 34c:	cf 93       	push	r28
+ 34e:	df 93       	push	r29
+ 350:	cd b7       	in	r28, 0x3d	; 61
+ 352:	de b7       	in	r29, 0x3e	; 62
+    /* Interrupt Code */
+	timer0_counter++;
+ 354:	80 91 63 00 	lds	r24, 0x0063
+ 358:	8f 5f       	subi	r24, 0xFF	; 255
+ 35a:	80 93 63 00 	sts	0x0063, r24
+	if(timer0_counter == 84){
+ 35e:	80 91 63 00 	lds	r24, 0x0063
+ 362:	84 35       	cpi	r24, 0x54	; 84
+ 364:	41 f4       	brne	.+16     	; 0x376 <__vector_9+0x4c>
+		timer0_counter = 0;
+ 366:	10 92 63 00 	sts	0x0063, r1
+		PORTB ^=(1<<PB3);
+ 36a:	80 91 38 00 	lds	r24, 0x0038
+ 36e:	98 e0       	ldi	r25, 0x08	; 8
+ 370:	89 27       	eor	r24, r25
+ 372:	80 93 38 00 	sts	0x0038, r24
+	}
+	tasten();
+ 376:	0e 94 dc 00 	call	0x1b8 <tasten>
+ 37a:	df 91       	pop	r29
+ 37c:	cf 91       	pop	r28
+ 37e:	ff 91       	pop	r31
+ 380:	ef 91       	pop	r30
+ 382:	bf 91       	pop	r27
+ 384:	af 91       	pop	r26
+ 386:	9f 91       	pop	r25
+ 388:	8f 91       	pop	r24
+ 38a:	7f 91       	pop	r23
+ 38c:	6f 91       	pop	r22
+ 38e:	5f 91       	pop	r21
+ 390:	4f 91       	pop	r20
+ 392:	3f 91       	pop	r19
+ 394:	2f 91       	pop	r18
+ 396:	0f 90       	pop	r0
+ 398:	0f be       	out	0x3f, r0	; 63
+ 39a:	0f 90       	pop	r0
+ 39c:	1f 90       	pop	r1
+ 39e:	18 95       	reti

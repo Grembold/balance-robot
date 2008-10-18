@@ -1,0 +1,167 @@
+   1               		.file	"taste.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	tasten
+  19               	tasten:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24               	.LM2:
+  25 0000 8091 0000 		lds r24,key_state
+  26 0004 29B3      		in r18,57-0x20
+  27               	.LVL0:
+  28 0006 2095      		com r18
+  29 0008 2827      		eor r18,r24
+  30               	.LM3:
+  31 000a 8091 0000 		lds r24,ct0.1512
+  32 000e 8223      		and r24,r18
+  33 0010 8095      		com r24
+  34 0012 8093 0000 		sts ct0.1512,r24
+  35               	.LM4:
+  36 0016 9091 0000 		lds r25,ct1.1513
+  37 001a 9827      		eor r25,r24
+  38 001c 9223      		and r25,r18
+  39 001e 9093 0000 		sts ct1.1513,r25
+  40               	.LM5:
+  41 0022 8223      		and r24,r18
+  42               	.LVL1:
+  43 0024 8923      		and r24,r25
+  44               	.LM6:
+  45 0026 9091 0000 		lds r25,key_state
+  46 002a 9827      		eor r25,r24
+  47 002c 9093 0000 		sts key_state,r25
+  48               	.LM7:
+  49 0030 2091 0000 		lds r18,key_press
+  50 0034 9091 0000 		lds r25,key_state
+  51 0038 8923      		and r24,r25
+  52 003a 822B      		or r24,r18
+  53 003c 8093 0000 		sts key_press,r24
+  54               	.LM8:
+  55 0040 8091 0000 		lds r24,key_state
+  56               	.LVL2:
+  57 0044 8670      		andi r24,lo8(6)
+  58 0046 01F4      		brne .L2
+  59               	.LM9:
+  60 0048 82E3      		ldi r24,lo8(50)
+  61 004a 8093 0000 		sts rpt.1514,r24
+  62               	.L2:
+  63               	.LM10:
+  64 004e 8091 0000 		lds r24,rpt.1514
+  65 0052 8150      		subi r24,lo8(-(-1))
+  66 0054 8093 0000 		sts rpt.1514,r24
+  67 0058 8823      		tst r24
+  68 005a 01F4      		brne .L6
+  69               	.LM11:
+  70 005c 89E1      		ldi r24,lo8(25)
+  71 005e 8093 0000 		sts rpt.1514,r24
+  72               	.LM12:
+  73 0062 9091 0000 		lds r25,key_rpt
+  74 0066 8091 0000 		lds r24,key_state
+  75 006a 8670      		andi r24,lo8(6)
+  76 006c 892B      		or r24,r25
+  77 006e 8093 0000 		sts key_rpt,r24
+  78               	.L6:
+  79 0072 0895      		ret
+  80               	/* epilogue: frame size=0 */
+  81               	/* epilogue: noreturn */
+  82               	/* epilogue end (size=0) */
+  83               	/* function tasten size 59 (59) */
+  84               	.LFE2:
+  86               	.global	get_key_press
+  88               	get_key_press:
+  89               	.LFB3:
+  90               	.LM13:
+  91               	/* prologue: frame size=0 */
+  92               	/* prologue end (size=0) */
+  93               	.LVL3:
+  94               	.LM14:
+  95 0074 2FB7      		in r18,95-0x20
+  96               	.LVL4:
+  97               	.LM15:
+  98               	/* #APP */
+  99 0076 F894      		cli
+ 100               	.LM16:
+ 101               	/* #NOAPP */
+ 102 0078 9091 0000 		lds r25,key_press
+ 103 007c 8923      		and r24,r25
+ 104               	.LVL5:
+ 105               	.LM17:
+ 106 007e 9091 0000 		lds r25,key_press
+ 107 0082 9827      		eor r25,r24
+ 108 0084 9093 0000 		sts key_press,r25
+ 109               	.LM18:
+ 110 0088 2FBF      		out 95-0x20,r18
+ 111               	.LM19:
+ 112 008a 90E0      		ldi r25,lo8(0)
+ 113               	.LVL6:
+ 114               	/* epilogue: frame size=0 */
+ 115 008c 0895      		ret
+ 116               	/* epilogue end (size=1) */
+ 117               	/* function get_key_press size 14 (13) */
+ 118               	.LFE3:
+ 120               	.global	get_key_rpt
+ 122               	get_key_rpt:
+ 123               	.LFB4:
+ 124               	.LM20:
+ 125               	/* prologue: frame size=0 */
+ 126               	/* prologue end (size=0) */
+ 127               	.LVL7:
+ 128               	.LM21:
+ 129 008e 2FB7      		in r18,95-0x20
+ 130               	.LVL8:
+ 131               	.LM22:
+ 132               	/* #APP */
+ 133 0090 F894      		cli
+ 134               	.LM23:
+ 135               	/* #NOAPP */
+ 136 0092 9091 0000 		lds r25,key_rpt
+ 137 0096 8923      		and r24,r25
+ 138               	.LVL9:
+ 139               	.LM24:
+ 140 0098 9091 0000 		lds r25,key_rpt
+ 141 009c 9827      		eor r25,r24
+ 142 009e 9093 0000 		sts key_rpt,r25
+ 143               	.LM25:
+ 144 00a2 2FBF      		out 95-0x20,r18
+ 145               	.LM26:
+ 146 00a4 90E0      		ldi r25,lo8(0)
+ 147               	.LVL10:
+ 148               	/* epilogue: frame size=0 */
+ 149 00a6 0895      		ret
+ 150               	/* epilogue end (size=1) */
+ 151               	/* function get_key_rpt size 14 (13) */
+ 152               	.LFE4:
+ 154               		.lcomm rpt.1514,1
+ 155               		.lcomm ct1.1513,1
+ 156               		.lcomm ct0.1512,1
+ 157               		.comm key_state,1,1
+ 158               		.comm key_press,1,1
+ 159               		.comm key_rpt,1,1
+ 200               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 taste.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:6      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:19     .text:00000000 tasten
+                            *COM*:00000001 key_state
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:155    .bss:00000002 ct0.1512
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:154    .bss:00000001 ct1.1513
+                            *COM*:00000001 key_press
+                             .bss:00000000 rpt.1514
+                            *COM*:00000001 key_rpt
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:88     .text:00000074 get_key_press
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccg4DbIj.s:122    .text:0000008e get_key_rpt
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

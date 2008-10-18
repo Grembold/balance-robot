@@ -1,0 +1,193 @@
+   1               		.file	"timer.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	timer2_init
+  20               	timer2_init:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 8AE7      		ldi r24,lo8(122)
+  27 0002 85BD      		out 69-0x20,r24
+  28               	.LM3:
+  29 0004 89B7      		in r24,89-0x20
+  30 0006 8064      		ori r24,lo8(64)
+  31 0008 89BF      		out 89-0x20,r24
+  32               	/* epilogue: frame size=0 */
+  33 000a 0895      		ret
+  34               	/* epilogue end (size=1) */
+  35               	/* function timer2_init size 6 (5) */
+  36               	.LFE4:
+  38               	.global	Gettime
+  40               	Gettime:
+  41               	.LFB5:
+  42               	.LM4:
+  43               	/* prologue: frame size=0 */
+  44               	/* prologue end (size=0) */
+  45               	.LM5:
+  46 000c 8091 0000 		lds r24,timebase
+  47 0010 9091 0000 		lds r25,(timebase)+1
+  48 0014 A091 0000 		lds r26,(timebase)+2
+  49 0018 B091 0000 		lds r27,(timebase)+3
+  50 001c BA2F      		mov r27,r26
+  51 001e A92F      		mov r26,r25
+  52 0020 982F      		mov r25,r24
+  53 0022 8827      		clr r24
+  54 0024 2091 0000 		lds r18,count36kHz
+  55 0028 820F      		add r24,r18
+  56 002a 911D      		adc r25,__zero_reg__
+  57 002c A11D      		adc r26,__zero_reg__
+  58 002e B11D      		adc r27,__zero_reg__
+  59 0030 BC01      		movw r22,r24
+  60 0032 CD01      		movw r24,r26
+  61 0034 24E2      		ldi r18,lo8(36)
+  62 0036 30E0      		ldi r19,hi8(36)
+  63 0038 40E0      		ldi r20,hlo8(36)
+  64 003a 50E0      		ldi r21,hhi8(36)
+  65 003c 0E94 0000 		call __udivmodsi4
+  66               	.LM6:
+  67 0040 CA01      		movw r24,r20
+  68 0042 B901      		movw r22,r18
+  69               	/* epilogue: frame size=0 */
+  70 0044 0895      		ret
+  71               	/* epilogue end (size=1) */
+  72               	/* function Gettime size 29 (28) */
+  73               	.LFE5:
+  75               	.global	sleep
+  77               	sleep:
+  78               	.LFB6:
+  79               	.LM7:
+  80               	/* prologue: frame size=0 */
+  81               	/* prologue end (size=0) */
+  82               	.LM8:
+  83 0046 9091 0000 		lds r25,count36kHz
+  84 004a 980F      		add r25,r24
+  85               	.L4:
+  86               	.LM9:
+  87 004c 8091 0000 		lds r24,count36kHz
+  88 0050 8917      		cp r24,r25
+  89 0052 E1F7      		brne .L4
+  90               	/* epilogue: frame size=0 */
+  91 0054 0895      		ret
+  92               	/* epilogue end (size=1) */
+  93               	/* function sleep size 8 (7) */
+  94               	.LFE6:
+  96               	.global	msleep
+  98               	msleep:
+  99               	.LFB7:
+ 100               	.LM10:
+ 101               	/* prologue: frame size=0 */
+ 102 0056 0F93      		push r16
+ 103 0058 1F93      		push r17
+ 104 005a CF93      		push r28
+ 105 005c DF93      		push r29
+ 106               	/* prologue end (size=4) */
+ 107 005e 8C01      		movw r16,r24
+ 108               	.LM11:
+ 109 0060 C0E0      		ldi r28,lo8(0)
+ 110 0062 D0E0      		ldi r29,hi8(0)
+ 111 0064 C817      		cp r28,r24
+ 112 0066 D907      		cpc r29,r25
+ 113 0068 3CF4      		brge .L13
+ 114               	.L11:
+ 115               	.LM12:
+ 116 006a 84E2      		ldi r24,lo8(36)
+ 117 006c 0E94 0000 		call sleep
+ 118               	.LM13:
+ 119 0070 2196      		adiw r28,1
+ 120 0072 C017      		cp r28,r16
+ 121 0074 D107      		cpc r29,r17
+ 122 0076 CCF3      		brlt .L11
+ 123               	.L13:
+ 124               	/* epilogue: frame size=0 */
+ 125 0078 DF91      		pop r29
+ 126 007a CF91      		pop r28
+ 127 007c 1F91      		pop r17
+ 128 007e 0F91      		pop r16
+ 129 0080 0895      		ret
+ 130               	/* epilogue end (size=5) */
+ 131               	/* function msleep size 22 (13) */
+ 132               	.LFE7:
+ 134               	.global	__vector_4
+ 136               	__vector_4:
+ 137               	.LFB8:
+ 138               	.LM14:
+ 139               	/* prologue: frame size=0 */
+ 140 0082 1F92      		push __zero_reg__
+ 141 0084 0F92      		push __tmp_reg__
+ 142 0086 0FB6      		in __tmp_reg__,__SREG__
+ 143 0088 0F92      		push __tmp_reg__
+ 144 008a 1124      		clr __zero_reg__
+ 145 008c 8F93      		push r24
+ 146 008e 9F93      		push r25
+ 147 0090 AF93      		push r26
+ 148 0092 BF93      		push r27
+ 149               	/* prologue end (size=9) */
+ 150               	.LM15:
+ 151 0094 84B5      		in r24,68-0x20
+ 152 0096 8952      		subi r24,lo8(-(-41))
+ 153 0098 84BD      		out 68-0x20,r24
+ 154               	.LM16:
+ 155 009a 8091 0000 		lds r24,count36kHz
+ 156 009e 8F5F      		subi r24,lo8(-(1))
+ 157 00a0 8093 0000 		sts count36kHz,r24
+ 158               	.LM17:
+ 159 00a4 8091 0000 		lds r24,count36kHz
+ 160 00a8 8823      		tst r24
+ 161 00aa 99F4      		brne .L14
+ 162               	.LM18:
+ 163 00ac 8091 0000 		lds r24,timebase
+ 164 00b0 9091 0000 		lds r25,(timebase)+1
+ 165 00b4 A091 0000 		lds r26,(timebase)+2
+ 166 00b8 B091 0000 		lds r27,(timebase)+3
+ 167 00bc 0196      		adiw r24,1
+ 168 00be A11D      		adc r26,__zero_reg__
+ 169 00c0 B11D      		adc r27,__zero_reg__
+ 170 00c2 8093 0000 		sts timebase,r24
+ 171 00c6 9093 0000 		sts (timebase)+1,r25
+ 172 00ca A093 0000 		sts (timebase)+2,r26
+ 173 00ce B093 0000 		sts (timebase)+3,r27
+ 174               	.L14:
+ 175               	/* epilogue: frame size=0 */
+ 176 00d2 BF91      		pop r27
+ 177 00d4 AF91      		pop r26
+ 178 00d6 9F91      		pop r25
+ 179 00d8 8F91      		pop r24
+ 180 00da 0F90      		pop __tmp_reg__
+ 181 00dc 0FBE      		out __SREG__,__tmp_reg__
+ 182 00de 0F90      		pop __tmp_reg__
+ 183 00e0 1F90      		pop __zero_reg__
+ 184 00e2 1895      		reti
+ 185               	/* epilogue end (size=9) */
+ 186               	/* function __vector_4 size 49 (31) */
+ 187               	.LFE8:
+ 189               		.comm count36kHz,1,1
+ 190               		.comm timebase,4,1
+ 191               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:20     .text:00000000 timer2_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:40     .text:0000000c Gettime
+                            *COM*:00000004 timebase
+                            *COM*:00000001 count36kHz
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:77     .text:00000046 sleep
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:98     .text:00000056 msleep
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccOgaaaa.s:136    .text:00000082 __vector_4
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__udivmodsi4

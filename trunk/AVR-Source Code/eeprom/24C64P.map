@@ -1,0 +1,419 @@
+Archive member included because of file (symbol)
+
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_exit.o)
+                              24C64P.o (exit)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                              24C64P.o (__do_copy_data)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                              24C64P.o (__do_clear_bss)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                              uart.o (itoa)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o) (strrev)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o) (__udivmodhi4)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+LOAD 24C64P.o
+LOAD twimaster.o
+LOAD uart.o
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libm.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x682
+ *(.vectors)
+ .vectors       0x00000000       0x54 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+                0x00000054                __ctors_start = .
+ *(.ctors)
+                0x00000054                __ctors_end = .
+                0x00000054                __dtors_start = .
+ *(.dtors)
+                0x00000054                __dtors_end = .
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000054                . = ALIGN (0x2)
+ *(.init0)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000054        0xc C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+ *(.init3)
+ *(.init4)
+ .init4         0x00000060       0x16 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                0x00000060                __do_copy_data
+ .init4         0x00000076       0x10 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                0x00000076                __do_clear_bss
+ *(.init5)
+ *(.init6)
+ *(.init7)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000086        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+ *(.text)
+ .text          0x0000008a        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                0x0000008a                __vector_1
+                0x0000008a                __vector_12
+                0x0000008a                __bad_interrupt
+                0x0000008a                __vector_6
+                0x0000008a                __vector_3
+                0x0000008a                __vector_13
+                0x0000008a                __vector_17
+                0x0000008a                __vector_19
+                0x0000008a                __vector_7
+                0x0000008a                __vector_5
+                0x0000008a                __vector_4
+                0x0000008a                __vector_9
+                0x0000008a                __vector_2
+                0x0000008a                __vector_15
+                0x0000008a                __vector_8
+                0x0000008a                __vector_14
+                0x0000008a                __vector_10
+                0x0000008a                __vector_16
+                0x0000008a                __vector_18
+                0x0000008a                __vector_20
+ .text          0x0000008e      0x1d4 24C64P.o
+                0x0000020c                eeprom_write_byte
+                0x00000134                eeprom_read_byte
+                0x0000008e                main
+                0x000000ce                eeprom_init
+                0x00000192                eeprom_read_word
+ .text          0x00000262      0x23e twimaster.o
+                0x000003f8                i2c_write
+                0x0000047c                i2c_readNak
+                0x00000458                i2c_readAck
+                0x000003a4                i2c_rep_start
+                0x0000027a                i2c_start
+                0x000003d4                i2c_stop
+                0x00000310                i2c_start_wait
+                0x00000262                i2c_init
+ .text          0x000004a0      0x156 uart.o
+                0x0000050a                uart_puts
+                0x000005a4                __vector_11
+                0x000004a0                uart_init
+                0x000004cc                uart_putc
+                0x0000055a                uart_puti
+ .text          0x000005f6       0x42 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x000005f6                itoa
+ .text          0x00000638       0x20 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00000638                strrev
+                0x00000658                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00000658       0x28 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                0x00000658                __udivmodhi4
+                0x00000680                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini8)
+ *(.fini7)
+ *(.fini6)
+ *(.fini5)
+ *(.fini4)
+ *(.fini3)
+ *(.fini2)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00000680        0x2 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_exit.o)
+                0x00000682                _etext = .
+
+.data           0x00800060       0x68 load address 0x00000682
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060       0x45 24C64P.o
+ .data          0x008000a5       0x22 uart.o
+ *(.gnu.linkonce.d*)
+                0x008000c8                . = ALIGN (0x2)
+ *fill*         0x008000c7        0x1 00
+                0x008000c8                _edata = .
+                0x008000c8                PROVIDE (__data_end, .)
+
+.bss            0x008000c8        0x0
+                0x008000c8                PROVIDE (__bss_start, .)
+ *(.bss)
+ *(COMMON)
+                0x008000c8                PROVIDE (__bss_end, .)
+                0x00000682                __data_load_start = LOADADDR (.data)
+                0x000006ea                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008000c8        0x0
+                0x008000c8                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008000c8                PROVIDE (__noinit_end, .)
+                0x008000c8                _end = .
+                0x008000c8                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.stab           0x00000000      0x36c
+ *(.stab)
+ .stab          0x00000000      0x36c C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+
+.stabstr        0x00000000       0x84
+ *(.stabstr)
+ .stabstr       0x00000000       0x84 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x3c
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x14 24C64P.o
+ .debug_aranges
+                0x00000014       0x14 twimaster.o
+ .debug_aranges
+                0x00000028       0x14 uart.o
+
+.debug_pubnames
+                0x00000000      0x152
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x6b 24C64P.o
+ .debug_pubnames
+                0x0000006b       0x8d twimaster.o
+ .debug_pubnames
+                0x000000f8       0x5a uart.o
+
+.debug_info     0x00000000      0x716
+ *(.debug_info)
+ .debug_info    0x00000000      0x2b9 24C64P.o
+ .debug_info    0x000002b9      0x26a twimaster.o
+ .debug_info    0x00000523      0x1f3 uart.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x1e5
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x7f 24C64P.o
+ .debug_abbrev  0x0000007f       0xb5 twimaster.o
+ .debug_abbrev  0x00000134       0xb1 uart.o
+
+.debug_line     0x00000000      0x476
+ *(.debug_line)
+ .debug_line    0x00000000      0x1a0 24C64P.o
+ .debug_line    0x000001a0      0x19d twimaster.o
+ .debug_line    0x0000033d      0x139 uart.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x00000000       0x15
+ *(.debug_str)
+ .debug_str     0x00000000        0x8 twimaster.o
+ .debug_str     0x00000008        0xd uart.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(24C64P.elf elf32-avr)
+
+Cross Reference Table
+
+Symbol                                            File
+__bad_interrupt                                   C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__bss_end                                         C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__data_start                                      C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__do_clear_bss                                    C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                                                  uart.o
+                                                  twimaster.o
+                                                  24C64P.o
+__do_copy_data                                    C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                                                  uart.o
+                                                  twimaster.o
+                                                  24C64P.o
+__heap_end                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__init                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__stack                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                                                  24C64P.o
+__udivmodhi4                                      C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+__vector_1                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_10                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_11                                       uart.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_12                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_13                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_14                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_15                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_16                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_17                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_18                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_19                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_2                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_20                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_3                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_4                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_5                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_6                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_7                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_8                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_9                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_default                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vectors                                         C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+_exit                                             C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_exit.o)
+eeprom_init                                       24C64P.o
+eeprom_read_byte                                  24C64P.o
+eeprom_read_word                                  24C64P.o
+eeprom_write_byte                                 24C64P.o
+exit                                              C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_exit.o)
+                                                  24C64P.o
+i2c_init                                          twimaster.o
+                                                  24C64P.o
+i2c_readAck                                       twimaster.o
+                                                  24C64P.o
+i2c_readNak                                       twimaster.o
+                                                  24C64P.o
+i2c_rep_start                                     twimaster.o
+                                                  24C64P.o
+i2c_start                                         twimaster.o
+                                                  24C64P.o
+i2c_start_wait                                    twimaster.o
+                                                  24C64P.o
+i2c_stop                                          twimaster.o
+                                                  24C64P.o
+i2c_write                                         twimaster.o
+                                                  24C64P.o
+itoa                                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                                                  uart.o
+main                                              24C64P.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+strrev                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+uart_init                                         uart.o
+                                                  24C64P.o
+uart_putc                                         uart.o
+uart_puti                                         uart.o
+                                                  24C64P.o
+uart_puts                                         uart.o
+                                                  24C64P.o

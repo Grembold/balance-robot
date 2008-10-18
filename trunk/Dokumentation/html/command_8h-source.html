@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: command.h Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_6bb2651bc0a152aa2f3f5a312f6d27ea.html">nbot_lib</a></div>
+<h1>command.h</h1><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#ifndef _COMMAND_H</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define _COMMAND_H</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a>00006 <span class="preprocessor">#define CMD_NOP                                 00                      </span>
+<a name="l00007"></a>00007 <span class="preprocessor">#define CMD_NOC                                 01              </span>
+<a name="l00008"></a>00008 <span class="preprocessor">#define CMD_CLS                                 02                      </span>
+<a name="l00009"></a>00009 <span class="preprocessor">#define CMD_STATUS                      03                      </span>
+<a name="l00010"></a>00010 <span class="preprocessor">#define CMD_HELP                                04                      </span>
+<a name="l00011"></a>00011 <span class="preprocessor">#define CMD_MOVE                                05                      </span>
+<a name="l00012"></a>00012 <span class="preprocessor">#define CMD_DEMO                                06                      </span>
+<a name="l00013"></a>00013 <span class="preprocessor">#define CMD_DEBUG                               10                      </span>
+<a name="l00014"></a>00014 <span class="preprocessor">#define CMD_DB_CMD                      11                      </span>
+<a name="l00015"></a>00015 <span class="preprocessor">#define CMD_DB_ENC                      12                      </span>
+<a name="l00016"></a>00016 <span class="preprocessor">#define CMD_DB_REG                      13                      </span>
+<a name="l00017"></a>00017 <span class="preprocessor">#define CMD_ESCAPE                      27                      </span>
+<a name="l00018"></a>00018 <span class="preprocessor">#define CMD_UP                                  65                      </span>
+<a name="l00019"></a>00019 <span class="preprocessor">#define CMD_DOWN                                66                      </span>
+<a name="l00020"></a>00020 <span class="preprocessor">#define CMD_LEFT                                68                      </span>
+<a name="l00021"></a>00021 <span class="preprocessor">#define CMD_RIGHT                       69                      </span>
+<a name="l00024"></a>00024 <span class="preprocessor">#define MAX_BUF 100     // maximal 255 zeichen speichern</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="keyword">extern</span> <span class="keywordtype">void</span> command_put(uint8_t last_c);
+<a name="l00028"></a>00028 <span class="keyword">extern</span> uint8_t command_get(<span class="keywordtype">void</span>);
+<a name="l00029"></a>00029 <span class="keyword">extern</span> uint8_t *command_text(<span class="keywordtype">void</span>);
+<a name="l00030"></a>00030 <span class="keyword">extern</span> <span class="keywordtype">void</span> command_prompt(uint8_t command);
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="preprocessor">#endif </span><span class="comment">/* _COMMAND_H */</span>
+</pre></div><hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Apr 8 18:04:14 2007 für nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

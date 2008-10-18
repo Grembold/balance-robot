@@ -1,0 +1,192 @@
+   1               		.file	"fifo.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	fifo_init
+  19               	fifo_init:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24               	.LVL0:
+  25 0000 FC01      		movw r30,r24
+  26               	.LM2:
+  27 0002 1082      		st Z,__zero_reg__
+  28               	.LM3:
+  29 0004 7583      		std Z+5,r23
+  30 0006 6483      		std Z+4,r22
+  31 0008 7383      		std Z+3,r23
+  32 000a 6283      		std Z+2,r22
+  33               	.LM4:
+  34 000c 4183      		std Z+1,r20
+  35 000e 4783      		std Z+7,r20
+  36 0010 4683      		std Z+6,r20
+  37               	/* epilogue: frame size=0 */
+  38 0012 0895      		ret
+  39               	/* epilogue end (size=1) */
+  40               	/* function fifo_init size 10 (9) */
+  41               	.LFE2:
+  43               	.global	fifo_put
+  45               	fifo_put:
+  46               	.LFB3:
+  47               	.LM5:
+  48               	/* prologue: frame size=0 */
+  49 0014 CF93      		push r28
+  50 0016 DF93      		push r29
+  51               	/* prologue end (size=2) */
+  52               	.LVL1:
+  53 0018 DC01      		movw r26,r24
+  54               	.LM6:
+  55 001a 9C91      		ld r25,X
+  56 001c ED01      		movw r28,r26
+  57 001e 8981      		ldd r24,Y+1
+  58               	.LVL2:
+  59 0020 9817      		cp r25,r24
+  60 0022 00F0      		brlo .L4
+  61               	.LM7:
+  62 0024 80E0      		ldi r24,lo8(0)
+  63 0026 90E0      		ldi r25,hi8(0)
+  64 0028 00C0      		rjmp .L6
+  65               	.L4:
+  66               	.LM8:
+  67 002a 9FB7      		in r25,95-0x20
+  68               	.LVL3:
+  69               	.LM9:
+  70               	/* #APP */
+  71 002c F894      		cli
+  72               	.LM10:
+  73               	/* #NOAPP */
+  74 002e ED01      		movw r28,r26
+  75 0030 EC81      		ldd r30,Y+4
+  76 0032 FD81      		ldd r31,Y+5
+  77               	.LVL4:
+  78               	.LM11:
+  79 0034 6193      		st Z+,r22
+  80               	.LM12:
+  81 0036 8F81      		ldd r24,Y+7
+  82               	.LVL5:
+  83               	.LM13:
+  84 0038 8150      		subi r24,lo8(-(-1))
+  85 003a 01F4      		brne .L7
+  86               	.LM14:
+  87 003c 8981      		ldd r24,Y+1
+  88               	.LM15:
+  89 003e E81B      		sub r30,r24
+  90 0040 F109      		sbc r31,__zero_reg__
+  91               	.LVL6:
+  92               	.L7:
+  93               	.LM16:
+  94 0042 ED01      		movw r28,r26
+  95 0044 8F83      		std Y+7,r24
+  96               	.LM17:
+  97 0046 FD83      		std Y+5,r31
+  98 0048 EC83      		std Y+4,r30
+  99               	.LM18:
+ 100 004a 8C91      		ld r24,X
+ 101               	.LVL7:
+ 102 004c 8F5F      		subi r24,lo8(-(1))
+ 103 004e 8C93      		st X,r24
+ 104               	.LM19:
+ 105 0050 9FBF      		out 95-0x20,r25
+ 106 0052 81E0      		ldi r24,lo8(1)
+ 107 0054 90E0      		ldi r25,hi8(1)
+ 108               	.L6:
+ 109               	/* epilogue: frame size=0 */
+ 110 0056 DF91      		pop r29
+ 111 0058 CF91      		pop r28
+ 112 005a 0895      		ret
+ 113               	/* epilogue end (size=3) */
+ 114               	/* function fifo_put size 38 (33) */
+ 115               	.LFE3:
+ 117               	.global	fifo_get
+ 119               	fifo_get:
+ 120               	.LFB4:
+ 121               	.LM20:
+ 122               	/* prologue: frame size=0 */
+ 123 005c CF93      		push r28
+ 124 005e DF93      		push r29
+ 125               	/* prologue end (size=2) */
+ 126               	.LVL8:
+ 127 0060 DC01      		movw r26,r24
+ 128               	.LM21:
+ 129 0062 8C91      		ld r24,X
+ 130               	.LVL9:
+ 131 0064 8823      		tst r24
+ 132 0066 01F4      		brne .L11
+ 133               	.LM22:
+ 134 0068 81E0      		ldi r24,lo8(1)
+ 135 006a 90E0      		ldi r25,hi8(1)
+ 136 006c 00C0      		rjmp .L13
+ 137               	.L11:
+ 138               	.LM23:
+ 139 006e 2FB7      		in r18,95-0x20
+ 140               	.LVL10:
+ 141               	.LM24:
+ 142               	/* #APP */
+ 143 0070 F894      		cli
+ 144               	.LM25:
+ 145               	/* #NOAPP */
+ 146 0072 ED01      		movw r28,r26
+ 147 0074 EA81      		ldd r30,Y+2
+ 148 0076 FB81      		ldd r31,Y+3
+ 149               	.LVL11:
+ 150               	.LM26:
+ 151 0078 9E81      		ldd r25,Y+6
+ 152               	.LVL12:
+ 153               	.LM27:
+ 154 007a 8191      		ld r24,Z+
+ 155 007c EB01      		movw r28,r22
+ 156 007e 8883      		st Y,r24
+ 157               	.LM28:
+ 158 0080 9150      		subi r25,lo8(-(-1))
+ 159 0082 01F4      		brne .L14
+ 160               	.LM29:
+ 161 0084 ED01      		movw r28,r26
+ 162 0086 9981      		ldd r25,Y+1
+ 163               	.LM30:
+ 164 0088 E91B      		sub r30,r25
+ 165 008a F109      		sbc r31,__zero_reg__
+ 166               	.LVL13:
+ 167               	.L14:
+ 168               	.LM31:
+ 169 008c ED01      		movw r28,r26
+ 170 008e FB83      		std Y+3,r31
+ 171 0090 EA83      		std Y+2,r30
+ 172               	.LM32:
+ 173 0092 9E83      		std Y+6,r25
+ 174               	.LM33:
+ 175 0094 8C91      		ld r24,X
+ 176 0096 8150      		subi r24,lo8(-(-1))
+ 177 0098 8C93      		st X,r24
+ 178               	.LM34:
+ 179 009a 2FBF      		out 95-0x20,r18
+ 180 009c 80E0      		ldi r24,lo8(0)
+ 181 009e 90E0      		ldi r25,hi8(0)
+ 182               	.L13:
+ 183               	/* epilogue: frame size=0 */
+ 184 00a0 DF91      		pop r29
+ 185 00a2 CF91      		pop r28
+ 186 00a4 0895      		ret
+ 187               	/* epilogue end (size=3) */
+ 188               	/* function fifo_get size 39 (34) */
+ 189               	.LFE4:
+ 231               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 fifo.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:6      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:19     .text:00000000 fifo_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:45     .text:00000014 fifo_put
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccPDATWp.s:119    .text:0000005c fifo_get
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

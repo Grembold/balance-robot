@@ -1,0 +1,223 @@
+   1               		.file	"main.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	main
+  20               	main:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 C0E0      		ldi r28,lo8(__stack - 0)
+  25 0002 D0E0      		ldi r29,hi8(__stack - 0)
+  26 0004 DEBF      		out __SP_H__,r29
+  27 0006 CDBF      		out __SP_L__,r28
+  28               	/* prologue end (size=4) */
+  29               	.LM2:
+  30 0008 87E4      		ldi r24,lo8(71)
+  31 000a 0E94 0000 		call init_twi_slave
+  32               	.LM3:
+  33               	/* #APP */
+  34 000e 7894      		sei
+  35               	/* #NOAPP */
+  36               	.L2:
+  37               	.LM4:
+  38 0010 FFCF      		rjmp .L2
+  39               	/* epilogue: frame size=0 */
+  40               	/* epilogue: noreturn */
+  41               	/* epilogue end (size=0) */
+  42               	/* function main size 10 (6) */
+  43               	.LFE2:
+  45               	.global	init_twi_slave
+  47               	init_twi_slave:
+  48               	.LFB3:
+  49               	.LM5:
+  50               	/* prologue: frame size=1 */
+  51 0012 CF93      		push r28
+  52 0014 DF93      		push r29
+  53 0016 CDB7      		in r28,__SP_L__
+  54 0018 DEB7      		in r29,__SP_H__
+  55 001a 2197      		sbiw r28,1
+  56 001c 0FB6      		in __tmp_reg__,__SREG__
+  57 001e F894      		cli
+  58 0020 DEBF      		out __SP_H__,r29
+  59 0022 0FBE      		out __SREG__,__tmp_reg__
+  60 0024 CDBF      		out __SP_L__,r28
+  61               	/* prologue end (size=10) */
+  62 0026 8983      		std Y+1,r24
+  63               	.LM6:
+  64 0028 8981      		ldd r24,Y+1
+  65 002a 8093 2200 		sts 34,r24
+  66               	.LM7:
+  67 002e 8091 5600 		lds r24,86
+  68 0032 8F7D      		andi r24,lo8(-33)
+  69 0034 8093 5600 		sts 86,r24
+  70               	.LM8:
+  71 0038 8091 5600 		lds r24,86
+  72 003c 8564      		ori r24,lo8(69)
+  73 003e 8093 5600 		sts 86,r24
+  74               	.LM9:
+  75 0042 1092 0000 		sts register_adr,__zero_reg__
+  76               	.LM10:
+  77 0046 8091 0000 		lds r24,twi_status
+  78 004a 8160      		ori r24,lo8(1)
+  79 004c 8093 0000 		sts twi_status,r24
+  80               	.LM11:
+  81 0050 8FEF      		ldi r24,lo8(-1)
+  82 0052 8093 3700 		sts 55,r24
+  83               	.LM12:
+  84 0056 83E3      		ldi r24,lo8(51)
+  85 0058 8093 3800 		sts 56,r24
+  86               	/* epilogue: frame size=1 */
+  87 005c 2196      		adiw r28,1
+  88 005e 0FB6      		in __tmp_reg__,__SREG__
+  89 0060 F894      		cli
+  90 0062 DEBF      		out __SP_H__,r29
+  91 0064 0FBE      		out __SREG__,__tmp_reg__
+  92 0066 CDBF      		out __SP_L__,r28
+  93 0068 DF91      		pop r29
+  94 006a CF91      		pop r28
+  95 006c 0895      		ret
+  96               	/* epilogue end (size=9) */
+  97               	/* function init_twi_slave size 46 (27) */
+  98               	.LFE3:
+ 100               	.global	__vector_17
+ 102               	__vector_17:
+ 103               	.LFB4:
+ 104               	.LM13:
+ 105               	/* prologue: frame size=3 */
+ 106 006e 1F92      		push __zero_reg__
+ 107 0070 0F92      		push __tmp_reg__
+ 108 0072 0FB6      		in __tmp_reg__,__SREG__
+ 109 0074 0F92      		push __tmp_reg__
+ 110 0076 1124      		clr __zero_reg__
+ 111 0078 8F93      		push r24
+ 112 007a 9F93      		push r25
+ 113 007c CF93      		push r28
+ 114 007e DF93      		push r29
+ 115 0080 CDB7      		in r28,__SP_L__
+ 116 0082 DEB7      		in r29,__SP_H__
+ 117 0084 2397      		sbiw r28,3
+ 118 0086 DEBF      		out __SP_H__,r29
+ 119 0088 CDBF      		out __SP_L__,r28
+ 120               	/* prologue end (size=14) */
+ 121               	.LM14:
+ 122 008a 1982      		std Y+1,__zero_reg__
+ 123               	.LM15:
+ 124 008c 8091 2100 		lds r24,33
+ 125 0090 9927      		clr r25
+ 126 0092 887F      		andi r24,lo8(248)
+ 127 0094 9070      		andi r25,hi8(248)
+ 128 0096 9B83      		std Y+3,r25
+ 129 0098 8A83      		std Y+2,r24
+ 130 009a 8A81      		ldd r24,Y+2
+ 131 009c 9B81      		ldd r25,Y+3
+ 132 009e 8038      		cpi r24,128
+ 133 00a0 9105      		cpc r25,__zero_reg__
+ 134 00a2 D1F0      		breq .L8
+ 135               	.LM16:
+ 136 00a4 8A81      		ldd r24,Y+2
+ 137 00a6 9B81      		ldd r25,Y+3
+ 138 00a8 8138      		cpi r24,129
+ 139 00aa 9105      		cpc r25,__zero_reg__
+ 140 00ac 34F4      		brge .L18
+ 141 00ae 8A81      		ldd r24,Y+2
+ 142 00b0 9B81      		ldd r25,Y+3
+ 143 00b2 8036      		cpi r24,96
+ 144 00b4 9105      		cpc r25,__zero_reg__
+ 145 00b6 61F0      		breq .L7
+ 146 00b8 28C0      		rjmp .L17
+ 147               	.L18:
+ 148 00ba 8A81      		ldd r24,Y+2
+ 149 00bc 9B81      		ldd r25,Y+3
+ 150 00be 883A      		cpi r24,168
+ 151 00c0 9105      		cpc r25,__zero_reg__
+ 152 00c2 59F1      		breq .L5
+ 153 00c4 8A81      		ldd r24,Y+2
+ 154 00c6 9B81      		ldd r25,Y+3
+ 155 00c8 883B      		cpi r24,184
+ 156 00ca 9105      		cpc r25,__zero_reg__
+ 157 00cc 31F1      		breq .L5
+ 158 00ce 1DC0      		rjmp .L17
+ 159               	.L7:
+ 160               	.LM17:
+ 161 00d0 85EC      		ldi r24,lo8(-59)
+ 162 00d2 8093 5600 		sts 86,r24
+ 163               	.LM18:
+ 164 00d6 21C0      		rjmp .L5
+ 165               	.L8:
+ 166               	.LM19:
+ 167 00d8 8091 2300 		lds r24,35
+ 168 00dc 8983      		std Y+1,r24
+ 169               	.LM20:
+ 170 00de 8091 0000 		lds r24,twi_status
+ 171 00e2 9927      		clr r25
+ 172 00e4 8170      		andi r24,lo8(1)
+ 173 00e6 9070      		andi r25,hi8(1)
+ 174 00e8 0097      		sbiw r24,0
+ 175 00ea B9F0      		breq .L5
+ 176               	.LM21:
+ 177 00ec 8091 0000 		lds r24,twi_status
+ 178 00f0 8E7F      		andi r24,lo8(-2)
+ 179 00f2 8093 0000 		sts twi_status,r24
+ 180               	.LM22:
+ 181 00f6 8981      		ldd r24,Y+1
+ 182 00f8 8093 0000 		sts register_adr,r24
+ 183               	.LM23:
+ 184 00fc 8981      		ldd r24,Y+1
+ 185 00fe 8093 3800 		sts 56,r24
+ 186               	.LM24:
+ 187 0102 85EC      		ldi r24,lo8(-59)
+ 188 0104 8093 5600 		sts 86,r24
+ 189 0108 08C0      		rjmp .L5
+ 190               	.L17:
+ 191               	.LM25:
+ 192 010a 8091 0000 		lds r24,twi_status
+ 193 010e 8160      		ori r24,lo8(1)
+ 194 0110 8093 0000 		sts twi_status,r24
+ 195               	.LM26:
+ 196 0114 85EC      		ldi r24,lo8(-59)
+ 197 0116 8093 5600 		sts 86,r24
+ 198               	.L5:
+ 199               	/* epilogue: frame size=3 */
+ 200 011a 2396      		adiw r28,3
+ 201 011c F894      		cli
+ 202 011e DEBF      		out __SP_H__,r29
+ 203 0120 CDBF      		out __SP_L__,r28
+ 204 0122 DF91      		pop r29
+ 205 0124 CF91      		pop r28
+ 206 0126 9F91      		pop r25
+ 207 0128 8F91      		pop r24
+ 208 012a 0F90      		pop __tmp_reg__
+ 209 012c 0FBE      		out __SREG__,__tmp_reg__
+ 210 012e 0F90      		pop __tmp_reg__
+ 211 0130 1F90      		pop __zero_reg__
+ 212 0132 1895      		reti
+ 213               	/* epilogue end (size=13) */
+ 214               	/* function __vector_17 size 99 (72) */
+ 215               	.LFE4:
+ 217               		.comm register_adr,1,1
+ 218               		.comm twi_status,1,1
+ 219               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:20     .text:00000000 main
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:47     .text:00000012 init_twi_slave
+                            *COM*:00000001 register_adr
+                            *COM*:00000001 twi_status
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccuwaaaa.s:102    .text:0000006e __vector_17
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack

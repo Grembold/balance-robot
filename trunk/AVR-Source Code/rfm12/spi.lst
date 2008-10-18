@@ -1,0 +1,76 @@
+   1               		.file	"spi.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	spi_init
+  20               	spi_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 87B3      		in r24,55-0x20
+  27 0002 806A      		ori r24,lo8(-96)
+  28 0004 87BB      		out 55-0x20,r24
+  29               	.LM3:
+  30 0006 88B3      		in r24,56-0x20
+  31 0008 8F71      		andi r24,lo8(31)
+  32 000a 88BB      		out 56-0x20,r24
+  33               	.LM4:
+  34 000c BC9A      		sbi 55-0x20,4
+  35               	.LM5:
+  36 000e C498      		cbi 56-0x20,4
+  37               	.LM6:
+  38 0010 80E5      		ldi r24,lo8(80)
+  39 0012 8DB9      		out 45-0x20,r24
+  40               	.LM7:
+  41 0014 81E0      		ldi r24,lo8(1)
+  42 0016 8EB9      		out 46-0x20,r24
+  43               	/* epilogue: frame size=0 */
+  44 0018 0895      		ret
+  45               	/* epilogue end (size=1) */
+  46               	/* function spi_init size 13 (12) */
+  47               	.LFE2:
+  49               	.global	spi_putc
+  51               	spi_putc:
+  52               	.LFB3:
+  53               	.LM8:
+  54               	/* prologue: frame size=0 */
+  55               	/* prologue end (size=0) */
+  56               	.LVL0:
+  57               	.LM9:
+  58 001a 8FB9      		out 47-0x20,r24
+  59               	.L4:
+  60               	.LM10:
+  61 001c 779B      		sbis 46-0x20,7
+  62 001e 00C0      		rjmp .L4
+  63               	.LM11:
+  64 0020 8FB1      		in r24,47-0x20
+  65               	.LVL1:
+  66               	.LM12:
+  67 0022 9927      		clr r25
+  68               	/* epilogue: frame size=0 */
+  69 0024 0895      		ret
+  70               	/* epilogue end (size=1) */
+  71               	/* function spi_putc size 6 (5) */
+  72               	.LFE3:
+ 106               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 spi.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:20     .text:00000000 spi_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccDKxkGR.s:51     .text:0000001a spi_putc
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

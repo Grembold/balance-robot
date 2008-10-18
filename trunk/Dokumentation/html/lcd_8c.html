@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: lcd.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_6bb2651bc0a152aa2f3f5a312f6d27ea.html">nbot_lib</a></div>
+<h1>lcd.c-Dateireferenz</h1>Library for LC Display WINTEK WD-C2704M-1HNN<br>
+ 27 x 4 Characters<br>
+ www.pollin.de (Nr. 120 232). <a href="#_details">Mehr ...</a>
+<p>
+<code>#include &lt;avr/io.h&gt;</code><br>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br>
+<code>#include &quot;<a class="el" href="lcd_8h-source.html">lcd.h</a>&quot;</code><br>
+
+<p>
+Include-Abhängigkeitsdiagramm für lcd.c:<p><center><img src="lcd_8c__incl.png" border="0" usemap="#lcd.c_map" alt=""></center>
+<map name="lcd.c_map">
+<area shape="rect" title="Library for LC Display WINTEK WD&#45;C2704M&#45;1HNN  27 x 4 Characters  www.pollin.de (Nr..." alt="" coords="129,5,196,32"><area shape="rect" title="Library for LC Display WINTEK WD&#45;C2704M&#45;1HNN  27 x 4 Characters  www.pollin.de (Nr..." alt="" coords="104,56,221,83"><area shape="rect" href="lcd_8h.html" title="Library for LC Display WINTEK WD&#45;C2704M&#45;1HNN  27 x 4 Characters  www.pollin.de (Nr..." alt="" coords="137,107,188,133"></map>
+
+<p>
+<a href="lcd_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="58cb5e934d2dcc17cde426d70ce5d5a0"></a><!-- doxytag: member="lcd.c::PINOFPORT" ref="58cb5e934d2dcc17cde426d70ce5d5a0" args="(x)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#58cb5e934d2dcc17cde426d70ce5d5a0">PINOFPORT</a>(x)&nbsp;&nbsp;&nbsp;(*(&amp;x - 2))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="ad0f4f8181754f04a3cd2221072a13bf"></a><!-- doxytag: member="lcd.c::DDROFPORT" ref="ad0f4f8181754f04a3cd2221072a13bf" args="(x)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#ad0f4f8181754f04a3cd2221072a13bf">DDROFPORT</a>(x)&nbsp;&nbsp;&nbsp;(*(&amp;x - 1))</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#b35032ab368a8bc90798e0c547fb24c2">LCD_FUNCTION_4BIT_2LINES</a>&nbsp;&nbsp;&nbsp;0x28</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#c8dd1658e235f174d1cabae5c438943d">LCD_BUSY</a>&nbsp;&nbsp;&nbsp;7</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="bd01e64562ef0e704b5402884a269901"></a><!-- doxytag: member="lcd.c::lcd_e_delay" ref="bd01e64562ef0e704b5402884a269901" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#bd01e64562ef0e704b5402884a269901">lcd_e_delay</a>()&nbsp;&nbsp;&nbsp;__asm__ __volatile__( &quot;rjmp 1f\n 1:&quot; )</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d0ce3cd9b481370ad4de36eff08440c8"></a><!-- doxytag: member="lcd.c::lcd_rw_high" ref="d0ce3cd9b481370ad4de36eff08440c8" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#d0ce3cd9b481370ad4de36eff08440c8">lcd_rw_high</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT |= (1&lt;&lt;LCD_PIN_RW)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="7f5ebe0ca71b1298a7d3423850cc82b1"></a><!-- doxytag: member="lcd.c::lcd_rw_low" ref="7f5ebe0ca71b1298a7d3423850cc82b1" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#7f5ebe0ca71b1298a7d3423850cc82b1">lcd_rw_low</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT &amp;= ~(1&lt;&lt;LCD_PIN_RW)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="795b48274d3f80bc744a707b67fd93e9"></a><!-- doxytag: member="lcd.c::lcd_rs_high" ref="795b48274d3f80bc744a707b67fd93e9" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#795b48274d3f80bc744a707b67fd93e9">lcd_rs_high</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT |= (1&lt;&lt;LCD_PIN_RS)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6edb13d59460246fb4cc32ada1c9f4a8"></a><!-- doxytag: member="lcd.c::lcd_rs_low" ref="6edb13d59460246fb4cc32ada1c9f4a8" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#6edb13d59460246fb4cc32ada1c9f4a8">lcd_rs_low</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT &amp;= ~(1&lt;&lt;LCD_PIN_RS)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="36e38738cd00287b6fb42ff683029aad"></a><!-- doxytag: member="lcd.c::lcd_e_high" ref="36e38738cd00287b6fb42ff683029aad" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#36e38738cd00287b6fb42ff683029aad">lcd_e_high</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT |= (1&lt;&lt;<a class="el" href="lcd_8c.html#20cddb33daa86bfb43a950a416ba1b23">active_e</a>)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="5ca48e29e8aab0646fc0e23c59f6485d"></a><!-- doxytag: member="lcd.c::lcd_e_low" ref="5ca48e29e8aab0646fc0e23c59f6485d" args="()" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#5ca48e29e8aab0646fc0e23c59f6485d">lcd_e_low</a>()&nbsp;&nbsp;&nbsp;LCD_CTRL_PORT &amp;= ~(1&lt;&lt;<a class="el" href="lcd_8c.html#20cddb33daa86bfb43a950a416ba1b23">active_e</a>)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="deb129e484b57c960e4a118fab9cdb21"></a><!-- doxytag: member="lcd.c::delay" ref="deb129e484b57c960e4a118fab9cdb21" args="(us)" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#deb129e484b57c960e4a118fab9cdb21">delay</a>(us)&nbsp;&nbsp;&nbsp;_delayFourCycles( ( ( 1*(F_CPU/4000) )*us)/1000 )</td></tr>
+
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="7570f3657d5468148afe4f2e356bc41a"></a><!-- doxytag: member="lcd.c::lcd_command" ref="7570f3657d5468148afe4f2e356bc41a" args="(unsigned char cmd)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#7570f3657d5468148afe4f2e356bc41a">lcd_command</a> (unsigned char cmd)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="dbf47a5efdf02367ded1ebf8f9edb5fe"></a><!-- doxytag: member="lcd.c::lcd_gotoxy" ref="dbf47a5efdf02367ded1ebf8f9edb5fe" args="(uint8_t x, uint8_t y)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#dbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a> (uint8_t x, uint8_t y)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="fa7e36b95c43d603f510273ad077cbbe"></a><!-- doxytag: member="lcd.c::lcd_putc" ref="fa7e36b95c43d603f510273ad077cbbe" args="(char c)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#fa7e36b95c43d603f510273ad077cbbe">lcd_putc</a> (char c)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="8ffdfcac7638368ff04364c14984266e"></a><!-- doxytag: member="lcd.c::lcd_puts" ref="8ffdfcac7638368ff04364c14984266e" args="(const char *s)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#8ffdfcac7638368ff04364c14984266e">lcd_puts</a> (const char *s)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="cb11e5a7e15154c8b4d1bb05f307483b"></a><!-- doxytag: member="lcd.c::lcd_puts_P" ref="cb11e5a7e15154c8b4d1bb05f307483b" args="(const char *progmem_s)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#cb11e5a7e15154c8b4d1bb05f307483b">lcd_puts_P</a> (const char *progmem_s)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f8da853dba4b9d5f2aea4e294444e14d"></a><!-- doxytag: member="lcd.c::lcd_clrscr" ref="f8da853dba4b9d5f2aea4e294444e14d" args="(void)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#f8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a> (void)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f28450b1acc4274a71fab57b0f7720ed"></a><!-- doxytag: member="lcd.c::init_controller" ref="f28450b1acc4274a71fab57b0f7720ed" args="(unsigned char cmd)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#f28450b1acc4274a71fab57b0f7720ed">init_controller</a> (unsigned char cmd)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="3afa3406e59f5137c3ba14e89f493cd0"></a><!-- doxytag: member="lcd.c::lcd_init" ref="3afa3406e59f5137c3ba14e89f493cd0" args="(unsigned char cmd)" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#3afa3406e59f5137c3ba14e89f493cd0">lcd_init</a> (unsigned char cmd)</td></tr>
+
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="20cddb33daa86bfb43a950a416ba1b23"></a><!-- doxytag: member="lcd.c::active_e" ref="20cddb33daa86bfb43a950a416ba1b23" args="" -->
+unsigned char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8c.html#20cddb33daa86bfb43a950a416ba1b23">active_e</a></td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+Library for LC Display WINTEK WD-C2704M-1HNN<br>
+ 27 x 4 Characters<br>
+ www.pollin.de (Nr. 120 232). 
+<p>
+based on LCD implementation from Peter Fleury<br>
+ 2005 Stefan Seegel <a href="mailto:dahamm@gmx.net">dahamm@gmx.net</a> Thanks to Peter Fleury for hd44780 lib !<p>
+<dl class="see" compact><dt><b>Siehe auch:</b></dt><dd><a class="el" href="lcd_8h.html" title="Definitionen der Pinbelegung des Displays .">lcd.h</a></dd></dl>
+<dl class="version" compact><dt><b>Version:</b></dt><dd>V--- - --.--.2005 - Stefan Seegel<br>
+<p>
+V001 - 27.02.2007 - Olaf Petersen<br>
+ Dokumentiert<br>
+</dd></dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment"> <span class="keywordtype">int</span> main(<span class="keywordtype">void</span>)
+ {
+   DDRA = 0xff;
+   PORTA = 0xff;
+
+   <a class="code" href="lcd_8c.html#3afa3406e59f5137c3ba14e89f493cd0">lcd_init</a>(<a class="code" href="lcd_8h.html#5163a96b133868975c0738e180b30cb8">LCD_DISP_ON</a>);
+   <a class="code" href="lcd_8c.html#8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">"Guten Tag\n2. Zeile\n3. Zeile"</span>);
+   <a class="code" href="lcd_8c.html#dbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a>(6, 3);
+   <a class="code" href="lcd_8c.html#8ffdfcac7638368ff04364c14984266e">lcd_puts</a>(<span class="stringliteral">"4. Zeile Mitte"</span>);
+
+   <span class="keywordflow">while</span> (1)
+   {}
+
+  <span class="keywordflow">return</span> 0;
+ }
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Datei <a class="el" href="lcd_8c-source.html">lcd.c</a>.<hr><h2>Makro-Dokumentation</h2>
+<a class="anchor" name="c8dd1658e235f174d1cabae5c438943d"></a><!-- doxytag: member="lcd.c::LCD_BUSY" ref="c8dd1658e235f174d1cabae5c438943d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_BUSY&nbsp;&nbsp;&nbsp;7          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+DB7: LCD is busy 
+<p>
+Definiert in Zeile <a class="el" href="lcd_8c-source.html#l00051">51</a> der Datei <a class="el" href="lcd_8c-source.html">lcd.c</a>.
+</div>
+</div><p>
+<a class="anchor" name="b35032ab368a8bc90798e0c547fb24c2"></a><!-- doxytag: member="lcd.c::LCD_FUNCTION_4BIT_2LINES" ref="b35032ab368a8bc90798e0c547fb24c2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_FUNCTION_4BIT_2LINES&nbsp;&nbsp;&nbsp;0x28          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+4-bit interface, dual line, 5x7 dots 
+<p>
+Definiert in Zeile <a class="el" href="lcd_8c-source.html#l00050">50</a> der Datei <a class="el" href="lcd_8c-source.html">lcd.c</a>.
+</div>
+</div><p>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Apr 8 18:04:16 2007 für nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

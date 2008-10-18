@@ -1,0 +1,1503 @@
+   1               		.file	"usbn960x.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	_USBNInitEP0
+  19               	_USBNInitEP0:
+  20               	.LFB3:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24               	.LM2:
+  25 0000 87E2      		ldi r24,lo8(39)
+  26 0002 8093 0000 		sts EP0rx+1,r24
+  27               	.LM3:
+  28 0006 85E2      		ldi r24,lo8(37)
+  29 0008 8093 0000 		sts EP0rx,r24
+  30               	.LM4:
+  31 000c 90E2      		ldi r25,lo8(32)
+  32 000e 9093 0000 		sts EP0rx+2,r25
+  33               	.LM5:
+  34 0012 1092 0000 		sts EP0rx+3,__zero_reg__
+  35               	.LM6:
+  36 0016 28E0      		ldi r18,lo8(8)
+  37 0018 30E0      		ldi r19,hi8(8)
+  38 001a 3093 0000 		sts (EP0rx+4)+1,r19
+  39 001e 2093 0000 		sts EP0rx+4,r18
+  40               	.LM7:
+  41 0022 83E2      		ldi r24,lo8(35)
+  42 0024 8093 0000 		sts EP0tx+1,r24
+  43               	.LM8:
+  44 0028 81E2      		ldi r24,lo8(33)
+  45 002a 8093 0000 		sts EP0tx,r24
+  46               	.LM9:
+  47 002e 9093 0000 		sts EP0tx+2,r25
+  48               	.LM10:
+  49 0032 1092 0000 		sts EP0tx+3,__zero_reg__
+  50               	.LM11:
+  51 0036 3093 0000 		sts (EP0tx+4)+1,r19
+  52 003a 2093 0000 		sts EP0tx+4,r18
+  53               	/* epilogue: frame size=0 */
+  54 003e 0895      		ret
+  55               	/* epilogue end (size=1) */
+  56               	/* function _USBNInitEP0 size 32 (31) */
+  57               	.LFE3:
+  59               	.global	_USBNReceive
+  61               	_USBNReceive:
+  62               	.LFB11:
+  63               	.LM12:
+  64               	/* prologue: frame size=0 */
+  65               	/* prologue end (size=0) */
+  66               	.LVL0:
+  67               	/* epilogue: frame size=0 */
+  68 0040 0895      		ret
+  69               	/* epilogue end (size=1) */
+  70               	/* function _USBNReceive size 1 (0) */
+  71               	.LFE11:
+  73               	.global	_USBNGetConfiguration
+  75               	_USBNGetConfiguration:
+  76               	.LFB16:
+  77               	.LM13:
+  78               	/* prologue: frame size=0 */
+  79               	/* prologue end (size=0) */
+  80               	.LVL1:
+  81               	.LM14:
+  82 0042 6091 0000 		lds r22,USBNFunctionInfo+1
+  83 0046 81E2      		ldi r24,lo8(33)
+  84               	.LVL2:
+  85 0048 0E94 0000 		call USBNWrite
+  86               	/* epilogue: frame size=0 */
+  87 004c 0895      		ret
+  88               	/* epilogue end (size=1) */
+  89               	/* function _USBNGetConfiguration size 6 (5) */
+  90               	.LFE16:
+  92               	.global	_USBNSetConfiguration
+  94               	_USBNSetConfiguration:
+  95               	.LFB15:
+  96               	.LM15:
+  97               	/* prologue: frame size=0 */
+  98               	/* prologue end (size=0) */
+  99               	.LVL3:
+ 100               	.LM16:
+ 101 004e 68E0      		ldi r22,lo8(8)
+ 102 0050 8BE2      		ldi r24,lo8(43)
+ 103               	.LVL4:
+ 104 0052 0E94 0000 		call USBNWrite
+ 105               	.LM17:
+ 106 0056 63E1      		ldi r22,lo8(19)
+ 107 0058 88E2      		ldi r24,lo8(40)
+ 108 005a 0E94 0000 		call USBNWrite
+ 109               	.LM18:
+ 110 005e 68E0      		ldi r22,lo8(8)
+ 111 0060 8FE2      		ldi r24,lo8(47)
+ 112 0062 0E94 0000 		call USBNWrite
+ 113               	.LM19:
+ 114 0066 62E1      		ldi r22,lo8(18)
+ 115 0068 8CE2      		ldi r24,lo8(44)
+ 116 006a 0E94 0000 		call USBNWrite
+ 117               	.LM20:
+ 118 006e 61E0      		ldi r22,lo8(1)
+ 119 0070 8FE2      		ldi r24,lo8(47)
+ 120 0072 0E94 0000 		call USBNWrite
+ 121               	.LM21:
+ 122 0076 68E0      		ldi r22,lo8(8)
+ 123 0078 8BE3      		ldi r24,lo8(59)
+ 124 007a 0E94 0000 		call USBNWrite
+ 125               	.LM22:
+ 126 007e 65E1      		ldi r22,lo8(21)
+ 127 0080 88E3      		ldi r24,lo8(56)
+ 128 0082 0E94 0000 		call USBNWrite
+ 129               	.LM23:
+ 130 0086 65E0      		ldi r22,lo8(5)
+ 131 0088 83E2      		ldi r24,lo8(35)
+ 132 008a 0E94 0000 		call USBNWrite
+ 133               	/* epilogue: frame size=0 */
+ 134 008e 0895      		ret
+ 135               	/* epilogue end (size=1) */
+ 136               	/* function _USBNSetConfiguration size 33 (32) */
+ 137               	.LFE15:
+ 139               	.global	_USBNSetAddress
+ 141               	_USBNSetAddress:
+ 142               	.LFB13:
+ 143               	.LM24:
+ 144               	/* prologue: frame size=0 */
+ 145 0090 0F93      		push r16
+ 146 0092 1F93      		push r17
+ 147               	/* prologue end (size=2) */
+ 148               	.LVL5:
+ 149 0094 8C01      		movw r16,r24
+ 150               	.LM25:
+ 151 0096 60E4      		ldi r22,lo8(64)
+ 152 0098 80E2      		ldi r24,lo8(32)
+ 153               	.LVL6:
+ 154 009a 0E94 0000 		call USBNWrite
+ 155               	.LM26:
+ 156 009e F801      		movw r30,r16
+ 157 00a0 6281      		ldd r22,Z+2
+ 158 00a2 6058      		subi r22,lo8(-(-128))
+ 159 00a4 84E0      		ldi r24,lo8(4)
+ 160 00a6 0E94 0000 		call USBNWrite
+ 161               	.LM27:
+ 162 00aa F801      		movw r30,r16
+ 163 00ac 8281      		ldd r24,Z+2
+ 164 00ae 8093 0000 		sts USBNFunctionInfo,r24
+ 165               	/* epilogue: frame size=0 */
+ 166 00b2 1F91      		pop r17
+ 167 00b4 0F91      		pop r16
+ 168 00b6 0895      		ret
+ 169               	/* epilogue end (size=3) */
+ 170               	/* function _USBNSetAddress size 20 (15) */
+ 171               	.LFE13:
+ 173               	.global	_USBNTransmit
+ 175               	_USBNTransmit:
+ 176               	.LFB12:
+ 177               	.LM28:
+ 178               	/* prologue: frame size=0 */
+ 179 00b8 0F93      		push r16
+ 180 00ba 1F93      		push r17
+ 181 00bc CF93      		push r28
+ 182 00be DF93      		push r29
+ 183               	/* prologue end (size=4) */
+ 184               	.LVL7:
+ 185 00c0 EC01      		movw r28,r24
+ 186               	.LM29:
+ 187 00c2 2A85      		ldd r18,Y+10
+ 188 00c4 3B85      		ldd r19,Y+11
+ 189 00c6 1216      		cp __zero_reg__,r18
+ 190 00c8 1306      		cpc __zero_reg__,r19
+ 191 00ca 04F0      		brlt .+2
+ 192 00cc 00C0      		rjmp .L24
+ 193               	.LVL8:
+ 194               	.LM30:
+ 195 00ce 8885      		ldd r24,Y+8
+ 196 00d0 9985      		ldd r25,Y+9
+ 197 00d2 8217      		cp r24,r18
+ 198 00d4 9307      		cpc r25,r19
+ 199 00d6 04F4      		brge .L14
+ 200               	.LM31:
+ 201 00d8 68E0      		ldi r22,lo8(8)
+ 202 00da 83E2      		ldi r24,lo8(35)
+ 203 00dc 0E94 0000 		call USBNWrite
+ 204               	.LM32:
+ 205 00e0 E885      		ldd r30,Y+8
+ 206 00e2 F985      		ldd r31,Y+9
+ 207 00e4 8A85      		ldd r24,Y+10
+ 208 00e6 9B85      		ldd r25,Y+11
+ 209 00e8 E817      		cp r30,r24
+ 210 00ea F907      		cpc r31,r25
+ 211 00ec 04F4      		brge .L14
+ 212 00ee 00E0      		ldi r16,lo8(0)
+ 213 00f0 10E0      		ldi r17,hi8(0)
+ 214               	.LVL9:
+ 215               	.L18:
+ 216               	.LM33:
+ 217 00f2 8C85      		ldd r24,Y+12
+ 218 00f4 9D85      		ldd r25,Y+13
+ 219 00f6 E80F      		add r30,r24
+ 220 00f8 F91F      		adc r31,r25
+ 221 00fa 6081      		ld r22,Z
+ 222 00fc 81E2      		ldi r24,lo8(33)
+ 223 00fe 0E94 0000 		call USBNWrite
+ 224               	.LM34:
+ 225 0102 E885      		ldd r30,Y+8
+ 226 0104 F985      		ldd r31,Y+9
+ 227 0106 3196      		adiw r30,1
+ 228 0108 F987      		std Y+9,r31
+ 229 010a E887      		std Y+8,r30
+ 230               	.LM35:
+ 231 010c 0F5F      		subi r16,lo8(-(1))
+ 232 010e 1F4F      		sbci r17,hi8(-(1))
+ 233 0110 8A85      		ldd r24,Y+10
+ 234 0112 9B85      		ldd r25,Y+11
+ 235 0114 0830      		cpi r16,8
+ 236 0116 1105      		cpc r17,__zero_reg__
+ 237 0118 04F0      		brlt .L27
+ 238               	.L20:
+ 239               	.LM36:
+ 240 011a E817      		cp r30,r24
+ 241 011c F907      		cpc r31,r25
+ 242 011e 04F0      		brlt .L21
+ 243               	.L14:
+ 244               	.LM37:
+ 245 0120 61E0      		ldi r22,lo8(1)
+ 246 0122 87E2      		ldi r24,lo8(39)
+ 247 0124 0E94 0000 		call USBNWrite
+ 248               	.L21:
+ 249               	.LM38:
+ 250 0128 8B81      		ldd r24,Y+3
+ 251 012a 8130      		cpi r24,lo8(1)
+ 252 012c 01F0      		breq .L28
+ 253               	.LM39:
+ 254 012e 61E0      		ldi r22,lo8(1)
+ 255 0130 8981      		ldd r24,Y+1
+ 256 0132 0E94 0000 		call USBNWrite
+ 257               	.LM40:
+ 258 0136 81E0      		ldi r24,lo8(1)
+ 259 0138 8B83      		std Y+3,r24
+ 260 013a 00C0      		rjmp .L24
+ 261               	.L27:
+ 262               	.LM41:
+ 263 013c E817      		cp r30,r24
+ 264 013e F907      		cpc r31,r25
+ 265 0140 04F0      		brlt .L18
+ 266 0142 00C0      		rjmp .L20
+ 267               	.L28:
+ 268               	.LM42:
+ 269 0144 65E0      		ldi r22,lo8(5)
+ 270 0146 8981      		ldd r24,Y+1
+ 271 0148 0E94 0000 		call USBNWrite
+ 272               	.LM43:
+ 273 014c 1B82      		std Y+3,__zero_reg__
+ 274               	.LVL10:
+ 275               	.L24:
+ 276               	/* epilogue: frame size=0 */
+ 277 014e DF91      		pop r29
+ 278 0150 CF91      		pop r28
+ 279 0152 1F91      		pop r17
+ 280 0154 0F91      		pop r16
+ 281 0156 0895      		ret
+ 282               	/* epilogue end (size=5) */
+ 283               	/* function _USBNTransmit size 80 (71) */
+ 284               	.LFE12:
+ 286               		.data
+ 287               	.LC0:
+ 288 0000 4445 5649 		.string	"DEVICE DESCRIPTOR\n\r"
+ 288      4345 2044 
+ 288      4553 4352 
+ 288      4950 544F 
+ 288      520A 0D00 
+ 289               	.LC1:
+ 290 0014 434F 4E46 		.string	"CONFIGURATION DESCRIPTOR "
+ 290      4947 5552 
+ 290      4154 494F 
+ 290      4E20 4445 
+ 290      5343 5249 
+ 291               	.LC2:
+ 292 002e 5354 5249 		.string	"STRING DESCRIPTOR "
+ 292      4E47 2044 
+ 292      4553 4352 
+ 292      4950 544F 
+ 292      5220 00
+ 293               	.LC3:
+ 294 0041 0D0A 00   		.string	"\r\n"
+ 295               	.LC4:
+ 296 0044 6C61 6E67 		.string	"language descriptor"
+ 296      7561 6765 
+ 296      2064 6573 
+ 296      6372 6970 
+ 296      746F 7200 
+ 297               		.text
+ 298               	.global	_USBNGetDescriptor
+ 300               	_USBNGetDescriptor:
+ 301               	.LFB14:
+ 302               	.LM44:
+ 303               	/* prologue: frame size=4 */
+ 304 0158 DF92      		push r13
+ 305 015a EF92      		push r14
+ 306 015c FF92      		push r15
+ 307 015e 0F93      		push r16
+ 308 0160 1F93      		push r17
+ 309 0162 CF93      		push r28
+ 310 0164 DF93      		push r29
+ 311 0166 CDB7      		in r28,__SP_L__
+ 312 0168 DEB7      		in r29,__SP_H__
+ 313 016a 2497      		sbiw r28,4
+ 314 016c 0FB6      		in __tmp_reg__,__SREG__
+ 315 016e F894      		cli
+ 316 0170 DEBF      		out __SP_H__,r29
+ 317 0172 0FBE      		out __SREG__,__tmp_reg__
+ 318 0174 CDBF      		out __SP_L__,r28
+ 319               	/* prologue end (size=15) */
+ 320               	.LVL11:
+ 321 0176 7C01      		movw r14,r24
+ 322               	.LM45:
+ 323 0178 FC01      		movw r30,r24
+ 324 017a 0281      		ldd r16,Z+2
+ 325 017c 1381      		ldd r17,Z+3
+ 326               	.LM46:
+ 327 017e 1092 0000 		sts (EP0tx+8)+1,__zero_reg__
+ 328 0182 1092 0000 		sts EP0tx+8,__zero_reg__
+ 329               	.LM47:
+ 330 0186 81E0      		ldi r24,lo8(1)
+ 331               	.LVL12:
+ 332 0188 8093 0000 		sts EP0tx+3,r24
+ 333               	.LM48:
+ 334 018c 812F      		mov r24,r17
+ 335 018e 9927      		clr r25
+ 336 0190 8230      		cpi r24,lo8(2)
+ 337 0192 01F4      		brne .+2
+ 338 0194 00C0      		rjmp .L32
+ 339               	.LM49:
+ 340 0196 8330      		cpi r24,lo8(3)
+ 341 0198 01F0      		breq .L33
+ 342 019a 8130      		cpi r24,lo8(1)
+ 343 019c 01F0      		breq .+2
+ 344 019e 00C0      		rjmp .L30
+ 345               	.LM50:
+ 346 01a0 80E0      		ldi r24,lo8(.LC0)
+ 347 01a2 90E0      		ldi r25,hi8(.LC0)
+ 348 01a4 0E94 0000 		call USBNDebug
+ 349               	.LM51:
+ 350 01a8 8091 0000 		lds r24,DeviceDescriptor
+ 351 01ac 90E0      		ldi r25,lo8(0)
+ 352 01ae 9093 0000 		sts (EP0tx+10)+1,r25
+ 353 01b2 8093 0000 		sts EP0tx+10,r24
+ 354               	.LM52:
+ 355 01b6 80E0      		ldi r24,lo8(DeviceDescriptor)
+ 356 01b8 90E0      		ldi r25,hi8(DeviceDescriptor)
+ 357 01ba 9093 0000 		sts (EP0tx+12)+1,r25
+ 358 01be 8093 0000 		sts EP0tx+12,r24
+ 359               	.LM53:
+ 360 01c2 F701      		movw r30,r14
+ 361 01c4 8681      		ldd r24,Z+6
+ 362 01c6 9781      		ldd r25,Z+7
+ 363 01c8 8034      		cpi r24,64
+ 364 01ca 9105      		cpc r25,__zero_reg__
+ 365 01cc 01F0      		breq .+2
+ 366 01ce 00C0      		rjmp .L30
+ 367               	.LM54:
+ 368 01d0 88E0      		ldi r24,lo8(8)
+ 369 01d2 90E0      		ldi r25,hi8(8)
+ 370 01d4 9093 0000 		sts (EP0tx+10)+1,r25
+ 371 01d8 8093 0000 		sts EP0tx+10,r24
+ 372 01dc 00C0      		rjmp .L30
+ 373               	.L33:
+ 374               	.LM55:
+ 375 01de 80E0      		ldi r24,lo8(.LC2)
+ 376 01e0 90E0      		ldi r25,hi8(.LC2)
+ 377 01e2 0E94 0000 		call USBNDebug
+ 378               	.LM56:
+ 379 01e6 E02E      		mov r14,r16
+ 380               	.LVL13:
+ 381 01e8 FF24      		clr r15
+ 382               	.LVL14:
+ 383 01ea C701      		movw r24,r14
+ 384 01ec 0E94 0000 		call SendHex
+ 385               	.LM57:
+ 386 01f0 80E0      		ldi r24,lo8(.LC3)
+ 387 01f2 90E0      		ldi r25,hi8(.LC3)
+ 388 01f4 0E94 0000 		call USBNDebug
+ 389               	.LM58:
+ 390 01f8 0023      		tst r16
+ 391               	.LVL15:
+ 392 01fa 01F0      		breq .L35
+ 393               	.LM59:
+ 394 01fc EE0C      		lsl r14
+ 395 01fe FF1C      		rol r15
+ 396               	.LVL16:
+ 397 0200 8091 0000 		lds r24,FinalStringArray
+ 398 0204 9091 0000 		lds r25,(FinalStringArray)+1
+ 399 0208 E80E      		add r14,r24
+ 400 020a F91E      		adc r15,r25
+ 401 020c D701      		movw r26,r14
+ 402 020e ED91      		ld r30,X+
+ 403 0210 FC91      		ld r31,X
+ 404 0212 F093 0000 		sts (EP0tx+12)+1,r31
+ 405 0216 E093 0000 		sts EP0tx+12,r30
+ 406               	.LM60:
+ 407 021a 8081      		ld r24,Z
+ 408 021c 90E0      		ldi r25,lo8(0)
+ 409 021e 9093 0000 		sts (EP0tx+10)+1,r25
+ 410 0222 8093 0000 		sts EP0tx+10,r24
+ 411 0226 00C0      		rjmp .L30
+ 412               	.LVL17:
+ 413               	.L32:
+ 414               	.LM61:
+ 415 0228 80E0      		ldi r24,lo8(.LC1)
+ 416 022a 90E0      		ldi r25,hi8(.LC1)
+ 417 022c 0E94 0000 		call USBNDebug
+ 418               	.LM62:
+ 419 0230 F701      		movw r30,r14
+ 420 0232 8681      		ldd r24,Z+6
+ 421 0234 9781      		ldd r25,Z+7
+ 422 0236 9093 0000 		sts (EP0tx+10)+1,r25
+ 423 023a 8093 0000 		sts EP0tx+10,r24
+ 424               	.LM63:
+ 425 023e E02F      		mov r30,r16
+ 426               	.LVL18:
+ 427 0240 F0E0      		ldi r31,lo8(0)
+ 428               	.LVL19:
+ 429 0242 EE0F      		lsl r30
+ 430 0244 FF1F      		rol r31
+ 431               	.LVL20:
+ 432 0246 8091 0000 		lds r24,FinalConfigurationArray
+ 433 024a 9091 0000 		lds r25,(FinalConfigurationArray)+1
+ 434 024e E80F      		add r30,r24
+ 435 0250 F91F      		adc r31,r25
+ 436 0252 8081      		ld r24,Z
+ 437 0254 9181      		ldd r25,Z+1
+ 438 0256 9093 0000 		sts (EP0tx+12)+1,r25
+ 439 025a 8093 0000 		sts EP0tx+12,r24
+ 440 025e 00C0      		rjmp .L30
+ 441               	.LVL21:
+ 442               	.L35:
+ 443               	.LBB4:
+ 444               	.LM64:
+ 445 0260 80E0      		ldi r24,lo8(.LC4)
+ 446 0262 90E0      		ldi r25,hi8(.LC4)
+ 447 0264 0E94 0000 		call USBNDebug
+ 448               	.LM65:
+ 449 0268 94E0      		ldi r25,lo8(4)
+ 450 026a 9983      		std Y+1,r25
+ 451 026c 83E0      		ldi r24,lo8(3)
+ 452 026e 8A83      		std Y+2,r24
+ 453 0270 89E0      		ldi r24,lo8(9)
+ 454 0272 8B83      		std Y+3,r24
+ 455 0274 9C83      		std Y+4,r25
+ 456               	.LM66:
+ 457 0276 84E0      		ldi r24,lo8(4)
+ 458 0278 90E0      		ldi r25,hi8(4)
+ 459 027a 9093 0000 		sts (EP0tx+10)+1,r25
+ 460 027e 8093 0000 		sts EP0tx+10,r24
+ 461               	.LM67:
+ 462 0282 CE01      		movw r24,r28
+ 463 0284 0196      		adiw r24,1
+ 464 0286 9093 0000 		sts (EP0tx+12)+1,r25
+ 465 028a 8093 0000 		sts EP0tx+12,r24
+ 466               	.LVL22:
+ 467               	.L30:
+ 468               	.LBE4:
+ 469               	.LM68:
+ 470 028e 80E0      		ldi r24,lo8(EP0tx)
+ 471 0290 90E0      		ldi r25,hi8(EP0tx)
+ 472 0292 0E94 0000 		call _USBNTransmit
+ 473               	/* epilogue: frame size=4 */
+ 474 0296 2496      		adiw r28,4
+ 475 0298 0FB6      		in __tmp_reg__,__SREG__
+ 476 029a F894      		cli
+ 477 029c DEBF      		out __SP_H__,r29
+ 478 029e 0FBE      		out __SREG__,__tmp_reg__
+ 479 02a0 CDBF      		out __SP_L__,r28
+ 480 02a2 DF91      		pop r29
+ 481 02a4 CF91      		pop r28
+ 482 02a6 1F91      		pop r17
+ 483 02a8 0F91      		pop r16
+ 484 02aa FF90      		pop r15
+ 485 02ac EF90      		pop r14
+ 486 02ae DF90      		pop r13
+ 487 02b0 0895      		ret
+ 488               	/* epilogue end (size=14) */
+ 489               	/* function _USBNGetDescriptor size 173 (144) */
+ 490               	.LFE14:
+ 492               		.data
+ 493               	.LC5:
+ 494 0058 7400      		.string	"t"
+ 495               	.LC6:
+ 496 005a 7374 616C 		.string	"stall handshake "
+ 496      6C20 6861 
+ 496      6E64 7368 
+ 496      616B 6520 
+ 496      00
+ 497               	.LC7:
+ 498 006b 7478 3020 		.string	"tx0 error\n"
+ 498      6572 726F 
+ 498      720A 00
+ 499               		.text
+ 500               	.global	_USBNTransmitFIFO0
+ 502               	_USBNTransmitFIFO0:
+ 503               	.LFB10:
+ 504               	.LM69:
+ 505               	/* prologue: frame size=0 */
+ 506 02b2 1F93      		push r17
+ 507 02b4 CF93      		push r28
+ 508 02b6 DF93      		push r29
+ 509               	/* prologue end (size=3) */
+ 510               	.LM70:
+ 511 02b8 82E2      		ldi r24,lo8(34)
+ 512 02ba 0E94 0000 		call USBNRead
+ 513 02be 182F      		mov r17,r24
+ 514               	.LVL23:
+ 515               	.LM71:
+ 516 02c0 80E0      		ldi r24,lo8(.LC5)
+ 517 02c2 90E0      		ldi r25,hi8(.LC5)
+ 518 02c4 0E94 0000 		call USBNDebug
+ 519               	.LM72:
+ 520 02c8 15FF      		sbrs r17,5
+ 521 02ca 00C0      		rjmp .L39
+ 522               	.LVL24:
+ 523               	.LM73:
+ 524 02cc 68E0      		ldi r22,lo8(8)
+ 525 02ce 83E2      		ldi r24,lo8(35)
+ 526 02d0 0E94 0000 		call USBNWrite
+ 527               	.LM74:
+ 528 02d4 16FF      		sbrs r17,6
+ 529 02d6 00C0      		rjmp .L41
+ 530               	.LM75:
+ 531 02d8 2091 0000 		lds r18,EP0tx+8
+ 532 02dc 3091 0000 		lds r19,(EP0tx+8)+1
+ 533 02e0 8091 0000 		lds r24,EP0tx+10
+ 534 02e4 9091 0000 		lds r25,(EP0tx+10)+1
+ 535 02e8 2817      		cp r18,r24
+ 536 02ea 3907      		cpc r19,r25
+ 537 02ec 04F4      		brge .L47
+ 538               	.LM76:
+ 539 02ee 80E0      		ldi r24,lo8(EP0tx)
+ 540 02f0 90E0      		ldi r25,hi8(EP0tx)
+ 541 02f2 0E94 0000 		call _USBNTransmit
+ 542 02f6 00C0      		rjmp .L46
+ 543               	.L39:
+ 544               	.LM77:
+ 545 02f8 80E0      		ldi r24,lo8(.LC7)
+ 546 02fa 90E0      		ldi r25,hi8(.LC7)
+ 547 02fc 0E94 0000 		call USBNDebug
+ 548 0300 00C0      		rjmp .L46
+ 549               	.L41:
+ 550               	.LM78:
+ 551 0302 80E0      		ldi r24,lo8(.LC6)
+ 552 0304 90E0      		ldi r25,hi8(.LC6)
+ 553 0306 0E94 0000 		call USBNDebug
+ 554               	.L47:
+ 555               	.LM79:
+ 556 030a 61E0      		ldi r22,lo8(1)
+ 557 030c 87E2      		ldi r24,lo8(39)
+ 558 030e 0E94 0000 		call USBNWrite
+ 559               	.L46:
+ 560               	/* epilogue: frame size=0 */
+ 561 0312 DF91      		pop r29
+ 562 0314 CF91      		pop r28
+ 563 0316 1F91      		pop r17
+ 564 0318 0895      		ret
+ 565               	/* epilogue end (size=4) */
+ 566               	/* function _USBNTransmitFIFO0 size 52 (45) */
+ 567               	.LFE10:
+ 569               		.data
+ 570               	.LC8:
+ 571 0076 616C 7420 		.string	"alt event\r\n"
+ 571      6576 656E 
+ 571      740D 0A00 
+ 572               	.LC9:
+ 573 0082 7265 7365 		.string	"reset\r\n"
+ 573      740D 0A00 
+ 574               	.LC10:
+ 575 008a 656F 700D 		.string	"eop\r\n"
+ 575      0A00 
+ 576               		.text
+ 577               	.global	_USBNAlternateEvent
+ 579               	_USBNAlternateEvent:
+ 580               	.LFB8:
+ 581               	.LM80:
+ 582               	/* prologue: frame size=0 */
+ 583 031a 1F93      		push r17
+ 584 031c CF93      		push r28
+ 585 031e DF93      		push r29
+ 586               	/* prologue end (size=3) */
+ 587               	.LM81:
+ 588 0320 88E0      		ldi r24,lo8(8)
+ 589 0322 0E94 0000 		call USBNRead
+ 590 0326 182F      		mov r17,r24
+ 591               	.LVL25:
+ 592               	.LM82:
+ 593 0328 80E0      		ldi r24,lo8(.LC8)
+ 594 032a 90E0      		ldi r25,hi8(.LC8)
+ 595 032c 0E94 0000 		call USBNDebug
+ 596               	.LM83:
+ 597 0330 C12F      		mov r28,r17
+ 598 0332 16FD      		sbrc r17,6
+ 599 0334 00C0      		rjmp .L58
+ 600               	.LVL26:
+ 601               	.L49:
+ 602               	.LM84:
+ 603 0336 C4FD      		sbrc r28,4
+ 604 0338 00C0      		rjmp .L59
+ 605               	.LM85:
+ 606 033a 17FD      		sbrc r17,7
+ 607 033c 00C0      		rjmp .L60
+ 608               	.LVL27:
+ 609               	.L53:
+ 610               	.LM86:
+ 611 033e C3FF      		sbrs r28,3
+ 612 0340 00C0      		rjmp .L57
+ 613               	.LM87:
+ 614 0342 80E0      		ldi r24,lo8(.LC10)
+ 615 0344 90E0      		ldi r25,hi8(.LC10)
+ 616 0346 0E94 0000 		call USBNDebug
+ 617 034a 00C0      		rjmp .L57
+ 618               	.LVL28:
+ 619               	.L59:
+ 620               	.LM88:
+ 621 034c 60EC      		ldi r22,lo8(-64)
+ 622 034e 89E0      		ldi r24,lo8(9)
+ 623 0350 0E94 0000 		call USBNWrite
+ 624               	.LM89:
+ 625 0354 17FF      		sbrs r17,7
+ 626 0356 00C0      		rjmp .L53
+ 627               	.LVL29:
+ 628               	.L60:
+ 629               	.LM90:
+ 630 0358 60ED      		ldi r22,lo8(-48)
+ 631 035a 89E0      		ldi r24,lo8(9)
+ 632 035c 0E94 0000 		call USBNWrite
+ 633 0360 00C0      		rjmp .L53
+ 634               	.LVL30:
+ 635               	.L58:
+ 636               	.LM91:
+ 637 0362 60E0      		ldi r22,lo8(0)
+ 638 0364 85E0      		ldi r24,lo8(5)
+ 639 0366 0E94 0000 		call USBNWrite
+ 640               	.LM92:
+ 641 036a 60E8      		ldi r22,lo8(-128)
+ 642 036c 84E0      		ldi r24,lo8(4)
+ 643 036e 0E94 0000 		call USBNWrite
+ 644               	.LM93:
+ 645 0372 60E0      		ldi r22,lo8(0)
+ 646 0374 80E2      		ldi r24,lo8(32)
+ 647 0376 0E94 0000 		call USBNWrite
+ 648               	.LM94:
+ 649 037a 68E0      		ldi r22,lo8(8)
+ 650 037c 83E2      		ldi r24,lo8(35)
+ 651 037e 0E94 0000 		call USBNWrite
+ 652               	.LM95:
+ 653 0382 61E0      		ldi r22,lo8(1)
+ 654 0384 87E2      		ldi r24,lo8(39)
+ 655 0386 0E94 0000 		call USBNWrite
+ 656               	.LM96:
+ 657 038a 62E0      		ldi r22,lo8(2)
+ 658 038c 85E0      		ldi r24,lo8(5)
+ 659 038e 0E94 0000 		call USBNWrite
+ 660               	.LM97:
+ 661 0392 80E0      		ldi r24,lo8(.LC9)
+ 662 0394 90E0      		ldi r25,hi8(.LC9)
+ 663 0396 0E94 0000 		call USBNDebug
+ 664 039a 00C0      		rjmp .L49
+ 665               	.LVL31:
+ 666               	.L57:
+ 667               	/* epilogue: frame size=0 */
+ 668 039c DF91      		pop r29
+ 669 039e CF91      		pop r28
+ 670 03a0 1F91      		pop r17
+ 671 03a2 0895      		ret
+ 672               	/* epilogue end (size=4) */
+ 673               	/* function _USBNAlternateEvent size 69 (62) */
+ 674               	.LFE8:
+ 676               		.data
+ 677               	.LC11:
+ 678 0090 7478 2065 		.string	"tx event\r\n"
+ 678      7665 6E74 
+ 678      0D0A 00
+ 679               		.text
+ 680               	.global	_USBNTransmitEvent
+ 682               	_USBNTransmitEvent:
+ 683               	.LFB7:
+ 684               	.LM98:
+ 685               	/* prologue: frame size=0 */
+ 686 03a4 1F93      		push r17
+ 687               	/* prologue end (size=1) */
+ 688               	.LM99:
+ 689 03a6 8AE0      		ldi r24,lo8(10)
+ 690 03a8 0E94 0000 		call USBNRead
+ 691 03ac 182F      		mov r17,r24
+ 692               	.LVL32:
+ 693               	.LM100:
+ 694 03ae 80E0      		ldi r24,lo8(.LC11)
+ 695 03b0 90E0      		ldi r25,hi8(.LC11)
+ 696 03b2 0E94 0000 		call USBNDebug
+ 697               	.LM101:
+ 698 03b6 10FD      		sbrc r17,0
+ 699 03b8 00C0      		rjmp .L69
+ 700               	.LVL33:
+ 701               	.LM102:
+ 702 03ba 11FD      		sbrc r17,1
+ 703 03bc 00C0      		rjmp .L70
+ 704               	.LM103:
+ 705 03be 80E0      		ldi r24,lo8(.LC11)
+ 706 03c0 90E0      		ldi r25,hi8(.LC11)
+ 707 03c2 0E94 0000 		call USBNDebug
+ 708               	.LM104:
+ 709 03c6 82E3      		ldi r24,lo8(50)
+ 710 03c8 0E94 0000 		call USBNRead
+ 711               	.LM105:
+ 712 03cc 8AE3      		ldi r24,lo8(58)
+ 713 03ce 0E94 0000 		call USBNRead
+ 714 03d2 00C0      		rjmp .L68
+ 715               	.L70:
+ 716               	.LM106:
+ 717 03d4 8AE2      		ldi r24,lo8(42)
+ 718 03d6 0E94 0000 		call USBNRead
+ 719               	.LM107:
+ 720 03da 8091 0000 		lds r24,txfifos
+ 721 03de 8130      		cpi r24,lo8(1)
+ 722 03e0 01F4      		brne .L68
+ 723               	.LM108:
+ 724 03e2 E091 0000 		lds r30,txfifos+3
+ 725 03e6 F091 0000 		lds r31,(txfifos+3)+1
+ 726 03ea 0995      		icall
+ 727 03ec 00C0      		rjmp .L68
+ 728               	.L69:
+ 729               	.LM109:
+ 730 03ee 0E94 0000 		call _USBNTransmitFIFO0
+ 731               	.L68:
+ 732               	/* epilogue: frame size=0 */
+ 733 03f2 1F91      		pop r17
+ 734 03f4 0895      		ret
+ 735               	/* epilogue end (size=2) */
+ 736               	/* function _USBNTransmitEvent size 41 (38) */
+ 737               	.LFE7:
+ 739               		.data
+ 740               	.LC12:
+ 741 009b 6E61 636B 		.string	"nack event\r\n"
+ 741      2065 7665 
+ 741      6E74 0D0A 
+ 741      00
+ 742               		.text
+ 743               	.global	_USBNNackEvent
+ 745               	_USBNNackEvent:
+ 746               	.LFB5:
+ 747               	.LM110:
+ 748               	/* prologue: frame size=0 */
+ 749               	/* prologue end (size=0) */
+ 750               	.LM111:
+ 751 03f6 8EE0      		ldi r24,lo8(14)
+ 752 03f8 0E94 0000 		call USBNRead
+ 753               	.LM112:
+ 754 03fc 80E0      		ldi r24,lo8(.LC12)
+ 755 03fe 90E0      		ldi r25,hi8(.LC12)
+ 756 0400 0E94 0000 		call USBNDebug
+ 757               	/* epilogue: frame size=0 */
+ 758 0404 0895      		ret
+ 759               	/* epilogue end (size=1) */
+ 760               	/* function _USBNNackEvent size 8 (7) */
+ 761               	.LFE5:
+ 763               	.global	_USBNMemFIFO
+ 765               	_USBNMemFIFO:
+ 766               	.LFB4:
+ 767               	.LM113:
+ 768               	/* prologue: frame size=0 */
+ 769 0406 CF92      		push r12
+ 770 0408 DF92      		push r13
+ 771 040a EF92      		push r14
+ 772 040c FF92      		push r15
+ 773 040e 0F93      		push r16
+ 774 0410 1F93      		push r17
+ 775 0412 CF93      		push r28
+ 776 0414 DF93      		push r29
+ 777               	/* prologue end (size=8) */
+ 778               	.LVL34:
+ 779 0416 6C01      		movw r12,r24
+ 780 0418 7B01      		movw r14,r22
+ 781 041a 8A01      		movw r16,r20
+ 782               	.LM114:
+ 783 041c 1416      		cp __zero_reg__,r20
+ 784 041e 1506      		cpc __zero_reg__,r21
+ 785 0420 04F4      		brge .L77
+ 786               	.LVL35:
+ 787               	.LM115:
+ 788 0422 C0E0      		ldi r28,lo8(0)
+ 789 0424 D0E0      		ldi r29,hi8(0)
+ 790               	.LVL36:
+ 791               	.L76:
+ 792               	.LM116:
+ 793 0426 F701      		movw r30,r14
+ 794 0428 EC0F      		add r30,r28
+ 795 042a FD1F      		adc r31,r29
+ 796 042c 6081      		ld r22,Z
+ 797 042e C601      		movw r24,r12
+ 798 0430 0E94 0000 		call fifo_put
+ 799               	.LVL37:
+ 800               	.LM117:
+ 801 0434 2196      		adiw r28,1
+ 802 0436 C017      		cp r28,r16
+ 803 0438 D107      		cpc r29,r17
+ 804 043a 01F4      		brne .L76
+ 805               	.LVL38:
+ 806               	.L77:
+ 807               	/* epilogue: frame size=0 */
+ 808 043c DF91      		pop r29
+ 809 043e CF91      		pop r28
+ 810 0440 1F91      		pop r17
+ 811 0442 0F91      		pop r16
+ 812 0444 FF90      		pop r15
+ 813 0446 EF90      		pop r14
+ 814 0448 DF90      		pop r13
+ 815 044a CF90      		pop r12
+ 816 044c 0895      		ret
+ 817               	/* epilogue end (size=9) */
+ 818               	/* function _USBNMemFIFO size 36 (19) */
+ 819               	.LFE4:
+ 821               		.data
+ 822               	.LC13:
+ 823 00a8 7278 0D0A 		.string	"rx\r\n"
+ 823      00
+ 824               	.LC14:
+ 825 00ad 434C 5220 		.string	"CLR FEATURE\n\r"
+ 825      4645 4154 
+ 825      5552 450A 
+ 825      0D00 
+ 826               	.LC15:
+ 827 00bb 4745 5420 		.string	"GET DESCRIPTOR\n\r"
+ 827      4445 5343 
+ 827      5249 5054 
+ 827      4F52 0A0D 
+ 827      00
+ 828               	.LC16:
+ 829 00cc 4745 5420 		.string	"GET INTERFACE\n\r"
+ 829      494E 5445 
+ 829      5246 4143 
+ 829      450A 0D00 
+ 830               	.LC17:
+ 831 00dc 4745 5420 		.string	"GET STATUS\n\r"
+ 831      5354 4154 
+ 831      5553 0A0D 
+ 831      00
+ 832               	.LC18:
+ 833 00e9 5345 5420 		.string	"SET ADDRESS "
+ 833      4144 4452 
+ 833      4553 5320 
+ 833      00
+ 834               	.LC19:
+ 835 00f6 5345 5420 		.string	"SET CONFIGURATION\n\r"
+ 835      434F 4E46 
+ 835      4947 5552 
+ 835      4154 494F 
+ 835      4E0A 0D00 
+ 836               	.LC20:
+ 837 010a 5345 5420 		.string	"SET FEATURE\n\r"
+ 837      4645 4154 
+ 837      5552 450A 
+ 837      0D00 
+ 838               	.LC21:
+ 839 0118 5345 5420 		.string	"SET INTERFACE\n\r"
+ 839      494E 5445 
+ 839      5246 4143 
+ 839      450A 0D00 
+ 840               	.LC22:
+ 841 0128 756E 7375 		.string	"unsupported standard req\n\r"
+ 841      7070 6F72 
+ 841      7465 6420 
+ 841      7374 616E 
+ 841      6461 7264 
+ 842               	.LC23:
+ 843 0143 436C 6173 		.string	"Class request\n\r"
+ 843      7320 7265 
+ 843      7175 6573 
+ 843      740A 0D00 
+ 844               	.LC24:
+ 845 0153 5665 6E64 		.string	"Vendor request\n\r"
+ 845      6F72 2072 
+ 845      6571 7565 
+ 845      7374 0A0D 
+ 845      00
+ 846               	.LC25:
+ 847 0164 756E 7375 		.string	"unsupported req type\r\n"
+ 847      7070 6F72 
+ 847      7465 6420 
+ 847      7265 7120 
+ 847      7479 7065 
+ 848               	.LC26:
+ 849 017b 6C65 6E67 		.string	"length error\r\n"
+ 849      7468 2065 
+ 849      7272 6F72 
+ 849      0D0A 00
+ 850               		.text
+ 851               	.global	_USBNReceiveFIFO0
+ 853               	_USBNReceiveFIFO0:
+ 854               	.LFB9:
+ 855               	.LM118:
+ 856               	/* prologue: frame size=8 */
+ 857 044e 0F93      		push r16
+ 858 0450 1F93      		push r17
+ 859 0452 CF93      		push r28
+ 860 0454 DF93      		push r29
+ 861 0456 CDB7      		in r28,__SP_L__
+ 862 0458 DEB7      		in r29,__SP_H__
+ 863 045a 2897      		sbiw r28,8
+ 864 045c 0FB6      		in __tmp_reg__,__SREG__
+ 865 045e F894      		cli
+ 866 0460 DEBF      		out __SP_H__,r29
+ 867 0462 0FBE      		out __SREG__,__tmp_reg__
+ 868 0464 CDBF      		out __SP_L__,r28
+ 869               	/* prologue end (size=12) */
+ 870               	.LM119:
+ 871 0466 80E0      		ldi r24,lo8(.LC13)
+ 872 0468 90E0      		ldi r25,hi8(.LC13)
+ 873 046a 0E94 0000 		call USBNDebug
+ 874               	.LM120:
+ 875 046e 86E2      		ldi r24,lo8(38)
+ 876 0470 0E94 0000 		call USBNRead
+ 877               	.LM121:
+ 878 0474 482F      		mov r20,r24
+ 879 0476 50E0      		ldi r21,lo8(0)
+ 880 0478 86FD      		sbrc r24,6
+ 881 047a 00C0      		rjmp .L106
+ 882               	.LM122:
+ 883 047c 2091 0000 		lds r18,EP0tx+10
+ 884 0480 3091 0000 		lds r19,(EP0tx+10)+1
+ 885 0484 8091 0000 		lds r24,EP0tx+4
+ 886 0488 9091 0000 		lds r25,(EP0tx+4)+1
+ 887 048c 8217      		cp r24,r18
+ 888 048e 9307      		cpc r25,r19
+ 889 0490 04F0      		brlt .+2
+ 890 0492 00C0      		rjmp .L104
+ 891               	.LM123:
+ 892 0494 4F75      		andi r20,lo8(95)
+ 893 0496 5070      		andi r21,hi8(95)
+ 894 0498 4031      		cpi r20,16
+ 895 049a 5105      		cpc r21,__zero_reg__
+ 896 049c 01F0      		breq .L102
+ 897               	.LM124:
+ 898 049e 80E0      		ldi r24,lo8(.LC26)
+ 899 04a0 90E0      		ldi r25,hi8(.LC26)
+ 900 04a2 0E94 0000 		call USBNDebug
+ 901               	.L102:
+ 902               	.LM125:
+ 903 04a6 1092 0000 		sts (EP0tx+10)+1,__zero_reg__
+ 904 04aa 1092 0000 		sts EP0tx+10,__zero_reg__
+ 905               	.LM126:
+ 906 04ae 68E0      		ldi r22,lo8(8)
+ 907 04b0 83E2      		ldi r24,lo8(35)
+ 908 04b2 0E94 0000 		call USBNWrite
+ 909               	.LM127:
+ 910 04b6 61E0      		ldi r22,lo8(1)
+ 911 04b8 87E2      		ldi r24,lo8(39)
+ 912 04ba 0E94 0000 		call USBNWrite
+ 913 04be 00C0      		rjmp .L104
+ 914               	.L106:
+ 915               	.LM128:
+ 916 04c0 8091 0000 		lds r24,EP0rx
+ 917 04c4 0E94 0000 		call USBNRead
+ 918 04c8 8983      		std Y+1,r24
+ 919 04ca 8091 0000 		lds r24,EP0rx
+ 920 04ce 0E94 0000 		call USBNRead
+ 921 04d2 8A83      		std Y+2,r24
+ 922 04d4 8091 0000 		lds r24,EP0rx
+ 923 04d8 0E94 0000 		call USBNRead
+ 924 04dc 8B83      		std Y+3,r24
+ 925 04de 8091 0000 		lds r24,EP0rx
+ 926 04e2 0E94 0000 		call USBNRead
+ 927 04e6 8C83      		std Y+4,r24
+ 928 04e8 8091 0000 		lds r24,EP0rx
+ 929 04ec 0E94 0000 		call USBNRead
+ 930 04f0 8D83      		std Y+5,r24
+ 931 04f2 8091 0000 		lds r24,EP0rx
+ 932 04f6 0E94 0000 		call USBNRead
+ 933 04fa 8E83      		std Y+6,r24
+ 934 04fc 8091 0000 		lds r24,EP0rx
+ 935 0500 0E94 0000 		call USBNRead
+ 936 0504 8F83      		std Y+7,r24
+ 937 0506 8091 0000 		lds r24,EP0rx
+ 938 050a 0E94 0000 		call USBNRead
+ 939 050e 8887      		std Y+8,r24
+ 940               	.LM129:
+ 941 0510 8981      		ldd r24,Y+1
+ 942 0512 90E0      		ldi r25,lo8(0)
+ 943 0514 0E94 0000 		call SendHex
+ 944 0518 8A81      		ldd r24,Y+2
+ 945 051a 90E0      		ldi r25,lo8(0)
+ 946 051c 0E94 0000 		call SendHex
+ 947 0520 8B81      		ldd r24,Y+3
+ 948 0522 90E0      		ldi r25,lo8(0)
+ 949 0524 0E94 0000 		call SendHex
+ 950 0528 8C81      		ldd r24,Y+4
+ 951 052a 90E0      		ldi r25,lo8(0)
+ 952 052c 0E94 0000 		call SendHex
+ 953 0530 8D81      		ldd r24,Y+5
+ 954 0532 90E0      		ldi r25,lo8(0)
+ 955 0534 0E94 0000 		call SendHex
+ 956 0538 8E81      		ldd r24,Y+6
+ 957 053a 90E0      		ldi r25,lo8(0)
+ 958 053c 0E94 0000 		call SendHex
+ 959 0540 8F81      		ldd r24,Y+7
+ 960 0542 90E0      		ldi r25,lo8(0)
+ 961 0544 0E94 0000 		call SendHex
+ 962 0548 8885      		ldd r24,Y+8
+ 963 054a 90E0      		ldi r25,lo8(0)
+ 964 054c 0E94 0000 		call SendHex
+ 965               	.LM130:
+ 966 0550 80E0      		ldi r24,lo8(.LC3)
+ 967 0552 90E0      		ldi r25,hi8(.LC3)
+ 968 0554 0E94 0000 		call USBNDebug
+ 969               	.LM131:
+ 970 0558 8E01      		movw r16,r28
+ 971               	.LVL39:
+ 972 055a 0F5F      		subi r16,lo8(-(1))
+ 973 055c 1F4F      		sbci r17,hi8(-(1))
+ 974               	.LM132:
+ 975 055e 68E0      		ldi r22,lo8(8)
+ 976 0560 87E2      		ldi r24,lo8(39)
+ 977 0562 0E94 0000 		call USBNWrite
+ 978               	.LM133:
+ 979 0566 68E0      		ldi r22,lo8(8)
+ 980 0568 83E2      		ldi r24,lo8(35)
+ 981 056a 0E94 0000 		call USBNWrite
+ 982               	.LM134:
+ 983 056e 80E2      		ldi r24,lo8(32)
+ 984 0570 0E94 0000 		call USBNRead
+ 985 0574 8F77      		andi r24,lo8(127)
+ 986 0576 682F      		mov r22,r24
+ 987 0578 80E2      		ldi r24,lo8(32)
+ 988 057a 0E94 0000 		call USBNWrite
+ 989               	.LM135:
+ 990 057e 8981      		ldd r24,Y+1
+ 991 0580 90E0      		ldi r25,lo8(0)
+ 992 0582 8076      		andi r24,lo8(96)
+ 993 0584 9070      		andi r25,hi8(96)
+ 994 0586 8032      		cpi r24,32
+ 995 0588 9105      		cpc r25,__zero_reg__
+ 996 058a 01F0      		breq .L84
+ 997 058c 8034      		cpi r24,64
+ 998 058e 9105      		cpc r25,__zero_reg__
+ 999 0590 01F0      		breq .L85
+ 1000 0592 892B      		or r24,r25
+ 1001 0594 01F4      		brne .L82
+ 1002               	.LM136:
+ 1003 0596 F801      		movw r30,r16
+ 1004 0598 8181      		ldd r24,Z+1
+ 1005 059a 8630      		cpi r24,lo8(6)
+ 1006 059c 01F4      		brne .+2
+ 1007 059e 00C0      		rjmp .L91
+ 1008 05a0 8730      		cpi r24,lo8(7)
+ 1009 05a2 00F0      		brlo .L107
+ 1010 05a4 8930      		cpi r24,lo8(9)
+ 1011 05a6 01F4      		brne .+2
+ 1012 05a8 00C0      		rjmp .L93
+ 1013 05aa 8A30      		cpi r24,lo8(10)
+ 1014 05ac 00F0      		brlo .+2
+ 1015 05ae 00C0      		rjmp .L97
+ 1016 05b0 8830      		cpi r24,lo8(8)
+ 1017 05b2 01F4      		brne .+2
+ 1018 05b4 00C0      		rjmp .L108
+ 1019               	.L86:
+ 1020               	.LM137:
+ 1021 05b6 80E0      		ldi r24,lo8(.LC22)
+ 1022 05b8 90E0      		ldi r25,hi8(.LC22)
+ 1023 05ba 00C0      		rjmp .L105
+ 1024               	.L85:
+ 1025               	.LM138:
+ 1026 05bc 80E0      		ldi r24,lo8(.LC24)
+ 1027 05be 90E0      		ldi r25,hi8(.LC24)
+ 1028 05c0 0E94 0000 		call USBNDebug
+ 1029               	.LM139:
+ 1030 05c4 65E0      		ldi r22,lo8(5)
+ 1031 05c6 83E2      		ldi r24,lo8(35)
+ 1032 05c8 0E94 0000 		call USBNWrite
+ 1033               	.L98:
+ 1034               	.LM140:
+ 1035 05cc F801      		movw r30,r16
+ 1036 05ce 8081      		ld r24,Z
+ 1037 05d0 8823      		tst r24
+ 1038 05d2 01F0      		breq .+2
+ 1039 05d4 00C0      		rjmp .L104
+ 1040               	.LM141:
+ 1041 05d6 65E0      		ldi r22,lo8(5)
+ 1042 05d8 83E2      		ldi r24,lo8(35)
+ 1043 05da 0E94 0000 		call USBNWrite
+ 1044 05de 00C0      		rjmp .L104
+ 1045               	.L84:
+ 1046               	.LM142:
+ 1047 05e0 80E0      		ldi r24,lo8(.LC23)
+ 1048 05e2 90E0      		ldi r25,hi8(.LC23)
+ 1049 05e4 0E94 0000 		call USBNDebug
+ 1050               	.LM143:
+ 1051 05e8 65E0      		ldi r22,lo8(5)
+ 1052 05ea 83E2      		ldi r24,lo8(35)
+ 1053 05ec 0E94 0000 		call USBNWrite
+ 1054 05f0 00C0      		rjmp .L98
+ 1055               	.L82:
+ 1056               	.LM144:
+ 1057 05f2 80E0      		ldi r24,lo8(.LC25)
+ 1058 05f4 90E0      		ldi r25,hi8(.LC25)
+ 1059               	.L105:
+ 1060 05f6 0E94 0000 		call USBNDebug
+ 1061               	.LM145:
+ 1062 05fa 80E2      		ldi r24,lo8(32)
+ 1063 05fc 0E94 0000 		call USBNRead
+ 1064 0600 8058      		subi r24,lo8(-(-128))
+ 1065 0602 682F      		mov r22,r24
+ 1066 0604 80E2      		ldi r24,lo8(32)
+ 1067 0606 0E94 0000 		call USBNWrite
+ 1068 060a 00C0      		rjmp .L98
+ 1069               	.L107:
+ 1070               	.LM146:
+ 1071 060c 8130      		cpi r24,lo8(1)
+ 1072 060e 01F0      		breq .L88
+ 1073 0610 8130      		cpi r24,lo8(1)
+ 1074 0612 00F4      		brsh .L109
+ 1075               	.LM147:
+ 1076 0614 80E0      		ldi r24,lo8(.LC17)
+ 1077 0616 90E0      		ldi r25,hi8(.LC17)
+ 1078 0618 0E94 0000 		call USBNDebug
+ 1079 061c 00C0      		rjmp .L98
+ 1080               	.L109:
+ 1081               	.LM148:
+ 1082 061e 8330      		cpi r24,lo8(3)
+ 1083 0620 01F4      		brne .+2
+ 1084 0622 00C0      		rjmp .L89
+ 1085 0624 8530      		cpi r24,lo8(5)
+ 1086 0626 01F4      		brne .L86
+ 1087               	.LM149:
+ 1088 0628 80E0      		ldi r24,lo8(.LC18)
+ 1089 062a 90E0      		ldi r25,hi8(.LC18)
+ 1090 062c 0E94 0000 		call USBNDebug
+ 1091               	.LBB9:
+ 1092               	.LBB10:
+ 1093               	.LM150:
+ 1094 0630 60E4      		ldi r22,lo8(64)
+ 1095 0632 80E2      		ldi r24,lo8(32)
+ 1096 0634 0E94 0000 		call USBNWrite
+ 1097               	.LM151:
+ 1098 0638 F801      		movw r30,r16
+ 1099 063a 6281      		ldd r22,Z+2
+ 1100 063c 6058      		subi r22,lo8(-(-128))
+ 1101 063e 84E0      		ldi r24,lo8(4)
+ 1102 0640 0E94 0000 		call USBNWrite
+ 1103               	.LM152:
+ 1104 0644 F801      		movw r30,r16
+ 1105 0646 8281      		ldd r24,Z+2
+ 1106 0648 8093 0000 		sts USBNFunctionInfo,r24
+ 1107 064c 00C0      		rjmp .L98
+ 1108               	.L97:
+ 1109               	.LBE10:
+ 1110               	.LBE9:
+ 1111               	.LM153:
+ 1112 064e 8A30      		cpi r24,lo8(10)
+ 1113 0650 01F0      		breq .L94
+ 1114 0652 8B30      		cpi r24,lo8(11)
+ 1115 0654 01F0      		breq .+2
+ 1116 0656 00C0      		rjmp .L86
+ 1117               	.LM154:
+ 1118 0658 80E0      		ldi r24,lo8(.LC21)
+ 1119 065a 90E0      		ldi r25,hi8(.LC21)
+ 1120 065c 0E94 0000 		call USBNDebug
+ 1121               	.LM155:
+ 1122 0660 65E0      		ldi r22,lo8(5)
+ 1123 0662 83E2      		ldi r24,lo8(35)
+ 1124 0664 0E94 0000 		call USBNWrite
+ 1125 0668 00C0      		rjmp .L98
+ 1126               	.L91:
+ 1127               	.LM156:
+ 1128 066a 80E0      		ldi r24,lo8(.LC15)
+ 1129 066c 90E0      		ldi r25,hi8(.LC15)
+ 1130 066e 0E94 0000 		call USBNDebug
+ 1131               	.LM157:
+ 1132 0672 C801      		movw r24,r16
+ 1133 0674 0E94 0000 		call _USBNGetDescriptor
+ 1134 0678 00C0      		rjmp .L98
+ 1135               	.L94:
+ 1136               	.LM158:
+ 1137 067a 80E0      		ldi r24,lo8(.LC16)
+ 1138 067c 90E0      		ldi r25,hi8(.LC16)
+ 1139 067e 0E94 0000 		call USBNDebug
+ 1140 0682 00C0      		rjmp .L98
+ 1141               	.L88:
+ 1142               	.LM159:
+ 1143 0684 80E0      		ldi r24,lo8(.LC14)
+ 1144 0686 90E0      		ldi r25,hi8(.LC14)
+ 1145 0688 0E94 0000 		call USBNDebug
+ 1146 068c 00C0      		rjmp .L98
+ 1147               	.L108:
+ 1148               	.LBB11:
+ 1149               	.LBB12:
+ 1150               	.LM160:
+ 1151 068e 6091 0000 		lds r22,USBNFunctionInfo+1
+ 1152 0692 81E2      		ldi r24,lo8(33)
+ 1153 0694 0E94 0000 		call USBNWrite
+ 1154 0698 00C0      		rjmp .L98
+ 1155               	.L93:
+ 1156               	.LBE12:
+ 1157               	.LBE11:
+ 1158               	.LM161:
+ 1159 069a 80E0      		ldi r24,lo8(.LC19)
+ 1160 069c 90E0      		ldi r25,hi8(.LC19)
+ 1161 069e 0E94 0000 		call USBNDebug
+ 1162               	.LM162:
+ 1163 06a2 C801      		movw r24,r16
+ 1164 06a4 0E94 0000 		call _USBNSetConfiguration
+ 1165 06a8 00C0      		rjmp .L98
+ 1166               	.L89:
+ 1167               	.LM163:
+ 1168 06aa 80E0      		ldi r24,lo8(.LC20)
+ 1169 06ac 90E0      		ldi r25,hi8(.LC20)
+ 1170 06ae 0E94 0000 		call USBNDebug
+ 1171 06b2 00C0      		rjmp .L98
+ 1172               	.L104:
+ 1173               	/* epilogue: frame size=8 */
+ 1174 06b4 2896      		adiw r28,8
+ 1175 06b6 0FB6      		in __tmp_reg__,__SREG__
+ 1176 06b8 F894      		cli
+ 1177 06ba DEBF      		out __SP_H__,r29
+ 1178 06bc 0FBE      		out __SREG__,__tmp_reg__
+ 1179 06be CDBF      		out __SP_L__,r28
+ 1180 06c0 DF91      		pop r29
+ 1181 06c2 CF91      		pop r28
+ 1182 06c4 1F91      		pop r17
+ 1183 06c6 0F91      		pop r16
+ 1184 06c8 0895      		ret
+ 1185               	/* epilogue end (size=11) */
+ 1186               	/* function _USBNReceiveFIFO0 size 318 (295) */
+ 1187               	.LFE9:
+ 1189               		.data
+ 1190               	.LC27:
+ 1191 018a 7278 2065 		.string	"rx event\r\n"
+ 1191      7665 6E74 
+ 1191      0D0A 00
+ 1192               		.text
+ 1193               	.global	_USBNReceiveEvent
+ 1195               	_USBNReceiveEvent:
+ 1196               	.LFB6:
+ 1197               	.LM164:
+ 1198               	/* prologue: frame size=64 */
+ 1199 06ca CF92      		push r12
+ 1200 06cc DF92      		push r13
+ 1201 06ce EF92      		push r14
+ 1202 06d0 FF92      		push r15
+ 1203 06d2 0F93      		push r16
+ 1204 06d4 1F93      		push r17
+ 1205 06d6 CF93      		push r28
+ 1206 06d8 DF93      		push r29
+ 1207 06da CDB7      		in r28,__SP_L__
+ 1208 06dc DEB7      		in r29,__SP_H__
+ 1209 06de C054      		subi r28,lo8(64)
+ 1210 06e0 D040      		sbci r29,hi8(64)
+ 1211 06e2 0FB6      		in __tmp_reg__,__SREG__
+ 1212 06e4 F894      		cli
+ 1213 06e6 DEBF      		out __SP_H__,r29
+ 1214 06e8 0FBE      		out __SREG__,__tmp_reg__
+ 1215 06ea CDBF      		out __SP_L__,r28
+ 1216               	/* prologue end (size=17) */
+ 1217               	.LM165:
+ 1218 06ec 8CE0      		ldi r24,lo8(12)
+ 1219 06ee 0E94 0000 		call USBNRead
+ 1220 06f2 182F      		mov r17,r24
+ 1221               	.LVL40:
+ 1222               	.LM166:
+ 1223 06f4 80E0      		ldi r24,lo8(.LC27)
+ 1224 06f6 90E0      		ldi r25,hi8(.LC27)
+ 1225 06f8 0E94 0000 		call USBNDebug
+ 1226               	.LM167:
+ 1227 06fc 10FD      		sbrc r17,0
+ 1228 06fe 00C0      		rjmp .L137
+ 1229               	.LVL41:
+ 1230               	.LM168:
+ 1231 0700 11FD      		sbrc r17,1
+ 1232 0702 00C0      		rjmp .L138
+ 1233               	.LM169:
+ 1234 0704 12FD      		sbrc r17,2
+ 1235 0706 00C0      		rjmp .L139
+ 1236               	.LM170:
+ 1237 0708 13FF      		sbrs r17,3
+ 1238 070a 00C0      		rjmp .L130
+ 1239 070c 00C0      		rjmp .L143
+ 1240               	.L138:
+ 1241               	.LM171:
+ 1242 070e 8EE2      		ldi r24,lo8(46)
+ 1243 0710 0E94 0000 		call USBNRead
+ 1244               	.LM172:
+ 1245 0714 8DE2      		ldi r24,lo8(45)
+ 1246 0716 0E94 0000 		call USBNRead
+ 1247 071a 8983      		std Y+1,r24
+ 1248 071c 6E01      		movw r12,r28
+ 1249 071e 0894      		sec
+ 1250 0720 C11C      		adc r12,__zero_reg__
+ 1251 0722 D11C      		adc r13,__zero_reg__
+ 1252 0724 8601      		movw r16,r12
+ 1253               	.LVL42:
+ 1254               	.LM173:
+ 1255 0726 5FE3      		ldi r21,lo8(63)
+ 1256 0728 E52E      		mov r14,r21
+ 1257 072a F12C      		mov r15,__zero_reg__
+ 1258 072c EC0C      		add r14,r12
+ 1259 072e FD1C      		adc r15,r13
+ 1260               	.L116:
+ 1261               	.LM174:
+ 1262 0730 0F5F      		subi r16,lo8(-(1))
+ 1263 0732 1F4F      		sbci r17,hi8(-(1))
+ 1264 0734 0E94 0000 		call USBNBurstRead
+ 1265 0738 F801      		movw r30,r16
+ 1266 073a 8083      		st Z,r24
+ 1267               	.LM175:
+ 1268 073c 0E15      		cp r16,r14
+ 1269 073e 1F05      		cpc r17,r15
+ 1270 0740 01F4      		brne .L116
+ 1271               	.LM176:
+ 1272 0742 8091 0000 		lds r24,rxfifos
+ 1273 0746 8130      		cpi r24,lo8(1)
+ 1274 0748 01F4      		brne .+2
+ 1275 074a 00C0      		rjmp .L141
+ 1276               	.L118:
+ 1277               	.LM177:
+ 1278 074c 68E0      		ldi r22,lo8(8)
+ 1279 074e 8FE2      		ldi r24,lo8(47)
+ 1280 0750 0E94 0000 		call USBNWrite
+ 1281               	.LM178:
+ 1282 0754 61E0      		ldi r22,lo8(1)
+ 1283 0756 8FE2      		ldi r24,lo8(47)
+ 1284 0758 0E94 0000 		call USBNWrite
+ 1285 075c 00C0      		rjmp .L130
+ 1286               	.LVL43:
+ 1287               	.L137:
+ 1288               	.LM179:
+ 1289 075e 0E94 0000 		call _USBNReceiveFIFO0
+ 1290 0762 00C0      		rjmp .L130
+ 1291               	.L143:
+ 1292               	.LM180:
+ 1293 0764 8EE3      		ldi r24,lo8(62)
+ 1294 0766 0E94 0000 		call USBNRead
+ 1295 076a 6E01      		movw r12,r28
+ 1296 076c 0894      		sec
+ 1297 076e C11C      		adc r12,__zero_reg__
+ 1298 0770 D11C      		adc r13,__zero_reg__
+ 1299 0772 8601      		movw r16,r12
+ 1300 0774 31E4      		ldi r19,lo8(65)
+ 1301 0776 E32E      		mov r14,r19
+ 1302 0778 F12C      		mov r15,__zero_reg__
+ 1303 077a EC0E      		add r14,r28
+ 1304 077c FD1E      		adc r15,r29
+ 1305               	.L127:
+ 1306               	.LM181:
+ 1307 077e 8DE3      		ldi r24,lo8(61)
+ 1308 0780 0E94 0000 		call USBNRead
+ 1309 0784 F801      		movw r30,r16
+ 1310 0786 8193      		st Z+,r24
+ 1311 0788 8F01      		movw r16,r30
+ 1312               	.LM182:
+ 1313 078a EE15      		cp r30,r14
+ 1314 078c FF05      		cpc r31,r15
+ 1315 078e 01F4      		brne .L127
+ 1316               	.LM183:
+ 1317 0790 8091 0000 		lds r24,rxfifos+2
+ 1318 0794 8130      		cpi r24,lo8(1)
+ 1319 0796 01F4      		brne .L130
+ 1320               	.LM184:
+ 1321 0798 E091 0000 		lds r30,rxfifos+3
+ 1322 079c F091 0000 		lds r31,(rxfifos+3)+1
+ 1323 07a0 C601      		movw r24,r12
+ 1324 07a2 0995      		icall
+ 1325 07a4 00C0      		rjmp .L130
+ 1326               	.L139:
+ 1327               	.LM185:
+ 1328 07a6 86E3      		ldi r24,lo8(54)
+ 1329 07a8 0E94 0000 		call USBNRead
+ 1330               	.LM186:
+ 1331 07ac 85E3      		ldi r24,lo8(53)
+ 1332 07ae 0E94 0000 		call USBNRead
+ 1333 07b2 8983      		std Y+1,r24
+ 1334 07b4 6E01      		movw r12,r28
+ 1335 07b6 0894      		sec
+ 1336 07b8 C11C      		adc r12,__zero_reg__
+ 1337 07ba D11C      		adc r13,__zero_reg__
+ 1338 07bc 8601      		movw r16,r12
+ 1339               	.LVL44:
+ 1340               	.LM187:
+ 1341 07be 4FE3      		ldi r20,lo8(63)
+ 1342 07c0 E42E      		mov r14,r20
+ 1343 07c2 F12C      		mov r15,__zero_reg__
+ 1344 07c4 EC0C      		add r14,r12
+ 1345 07c6 FD1C      		adc r15,r13
+ 1346               	.L122:
+ 1347               	.LM188:
+ 1348 07c8 0F5F      		subi r16,lo8(-(1))
+ 1349 07ca 1F4F      		sbci r17,hi8(-(1))
+ 1350 07cc 0E94 0000 		call USBNBurstRead
+ 1351 07d0 F801      		movw r30,r16
+ 1352 07d2 8083      		st Z,r24
+ 1353               	.LM189:
+ 1354 07d4 0E15      		cp r16,r14
+ 1355 07d6 1F05      		cpc r17,r15
+ 1356 07d8 01F4      		brne .L122
+ 1357               	.LM190:
+ 1358 07da 8091 0000 		lds r24,rxfifos+1
+ 1359 07de 8130      		cpi r24,lo8(1)
+ 1360 07e0 01F0      		breq .L142
+ 1361               	.L124:
+ 1362               	.LM191:
+ 1363 07e2 68E0      		ldi r22,lo8(8)
+ 1364 07e4 87E3      		ldi r24,lo8(55)
+ 1365 07e6 0E94 0000 		call USBNWrite
+ 1366               	.LM192:
+ 1367 07ea 61E0      		ldi r22,lo8(1)
+ 1368 07ec 87E3      		ldi r24,lo8(55)
+ 1369 07ee 0E94 0000 		call USBNWrite
+ 1370 07f2 00C0      		rjmp .L130
+ 1371               	.L141:
+ 1372               	.LM193:
+ 1373 07f4 E091 0000 		lds r30,rxfifos+3
+ 1374 07f8 F091 0000 		lds r31,(rxfifos+3)+1
+ 1375 07fc C601      		movw r24,r12
+ 1376 07fe 0995      		icall
+ 1377 0800 00C0      		rjmp .L118
+ 1378               	.L142:
+ 1379               	.LM194:
+ 1380 0802 E091 0000 		lds r30,rxfifos+5
+ 1381 0806 F091 0000 		lds r31,(rxfifos+5)+1
+ 1382 080a C601      		movw r24,r12
+ 1383 080c 0995      		icall
+ 1384 080e 00C0      		rjmp .L124
+ 1385               	.L130:
+ 1386               	/* epilogue: frame size=64 */
+ 1387 0810 C05C      		subi r28,lo8(-64)
+ 1388 0812 DF4F      		sbci r29,hi8(-64)
+ 1389 0814 0FB6      		in __tmp_reg__,__SREG__
+ 1390 0816 F894      		cli
+ 1391 0818 DEBF      		out __SP_H__,r29
+ 1392 081a 0FBE      		out __SREG__,__tmp_reg__
+ 1393 081c CDBF      		out __SP_L__,r28
+ 1394 081e DF91      		pop r29
+ 1395 0820 CF91      		pop r28
+ 1396 0822 1F91      		pop r17
+ 1397 0824 0F91      		pop r16
+ 1398 0826 FF90      		pop r15
+ 1399 0828 EF90      		pop r14
+ 1400 082a DF90      		pop r13
+ 1401 082c CF90      		pop r12
+ 1402 082e 0895      		ret
+ 1403               	/* epilogue end (size=16) */
+ 1404               	/* function _USBNReceiveEvent size 179 (146) */
+ 1405               	.LFE6:
+ 1407               		.comm DeviceDescriptor,18,1
+ 1408               		.comm DescriptorList,2,1
+ 1409               		.comm StringList,2,1
+ 1410               		.comm FinalConfigurationArray,2,1
+ 1411               		.comm FinalStringArray,2,1
+ 1412               		.comm rxfifos,9,1
+ 1413               		.comm txfifos,9,1
+ 1414               		.comm EP0RXBuf,8,1
+ 1415               		.comm EP0rx,14,1
+ 1416               		.comm EP0tx,14,1
+ 1417               		.comm USBNFunctionInfo,2,1
+ 1546               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 usbn960x.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:6      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:19     .text:00000000 _USBNInitEP0
+                            *COM*:0000000e EP0rx
+                            *COM*:0000000e EP0tx
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:61     .text:00000040 _USBNReceive
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:75     .text:00000042 _USBNGetConfiguration
+                            *COM*:00000002 USBNFunctionInfo
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:94     .text:0000004e _USBNSetConfiguration
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:141    .text:00000090 _USBNSetAddress
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:175    .text:000000b8 _USBNTransmit
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:300    .text:00000158 _USBNGetDescriptor
+                            *COM*:00000012 DeviceDescriptor
+                            *COM*:00000002 FinalStringArray
+                            *COM*:00000002 FinalConfigurationArray
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:502    .text:000002b2 _USBNTransmitFIFO0
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:579    .text:0000031a _USBNAlternateEvent
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:682    .text:000003a4 _USBNTransmitEvent
+                            *COM*:00000009 txfifos
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:745    .text:000003f6 _USBNNackEvent
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:765    .text:00000406 _USBNMemFIFO
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:853    .text:0000044e _USBNReceiveFIFO0
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccH8ub8T.s:1195   .text:000006ca _USBNReceiveEvent
+                            *COM*:00000009 rxfifos
+                            *COM*:00000002 DescriptorList
+                            *COM*:00000002 StringList
+                            *COM*:00000008 EP0RXBuf
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+USBNWrite
+USBNDebug
+SendHex
+USBNRead
+fifo_put
+USBNBurstRead

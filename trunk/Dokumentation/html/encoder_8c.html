@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: encoder.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_6bb2651bc0a152aa2f3f5a312f6d27ea.html">nbot_lib</a></div>
+<h1>encoder.c-Dateireferenz</h1>Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten und über uart ausgeben. <a href="#_details">Mehr ...</a>
+<p>
+<code>#include &lt;avr/io.h&gt;</code><br>
+<code>#include &lt;stdint.h&gt;</code><br>
+<code>#include &lt;stdlib.h&gt;</code><br>
+<code>#include &lt;avr/interrupt.h&gt;</code><br>
+<code>#include &quot;<a class="el" href="encoder_8h-source.html">encoder.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="uart_8h-source.html">uart.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="timer_8h-source.html">timer.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="motor_8h-source.html">motor.h</a>&quot;</code><br>
+
+<p>
+Include-AbhÃ¤ngigkeitsdiagramm fÃ¼r encoder.c:<p><center><img src="encoder_8c__incl.png" border="0" usemap="#encoder.c_map" alt=""></center>
+<map name="encoder.c_map">
+<area shape="rect" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="156,5,223,32"><area shape="rect" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="157,56,221,83"><area shape="rect" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="157,107,221,133"><area shape="rect" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="137,157,241,184"><area shape="rect" href="encoder_8h.html" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="149,208,229,235"><area shape="rect" href="uart_8h.html" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="161,259,217,285"><area shape="rect" href="timer_8h.html" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="157,309,221,336"><area shape="rect" href="motor_8h.html" title="Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten..." alt="" coords="156,360,223,387"></map>
+
+<p>
+<a href="encoder_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="55165a638114b40d51d5e86d639a0943"></a><!-- doxytag: member="encoder.c::PHASE_LEFT_A" ref="55165a638114b40d51d5e86d639a0943" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#55165a638114b40d51d5e86d639a0943">PHASE_LEFT_A</a>&nbsp;&nbsp;&nbsp;(PINC &amp; 1&lt;&lt;PINC2)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Anschlussbelegung des Encoders Phase A für den linken Motor. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="9c9fce2501dbba3dcbdb0f834fe5313d"></a><!-- doxytag: member="encoder.c::PHASE_LEFT_B" ref="9c9fce2501dbba3dcbdb0f834fe5313d" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#9c9fce2501dbba3dcbdb0f834fe5313d">PHASE_LEFT_B</a>&nbsp;&nbsp;&nbsp;(PINC &amp; 1&lt;&lt;PINC3)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Anschlussbelegung des Encoders Phase B für den linken Motor. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d4dac3ca0bc28551898bb90db2c3ec08"></a><!-- doxytag: member="encoder.c::PHASE_RIGHT_A" ref="d4dac3ca0bc28551898bb90db2c3ec08" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#d4dac3ca0bc28551898bb90db2c3ec08">PHASE_RIGHT_A</a>&nbsp;&nbsp;&nbsp;(PINC &amp; 1&lt;&lt;PINC0)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Anschlussbelegung des Encoders Phase A für den rechten Motor. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="2f02db4725cc7675fd47aef274b2e3de"></a><!-- doxytag: member="encoder.c::PHASE_RIGHT_B" ref="2f02db4725cc7675fd47aef274b2e3de" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#2f02db4725cc7675fd47aef274b2e3de">PHASE_RIGHT_B</a>&nbsp;&nbsp;&nbsp;(PINC &amp; 1&lt;&lt;PINC1)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Anschlussbelegung des Encoders Phase B für den rechten Motor. <br></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#1810f19ef7d35edd2e26a7d4ee29f6bc">encoder_init</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert die Encoderauswertung.  <a href="#1810f19ef7d35edd2e26a7d4ee29f6bc"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#1ef2ce91101e182f4ce4142b56b59cb9">encoderGet</a> (uint8_t motor)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liefert den Zählerstand seit dem letzten Auslesen des Encoders.  <a href="#1ef2ce91101e182f4ce4142b56b59cb9"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int32_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#e084907e786b88426e7ef87b1a935bda">encoderToMM</a> (int32_t <a class="el" href="globals_8c.html#8d98bfd378d27bc50413c83662cdc0b9">encoder</a>)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Umrechner von EncoderFlanken nach mm.  <a href="#e084907e786b88426e7ef87b1a935bda"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#dd2d7cdddfb682dcc0391e60cf42c7d6">ISR</a> (TIMER0_OVF_vect)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">timer mit 5,4kHz zur Encoder auswertung  <a href="#dd2d7cdddfb682dcc0391e60cf42c7d6"></a><br></td></tr>
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">volatile int16_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a> [2]</td></tr>
+
+</table>
+<hr><a name="_details"></a><h2>AusfÃ¼hrliche Beschreibung</h2>
+Dieses Programm soll zwei Motor mit je zwei 90° phasenverschobenen Signalen auswerten und über uart ausgeben. 
+<p>
+<dl class="user" compact><dt><b>Funktionsweise:</b></dt><dd>Ein Timer liest mit 5,4kHz die Eingänge der Encoder und wertet sie aus. enc_delta liefert dann die drei Zustände -128..0..127 je nach Drehrichtung, wobei -128/127 bedeutet der Motor hat sich links-/rechtsherum gedreht und 0 bedeutet keine änderung.<br>
+ Dieses delta wird zu einem Zähler addiert und gibt Zahl der Flanken an.</dd></dl>
+<dl class="version" compact><dt><b>Version:</b></dt><dd>V--- - 04.03.2007 - Olaf Petersen<br>
+ Created<br>
+ </dd></dl>
+
+<p>
+Definiert in Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="1810f19ef7d35edd2e26a7d4ee29f6bc"></a><!-- doxytag: member="encoder.c::encoder_init" ref="1810f19ef7d35edd2e26a7d4ee29f6bc" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void encoder_init           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Initialisiert die Encoderauswertung. 
+<p>
+Hier wird die Datenrichtung der Angeschlossenen Pins und die einstellungen für den Timer0 vorgenommen. 
+<p>
+Definiert in Zeile <a class="el" href="encoder_8c-source.html#l00051">51</a> der Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.<div class="fragment"><pre class="fragment"><a name="l00052"></a>00052 {
+<a name="l00053"></a>00053         DDRC &amp;= ~((1&lt;&lt;PC0) | (1&lt;&lt;PC1) | (1&lt;&lt;PC2) | (1&lt;&lt;PC3));           <span class="comment">// Phasen des rechten Motors als Input</span>
+<a name="l00054"></a>00054         PORTC |= ((1&lt;&lt;PC0) | (1&lt;&lt;PC1) | (1&lt;&lt;PC2) | (1&lt;&lt;PC3));           <span class="comment">// Interne Pull-Up für beide einschalten</span>
+<a name="l00055"></a>00055         <a class="code" href="encoder_8c.html#1ef2ce91101e182f4ce4142b56b59cb9" title="Liefert den Zählerstand seit dem letzten Auslesen des Encoders.">encoderGet</a>(<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>);       
+<a name="l00056"></a>00056         <a class="code" href="encoder_8c.html#1ef2ce91101e182f4ce4142b56b59cb9" title="Liefert den Zählerstand seit dem letzten Auslesen des Encoders.">encoderGet</a>(<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>);
+<a name="l00057"></a>00057         <span class="comment">// Timer0 einrichten und Überlauf Interrupt erlauben</span>
+<a name="l00058"></a>00058         TCCR0 = 1&lt;&lt;CS01;                        <span class="comment">// CPU_FP divitiert durch 8 * 256 -&gt; 5,4kHz</span>
+<a name="l00059"></a>00059         TIMSK |= 1&lt;&lt;TOIE0;              <span class="comment">// enable timer interrupt</span>
+<a name="l00060"></a>00060 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="1ef2ce91101e182f4ce4142b56b59cb9"></a><!-- doxytag: member="encoder.c::encoderGet" ref="1ef2ce91101e182f4ce4142b56b59cb9" args="(uint8_t motor)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t encoderGet           </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&nbsp;</td>
+          <td class="paramname"> <em>motor</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Liefert den Zählerstand seit dem letzten Auslesen des Encoders. 
+<p>
+Der Zählerstand wird nach dem Auslesen wieder gelöscht. Dieser Programmteil ist atomar( nicht unterbrechbar) da auch die Interruptrotiene auf die Variable zugreift.<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>motor</em>&nbsp;</td><td>Motor auswahl: LEFT, RIGHT</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>Zählerdifferenz seit dem letzten Auslesen </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="encoder_8c-source.html#l00078">78</a> der Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.<div class="fragment"><pre class="fragment"><a name="l00079"></a>00079 {
+<a name="l00080"></a>00080         int16_t r;                                                      <span class="comment">// rückgabewert</span>
+<a name="l00081"></a>00081         uint8_t tmp_sreg;                               <span class="comment">// temporaerer Speicher fuer das Statusregister</span>
+<a name="l00082"></a>00082         
+<a name="l00083"></a>00083         tmp_sreg = SREG;                                <span class="comment">// Statusregister (also auch das I-Flag darin) sichern</span>
+<a name="l00084"></a>00084         cli();                                                                  <span class="comment">// Interrupts global deaktivieren</span>
+<a name="l00085"></a>00085         r = <a class="code" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a>[motor];           <span class="comment">// Encoderwert speichern</span>
+<a name="l00086"></a>00086         <a class="code" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a>[motor]        = 0;    <span class="comment">// enc_delta zurücksetzen</span>
+<a name="l00087"></a>00087         SREG = tmp_sreg;                                <span class="comment">// Status-Register wieder herstellen </span>
+<a name="l00088"></a>00088         
+<a name="l00089"></a>00089         <span class="keywordflow">return</span> r;                                                       <span class="comment">// Encoderwert zurückgeben</span>
+<a name="l00090"></a>00090 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="e084907e786b88426e7ef87b1a935bda"></a><!-- doxytag: member="encoder.c::encoderToMM" ref="e084907e786b88426e7ef87b1a935bda" args="(int32_t encoder)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t encoderToMM           </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&nbsp;</td>
+          <td class="paramname"> <em>encoder</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Umrechner von EncoderFlanken nach mm. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>encoder</em>&nbsp;</td><td>Wert der Umgerechnet werden soll</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>Liefert die gefahrene strecke in mm zurück </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="encoder_8c-source.html#l00103">103</a> der Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.<div class="fragment"><pre class="fragment"><a name="l00104"></a>00104 {
+<a name="l00105"></a>00105         <span class="keywordflow">return</span> ((int32_t)(<a class="code" href="globals_8c.html#8d98bfd378d27bc50413c83662cdc0b9" title="Odometriesensor Zaehler bei Interrupt Betrieb.  encoder[0] links, encoder[1] = rechts...">encoder</a>*1000L)/<a class="code" href="encoder_8h.html#641ad630e162ad78992d76dfae66a485" title="Umrechnungsfaktor von Flanken -&gt; mm.">UMRECHNUG_ECNODER_MM</a>);
+<a name="l00106"></a>00106 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="dd2d7cdddfb682dcc0391e60cf42c7d6"></a><!-- doxytag: member="encoder.c::ISR" ref="dd2d7cdddfb682dcc0391e60cf42c7d6" args="(TIMER0_OVF_vect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR           </td>
+          <td>(</td>
+          <td class="paramtype">TIMER0_OVF_vect&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+timer mit 5,4kHz zur Encoder auswertung 
+<p>
+Es werden die Einganszustände des rechten Motor Eingelesen uns Ausgewertet. 
+<p>
+Definiert in Zeile <a class="el" href="encoder_8c-source.html#l00116">116</a> der Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.<div class="fragment"><pre class="fragment"><a name="l00117"></a>00117 {
+<a name="l00118"></a>00118         <span class="keyword">static</span> int8_t enc_last[] = {0x01, 0x01};
+<a name="l00119"></a>00119         int8_t i[] = {0, 0};
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121         <span class="comment">// Einlesen der Signalzustände für den linken Encoder</span>
+<a name="l00122"></a>00122         <span class="keywordflow">if</span>( <a class="code" href="encoder_8c.html#55165a638114b40d51d5e86d639a0943" title="Anschlussbelegung des Encoders Phase A für den linken Motor.">PHASE_LEFT_A</a> )
+<a name="l00123"></a>00123                 i[<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>] = 1;
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125         <span class="keywordflow">if</span>( <a class="code" href="encoder_8c.html#9c9fce2501dbba3dcbdb0f834fe5313d" title="Anschlussbelegung des Encoders Phase B für den linken Motor.">PHASE_LEFT_B</a> )
+<a name="l00126"></a>00126                 i[<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>] ^= 3;                                                                                   <span class="comment">// convert gray to binary</span>
+<a name="l00127"></a>00127                 
+<a name="l00128"></a>00128                 <span class="comment">// Einlesen der Signalzustände für den rechten Encoder</span>
+<a name="l00129"></a>00129         <span class="keywordflow">if</span>( <a class="code" href="encoder_8c.html#d4dac3ca0bc28551898bb90db2c3ec08" title="Anschlussbelegung des Encoders Phase A für den rechten Motor.">PHASE_RIGHT_A</a> )
+<a name="l00130"></a>00130                 i[<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>] = 1;
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132         <span class="keywordflow">if</span>( <a class="code" href="encoder_8c.html#2f02db4725cc7675fd47aef274b2e3de" title="Anschlussbelegung des Encoders Phase B für den rechten Motor.">PHASE_RIGHT_B</a> )
+<a name="l00133"></a>00133                 i[<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>] ^= 3;                                                                                  <span class="comment">// convert gray to binary       </span>
+<a name="l00134"></a>00134                 
+<a name="l00135"></a>00135         <span class="comment">// Auswerten des LINKEN Motor Encoders</span>
+<a name="l00136"></a>00136         i[<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>] -= enc_last[<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>];                                      <span class="comment">// difference new - last</span>
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138         <span class="keywordflow">if</span>( i[<a class="code" href="encoder_8h.html#437ef08681e7210d6678427030446a54">LEFT</a>] &amp; 1 ){                                                                      <span class="comment">// bit 0 = value (1)</span>
+<a name="l00139"></a>00139                 enc_last[LEFT] += i[LEFT];                              <span class="comment">// store new as next last</span>
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141                 <a class="code" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a>[LEFT] += (i[LEFT] &amp; 2) - 1;                   <span class="comment">// bit 1 = direction (+/-)</span>
+<a name="l00142"></a>00142         }       
+<a name="l00143"></a>00143         
+<a name="l00144"></a>00144         <span class="comment">// Auswerten des RECHTEN Motor Encoders</span>
+<a name="l00145"></a>00145         i[<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>] -= enc_last[<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>];                            <span class="comment">// difference new - last</span>
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147         <span class="keywordflow">if</span>( i[<a class="code" href="encoder_8h.html#80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>] &amp; 1 ){                                                             <span class="comment">// bit 0 = value (1)</span>
+<a name="l00148"></a>00148                 enc_last[RIGHT] += i[RIGHT];                    <span class="comment">// store new as next last</span>
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150                 <a class="code" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a>[RIGHT] += (i[RIGHT] &amp; 2) - 1;         <span class="comment">// bit 1 = direction (+/-)</span>
+<a name="l00151"></a>00151         }
+<a name="l00152"></a>00152 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<hr><h2>Variablen-Dokumentation</h2>
+<a class="anchor" name="1b398d40d387876be5f4eed816ae864e"></a><!-- doxytag: member="encoder.c::enc_delta" ref="1b398d40d387876be5f4eed816ae864e" args="[2]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile int16_t <a class="el" href="encoder_8c.html#1b398d40d387876be5f4eed816ae864e">enc_delta</a>[2]          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Encoderflangen seit dem letzten TimerIRQ 
+<p>
+Definiert in Zeile <a class="el" href="encoder_8c-source.html#l00041">41</a> der Datei <a class="el" href="encoder_8c-source.html">encoder.c</a>.
+</div>
+</div><p>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Apr 8 18:04:15 2007 fÃ¼r nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

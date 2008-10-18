@@ -1,0 +1,132 @@
+   1               		.file	"main.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	main
+  20               	main:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=8 */
+  24 0000 C0E0      		ldi r28,lo8(__stack - 8)
+  25 0002 D0E0      		ldi r29,hi8(__stack - 8)
+  26 0004 DEBF      		out __SP_H__,r29
+  27 0006 CDBF      		out __SP_L__,r28
+  28               	/* prologue end (size=4) */
+  29               	.LM2:
+  30 0008 0E94 0000 		call uart_init
+  31               	.LM3:
+  32 000c 0E94 0000 		call timer2_init
+  33               	.LM4:
+  34 0010 1982      		std Y+1,__zero_reg__
+  35 0012 1A82      		std Y+2,__zero_reg__
+  36 0014 1B82      		std Y+3,__zero_reg__
+  37 0016 1C82      		std Y+4,__zero_reg__
+  38               	.LM5:
+  39               	/* #APP */
+  40 0018 7894      		sei
+  41               	/* #NOAPP */
+  42               	.L2:
+  43               	.LM6:
+  44 001a 0E94 0000 		call Gettime
+  45 001e DC01      		movw r26,r24
+  46 0020 CB01      		movw r24,r22
+  47 0022 2981      		ldd r18,Y+1
+  48 0024 3A81      		ldd r19,Y+2
+  49 0026 4B81      		ldd r20,Y+3
+  50 0028 5C81      		ldd r21,Y+4
+  51 002a 2C59      		subi r18,lo8(-(100))
+  52 002c 3F4F      		sbci r19,hi8(-(100))
+  53 002e 4F4F      		sbci r20,hlo8(-(100))
+  54 0030 5F4F      		sbci r21,hhi8(-(100))
+  55 0032 8217      		cp r24,r18
+  56 0034 9307      		cpc r25,r19
+  57 0036 A407      		cpc r26,r20
+  58 0038 B507      		cpc r27,r21
+  59 003a 78F3      		brlo .L2
+  60               	.LM7:
+  61 003c 0E94 0000 		call uart_getc
+  62 0040 0E94 0000 		call pcc
+  63               	.LM8:
+  64 0044 0E94 0000 		call Gettime
+  65 0048 DC01      		movw r26,r24
+  66 004a CB01      		movw r24,r22
+  67 004c 9E83      		std Y+6,r25
+  68 004e 8D83      		std Y+5,r24
+  69               	.LM9:
+  70 0050 2D81      		ldd r18,Y+5
+  71 0052 3E81      		ldd r19,Y+6
+  72 0054 8D81      		ldd r24,Y+5
+  73 0056 9E81      		ldd r25,Y+6
+  74 0058 289F      		mul r18,r24
+  75 005a A001      		movw r20,r0
+  76 005c 299F      		mul r18,r25
+  77 005e 500D      		add r21,r0
+  78 0060 389F      		mul r19,r24
+  79 0062 500D      		add r21,r0
+  80 0064 1124      		clr r1
+  81 0066 CA01      		movw r24,r20
+  82 0068 9887      		std Y+8,r25
+  83 006a 8F83      		std Y+7,r24
+  84               	.LM10:
+  85 006c 8AE0      		ldi r24,lo8(10)
+  86 006e 0E94 0000 		call uart_putc
+  87               	.LM11:
+  88 0072 8D81      		ldd r24,Y+5
+  89 0074 9E81      		ldd r25,Y+6
+  90 0076 892F      		mov r24,r25
+  91 0078 9927      		clr r25
+  92 007a 0E94 0000 		call uart_putc
+  93               	.LM12:
+  94 007e 8D81      		ldd r24,Y+5
+  95 0080 0E94 0000 		call uart_putc
+  96               	.LM13:
+  97 0084 80E1      		ldi r24,lo8(16)
+  98 0086 0E94 0000 		call uart_putc
+  99               	.LM14:
+ 100 008a 8F81      		ldd r24,Y+7
+ 101 008c 9885      		ldd r25,Y+8
+ 102 008e 0596      		adiw r24,5
+ 103 0090 892F      		mov r24,r25
+ 104 0092 9927      		clr r25
+ 105 0094 0E94 0000 		call uart_putc
+ 106               	.LM15:
+ 107 0098 8F81      		ldd r24,Y+7
+ 108 009a 8B5F      		subi r24,lo8(-(5))
+ 109 009c 0E94 0000 		call uart_putc
+ 110               	.LM16:
+ 111 00a0 BCCF      		rjmp .L2
+ 112               	/* epilogue: frame size=8 */
+ 113               	/* epilogue: noreturn */
+ 114               	/* epilogue end (size=0) */
+ 115               	/* function main size 82 (78) */
+ 116               	.LFE4:
+ 118               		.comm count36kHz,1,1
+ 119               		.comm timebase,4,1
+ 120               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cceMaaaa.s:20     .text:00000000 main
+                            *COM*:00000001 count36kHz
+                            *COM*:00000004 timebase
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack
+uart_init
+timer2_init
+Gettime
+uart_getc
+pcc
+uart_putc

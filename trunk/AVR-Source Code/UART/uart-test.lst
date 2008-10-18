@@ -1,0 +1,112 @@
+   1               		.file	"uart-test.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  11               		.text
+  12               	.Ltext0:
+  75               		.data
+  76               	.LC0:
+  77 0000 0D20 2A2A 		.string	"\r ***         balance Bot             ***\r"
+  77      2A20 2020 
+  77      2020 2020 
+  77      2020 6261 
+  77      6C61 6E63 
+  78               	.LC1:
+  79 002b 202A 2A20 		.string	" ** Hier werden zu Debugzwecken       **\r"
+  79      4869 6572 
+  79      2077 6572 
+  79      6465 6E20 
+  79      7A75 2044 
+  80               	.LC2:
+  81 0055 202A 2A20 		.string	" ** einige statusmeldungen ausgegeben **\r\r"
+  81      6569 6E69 
+  81      6765 2073 
+  81      7461 7475 
+  81      736D 656C 
+  82               	.LC3:
+  83 0080 2055 4152 		.string	" UART inizialisierung ... OK \r"
+  83      5420 696E 
+  83      697A 6961 
+  83      6C69 7369 
+  83      6572 756E 
+  84               		.text
+  86               	.global	main
+  88               	main:
+   1:uart-test.c   **** #include <avr/interrupt.h>
+   2:uart-test.c   **** #include "uart.h"
+   3:uart-test.c   **** 
+   4:uart-test.c   **** int main(void)
+   5:uart-test.c   **** {	
+  90               	.LM1:
+  91               	/* prologue: frame size=0 */
+  92 0000 C0E0      		ldi r28,lo8(__stack - 0)
+  93 0002 D0E0      		ldi r29,hi8(__stack - 0)
+  94 0004 DEBF      		out __SP_H__,r29
+  95 0006 CDBF      		out __SP_L__,r28
+  96               	/* prologue end (size=4) */
+   6:uart-test.c   **** 	// USART initialisieren 
+   7:uart-test.c   **** 	uart_init();
+  98               	.LM2:
+  99 0008 0E94 0000 		call uart_init
+   8:uart-test.c   **** 	
+   9:uart-test.c   **** 	sei();	//global Interrupts Aktivieren
+ 101               	.LM3:
+ 102               	/* #APP */
+ 103 000c 7894      		sei
+  10:uart-test.c   **** 	 
+  11:uart-test.c   **** 	uart_puts("\r ***         balance Bot             ***\r");
+ 105               	.LM4:
+ 106               	/* #NOAPP */
+ 107 000e 80E0      		ldi r24,lo8(.LC0)
+ 108 0010 90E0      		ldi r25,hi8(.LC0)
+ 109 0012 0E94 0000 		call uart_puts
+  12:uart-test.c   **** 	uart_puts(  " ** Hier werden zu Debugzwecken       **\r");
+ 111               	.LM5:
+ 112 0016 80E0      		ldi r24,lo8(.LC1)
+ 113 0018 90E0      		ldi r25,hi8(.LC1)
+ 114 001a 0E94 0000 		call uart_puts
+  13:uart-test.c   **** 	uart_puts(  " ** einige statusmeldungen ausgegeben **\r\r");
+ 116               	.LM6:
+ 117 001e 80E0      		ldi r24,lo8(.LC2)
+ 118 0020 90E0      		ldi r25,hi8(.LC2)
+ 119 0022 0E94 0000 		call uart_puts
+  14:uart-test.c   **** 	
+  15:uart-test.c   **** 	uart_puts(" UART inizialisierung ... OK \r");
+ 121               	.LM7:
+ 122 0026 80E0      		ldi r24,lo8(.LC3)
+ 123 0028 90E0      		ldi r25,hi8(.LC3)
+ 124 002a 0E94 0000 		call uart_puts
+ 125               	.L2:
+  16:uart-test.c   **** 	// Nichts tun. Die Interrupts erledigten den Rest 
+  17:uart-test.c   **** 	while (1)
+ 127               	.LM8:
+ 128 002e FFCF      		rjmp .L2
+ 129               	/* epilogue: frame size=0 */
+ 130               	/* epilogue: noreturn */
+ 131               	/* epilogue end (size=0) */
+ 132               	/* function main size 25 (21) */
+ 134               	.Lscope0:
+ 135               		.text
+ 137               	Letext:
+ 138               	/* File "uart-test.c": code   25 = 0x0019 (  21), prologues   4, epilogues   0 */
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart-test.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:88     .text:00000000 main
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccesaaaa.s:137    .text:00000030 Letext
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack
+uart_init
+uart_puts

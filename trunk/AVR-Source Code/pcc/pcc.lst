@@ -1,0 +1,99 @@
+   1               		.file	"pcc.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	pcc_init
+  20               	pcc_init:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=2 */
+  24 0000 CF93      		push r28
+  25 0002 DF93      		push r29
+  26 0004 CDB7      		in r28,__SP_L__
+  27 0006 DEB7      		in r29,__SP_H__
+  28 0008 2297      		sbiw r28,2
+  29 000a 0FB6      		in __tmp_reg__,__SREG__
+  30 000c F894      		cli
+  31 000e DEBF      		out __SP_H__,r29
+  32 0010 0FBE      		out __SREG__,__tmp_reg__
+  33 0012 CDBF      		out __SP_L__,r28
+  34               	/* prologue end (size=10) */
+  35 0014 9A83      		std Y+2,r25
+  36 0016 8983      		std Y+1,r24
+  37               	.LM2:
+  38 0018 8981      		ldd r24,Y+1
+  39 001a 9A81      		ldd r25,Y+2
+  40 001c 9093 0000 		sts (ppcc)+1,r25
+  41 0020 8093 0000 		sts ppcc,r24
+  42               	.LM3:
+  43 0024 1092 0000 		sts firstbyte,__zero_reg__
+  44               	/* epilogue: frame size=2 */
+  45 0028 2296      		adiw r28,2
+  46 002a 0FB6      		in __tmp_reg__,__SREG__
+  47 002c F894      		cli
+  48 002e DEBF      		out __SP_H__,r29
+  49 0030 0FBE      		out __SREG__,__tmp_reg__
+  50 0032 CDBF      		out __SP_L__,r28
+  51 0034 DF91      		pop r29
+  52 0036 CF91      		pop r28
+  53 0038 0895      		ret
+  54               	/* epilogue end (size=9) */
+  55               	/* function pcc_init size 29 (10) */
+  56               	.LFE4:
+  58               	.global	pcc
+  60               	pcc:
+  61               	.LFB5:
+  62               	.LM4:
+  63               	/* prologue: frame size=1 */
+  64 003a CF93      		push r28
+  65 003c DF93      		push r29
+  66 003e CDB7      		in r28,__SP_L__
+  67 0040 DEB7      		in r29,__SP_H__
+  68 0042 2197      		sbiw r28,1
+  69 0044 0FB6      		in __tmp_reg__,__SREG__
+  70 0046 F894      		cli
+  71 0048 DEBF      		out __SP_H__,r29
+  72 004a 0FBE      		out __SREG__,__tmp_reg__
+  73 004c CDBF      		out __SP_L__,r28
+  74               	/* prologue end (size=10) */
+  75 004e 8983      		std Y+1,r24
+  76               	.LM5:
+  77 0050 8981      		ldd r24,Y+1
+  78 0052 8093 0000 		sts firstbyte,r24
+  79               	/* epilogue: frame size=1 */
+  80 0056 2196      		adiw r28,1
+  81 0058 0FB6      		in __tmp_reg__,__SREG__
+  82 005a F894      		cli
+  83 005c DEBF      		out __SP_H__,r29
+  84 005e 0FBE      		out __SREG__,__tmp_reg__
+  85 0060 CDBF      		out __SP_L__,r28
+  86 0062 DF91      		pop r29
+  87 0064 CF91      		pop r28
+  88 0066 0895      		ret
+  89               	/* epilogue end (size=9) */
+  90               	/* function pcc size 23 (4) */
+  91               	.LFE5:
+  93               		.comm firstbyte,1,1
+  94               		.comm ppcc,2,1
+  95               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 pcc.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:20     .text:00000000 pcc_init
+                            *COM*:00000002 ppcc
+                            *COM*:00000001 firstbyte
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc6Daaaa.s:60     .text:0000003a pcc
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

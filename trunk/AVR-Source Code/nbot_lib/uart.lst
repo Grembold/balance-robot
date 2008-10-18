@@ -1,0 +1,778 @@
+   1               		.file	"uart.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	uart_init
+  20               	uart_init:
+  21               	.LFB4:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24 0000 CF93      		push r28
+  25 0002 DF93      		push r29
+  26 0004 CDB7      		in r28,__SP_L__
+  27 0006 DEB7      		in r29,__SP_H__
+  28               	/* prologue end (size=4) */
+  29               	.LM2:
+  30 0008 1092 4000 		sts 64,__zero_reg__
+  31               	.LM3:
+  32 000c 85E0      		ldi r24,lo8(5)
+  33 000e 8093 2900 		sts 41,r24
+  34               	.LM4:
+  35 0012 88E9      		ldi r24,lo8(-104)
+  36 0014 8093 2A00 		sts 42,r24
+  37               	.LM5:
+  38 0018 86E8      		ldi r24,lo8(-122)
+  39 001a 8093 4000 		sts 64,r24
+  40               	.LM6:
+  41 001e 4AE0      		ldi r20,lo8(10)
+  42 0020 60E0      		ldi r22,lo8(inbuf)
+  43 0022 70E0      		ldi r23,hi8(inbuf)
+  44 0024 80E0      		ldi r24,lo8(infifo)
+  45 0026 90E0      		ldi r25,hi8(infifo)
+  46 0028 0E94 0000 		call fifo_init
+  47               	/* epilogue: frame size=0 */
+  48 002c DF91      		pop r29
+  49 002e CF91      		pop r28
+  50 0030 0895      		ret
+  51               	/* epilogue end (size=3) */
+  52               	/* function uart_init size 25 (18) */
+  53               	.LFE4:
+  55               	.global	uart_putc
+  57               	uart_putc:
+  58               	.LFB5:
+  59               	.LM7:
+  60               	/* prologue: frame size=1 */
+  61 0032 CF93      		push r28
+  62 0034 DF93      		push r29
+  63 0036 CDB7      		in r28,__SP_L__
+  64 0038 DEB7      		in r29,__SP_H__
+  65 003a 2197      		sbiw r28,1
+  66 003c 0FB6      		in __tmp_reg__,__SREG__
+  67 003e F894      		cli
+  68 0040 DEBF      		out __SP_H__,r29
+  69 0042 0FBE      		out __SREG__,__tmp_reg__
+  70 0044 CDBF      		out __SP_L__,r28
+  71               	/* prologue end (size=10) */
+  72 0046 8983      		std Y+1,r24
+  73               	.L3:
+  74               	.LM8:
+  75 0048 8091 2B00 		lds r24,43
+  76 004c 9927      		clr r25
+  77 004e 8072      		andi r24,lo8(32)
+  78 0050 9070      		andi r25,hi8(32)
+  79 0052 0097      		sbiw r24,0
+  80 0054 09F4      		brne .L4
+  81 0056 F8CF      		rjmp .L3
+  82               	.L4:
+  83               	.LM9:
+  84 0058 8981      		ldd r24,Y+1
+  85 005a 8093 2C00 		sts 44,r24
+  86               	/* epilogue: frame size=1 */
+  87 005e 2196      		adiw r28,1
+  88 0060 0FB6      		in __tmp_reg__,__SREG__
+  89 0062 F894      		cli
+  90 0064 DEBF      		out __SP_H__,r29
+  91 0066 0FBE      		out __SREG__,__tmp_reg__
+  92 0068 CDBF      		out __SP_L__,r28
+  93 006a DF91      		pop r29
+  94 006c CF91      		pop r28
+  95 006e 0895      		ret
+  96               	/* epilogue end (size=9) */
+  97               	/* function uart_putc size 31 (12) */
+  98               	.LFE5:
+ 100               	.global	uart_puts
+ 102               	uart_puts:
+ 103               	.LFB6:
+ 104               	.LM10:
+ 105               	/* prologue: frame size=2 */
+ 106 0070 CF93      		push r28
+ 107 0072 DF93      		push r29
+ 108 0074 CDB7      		in r28,__SP_L__
+ 109 0076 DEB7      		in r29,__SP_H__
+ 110 0078 2297      		sbiw r28,2
+ 111 007a 0FB6      		in __tmp_reg__,__SREG__
+ 112 007c F894      		cli
+ 113 007e DEBF      		out __SP_H__,r29
+ 114 0080 0FBE      		out __SREG__,__tmp_reg__
+ 115 0082 CDBF      		out __SP_L__,r28
+ 116               	/* prologue end (size=10) */
+ 117 0084 9A83      		std Y+2,r25
+ 118 0086 8983      		std Y+1,r24
+ 119               	.L6:
+ 120               	.LM11:
+ 121 0088 E981      		ldd r30,Y+1
+ 122 008a FA81      		ldd r31,Y+2
+ 123 008c 8081      		ld r24,Z
+ 124 008e 8823      		tst r24
+ 125 0090 49F0      		breq .L5
+ 126               	.LM12:
+ 127 0092 E981      		ldd r30,Y+1
+ 128 0094 FA81      		ldd r31,Y+2
+ 129 0096 8081      		ld r24,Z
+ 130 0098 3196      		adiw r30,1
+ 131 009a FA83      		std Y+2,r31
+ 132 009c E983      		std Y+1,r30
+ 133 009e 0E94 0000 		call uart_putc
+ 134 00a2 F2CF      		rjmp .L6
+ 135               	.L5:
+ 136               	/* epilogue: frame size=2 */
+ 137 00a4 2296      		adiw r28,2
+ 138 00a6 0FB6      		in __tmp_reg__,__SREG__
+ 139 00a8 F894      		cli
+ 140 00aa DEBF      		out __SP_H__,r29
+ 141 00ac 0FBE      		out __SREG__,__tmp_reg__
+ 142 00ae CDBF      		out __SP_L__,r28
+ 143 00b0 DF91      		pop r29
+ 144 00b2 CF91      		pop r28
+ 145 00b4 0895      		ret
+ 146               	/* epilogue end (size=9) */
+ 147               	/* function uart_puts size 35 (16) */
+ 148               	.LFE6:
+ 150               	.global	uart_puts_p
+ 152               	uart_puts_p:
+ 153               	.LFB7:
+ 154               	.LM13:
+ 155               	/* prologue: frame size=6 */
+ 156 00b6 CF93      		push r28
+ 157 00b8 DF93      		push r29
+ 158 00ba CDB7      		in r28,__SP_L__
+ 159 00bc DEB7      		in r29,__SP_H__
+ 160 00be 2697      		sbiw r28,6
+ 161 00c0 0FB6      		in __tmp_reg__,__SREG__
+ 162 00c2 F894      		cli
+ 163 00c4 DEBF      		out __SP_H__,r29
+ 164 00c6 0FBE      		out __SREG__,__tmp_reg__
+ 165 00c8 CDBF      		out __SP_L__,r28
+ 166               	/* prologue end (size=10) */
+ 167 00ca 9A83      		std Y+2,r25
+ 168 00cc 8983      		std Y+1,r24
+ 169               	.L9:
+ 170               	.LBB2:
+ 171               	.LM14:
+ 172 00ce 8981      		ldd r24,Y+1
+ 173 00d0 9A81      		ldd r25,Y+2
+ 174 00d2 9D83      		std Y+5,r25
+ 175 00d4 8C83      		std Y+4,r24
+ 176 00d6 EC81      		ldd r30,Y+4
+ 177 00d8 FD81      		ldd r31,Y+5
+ 178               	/* #APP */
+ 179 00da 8491      		lpm r24, Z
+ 180               		
+ 181               	/* #NOAPP */
+ 182 00dc 8E83      		std Y+6,r24
+ 183               	.LBE2:
+ 184 00de 8E81      		ldd r24,Y+6
+ 185 00e0 8B83      		std Y+3,r24
+ 186 00e2 8823      		tst r24
+ 187 00e4 49F0      		breq .L8
+ 188               	.LM15:
+ 189 00e6 8B81      		ldd r24,Y+3
+ 190 00e8 0E94 0000 		call uart_putc
+ 191               	.LM16:
+ 192 00ec 8981      		ldd r24,Y+1
+ 193 00ee 9A81      		ldd r25,Y+2
+ 194 00f0 0196      		adiw r24,1
+ 195 00f2 9A83      		std Y+2,r25
+ 196 00f4 8983      		std Y+1,r24
+ 197 00f6 EBCF      		rjmp .L9
+ 198               	.L8:
+ 199               	/* epilogue: frame size=6 */
+ 200 00f8 2696      		adiw r28,6
+ 201 00fa 0FB6      		in __tmp_reg__,__SREG__
+ 202 00fc F894      		cli
+ 203 00fe DEBF      		out __SP_H__,r29
+ 204 0100 0FBE      		out __SREG__,__tmp_reg__
+ 205 0102 CDBF      		out __SP_L__,r28
+ 206 0104 DF91      		pop r29
+ 207 0106 CF91      		pop r28
+ 208 0108 0895      		ret
+ 209               	/* epilogue end (size=9) */
+ 210               	/* function uart_puts_p size 45 (26) */
+ 211               	.LFE7:
+ 213               	.global	uart_send
+ 215               	uart_send:
+ 216               	.LFB8:
+ 217               	.LM17:
+ 218               	/* prologue: frame size=3 */
+ 219 010a CF93      		push r28
+ 220 010c DF93      		push r29
+ 221 010e CDB7      		in r28,__SP_L__
+ 222 0110 DEB7      		in r29,__SP_H__
+ 223 0112 2397      		sbiw r28,3
+ 224 0114 0FB6      		in __tmp_reg__,__SREG__
+ 225 0116 F894      		cli
+ 226 0118 DEBF      		out __SP_H__,r29
+ 227 011a 0FBE      		out __SREG__,__tmp_reg__
+ 228 011c CDBF      		out __SP_L__,r28
+ 229               	/* prologue end (size=10) */
+ 230 011e 9A83      		std Y+2,r25
+ 231 0120 8983      		std Y+1,r24
+ 232 0122 6B83      		std Y+3,r22
+ 233               	.L12:
+ 234               	.LM18:
+ 235 0124 8B81      		ldd r24,Y+3
+ 236 0126 8150      		subi r24,lo8(-(-1))
+ 237 0128 8B83      		std Y+3,r24
+ 238 012a 8F3F      		cpi r24,lo8(-1)
+ 239 012c 49F0      		breq .L11
+ 240               	.LM19:
+ 241 012e E981      		ldd r30,Y+1
+ 242 0130 FA81      		ldd r31,Y+2
+ 243 0132 8081      		ld r24,Z
+ 244 0134 3196      		adiw r30,1
+ 245 0136 FA83      		std Y+2,r31
+ 246 0138 E983      		std Y+1,r30
+ 247 013a 0E94 0000 		call uart_putc
+ 248 013e F2CF      		rjmp .L12
+ 249               	.L11:
+ 250               	/* epilogue: frame size=3 */
+ 251 0140 2396      		adiw r28,3
+ 252 0142 0FB6      		in __tmp_reg__,__SREG__
+ 253 0144 F894      		cli
+ 254 0146 DEBF      		out __SP_H__,r29
+ 255 0148 0FBE      		out __SREG__,__tmp_reg__
+ 256 014a CDBF      		out __SP_L__,r28
+ 257 014c DF91      		pop r29
+ 258 014e CF91      		pop r28
+ 259 0150 0895      		ret
+ 260               	/* epilogue end (size=9) */
+ 261               	/* function uart_send size 36 (17) */
+ 262               	.LFE8:
+ 264               	.global	uart_puti
+ 266               	uart_puti:
+ 267               	.LFB9:
+ 268               	.LM20:
+ 269               	/* prologue: frame size=9 */
+ 270 0152 CF93      		push r28
+ 271 0154 DF93      		push r29
+ 272 0156 CDB7      		in r28,__SP_L__
+ 273 0158 DEB7      		in r29,__SP_H__
+ 274 015a 2997      		sbiw r28,9
+ 275 015c 0FB6      		in __tmp_reg__,__SREG__
+ 276 015e F894      		cli
+ 277 0160 DEBF      		out __SP_H__,r29
+ 278 0162 0FBE      		out __SREG__,__tmp_reg__
+ 279 0164 CDBF      		out __SP_L__,r28
+ 280               	/* prologue end (size=10) */
+ 281 0166 9A83      		std Y+2,r25
+ 282 0168 8983      		std Y+1,r24
+ 283               	.LM21:
+ 284 016a CE01      		movw r24,r28
+ 285 016c 0396      		adiw r24,3
+ 286 016e 4AE0      		ldi r20,lo8(10)
+ 287 0170 50E0      		ldi r21,hi8(10)
+ 288 0172 BC01      		movw r22,r24
+ 289 0174 8981      		ldd r24,Y+1
+ 290 0176 9A81      		ldd r25,Y+2
+ 291 0178 0E94 0000 		call itoa
+ 292               	.LM22:
+ 293 017c CE01      		movw r24,r28
+ 294 017e 0396      		adiw r24,3
+ 295 0180 0E94 0000 		call uart_puts
+ 296               	/* epilogue: frame size=9 */
+ 297 0184 2996      		adiw r28,9
+ 298 0186 0FB6      		in __tmp_reg__,__SREG__
+ 299 0188 F894      		cli
+ 300 018a DEBF      		out __SP_H__,r29
+ 301 018c 0FBE      		out __SREG__,__tmp_reg__
+ 302 018e CDBF      		out __SP_L__,r28
+ 303 0190 DF91      		pop r29
+ 304 0192 CF91      		pop r28
+ 305 0194 0895      		ret
+ 306               	/* epilogue end (size=9) */
+ 307               	/* function uart_puti size 34 (15) */
+ 308               	.LFE9:
+ 310               	.global	uart_printtime
+ 312               	uart_printtime:
+ 313               	.LFB10:
+ 314               	.LM23:
+ 315               	/* prologue: frame size=13 */
+ 316 0196 EF92      		push r14
+ 317 0198 FF92      		push r15
+ 318 019a 0F93      		push r16
+ 319 019c 1F93      		push r17
+ 320 019e CF93      		push r28
+ 321 01a0 DF93      		push r29
+ 322 01a2 CDB7      		in r28,__SP_L__
+ 323 01a4 DEB7      		in r29,__SP_H__
+ 324 01a6 2D97      		sbiw r28,13
+ 325 01a8 0FB6      		in __tmp_reg__,__SREG__
+ 326 01aa F894      		cli
+ 327 01ac DEBF      		out __SP_H__,r29
+ 328 01ae 0FBE      		out __SREG__,__tmp_reg__
+ 329 01b0 CDBF      		out __SP_L__,r28
+ 330               	/* prologue end (size=14) */
+ 331               	.LM24:
+ 332 01b2 0E94 0000 		call Gettime
+ 333 01b6 DC01      		movw r26,r24
+ 334 01b8 CB01      		movw r24,r22
+ 335 01ba 8983      		std Y+1,r24
+ 336 01bc 9A83      		std Y+2,r25
+ 337 01be AB83      		std Y+3,r26
+ 338 01c0 BC83      		std Y+4,r27
+ 339               	.LM25:
+ 340 01c2 8981      		ldd r24,Y+1
+ 341 01c4 9A81      		ldd r25,Y+2
+ 342 01c6 AB81      		ldd r26,Y+3
+ 343 01c8 BC81      		ldd r27,Y+4
+ 344 01ca 0097      		sbiw r24,0
+ 345 01cc A105      		cpc r26,__zero_reg__
+ 346 01ce B105      		cpc r27,__zero_reg__
+ 347 01d0 09F4      		brne .L16
+ 348               	.LM26:
+ 349 01d2 02C1      		rjmp .L15
+ 350               	.L16:
+ 351               	.LM27:
+ 352 01d4 8981      		ldd r24,Y+1
+ 353 01d6 9A81      		ldd r25,Y+2
+ 354 01d8 AB81      		ldd r26,Y+3
+ 355 01da BC81      		ldd r27,Y+4
+ 356 01dc 28EE      		ldi r18,lo8(1000)
+ 357 01de 33E0      		ldi r19,hi8(1000)
+ 358 01e0 40E0      		ldi r20,hlo8(1000)
+ 359 01e2 50E0      		ldi r21,hhi8(1000)
+ 360 01e4 BC01      		movw r22,r24
+ 361 01e6 CD01      		movw r24,r26
+ 362 01e8 0E94 0000 		call __udivmodsi4
+ 363 01ec DA01      		movw r26,r20
+ 364 01ee C901      		movw r24,r18
+ 365 01f0 8D83      		std Y+5,r24
+ 366 01f2 9E83      		std Y+6,r25
+ 367 01f4 AF83      		std Y+7,r26
+ 368 01f6 B887      		std Y+8,r27
+ 369               	.LM28:
+ 370 01f8 8D81      		ldd r24,Y+5
+ 371 01fa 9E81      		ldd r25,Y+6
+ 372 01fc AF81      		ldd r26,Y+7
+ 373 01fe B885      		ldd r27,Y+8
+ 374 0200 2CE3      		ldi r18,lo8(60)
+ 375 0202 30E0      		ldi r19,hi8(60)
+ 376 0204 40E0      		ldi r20,hlo8(60)
+ 377 0206 50E0      		ldi r21,hhi8(60)
+ 378 0208 BC01      		movw r22,r24
+ 379 020a CD01      		movw r24,r26
+ 380 020c 0E94 0000 		call __udivmodsi4
+ 381 0210 DA01      		movw r26,r20
+ 382 0212 C901      		movw r24,r18
+ 383 0214 8987      		std Y+9,r24
+ 384 0216 9A87      		std Y+10,r25
+ 385 0218 AB87      		std Y+11,r26
+ 386 021a BC87      		std Y+12,r27
+ 387               	.LM29:
+ 388 021c 8985      		ldd r24,Y+9
+ 389 021e 9A85      		ldd r25,Y+10
+ 390 0220 AB85      		ldd r26,Y+11
+ 391 0222 BC85      		ldd r27,Y+12
+ 392 0224 2CE3      		ldi r18,lo8(60)
+ 393 0226 30E0      		ldi r19,hi8(60)
+ 394 0228 40E0      		ldi r20,hlo8(60)
+ 395 022a 50E0      		ldi r21,hhi8(60)
+ 396 022c BC01      		movw r22,r24
+ 397 022e CD01      		movw r24,r26
+ 398 0230 0E94 0000 		call __udivmodsi4
+ 399 0234 DA01      		movw r26,r20
+ 400 0236 C901      		movw r24,r18
+ 401 0238 8D87      		std Y+13,r24
+ 402               	.LM30:
+ 403 023a 9D85      		ldd r25,Y+13
+ 404 023c 8CE3      		ldi r24,lo8(60)
+ 405 023e 989F      		mul r25,r24
+ 406 0240 C001      		movw r24,r0
+ 407 0242 1124      		clr r1
+ 408 0244 9C01      		movw r18,r24
+ 409 0246 4427      		clr r20
+ 410 0248 37FD      		sbrc r19,7
+ 411 024a 4095      		com r20
+ 412 024c 542F      		mov r21,r20
+ 413 024e 8985      		ldd r24,Y+9
+ 414 0250 9A85      		ldd r25,Y+10
+ 415 0252 AB85      		ldd r26,Y+11
+ 416 0254 BC85      		ldd r27,Y+12
+ 417 0256 821B      		sub r24,r18
+ 418 0258 930B      		sbc r25,r19
+ 419 025a A40B      		sbc r26,r20
+ 420 025c B50B      		sbc r27,r21
+ 421 025e 8987      		std Y+9,r24
+ 422 0260 9A87      		std Y+10,r25
+ 423 0262 AB87      		std Y+11,r26
+ 424 0264 BC87      		std Y+12,r27
+ 425               	.LM31:
+ 426 0266 8985      		ldd r24,Y+9
+ 427 0268 9A85      		ldd r25,Y+10
+ 428 026a AB85      		ldd r26,Y+11
+ 429 026c BC85      		ldd r27,Y+12
+ 430 026e 2CE3      		ldi r18,lo8(60)
+ 431 0270 30E0      		ldi r19,hi8(60)
+ 432 0272 40E0      		ldi r20,hlo8(60)
+ 433 0274 50E0      		ldi r21,hhi8(60)
+ 434 0276 BC01      		movw r22,r24
+ 435 0278 CD01      		movw r24,r26
+ 436 027a 0E94 0000 		call __mulsi3
+ 437 027e AB01      		movw r20,r22
+ 438 0280 BC01      		movw r22,r24
+ 439 0282 8D85      		ldd r24,Y+13
+ 440 0284 282F      		mov r18,r24
+ 441 0286 3327      		clr r19
+ 442 0288 80E1      		ldi r24,lo8(3600)
+ 443 028a 9EE0      		ldi r25,hi8(3600)
+ 444 028c 289F      		mul r18,r24
+ 445 028e F001      		movw r30,r0
+ 446 0290 299F      		mul r18,r25
+ 447 0292 F00D      		add r31,r0
+ 448 0294 389F      		mul r19,r24
+ 449 0296 F00D      		add r31,r0
+ 450 0298 1124      		clr r1
+ 451 029a CF01      		movw r24,r30
+ 452 029c AA27      		clr r26
+ 453 029e 97FD      		sbrc r25,7
+ 454 02a0 A095      		com r26
+ 455 02a2 BA2F      		mov r27,r26
+ 456 02a4 9A01      		movw r18,r20
+ 457 02a6 AB01      		movw r20,r22
+ 458 02a8 280F      		add r18,r24
+ 459 02aa 391F      		adc r19,r25
+ 460 02ac 4A1F      		adc r20,r26
+ 461 02ae 5B1F      		adc r21,r27
+ 462 02b0 8D81      		ldd r24,Y+5
+ 463 02b2 9E81      		ldd r25,Y+6
+ 464 02b4 AF81      		ldd r26,Y+7
+ 465 02b6 B885      		ldd r27,Y+8
+ 466 02b8 821B      		sub r24,r18
+ 467 02ba 930B      		sbc r25,r19
+ 468 02bc A40B      		sbc r26,r20
+ 469 02be B50B      		sbc r27,r21
+ 470 02c0 8D83      		std Y+5,r24
+ 471 02c2 9E83      		std Y+6,r25
+ 472 02c4 AF83      		std Y+7,r26
+ 473 02c6 B887      		std Y+8,r27
+ 474               	.LM32:
+ 475 02c8 8D81      		ldd r24,Y+5
+ 476 02ca 9E81      		ldd r25,Y+6
+ 477 02cc AF81      		ldd r26,Y+7
+ 478 02ce B885      		ldd r27,Y+8
+ 479 02d0 28EE      		ldi r18,lo8(1000)
+ 480 02d2 33E0      		ldi r19,hi8(1000)
+ 481 02d4 40E0      		ldi r20,hlo8(1000)
+ 482 02d6 50E0      		ldi r21,hhi8(1000)
+ 483 02d8 BC01      		movw r22,r24
+ 484 02da CD01      		movw r24,r26
+ 485 02dc 0E94 0000 		call __mulsi3
+ 486 02e0 7B01      		movw r14,r22
+ 487 02e2 8C01      		movw r16,r24
+ 488 02e4 8985      		ldd r24,Y+9
+ 489 02e6 9A85      		ldd r25,Y+10
+ 490 02e8 AB85      		ldd r26,Y+11
+ 491 02ea BC85      		ldd r27,Y+12
+ 492 02ec 20E6      		ldi r18,lo8(60000)
+ 493 02ee 3AEE      		ldi r19,hi8(60000)
+ 494 02f0 40E0      		ldi r20,hlo8(60000)
+ 495 02f2 50E0      		ldi r21,hhi8(60000)
+ 496 02f4 BC01      		movw r22,r24
+ 497 02f6 CD01      		movw r24,r26
+ 498 02f8 0E94 0000 		call __mulsi3
+ 499 02fc DC01      		movw r26,r24
+ 500 02fe CB01      		movw r24,r22
+ 501 0300 B801      		movw r22,r16
+ 502 0302 A701      		movw r20,r14
+ 503 0304 480F      		add r20,r24
+ 504 0306 591F      		adc r21,r25
+ 505 0308 6A1F      		adc r22,r26
+ 506 030a 7B1F      		adc r23,r27
+ 507 030c 8D85      		ldd r24,Y+13
+ 508 030e 282F      		mov r18,r24
+ 509 0310 3327      		clr r19
+ 510 0312 80E8      		ldi r24,lo8(-4480)
+ 511 0314 9EEE      		ldi r25,hi8(-4480)
+ 512 0316 289F      		mul r18,r24
+ 513 0318 F001      		movw r30,r0
+ 514 031a 299F      		mul r18,r25
+ 515 031c F00D      		add r31,r0
+ 516 031e 389F      		mul r19,r24
+ 517 0320 F00D      		add r31,r0
+ 518 0322 1124      		clr r1
+ 519 0324 CF01      		movw r24,r30
+ 520 0326 AA27      		clr r26
+ 521 0328 97FD      		sbrc r25,7
+ 522 032a A095      		com r26
+ 523 032c BA2F      		mov r27,r26
+ 524 032e 9A01      		movw r18,r20
+ 525 0330 AB01      		movw r20,r22
+ 526 0332 280F      		add r18,r24
+ 527 0334 391F      		adc r19,r25
+ 528 0336 4A1F      		adc r20,r26
+ 529 0338 5B1F      		adc r21,r27
+ 530 033a 8981      		ldd r24,Y+1
+ 531 033c 9A81      		ldd r25,Y+2
+ 532 033e AB81      		ldd r26,Y+3
+ 533 0340 BC81      		ldd r27,Y+4
+ 534 0342 821B      		sub r24,r18
+ 535 0344 930B      		sbc r25,r19
+ 536 0346 A40B      		sbc r26,r20
+ 537 0348 B50B      		sbc r27,r21
+ 538 034a 8983      		std Y+1,r24
+ 539 034c 9A83      		std Y+2,r25
+ 540 034e AB83      		std Y+3,r26
+ 541 0350 BC83      		std Y+4,r27
+ 542               	.LM33:
+ 543 0352 8D85      		ldd r24,Y+13
+ 544 0354 8A30      		cpi r24,lo8(10)
+ 545 0356 18F4      		brsh .L17
+ 546               	.LM34:
+ 547 0358 80E3      		ldi r24,lo8(48)
+ 548 035a 0E94 0000 		call uart_putc
+ 549               	.L17:
+ 550               	.LM35:
+ 551 035e 8D85      		ldd r24,Y+13
+ 552 0360 9927      		clr r25
+ 553 0362 0E94 0000 		call uart_puti
+ 554               	.LM36:
+ 555 0366 8AE3      		ldi r24,lo8(58)
+ 556 0368 0E94 0000 		call uart_putc
+ 557               	.LM37:
+ 558 036c 8985      		ldd r24,Y+9
+ 559 036e 9A85      		ldd r25,Y+10
+ 560 0370 AB85      		ldd r26,Y+11
+ 561 0372 BC85      		ldd r27,Y+12
+ 562 0374 8A30      		cpi r24,lo8(10)
+ 563 0376 9105      		cpc r25,__zero_reg__
+ 564 0378 A105      		cpc r26,__zero_reg__
+ 565 037a B105      		cpc r27,__zero_reg__
+ 566 037c 18F4      		brsh .L18
+ 567               	.LM38:
+ 568 037e 80E3      		ldi r24,lo8(48)
+ 569 0380 0E94 0000 		call uart_putc
+ 570               	.L18:
+ 571               	.LM39:
+ 572 0384 8985      		ldd r24,Y+9
+ 573 0386 9A85      		ldd r25,Y+10
+ 574 0388 0E94 0000 		call uart_puti
+ 575               	.LM40:
+ 576 038c 8AE3      		ldi r24,lo8(58)
+ 577 038e 0E94 0000 		call uart_putc
+ 578               	.LM41:
+ 579 0392 8D81      		ldd r24,Y+5
+ 580 0394 9E81      		ldd r25,Y+6
+ 581 0396 AF81      		ldd r26,Y+7
+ 582 0398 B885      		ldd r27,Y+8
+ 583 039a 8A30      		cpi r24,lo8(10)
+ 584 039c 9105      		cpc r25,__zero_reg__
+ 585 039e A105      		cpc r26,__zero_reg__
+ 586 03a0 B105      		cpc r27,__zero_reg__
+ 587 03a2 18F4      		brsh .L19
+ 588               	.LM42:
+ 589 03a4 80E3      		ldi r24,lo8(48)
+ 590 03a6 0E94 0000 		call uart_putc
+ 591               	.L19:
+ 592               	.LM43:
+ 593 03aa 8D81      		ldd r24,Y+5
+ 594 03ac 9E81      		ldd r25,Y+6
+ 595 03ae 0E94 0000 		call uart_puti
+ 596               	.LM44:
+ 597 03b2 8AE3      		ldi r24,lo8(58)
+ 598 03b4 0E94 0000 		call uart_putc
+ 599               	.LM45:
+ 600 03b8 8981      		ldd r24,Y+1
+ 601 03ba 9A81      		ldd r25,Y+2
+ 602 03bc AB81      		ldd r26,Y+3
+ 603 03be BC81      		ldd r27,Y+4
+ 604 03c0 24E6      		ldi r18,lo8(100)
+ 605 03c2 30E0      		ldi r19,hi8(100)
+ 606 03c4 40E0      		ldi r20,hlo8(100)
+ 607 03c6 50E0      		ldi r21,hhi8(100)
+ 608 03c8 BC01      		movw r22,r24
+ 609 03ca CD01      		movw r24,r26
+ 610 03cc 0E94 0000 		call __udivmodsi4
+ 611 03d0 DA01      		movw r26,r20
+ 612 03d2 C901      		movw r24,r18
+ 613 03d4 0E94 0000 		call uart_puti
+ 614               	.L15:
+ 615               	/* epilogue: frame size=13 */
+ 616 03d8 2D96      		adiw r28,13
+ 617 03da 0FB6      		in __tmp_reg__,__SREG__
+ 618 03dc F894      		cli
+ 619 03de DEBF      		out __SP_H__,r29
+ 620 03e0 0FBE      		out __SREG__,__tmp_reg__
+ 621 03e2 CDBF      		out __SP_L__,r28
+ 622 03e4 DF91      		pop r29
+ 623 03e6 CF91      		pop r28
+ 624 03e8 1F91      		pop r17
+ 625 03ea 0F91      		pop r16
+ 626 03ec FF90      		pop r15
+ 627 03ee EF90      		pop r14
+ 628 03f0 0895      		ret
+ 629               	/* epilogue end (size=13) */
+ 630               	/* function uart_printtime size 302 (275) */
+ 631               	.LFE10:
+ 633               	.global	uart_getc
+ 635               	uart_getc:
+ 636               	.LFB11:
+ 637               	.LM46:
+ 638               	/* prologue: frame size=3 */
+ 639 03f2 CF93      		push r28
+ 640 03f4 DF93      		push r29
+ 641 03f6 CDB7      		in r28,__SP_L__
+ 642 03f8 DEB7      		in r29,__SP_H__
+ 643 03fa 2397      		sbiw r28,3
+ 644 03fc 0FB6      		in __tmp_reg__,__SREG__
+ 645 03fe F894      		cli
+ 646 0400 DEBF      		out __SP_H__,r29
+ 647 0402 0FBE      		out __SREG__,__tmp_reg__
+ 648 0404 CDBF      		out __SP_L__,r28
+ 649               	/* prologue end (size=10) */
+ 650               	.LM47:
+ 651 0406 BE01      		movw r22,r28
+ 652 0408 6F5F      		subi r22,lo8(-(1))
+ 653 040a 7F4F      		sbci r23,hi8(-(1))
+ 654 040c 80E0      		ldi r24,lo8(infifo)
+ 655 040e 90E0      		ldi r25,hi8(infifo)
+ 656 0410 0E94 0000 		call fifo_get
+ 657 0414 8823      		tst r24
+ 658 0416 39F4      		brne .L21
+ 659               	.LM48:
+ 660 0418 8981      		ldd r24,Y+1
+ 661 041a 9927      		clr r25
+ 662 041c 87FD      		sbrc r24,7
+ 663 041e 9095      		com r25
+ 664 0420 9B83      		std Y+3,r25
+ 665 0422 8A83      		std Y+2,r24
+ 666 0424 04C0      		rjmp .L20
+ 667               	.L21:
+ 668               	.LM49:
+ 669 0426 8FEF      		ldi r24,lo8(-1)
+ 670 0428 9FEF      		ldi r25,hi8(-1)
+ 671 042a 9B83      		std Y+3,r25
+ 672 042c 8A83      		std Y+2,r24
+ 673               	.L20:
+ 674               	.LM50:
+ 675 042e 8A81      		ldd r24,Y+2
+ 676 0430 9B81      		ldd r25,Y+3
+ 677               	/* epilogue: frame size=3 */
+ 678 0432 2396      		adiw r28,3
+ 679 0434 0FB6      		in __tmp_reg__,__SREG__
+ 680 0436 F894      		cli
+ 681 0438 DEBF      		out __SP_H__,r29
+ 682 043a 0FBE      		out __SREG__,__tmp_reg__
+ 683 043c CDBF      		out __SP_L__,r28
+ 684 043e DF91      		pop r29
+ 685 0440 CF91      		pop r28
+ 686 0442 0895      		ret
+ 687               	/* epilogue end (size=9) */
+ 688               	/* function uart_getc size 41 (22) */
+ 689               	.LFE11:
+ 691               	.global	__vector_11
+ 693               	__vector_11:
+ 694               	.LFB12:
+ 695               	.LM51:
+ 696               	/* prologue: frame size=1 */
+ 697 0444 1F92      		push __zero_reg__
+ 698 0446 0F92      		push __tmp_reg__
+ 699 0448 0FB6      		in __tmp_reg__,__SREG__
+ 700 044a 0F92      		push __tmp_reg__
+ 701 044c 1124      		clr __zero_reg__
+ 702 044e 2F93      		push r18
+ 703 0450 3F93      		push r19
+ 704 0452 4F93      		push r20
+ 705 0454 5F93      		push r21
+ 706 0456 6F93      		push r22
+ 707 0458 7F93      		push r23
+ 708 045a 8F93      		push r24
+ 709 045c 9F93      		push r25
+ 710 045e AF93      		push r26
+ 711 0460 BF93      		push r27
+ 712 0462 EF93      		push r30
+ 713 0464 FF93      		push r31
+ 714 0466 CF93      		push r28
+ 715 0468 DF93      		push r29
+ 716 046a CDB7      		in r28,__SP_L__
+ 717 046c DEB7      		in r29,__SP_H__
+ 718 046e 2197      		sbiw r28,1
+ 719 0470 DEBF      		out __SP_H__,r29
+ 720 0472 CDBF      		out __SP_L__,r28
+ 721               	/* prologue end (size=24) */
+ 722               	.LM52:
+ 723 0474 8091 2C00 		lds r24,44
+ 724 0478 8983      		std Y+1,r24
+ 725               	.LM53:
+ 726 047a 6981      		ldd r22,Y+1
+ 727 047c 80E0      		ldi r24,lo8(infifo)
+ 728 047e 90E0      		ldi r25,hi8(infifo)
+ 729 0480 0E94 0000 		call fifo_put
+ 730               	.L24:
+ 731               	.LM54:
+ 732 0484 8091 2B00 		lds r24,43
+ 733 0488 9927      		clr r25
+ 734 048a 8072      		andi r24,lo8(32)
+ 735 048c 9070      		andi r25,hi8(32)
+ 736 048e 0097      		sbiw r24,0
+ 737 0490 09F4      		brne .L23
+ 738 0492 F8CF      		rjmp .L24
+ 739               	.L23:
+ 740               	/* epilogue: frame size=1 */
+ 741 0494 2196      		adiw r28,1
+ 742 0496 F894      		cli
+ 743 0498 DEBF      		out __SP_H__,r29
+ 744 049a CDBF      		out __SP_L__,r28
+ 745 049c DF91      		pop r29
+ 746 049e CF91      		pop r28
+ 747 04a0 FF91      		pop r31
+ 748 04a2 EF91      		pop r30
+ 749 04a4 BF91      		pop r27
+ 750 04a6 AF91      		pop r26
+ 751 04a8 9F91      		pop r25
+ 752 04aa 8F91      		pop r24
+ 753 04ac 7F91      		pop r23
+ 754 04ae 6F91      		pop r22
+ 755 04b0 5F91      		pop r21
+ 756 04b2 4F91      		pop r20
+ 757 04b4 3F91      		pop r19
+ 758 04b6 2F91      		pop r18
+ 759 04b8 0F90      		pop __tmp_reg__
+ 760 04ba 0FBE      		out __SREG__,__tmp_reg__
+ 761 04bc 0F90      		pop __tmp_reg__
+ 762 04be 1F90      		pop __zero_reg__
+ 763 04c0 1895      		reti
+ 764               	/* epilogue end (size=23) */
+ 765               	/* function __vector_11 size 63 (16) */
+ 766               	.LFE12:
+ 768               		.comm count36kHz,1,1
+ 769               		.comm timebase,4,1
+ 770               		.comm inbuf,10,1
+ 771               		.comm infifo,8,1
+ 772               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:20     .text:00000000 uart_init
+                            *COM*:0000000a inbuf
+                            *COM*:00000008 infifo
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:57     .text:00000032 uart_putc
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:102    .text:00000070 uart_puts
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:152    .text:000000b6 uart_puts_p
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:215    .text:0000010a uart_send
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:266    .text:00000152 uart_puti
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:312    .text:00000196 uart_printtime
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:635    .text:000003f2 uart_getc
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccMLaaaa.s:693    .text:00000444 __vector_11
+                            *COM*:00000001 count36kHz
+                            *COM*:00000004 timebase
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+fifo_init
+itoa
+Gettime
+__udivmodsi4
+__mulsi3
+fifo_get
+fifo_put

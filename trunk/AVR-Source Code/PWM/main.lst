@@ -1,0 +1,179 @@
+   1               		.file	"main.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  19               	io_init:
+  20               	.LFB2:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27               	/* prologue end (size=4) */
+  28               	.LM2:
+  29 0008 8091 3100 		lds r24,49
+  30 000c 8063      		ori r24,lo8(48)
+  31 000e 8093 3100 		sts 49,r24
+  32               	.LM3:
+  33 0012 83E0      		ldi r24,lo8(3)
+  34 0014 8093 4F00 		sts 79,r24
+  35               	.LM4:
+  36 0018 83E0      		ldi r24,lo8(3)
+  37 001a 8093 4E00 		sts 78,r24
+  38               	.LM5:
+  39 001e 8091 4F00 		lds r24,79
+  40 0022 8068      		ori r24,lo8(-128)
+  41 0024 8093 4F00 		sts 79,r24
+  42               	.LM6:
+  43 0028 8091 4F00 		lds r24,79
+  44 002c 8062      		ori r24,lo8(32)
+  45 002e 8093 4F00 		sts 79,r24
+  46               	/* epilogue: frame size=0 */
+  47 0032 DF91      		pop r29
+  48 0034 CF91      		pop r28
+  49 0036 0895      		ret
+  50               	/* epilogue end (size=3) */
+  51               	/* function io_init size 28 (21) */
+  52               	.LFE2:
+  54               	.global	main
+  56               	main:
+  57               	.LFB3:
+  58               	.LM7:
+  59               	/* prologue: frame size=0 */
+  60 0038 C0E0      		ldi r28,lo8(__stack - 0)
+  61 003a D0E0      		ldi r29,hi8(__stack - 0)
+  62 003c DEBF      		out __SP_H__,r29
+  63 003e CDBF      		out __SP_L__,r28
+  64               	/* prologue end (size=4) */
+  65               	.LM8:
+  66 0040 8091 3A00 		lds r24,58
+  67 0044 887F      		andi r24,lo8(-8)
+  68 0046 8093 3A00 		sts 58,r24
+  69               	.LM9:
+  70 004a 8091 3B00 		lds r24,59
+  71 004e 8760      		ori r24,lo8(7)
+  72 0050 8093 3B00 		sts 59,r24
+  73               	.LM10:
+  74 0054 8091 3100 		lds r24,49
+  75 0058 8C6C      		ori r24,lo8(-52)
+  76 005a 8093 3100 		sts 49,r24
+  77               	.LM11:
+  78 005e 93E3      		ldi r25,lo8(51)
+  79 0060 8091 3200 		lds r24,50
+  80 0064 8923      		and r24,r25
+  81 0066 8093 3200 		sts 50,r24
+  82               	.LM12:
+  83 006a 0E94 0000 		call io_init
+  84               	.LM13:
+  85 006e 0E94 0000 		call timer0_init
+  86               	.LM14:
+  87 0072 8091 3200 		lds r24,50
+  88 0076 8460      		ori r24,lo8(4)
+  89 0078 8093 3200 		sts 50,r24
+  90               	.LM15:
+  91 007c 8091 3200 		lds r24,50
+  92 0080 877F      		andi r24,lo8(-9)
+  93 0082 8093 3200 		sts 50,r24
+  94               	.LM16:
+  95 0086 1092 4900 		sts (72)+1,__zero_reg__
+  96 008a 1092 4800 		sts 72,__zero_reg__
+  97               	.LM17:
+  98 008e 8091 3200 		lds r24,50
+  99 0092 8068      		ori r24,lo8(-128)
+ 100 0094 8093 3200 		sts 50,r24
+ 101               	.LM18:
+ 102 0098 8091 3200 		lds r24,50
+ 103 009c 8F7B      		andi r24,lo8(-65)
+ 104 009e 8093 3200 		sts 50,r24
+ 105               	.LM19:
+ 106 00a2 1092 4B00 		sts (74)+1,__zero_reg__
+ 107 00a6 1092 4A00 		sts 74,__zero_reg__
+ 108               	.L3:
+ 109               	.LM20:
+ 110 00aa 81E0      		ldi r24,lo8(1)
+ 111 00ac 0E94 0000 		call get_key_press
+ 112 00b0 8823      		tst r24
+ 113 00b2 49F0      		breq .L5
+ 114               	.LM21:
+ 115 00b4 8091 4A00 		lds r24,74
+ 116 00b8 9091 4B00 		lds r25,(74)+1
+ 117 00bc 0A97      		sbiw r24,10
+ 118 00be 9093 4B00 		sts (74)+1,r25
+ 119 00c2 8093 4A00 		sts 74,r24
+ 120               	.L5:
+ 121               	.LM22:
+ 122 00c6 84E0      		ldi r24,lo8(4)
+ 123 00c8 0E94 0000 		call get_key_press
+ 124 00cc 8823      		tst r24
+ 125 00ce C1F0      		breq .L6
+ 126               	.LM23:
+ 127 00d0 9091 3200 		lds r25,50
+ 128 00d4 8BEF      		ldi r24,lo8(-5)
+ 129 00d6 8927      		eor r24,r25
+ 130 00d8 8093 3200 		sts 50,r24
+ 131               	.LM24:
+ 132 00dc 9091 3200 		lds r25,50
+ 133 00e0 87EF      		ldi r24,lo8(-9)
+ 134 00e2 8927      		eor r24,r25
+ 135 00e4 8093 3200 		sts 50,r24
+ 136               	.LM25:
+ 137 00e8 9091 3200 		lds r25,50
+ 138 00ec 8FEB      		ldi r24,lo8(-65)
+ 139 00ee 8927      		eor r24,r25
+ 140 00f0 8093 3200 		sts 50,r24
+ 141               	.LM26:
+ 142 00f4 9FE7      		ldi r25,lo8(127)
+ 143 00f6 8091 3200 		lds r24,50
+ 144 00fa 8927      		eor r24,r25
+ 145 00fc 8093 3200 		sts 50,r24
+ 146               	.L6:
+ 147               	.LM27:
+ 148 0100 82E0      		ldi r24,lo8(2)
+ 149 0102 0E94 0000 		call get_key_press
+ 150 0106 8823      		tst r24
+ 151 0108 31F4      		brne .L8
+ 152 010a 82E0      		ldi r24,lo8(2)
+ 153 010c 0E94 0000 		call get_key_rpt
+ 154 0110 8823      		tst r24
+ 155 0112 09F4      		brne .L8
+ 156 0114 CACF      		rjmp .L3
+ 157               	.L8:
+ 158               	.LM28:
+ 159 0116 8091 4800 		lds r24,72
+ 160 011a 9091 4900 		lds r25,(72)+1
+ 161 011e 0A97      		sbiw r24,10
+ 162 0120 9093 4900 		sts (72)+1,r25
+ 163 0124 8093 4800 		sts 72,r24
+ 164 0128 C0CF      		rjmp .L3
+ 165               	/* epilogue: frame size=0 */
+ 166               	/* epilogue: noreturn */
+ 167               	/* epilogue end (size=0) */
+ 168               	/* function main size 121 (117) */
+ 169               	.LFE3:
+ 171               		.comm timer0_counter,1,1
+ 172               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:19     .text:00000000 io_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccgTaaaa.s:56     .text:00000038 main
+                            *COM*:00000001 timer0_counter
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__stack
+timer0_init
+get_key_press
+get_key_rpt

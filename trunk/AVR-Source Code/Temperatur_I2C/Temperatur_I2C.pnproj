@@ -1,0 +1,1 @@
+<Project name="Temperatur_I2C"><File path="main.c"></File><File path="Makefile"></File><File path="i2cmaster.h"></File><File path="twimaster.c"></File></Project>

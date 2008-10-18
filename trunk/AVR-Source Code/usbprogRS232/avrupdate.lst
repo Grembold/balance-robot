@@ -1,0 +1,85 @@
+   1               		.file	"avrupdate.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	avrupdate_start
+  19               	avrupdate_start:
+  20               	.LFB8:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24               	.LBB6:
+  25               	.LBB7:
+  26               	.LM2:
+  27 0000 8FEF      		ldi r24,lo8(-1)
+  28 0002 20E0      		ldi r18,lo8(ee_version)
+  29 0004 30E0      		ldi r19,hi8(ee_version)
+  30 0006 D901      		movw r26,r18
+  31               	.LVL0:
+  32               	/* #APP */
+  33 0008 082E      		mov __tmp_reg__,r24
+  34 000a 0E94 0000 		call __eeprom_write_byte_1C1D1E
+  35               	/* #NOAPP */
+  36               	.L2:
+  37               	.LBE7:
+  38               	.LBE6:
+  39               	.LBB8:
+  40               	.LBB9:
+  41               	.LM3:
+  42 000e D901      		movw r26,r18
+  43               	.LVL1:
+  44               	/* #APP */
+  45 0010 0E94 0000 		call __eeprom_read_byte_1C1D1E
+  46 0014 802D      		mov r24,__tmp_reg__
+  47               	.LVL2:
+  48               	/* #NOAPP */
+  49               	.LBE9:
+  50               	.LBE8:
+  51               	.LM4:
+  52 0016 8F3F      		cpi r24,lo8(-1)
+  53 0018 01F4      		brne .L2
+  54               	.LM5:
+  55 001a 8BB7      		in r24,91-0x20
+  56               	.LVL3:
+  57 001c 8260      		ori r24,lo8(2)
+  58 001e 8BBF      		out 91-0x20,r24
+  59               	.LM6:
+  60 0020 E091 0000 		lds r30,avrupdate_jump_to_boot
+  61 0024 F091 0000 		lds r31,(avrupdate_jump_to_boot)+1
+  62 0028 0995      		icall
+  63               	.LVL4:
+  64               	/* epilogue: frame size=0 */
+  65 002a 0895      		ret
+  66               	/* epilogue end (size=1) */
+  67               	/* function avrupdate_start size 24 (23) */
+  68               	.LFE8:
+  70               	.global	avrupdate_jump_to_boot
+  71               		.data
+  74               	avrupdate_jump_to_boot:
+  75 0000 0070      		.word	28672
+  76               	.global	ee_version
+  77               		.section	.eeprom,"aw",@progbits
+  80               	ee_version:
+  81 0000 01        		.byte	1
+ 106               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 avrupdate.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:6      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:19     .text:00000000 avrupdate_start
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:80     .eeprom:00000000 ee_version
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccFswt34.s:74     .data:00000000 avrupdate_jump_to_boot
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__eeprom_write_byte_1C1D1E
+__eeprom_read_byte_1C1D1E

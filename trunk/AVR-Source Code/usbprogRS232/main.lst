@@ -1,0 +1,611 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               	.global	USBNInterfaceRequests
+  19               	USBNInterfaceRequests:
+  20               	.LFB9:
+  21               	.LM1:
+  22               	/* prologue: frame size=0 */
+  23               	/* prologue end (size=0) */
+  24               	.LVL0:
+  25               	/* epilogue: frame size=0 */
+  26 0000 0895      		ret
+  27               	/* epilogue end (size=1) */
+  28               	/* function USBNInterfaceRequests size 1 (0) */
+  29               	.LFE9:
+  31               		.data
+  32               	.LC0:
+  33 0000 00        		.string	""
+  34               	.LC1:
+  35 0001 5553 4270 		.string	"USBprog EmbeddedProjects"
+  35      726F 6720 
+  35      456D 6265 
+  35      6464 6564 
+  35      5072 6F6A 
+  36               	.LC2:
+  37 001a 7573 6270 		.string	"usbprogRS232"
+  37      726F 6752 
+  37      5332 3332 
+  37      00
+  38               		.text
+  39               	.global	main
+  41               	main:
+  42               	.LFB15:
+  43               	.LM2:
+  44               	/* prologue: frame size=0 */
+  45               	/* prologue end (size=0) */
+  46               	.LM3:
+  47 0002 44E6      		ldi r20,lo8(100)
+  48 0004 60E0      		ldi r22,lo8(toRS232Buf)
+  49 0006 70E0      		ldi r23,hi8(toRS232Buf)
+  50 0008 8091 0000 		lds r24,toRS232FIFO
+  51 000c 9091 0000 		lds r25,(toRS232FIFO)+1
+  52 0010 0E94 0000 		call fifo_init
+  53               	.LM4:
+  54 0014 44E6      		ldi r20,lo8(100)
+  55 0016 60E0      		ldi r22,lo8(toUSBBuf)
+  56 0018 70E0      		ldi r23,hi8(toUSBBuf)
+  57 001a 8091 0000 		lds r24,toUSBFIFO
+  58 001e 9091 0000 		lds r25,(toUSBFIFO)+1
+  59 0022 0E94 0000 		call fifo_init
+  60               	.LM5:
+  61 0026 80E0      		ldi r24,lo8(gs(USBtoRS232))
+  62 0028 90E0      		ldi r25,hi8(gs(USBtoRS232))
+  63 002a 0E94 0000 		call USBNCallbackFIFORX1
+  64               	.LM6:
+  65               	/* #APP */
+  66 002e 7894      		sei
+  67               	.LM7:
+  68               	/* #NOAPP */
+  69 0030 0E94 0000 		call uart_init
+  70               	.LM8:
+  71 0034 60E0      		ldi r22,lo8(usbrs232Conf)
+  72 0036 70E0      		ldi r23,hi8(usbrs232Conf)
+  73 0038 80E0      		ldi r24,lo8(usbrs232)
+  74 003a 90E0      		ldi r25,hi8(usbrs232)
+  75 003c 0E94 0000 		call USBNInit
+  76               	.LM9:
+  77 0040 80E0      		ldi r24,lo8(.LC0)
+  78 0042 90E0      		ldi r25,hi8(.LC0)
+  79 0044 0E94 0000 		call _USBNAddStringDescriptor
+  80               	.LM10:
+  81 0048 80E0      		ldi r24,lo8(.LC1)
+  82 004a 90E0      		ldi r25,hi8(.LC1)
+  83 004c 0E94 0000 		call _USBNAddStringDescriptor
+  84               	.LM11:
+  85 0050 80E0      		ldi r24,lo8(.LC2)
+  86 0052 90E0      		ldi r25,hi8(.LC2)
+  87 0054 0E94 0000 		call _USBNAddStringDescriptor
+  88               	.LM12:
+  89 0058 0E94 0000 		call _USBNCreateStringField
+  90               	.LM13:
+  91 005c 0E94 0000 		call USBNInitMC
+  92               	.LM14:
+  93 0060 0E94 0000 		call USBNStart
+  94               	.L4:
+  95 0064 00C0      		rjmp .L4
+  96               	/* epilogue: frame size=0 */
+  97               	/* epilogue: noreturn */
+  98               	/* epilogue end (size=0) */
+  99               	/* function main size 51 (51) */
+ 100               	.LFE15:
+ 102               	.global	rs232_send
+ 104               	rs232_send:
+ 105               	.LFB14:
+ 106               	.LM15:
+ 107               	/* prologue: frame size=0 */
+ 108               	/* prologue end (size=0) */
+ 109               	.LM16:
+ 110 0066 8091 0000 		lds r24,togl1
+ 111 006a 9091 0000 		lds r25,(togl1)+1
+ 112 006e 0197      		sbiw r24,1
+ 113 0070 01F0      		breq .L12
+ 114               	.LM17:
+ 115 0072 81E0      		ldi r24,lo8(1)
+ 116 0074 90E0      		ldi r25,hi8(1)
+ 117 0076 9093 0000 		sts (togl1)+1,r25
+ 118 007a 8093 0000 		sts togl1,r24
+ 119               	.LM18:
+ 120 007e 67E0      		ldi r22,lo8(7)
+ 121 0080 83E3      		ldi r24,lo8(51)
+ 122 0082 0E94 0000 		call USBNWrite
+ 123 0086 0895      		ret
+ 124               	.L12:
+ 125               	.LM19:
+ 126 0088 1092 0000 		sts (togl1)+1,__zero_reg__
+ 127 008c 1092 0000 		sts togl1,__zero_reg__
+ 128               	.LM20:
+ 129 0090 63E0      		ldi r22,lo8(3)
+ 130 0092 83E3      		ldi r24,lo8(51)
+ 131 0094 0E94 0000 		call USBNWrite
+ 132 0098 0895      		ret
+ 133               	/* epilogue: frame size=0 */
+ 134               	/* epilogue: noreturn */
+ 135               	/* epilogue end (size=0) */
+ 136               	/* function rs232_send size 27 (27) */
+ 137               	.LFE14:
+ 139               	.global	interrupt_ep_send
+ 141               	interrupt_ep_send:
+ 142               	.LFB13:
+ 143               	.LM21:
+ 144               	/* prologue: frame size=0 */
+ 145               	/* prologue end (size=0) */
+ 146               	.LM22:
+ 147 009a 8091 0000 		lds r24,togl3
+ 148 009e 9091 0000 		lds r25,(togl3)+1
+ 149 00a2 0197      		sbiw r24,1
+ 150 00a4 01F0      		breq .L18
+ 151               	.LM23:
+ 152 00a6 81E0      		ldi r24,lo8(1)
+ 153 00a8 90E0      		ldi r25,hi8(1)
+ 154 00aa 9093 0000 		sts (togl3)+1,r25
+ 155 00ae 8093 0000 		sts togl3,r24
+ 156               	.LM24:
+ 157 00b2 67E0      		ldi r22,lo8(7)
+ 158 00b4 8BE2      		ldi r24,lo8(43)
+ 159 00b6 0E94 0000 		call USBNWrite
+ 160 00ba 0895      		ret
+ 161               	.L18:
+ 162               	.LM25:
+ 163 00bc 1092 0000 		sts (togl3)+1,__zero_reg__
+ 164 00c0 1092 0000 		sts togl3,__zero_reg__
+ 165               	.LM26:
+ 166 00c4 63E0      		ldi r22,lo8(3)
+ 167 00c6 8BE2      		ldi r24,lo8(43)
+ 168 00c8 0E94 0000 		call USBNWrite
+ 169 00cc 0895      		ret
+ 170               	/* epilogue: frame size=0 */
+ 171               	/* epilogue: noreturn */
+ 172               	/* epilogue end (size=0) */
+ 173               	/* function interrupt_ep_send size 27 (27) */
+ 174               	.LFE13:
+ 176               	.global	USBtoRS232
+ 178               	USBtoRS232:
+ 179               	.LFB12:
+ 180               	.LM27:
+ 181               	/* prologue: frame size=0 */
+ 182               	/* prologue end (size=0) */
+ 183               	.LVL1:
+ 184 00ce FC01      		movw r30,r24
+ 185               	.LM28:
+ 186 00d0 8081      		ld r24,Z
+ 187               	.LVL2:
+ 188 00d2 0E94 0000 		call uart_putc
+ 189               	.LVL3:
+ 190               	/* epilogue: frame size=0 */
+ 191 00d6 0895      		ret
+ 192               	/* epilogue end (size=1) */
+ 193               	/* function USBtoRS232 size 5 (4) */
+ 194               	.LFE12:
+ 196               	.global	USBNDecodeVendorRequest
+ 198               	USBNDecodeVendorRequest:
+ 199               	.LFB10:
+ 200               	.LM29:
+ 201               	/* prologue: frame size=0 */
+ 202               	/* prologue end (size=0) */
+ 203               	.LVL4:
+ 204               	.LM30:
+ 205 00d8 FC01      		movw r30,r24
+ 206 00da 8181      		ldd r24,Z+1
+ 207               	.LVL5:
+ 208 00dc 8130      		cpi r24,lo8(1)
+ 209 00de 01F0      		breq .L25
+ 210 00e0 0895      		ret
+ 211               	.L25:
+ 212               	.LM31:
+ 213 00e2 0E94 0000 		call avrupdate_start
+ 214 00e6 0895      		ret
+ 215               	/* epilogue: frame size=0 */
+ 216               	/* epilogue: noreturn */
+ 217               	/* epilogue end (size=0) */
+ 218               	/* function USBNDecodeVendorRequest size 8 (8) */
+ 219               	.LFE10:
+ 221               	.global	__vector_1
+ 223               	__vector_1:
+ 224               	.LFB8:
+ 225               	.LM32:
+ 226               	/* prologue: frame size=0 */
+ 227 00e8 1F92      		push __zero_reg__
+ 228 00ea 0F92      		push __tmp_reg__
+ 229 00ec 0FB6      		in __tmp_reg__,__SREG__
+ 230 00ee 0F92      		push __tmp_reg__
+ 231 00f0 1124      		clr __zero_reg__
+ 232 00f2 2F93      		push r18
+ 233 00f4 3F93      		push r19
+ 234 00f6 4F93      		push r20
+ 235 00f8 5F93      		push r21
+ 236 00fa 6F93      		push r22
+ 237 00fc 7F93      		push r23
+ 238 00fe 8F93      		push r24
+ 239 0100 9F93      		push r25
+ 240 0102 AF93      		push r26
+ 241 0104 BF93      		push r27
+ 242 0106 EF93      		push r30
+ 243 0108 FF93      		push r31
+ 244               	/* prologue end (size=17) */
+ 245               	.LM33:
+ 246 010a 0E94 0000 		call USBNInterrupt
+ 247               	/* epilogue: frame size=0 */
+ 248 010e FF91      		pop r31
+ 249 0110 EF91      		pop r30
+ 250 0112 BF91      		pop r27
+ 251 0114 AF91      		pop r26
+ 252 0116 9F91      		pop r25
+ 253 0118 8F91      		pop r24
+ 254 011a 7F91      		pop r23
+ 255 011c 6F91      		pop r22
+ 256 011e 5F91      		pop r21
+ 257 0120 4F91      		pop r20
+ 258 0122 3F91      		pop r19
+ 259 0124 2F91      		pop r18
+ 260 0126 0F90      		pop __tmp_reg__
+ 261 0128 0FBE      		out __SREG__,__tmp_reg__
+ 262 012a 0F90      		pop __tmp_reg__
+ 263 012c 1F90      		pop __zero_reg__
+ 264 012e 1895      		reti
+ 265               	/* epilogue end (size=17) */
+ 266               	/* function __vector_1 size 36 (2) */
+ 267               	.LFE8:
+ 269               		.data
+ 270               	.LC3:
+ 271 0027 636C 6173 		.string	"class"
+ 271      7300 
+ 272               	.LC4:
+ 273 002d 7365 7420 		.string	"set line\r\n"
+ 273      6C69 6E65 
+ 273      0D0A 00
+ 274               		.text
+ 275               	.global	USBNDecodeClassRequest
+ 277               	USBNDecodeClassRequest:
+ 278               	.LFB11:
+ 279               	.LM34:
+ 280               	/* prologue: frame size=0 */
+ 281 0130 0F93      		push r16
+ 282 0132 1F93      		push r17
+ 283               	/* prologue end (size=2) */
+ 284               	.LVL6:
+ 285 0134 8C01      		movw r16,r24
+ 286               	.LM35:
+ 287 0136 80E0      		ldi r24,lo8(.LC3)
+ 288 0138 90E0      		ldi r25,hi8(.LC3)
+ 289               	.LVL7:
+ 290 013a 0E94 0000 		call uart_puts
+ 291               	.LVL8:
+ 292               	.LM36:
+ 293 013e F801      		movw r30,r16
+ 294 0140 8181      		ldd r24,Z+1
+ 295 0142 8132      		cpi r24,lo8(33)
+ 296 0144 01F4      		brne .+2
+ 297 0146 00C0      		rjmp .L31
+ 298               	.LM37:
+ 299 0148 8232      		cpi r24,lo8(34)
+ 300 014a 01F0      		breq .L32
+ 301 014c 8032      		cpi r24,lo8(32)
+ 302 014e 01F0      		breq .+2
+ 303 0150 00C0      		rjmp .L39
+ 304               	.LM38:
+ 305 0152 80E0      		ldi r24,lo8(.LC4)
+ 306 0154 90E0      		ldi r25,hi8(.LC4)
+ 307 0156 0E94 0000 		call uart_puts
+ 308               	.LM39:
+ 309 015a 61E0      		ldi r22,lo8(1)
+ 310 015c 87E2      		ldi r24,lo8(39)
+ 311 015e 0E94 0000 		call USBNWrite
+ 312               	.LM40:
+ 313 0162 85E2      		ldi r24,lo8(37)
+ 314 0164 0E94 0000 		call USBNRead
+ 315               	.LM41:
+ 316 0168 85E2      		ldi r24,lo8(37)
+ 317 016a 0E94 0000 		call USBNRead
+ 318               	.LM42:
+ 319 016e 85E2      		ldi r24,lo8(37)
+ 320 0170 0E94 0000 		call USBNRead
+ 321               	.LM43:
+ 322 0174 85E2      		ldi r24,lo8(37)
+ 323 0176 0E94 0000 		call USBNRead
+ 324               	.LM44:
+ 325 017a 85E2      		ldi r24,lo8(37)
+ 326 017c 0E94 0000 		call USBNRead
+ 327               	.LM45:
+ 328 0180 85E2      		ldi r24,lo8(37)
+ 329 0182 0E94 0000 		call USBNRead
+ 330               	.LM46:
+ 331 0186 85E2      		ldi r24,lo8(37)
+ 332 0188 0E94 0000 		call USBNRead
+ 333               	.LM47:
+ 334 018c 68E0      		ldi r22,lo8(8)
+ 335 018e 83E2      		ldi r24,lo8(35)
+ 336 0190 0E94 0000 		call USBNWrite
+ 337               	.LM48:
+ 338 0194 65E0      		ldi r22,lo8(5)
+ 339 0196 83E2      		ldi r24,lo8(35)
+ 340 0198 0E94 0000 		call USBNWrite
+ 341 019c 00C0      		rjmp .L39
+ 342               	.L32:
+ 343               	.LM49:
+ 344 019e 68E0      		ldi r22,lo8(8)
+ 345 01a0 8BE2      		ldi r24,lo8(43)
+ 346 01a2 0E94 0000 		call USBNWrite
+ 347               	.LM50:
+ 348 01a6 61EA      		ldi r22,lo8(-95)
+ 349 01a8 89E2      		ldi r24,lo8(41)
+ 350 01aa 0E94 0000 		call USBNWrite
+ 351 01ae 60E2      		ldi r22,lo8(32)
+ 352 01b0 89E2      		ldi r24,lo8(41)
+ 353 01b2 0E94 0000 		call USBNWrite
+ 354 01b6 60E0      		ldi r22,lo8(0)
+ 355 01b8 89E2      		ldi r24,lo8(41)
+ 356 01ba 0E94 0000 		call USBNWrite
+ 357 01be 60E0      		ldi r22,lo8(0)
+ 358 01c0 89E2      		ldi r24,lo8(41)
+ 359 01c2 0E94 0000 		call USBNWrite
+ 360 01c6 60E0      		ldi r22,lo8(0)
+ 361 01c8 89E2      		ldi r24,lo8(41)
+ 362 01ca 0E94 0000 		call USBNWrite
+ 363 01ce 60E0      		ldi r22,lo8(0)
+ 364 01d0 89E2      		ldi r24,lo8(41)
+ 365 01d2 0E94 0000 		call USBNWrite
+ 366 01d6 62E0      		ldi r22,lo8(2)
+ 367 01d8 89E2      		ldi r24,lo8(41)
+ 368 01da 0E94 0000 		call USBNWrite
+ 369 01de 60E0      		ldi r22,lo8(0)
+ 370 01e0 89E2      		ldi r24,lo8(41)
+ 371 01e2 0E94 0000 		call USBNWrite
+ 372               	.LBB6:
+ 373               	.LBB7:
+ 374               	.LM51:
+ 375 01e6 8091 0000 		lds r24,togl3
+ 376 01ea 9091 0000 		lds r25,(togl3)+1
+ 377 01ee 0197      		sbiw r24,1
+ 378 01f0 01F0      		breq .L40
+ 379               	.L36:
+ 380               	.LM52:
+ 381 01f2 81E0      		ldi r24,lo8(1)
+ 382 01f4 90E0      		ldi r25,hi8(1)
+ 383 01f6 9093 0000 		sts (togl3)+1,r25
+ 384 01fa 8093 0000 		sts togl3,r24
+ 385               	.LM53:
+ 386 01fe 67E0      		ldi r22,lo8(7)
+ 387 0200 8BE2      		ldi r24,lo8(43)
+ 388 0202 0E94 0000 		call USBNWrite
+ 389               	.L38:
+ 390               	.LBE7:
+ 391               	.LBE6:
+ 392               	.LM54:
+ 393 0206 65E0      		ldi r22,lo8(5)
+ 394 0208 83E2      		ldi r24,lo8(35)
+ 395 020a 0E94 0000 		call USBNWrite
+ 396 020e 00C0      		rjmp .L39
+ 397               	.L31:
+ 398               	.LM55:
+ 399 0210 68E0      		ldi r22,lo8(8)
+ 400 0212 83E2      		ldi r24,lo8(35)
+ 401 0214 0E94 0000 		call USBNWrite
+ 402               	.LM56:
+ 403 0218 60E8      		ldi r22,lo8(-128)
+ 404 021a 81E2      		ldi r24,lo8(33)
+ 405 021c 0E94 0000 		call USBNWrite
+ 406               	.LM57:
+ 407 0220 65E2      		ldi r22,lo8(37)
+ 408 0222 81E2      		ldi r24,lo8(33)
+ 409 0224 0E94 0000 		call USBNWrite
+ 410               	.LM58:
+ 411 0228 60E0      		ldi r22,lo8(0)
+ 412 022a 81E2      		ldi r24,lo8(33)
+ 413 022c 0E94 0000 		call USBNWrite
+ 414               	.LM59:
+ 415 0230 60E0      		ldi r22,lo8(0)
+ 416 0232 81E2      		ldi r24,lo8(33)
+ 417 0234 0E94 0000 		call USBNWrite
+ 418               	.LM60:
+ 419 0238 60E0      		ldi r22,lo8(0)
+ 420 023a 81E2      		ldi r24,lo8(33)
+ 421 023c 0E94 0000 		call USBNWrite
+ 422               	.LM61:
+ 423 0240 60E0      		ldi r22,lo8(0)
+ 424 0242 81E2      		ldi r24,lo8(33)
+ 425 0244 0E94 0000 		call USBNWrite
+ 426               	.LM62:
+ 427 0248 68E0      		ldi r22,lo8(8)
+ 428 024a 81E2      		ldi r24,lo8(33)
+ 429 024c 0E94 0000 		call USBNWrite
+ 430               	.LBB9:
+ 431               	.LBB10:
+ 432               	.LM63:
+ 433 0250 8091 0000 		lds r24,togl3
+ 434 0254 9091 0000 		lds r25,(togl3)+1
+ 435 0258 0197      		sbiw r24,1
+ 436 025a 01F4      		brne .L36
+ 437               	.L40:
+ 438               	.LBE10:
+ 439               	.LBE9:
+ 440               	.LBB11:
+ 441               	.LBB8:
+ 442               	.LM64:
+ 443 025c 1092 0000 		sts (togl3)+1,__zero_reg__
+ 444 0260 1092 0000 		sts togl3,__zero_reg__
+ 445               	.LM65:
+ 446 0264 63E0      		ldi r22,lo8(3)
+ 447 0266 8BE2      		ldi r24,lo8(43)
+ 448 0268 0E94 0000 		call USBNWrite
+ 449 026c 00C0      		rjmp .L38
+ 450               	.L39:
+ 451               	.LBE8:
+ 452               	.LBE11:
+ 453               	/* epilogue: frame size=0 */
+ 454 026e 1F91      		pop r17
+ 455 0270 0F91      		pop r16
+ 456 0272 0895      		ret
+ 457               	/* epilogue end (size=3) */
+ 458               	/* function USBNDecodeClassRequest size 164 (159) */
+ 459               	.LFE11:
+ 461               	.global	tx1togl
+ 462               	.global	tx1togl
+ 463               		.section .bss
+ 466               	tx1togl:
+ 467 0000 00        		.skip 1,0
+ 468               	.global	togl3
+ 469               	.global	togl3
+ 472               	togl3:
+ 473 0001 0000      		.skip 2,0
+ 474               	.global	togl1
+ 475               	.global	togl1
+ 478               	togl1:
+ 479 0003 0000      		.skip 2,0
+ 480               	.global	usbrs232
+ 481               		.data
+ 484               	usbrs232:
+ 485 0038 12        		.byte	18
+ 486 0039 01        		.byte	1
+ 487 003a 10        		.byte	16
+ 488 003b 01        		.byte	1
+ 489 003c 02        		.byte	2
+ 490 003d 00        		.byte	0
+ 491 003e 00        		.byte	0
+ 492 003f 08        		.byte	8
+ 493 0040 81        		.byte	-127
+ 494 0041 17        		.byte	23
+ 495 0042 64        		.byte	100
+ 496 0043 0C        		.byte	12
+ 497 0044 00        		.byte	0
+ 498 0045 01        		.byte	1
+ 499 0046 01        		.byte	1
+ 500 0047 02        		.byte	2
+ 501 0048 00        		.byte	0
+ 502 0049 01        		.byte	1
+ 503               	.global	usbrs232Conf
+ 506               	usbrs232Conf:
+ 507 004a 09        		.byte	9
+ 508 004b 02        		.byte	2
+ 509 004c 48        		.byte	72
+ 510 004d 00        		.byte	0
+ 511 004e 02        		.byte	2
+ 512 004f 01        		.byte	1
+ 513 0050 00        		.byte	0
+ 514 0051 A0        		.byte	-96
+ 515 0052 1A        		.byte	26
+ 516 0053 09        		.byte	9
+ 517 0054 04        		.byte	4
+ 518 0055 00        		.byte	0
+ 519 0056 00        		.byte	0
+ 520 0057 01        		.byte	1
+ 521 0058 02        		.byte	2
+ 522 0059 02        		.byte	2
+ 523 005a 01        		.byte	1
+ 524 005b 00        		.byte	0
+ 525 005c 05        		.byte	5
+ 526 005d 24        		.byte	36
+ 527 005e 00        		.byte	0
+ 528 005f 10        		.byte	16
+ 529 0060 01        		.byte	1
+ 530 0061 04        		.byte	4
+ 531 0062 24        		.byte	36
+ 532 0063 02        		.byte	2
+ 533 0064 02        		.byte	2
+ 534 0065 05        		.byte	5
+ 535 0066 24        		.byte	36
+ 536 0067 06        		.byte	6
+ 537 0068 00        		.byte	0
+ 538 0069 01        		.byte	1
+ 539 006a 05        		.byte	5
+ 540 006b 24        		.byte	36
+ 541 006c 01        		.byte	1
+ 542 006d 03        		.byte	3
+ 543 006e 01        		.byte	1
+ 544 006f 07        		.byte	7
+ 545 0070 05        		.byte	5
+ 546 0071 83        		.byte	-125
+ 547 0072 03        		.byte	3
+ 548 0073 08        		.byte	8
+ 549 0074 00        		.byte	0
+ 550 0075 64        		.byte	100
+ 551 0076 09        		.byte	9
+ 552 0077 04        		.byte	4
+ 553 0078 01        		.byte	1
+ 554 0079 00        		.byte	0
+ 555 007a 02        		.byte	2
+ 556 007b 0A        		.byte	10
+ 557 007c 00        		.byte	0
+ 558 007d 00        		.byte	0
+ 559 007e 00        		.byte	0
+ 560 007f 07        		.byte	7
+ 561 0080 05        		.byte	5
+ 562 0081 01        		.byte	1
+ 563 0082 02        		.byte	2
+ 564 0083 01        		.byte	1
+ 565 0084 00        		.byte	0
+ 566 0085 00        		.byte	0
+ 567 0086 07        		.byte	7
+ 568 0087 05        		.byte	5
+ 569 0088 81        		.byte	-127
+ 570 0089 02        		.byte	2
+ 571 008a 08        		.byte	8
+ 572 008b 00        		.byte	0
+ 573 008c 00        		.byte	0
+ 574               		.comm DeviceDescriptor,2,1
+ 575               		.comm ConfigurationDescriptor,2,1
+ 576               		.comm StringList,2,1
+ 577               		.comm FinalStringArray,2,1
+ 578               		.comm RX1Callback,2,1
+ 579               		.comm EP0RXBuf,8,1
+ 580               		.comm toUSBBuf,100,1
+ 581               		.comm toRS232Buf,100,1
+ 582               		.comm toRS232FIFO,2,1
+ 583               		.comm toUSBFIFO,2,1
+ 584               		.comm usb_cdc_line_coding,7,1
+ 665               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:5      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:6      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:19     .text:00000000 USBNInterfaceRequests
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:41     .text:00000002 main
+                            *COM*:00000064 toRS232Buf
+                            *COM*:00000002 toRS232FIFO
+                            *COM*:00000064 toUSBBuf
+                            *COM*:00000002 toUSBFIFO
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:178    .text:000000ce USBtoRS232
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:506    .data:0000004a usbrs232Conf
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:484    .data:00000038 usbrs232
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:104    .text:00000066 rs232_send
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:478    .bss:00000003 togl1
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:141    .text:0000009a interrupt_ep_send
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:472    .bss:00000001 togl3
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:198    .text:000000d8 USBNDecodeVendorRequest
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:223    .text:000000e8 __vector_1
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:277    .text:00000130 USBNDecodeClassRequest
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cciPVLrd.s:466    .bss:00000000 tx1togl
+                            *COM*:00000002 DeviceDescriptor
+                            *COM*:00000002 ConfigurationDescriptor
+                            *COM*:00000002 StringList
+                            *COM*:00000002 FinalStringArray
+                            *COM*:00000002 RX1Callback
+                            *COM*:00000008 EP0RXBuf
+                            *COM*:00000007 usb_cdc_line_coding
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+fifo_init
+USBNCallbackFIFORX1
+uart_init
+USBNInit
+_USBNAddStringDescriptor
+_USBNCreateStringField
+USBNInitMC
+USBNStart
+USBNWrite
+uart_putc
+avrupdate_start
+USBNInterrupt
+uart_puts
+USBNRead
