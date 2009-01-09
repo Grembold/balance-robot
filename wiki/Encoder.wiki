@@ -33,22 +33,8 @@ Die alten und neuen Signale werden in einer Variablen (bPhase) gespeichert und d
 
 
 ||aSteps||
-||0	||0||
-||1	||-1||
-||2	||1||
-||3	||Inv||
-||4	||1||
-||5	||0||
-||6	||Inv||
-||7	||-1||
-||8	||-1||
-||9	||Inv||
-||10	||0||
-||11	||1||
-||12	||Inv||
-||13	||1||
-||14	||-1||
-||15	||0||
+||0	||1	||2	||3	||4	||5	||6	||7	||8	||9	||10	||11	||12	||13	||14	||15	||
+||0	||-1	||1	||Inv	||1	||0	||Inv	||-1	||-1	||Inv	||0	||1	||Inv	||1	||-1	||0	||
 
 
 
@@ -84,7 +70,7 @@ Encoder
 }}}
 
 === Wie viel passt in eine long (32bit)? ===
-<math>(±2.174.483.648)/(18 Striche∙4 Flanken)= ±30.201.161 Umdrehungen</math>
+{{{ (±2.174.483.648)/(18 Striche∙4 Flanken) = ±30.201.161 Umdrehungen}}}
 
-<math>(30.201.161 Umdr.)/(30 Getr.Motor ∙45/60 Getr.Rad)=755.029 Rad Umdrehungen 
-755.029 ∙31cm=23.405.899 cm=23,4 km</math>
+{{{(30.201.161 Umdr.)/(30 Getr.Motor ∙45/60 Getr.Rad)=755.029 Rad Umdrehungen}}}
+{{{ 755.029 ∙31cm=23.405.899 cm=23,4 km }}}
