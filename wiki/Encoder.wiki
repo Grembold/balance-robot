@@ -3,6 +3,8 @@
 
 
 = Encoder Auswertung =
+
+
 == Ausgangssituation ==
 An den Motoren sind Lichtschranken und Schlitzscheiben zur Erfassung der Drehung angebracht. Jeder Motor hat dabei zwei Gabellichtschranken (A und B)  die ein um 90° versetztes Signal liefern.
 
@@ -16,26 +18,26 @@ Die Auswertung eines Encoders soll durch einen Interrupt bei jeder steigenden un
 Da der µC die Auswertung für zwei Motoren machen muss, müssen 12.000 ISR pro Sekunde bearbeitet werden.
 Die zwei Eingangs-Signale können vier Zustände (Phasen) annehmen und ergeben mit den Zuständen beim letzten Aufruf, insgesamt 16 Möglichkeiten. Da sich von einem auf den anderen Zustand nur ein Signal ändern darf, sind in den 16 Möglichkeiten einige nicht Gültige. Das KV-Diagramm zeigt diese Zustände, wobei A und B die aktuellen und a und b die Signale der vorhergehenden Messung sind. Die Signale mit Ausrufezeichen sind LOW und ohne HIGH.
 
- ||	||A	||A	||!A	||!A	||	||
- ||B	||0	||1	||0	||-1	||b||
- ||B	||-1	||Inv	||1	||Inv	||!b||
- ||!B	||0	||-1	||0	||1	||!b||
- ||!B	||1	||Inv	||-1	||Inv	||b||
- ||	||a	||!a	||!a	||a	||	||
+||	||A	||A	||!A	||!A	||	||
+||B	||0	||1	||0	||-1	||b	||
+||B	||-1	||Inv	||1	||Inv	||!b	||
+||!B	||0	||-1	||0	||1	||!b	||
+||!B	||1	||Inv	||-1	||Inv	||b	||
+||	||a	||!a	||!a	||a	||	||
 
 Im zweiten Feld ist B HIGH und hat sich nicht geändert (kleines b ist auch HIGH), wobei A von LOW auf High gewechselt hat. Dies ergibt dann einen Schritt von 1. Bei negativen Schritten hat sich der Motor in die andere Richtung gedreht und bei 0 gar nicht.
 
 == Programstruktur ==
 Die alten und neuen Signale werden in einer Variablen (bPhase) gespeichert und damit aus einer Liste (aSteps) der entsprechende Schritt entnommen. 
 
- ||*bPhase*||
- ||0||0||0||0||0||A||B||a||b||
+||*bPhase*||
+||0||0||0||0||0||A||B||a||b||
 
 Das Byte bPhase ist der Index für das Array aSteps.
 
- ||*aSteps*||
- ||0	||1	||2	||3	||4	||5	||6	||7	||8	||9	||10	||11	||12	||13	||14	||15	||
- ||0	||-1	||1	||Inv	||1	||0	||Inv	||-1	||-1	||Inv	||0	||1	||Inv	||1	||-1	||0	||
+||*aSteps*||
+||0	||1	||2	||3	||4	||5	||6	||7	||8	||9	||10	||11	||12	||13	||14	||15	||
+||0	||-1	||1	||Inv	||1	||0	||Inv	||-1	||-1	||Inv	||0	||1	||Inv	||1	||-1	||0	||
 
 
 
