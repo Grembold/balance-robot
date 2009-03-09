@@ -1,0 +1,16 @@
+3764	2006/01/30	18:57:17	Reason=Fatal error
+3764	2006/01/30	18:57:17	ComputerName=LAPTOP-OLAF
+3764	2006/01/30	18:57:17	OS=5.1.2600 Service Pack 2
+3764	2006/01/30	18:57:17	File=CdaSelectTryAndExtendHandler.cpp,Line=288
+3764	2006/01/30	18:57:17	AdlmError=12 [License has expired and usage cannot be continued]
+3764	2006/01/30	18:57:17	VendorID=1 [SAFECAST]
+3764	2006/01/30	18:57:17	VendorError=14 [The licence has expired]
+3764	2006/01/30	18:57:17	SafeCastVersion=4.20.20
+3760	2006/02/02	13:37:47	Reason=Fatal error
+3760	2006/02/02	13:37:47	ComputerName=LAPTOP-OLAF
+3760	2006/02/02	13:37:47	OS=5.1.2600 Service Pack 2
+3760	2006/02/02	13:37:47	File=CdaSelectTryAndExtendHandler.cpp,Line=288
+3760	2006/02/02	13:37:47	AdlmError=12 [License has expired and usage cannot be continued]
+3760	2006/02/02	13:37:47	VendorID=1 [SAFECAST]
+3760	2006/02/02	13:37:47	VendorError=14 [The licence has expired]
+3760	2006/02/02	13:37:47	SafeCastVersion=4.20.20

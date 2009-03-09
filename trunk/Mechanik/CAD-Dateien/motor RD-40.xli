@@ -1,0 +1,233 @@
+Title: IGES Import Journal (Autodesk Inventor)
+==============================================================================
+Translating From:   J:\CAD\motor RD-40.igs
+
+==============================================================================
+
+Parse phase:
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_FORM_ZERO_CONIC_104_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_SPLINE_PLANAR_112_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_CONTINUITY_112_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PLANAR_FLAG_126_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_CLOSED_FLAG_126_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIODIC_PROP_FLAG_126_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIODIC_FLAG_126_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_NONPERIODIC_FLAG_126_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIOD_PROP_FLAG_1_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIODIC_FLAG_1_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_NONPERIODIC_FLAG_1_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIOD_PROP_FLAG_2_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_PERIODIC_FLAG_2_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_NONPERIODIC_FLAG_2_128_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_NUM_STRINGS_212_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_SUBENT_308_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_ENT_PTR_404_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_VIEW_LOC_404_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_CLIP_COEFF_410_FIX1 not found in validation table.
+
+*** Warning (EVM_CHECK_NOT_FOUND) ***
+Check IEVM_BAD_CLIP_DELTA_410_FIX1 not found in validation table.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 6253, TF 141:0) This Boundary entity's (141) parametric space curve, DE 6409
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 6251 of type 128:0.
+
+*** Warning (IEVM_BAD_SUBENT_143) ***
+(DE 6249, TF 143:0) This Bounded Surface entity (143) has a pointer (Index 4 or
+3+N of Parameter Data) that references an entity (DE 6253) that failed
+validation.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 7947, TF 141:0) This Boundary entity's (141) parametric space curve, DE 8091
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 7945 of type 128:0.
+
+*** Warning (IEVM_BAD_SUBENT_143) ***
+(DE 7943, TF 143:0) This Bounded Surface entity (143) has a pointer (Index 4 or
+3+N of Parameter Data) that references an entity (DE 7947) that failed
+validation.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 9017, TF 141:0) This Boundary entity's (141) parametric space curve, DE 9029
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 9015 of type 128:0.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 9017, TF 141:0) This Boundary entity's (141) parametric space curve, DE 9033
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 9015 of type 128:0.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 9017, TF 141:0) This Boundary entity's (141) parametric space curve, DE 9037
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 9015 of type 128:0.
+
+*** Warning (IEVM_BAD_PARAM_RANGE_141) ***
+(DE 9017, TF 141:0) This Boundary entity's (141) parametric space curve, DE 9041
+of type 126:0, parameter range is outside the parameter range of surface on
+which it lies, DE 9015 of type 128:0.
+
+*** Warning (IEVM_NON_CONT_MSC_141) ***
+(DE 9017, TF 141:0) This Boundary entity (141) points to a Model Space curve
+(Index 5 of Parameter Data) that contains segments that are discontinuous within
+the stated tolerance.
+Action taken: The curve was made continuous by the following actions.  (null)
+
+*** Warning (IEVM_BAD_SUBENT_143) ***
+(DE 9013, TF 143:0) This Bounded Surface entity (143) has a pointer (Index 4 or
+3+N of Parameter Data) that references an entity (DE 9017) that failed
+validation.
+
+ 
+==============================================================================
+
+Translation phase:
+
+==============================================================================
+Start Section:
+
+                                                                        
+
+Global Section:
+
+Parameter Delimiter:      ,
+Record Delimiter:         ;
+Sending Product ID:       J:\CAD\motor RD-40.dwg
+File Name:                J:\CAD\motor RD-40.igs
+System ID:                AutoCAD-16.2s (LMS Tech) (Microsoft Windows NT Version
+5.1 (x86))
+Preprocessor Version:     Autodesk IGES Translator Mechanical Desktop 2006 (Mar 
+7 2005) from Autodesk, Inc.
+Size of Integer:          32
+Sgl. Precision Mag:       38
+Sgl. Precision Sig:       6
+Dbl. Precision Mag:       99
+Dbl. Precision Sig:       15
+Receiving Product ID:     J:\CAD\motor RD-40.dwg
+Model Space Scale:        1,000000e+000
+Unit Flag:                2
+Unit String:              MM
+# of Line Weights:        211
+Maximum Line Width:       2,110000e+000
+Creation Date:            02/14/2006 13:28:08
+Minimum Resolution:       1,513862e-006
+Maximum Coordinate:       1,513862e+003
+Author:                   
+Organization:             
+IGES Version Number:      11  (IGES 5.3)
+Drafting Standard:        0
+Protocol Description:     
+Model Create/Modify Date: 02/07/2006 15:24:58
+
+Entity Summary:
+
+ Type     Form    Description                                            Count
+------------------------------------------------------------------------------
+  100        0    Circular Arc                                               2
+  102        0    Composite Curve                                            1
+  106       40    Witness Line                                              72
+  108        0    Plane (Unbounded)                                         12
+  110        0    Line                                                     199
+  116        0    Point                                                      6
+  124        0    Transformation Matrix                                     17
+  126        0    Rational B-Spline Curve (General)                       2581
+  126        1    Rational B-Spline Curve (Line)                           433
+  126        2    Rational B-Spline Curve (Circle)                          40
+  126        3    Rational B-Spline Curve (Ellipse)                          6
+  128        0    Rational B-Spline Surface (General)                      324
+  141        0    Boundary Entity                                          394
+  143        0    Bounded Surface                                          324
+  206        0    Diameter Dimension                                         4
+  212        2    General Note (Font change)                                 4
+  212        7    General Note (Center justified)                           36
+  214        3    Leader (Filled triangle)                                  74
+  214        4    Leader (No arrowhead)                                      2
+  216        0    Linear dim - undetermined form                            36
+  304        2    Line Font Definition (Pattern)                             1
+  308        0    Subfigure Definition                                      12
+  314        0    Color Definition                                           7
+  402        7    Group (Unordered, w/o back ptrs)                           2
+  404        0    Drawing (form 0)                                           3
+  406        3    Property (Level Function)                                  5
+  406        5    Property (Line Widening)                                   1
+  406       15    Property (Name)                                            8
+  406       16    Property (Drawing Size)                                    3
+  406       17    Property (Drawing Units)                                   3
+  406       21    Property (Pick)                                            1
+  406       27    Property (Generic Data)                                    1
+  408        0    Subfigure Instance                                        25
+  410        0    View                                                       3
+------------------------------------------------------------------------------
+                                                               Total      4642
+==============================================================================
+
+==============================================================================
+Error Summary:
+
+The following message was issued 30 time(s)
+Check %s not found in validation table.
+
+The following message was issued 6 time(s)
+This Boundary entity's (141) parametric space curve, DE %ld of type %<TF>,
+parameter range is outside the parameter range of surface on which it lies, DE
+%ld of type %<TF>.
+
+The following message was issued 1 time(s)
+This Boundary entity (141) points to a Model Space curve (Index 5 of Parameter
+Data) that contains segments that are discontinuous within the stated tolerance.
+
+The following message was issued 3 time(s)
+This Bounded Surface entity (143) has a pointer (Index 4 or 3+N of Parameter
+Data) that references an entity (DE %ld) that failed validation.
+
+Information: 0
+Status:      0
+Warning:     40
+Error:       0
+Fatal:       0
+
+Elapsed Time:
+
+Processor: 00:00:13
+Clock:     00:00:13
+==============================================================================
+

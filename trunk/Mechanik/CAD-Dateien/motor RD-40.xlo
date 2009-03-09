@@ -1,0 +1,224 @@
+Title: IGESOUT Journal (R2000i built May 19 2001 for 15.06s (LMS Tech) on
+Microsoft Windows NT Version 5.1 (x86))
+==============================================================================
+File: C:\Dokumente und Einstellungen\Olaf\Eigene Dateien\nBot\CAD\motor
+RD-40.xlo
+Date: Tue, Feb 07, 2006
+Time: 12:23:07
+==============================================================================
+
+Translating from AutoCAD Drawing:  C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\motor RD-40.dws
+            to IGES file:          C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\motor RD-40.igs
+
+
+==============================================================================
+
+Options obtained from:  default settings
+
+Units: Millimeters
+
+IGES Version: 5.3
+
+Drawing size based on ACAD layout.
+
+B-REP Solids mapped to IGES Bounded/Trimmed Surface (Type 143/144).
+
+All trimmed surfaces mapped to IGES Bounded Surface entities (Type 143).
+
+Text Font Mappings:
+  AutoCAD Style Name    IGES Font Code
+               COMP80            6
+               FUTURA            3
+                  GDT         1003
+              GOTHICE           12
+              GOTHICI           13
+            ISO8859-1         3001
+                KANJI         2001
+                LEROY            2
+                  OCR           19
+               ROMAND           18
+               ROMANS           14
+               ROMANT           17
+             STANDARD            1
+              SYMBOL0            0
+              SYMBOL1         1001
+              SYMBOL2         1002
+              SYMBOL3         1003
+                  TXT            1
+
+
+Linetype/Linefont Mappings:
+  AutoCAD Linetype     304:2?   IGES Linefont
+              CENTER     No            4
+          CONTINUOUS     No            1
+              DASHED     No            2
+                 DOT     No            5
+             PHANTOM     No            3
+
+Unreferenced data will not be written to IGES.
+
+Mechanical Desktop application present and loaded.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of ABDECKPLATTE.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of ABDECKPLATTE.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of LAGER STEG.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of LAGER STEG.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of SEITENWAND.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of SEITENWAND.
+
+*** Warning (ACAD_IGESOUT_ACTIVE_PART_VIEW) ***
+
+Unable to process Active Part View of SEITENWAND.
+
+
+
+AutoCAD Entity Summary
+
+Entity                                     Encountered  Processed  Errors
+=========================================  ===========  =========  ======
+Block                                                1          1       0
+Block Reference (Insert)                            11         11       0
+Mechanical Desktop Part                             11         11       0
+Dimension (Diameter)                                 4          4       0
+Dimension (Linear)                                  34         34       0
+Layer                                               28         28       0
+Line                                               186        186       0
+Linetype                                             2          2       0
+Multiline Text                                       2          2       0
+Named View (VIEW)                                    3          3       0
+Paper Space (Viewport id 1)                         10         10       0
+Point                                               12         12       0
+Polyline (Lightweight)                               1          1       0
+Solid (2D filled region)                             2          2       0
+                                           ===========  =========  ======
+Totals                                             307        307       0
+
+
+
+
+Unsupported AutoCAD Entity Summary
+
+Entity                                     Encountered
+=========================================  ===========
+Mechanical Desktop Part View-Edge Line             176
+Mechanical Desktop Part View-Edge Arc               57
+Mechanical Desktop Part View-Edge Circle            40
+Mechanical Desktop Geometry View                     3
+Unknown entity / ARX object                         60
+                                           ===========
+Totals                                             336
+
+
+==============================================================================
+Start Section:
+
+
+Global Section:
+
+Parameter Delimiter:      ,
+Record Delimiter:         ;
+Sending Product ID:       C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\motor RD-40.dws
+File Name:                C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\motor RD-40.igs
+System ID:                AutoCAD-15.06s (LMS Tech) (Microsoft Windows NT
+Version 5.1 (x86))
+Preprocessor Version:     Autodesk IGES Translator R2000i (May 19 2001) from
+Autodesk, Inc.
+Size of Integer:          32
+Sgl. Precision Mag:       38
+Sgl. Precision Sig:       6
+Dbl. Precision Mag:       99
+Dbl. Precision Sig:       15
+Receiving Product ID:     C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\motor RD-40.dws
+Model Space Scale:        1.000000e+000
+Unit Flag:                2
+Unit String:              MM
+# of Line Weights:        211
+Maximum Line Width:       2.110000e+000
+Creation Date:            02/07/2006 12:23:07
+Minimum Resolution:       1.350275e-006
+Maximum Coordinate:       1.350275e+003
+Author:                   
+Organization:             
+IGES Version Number:      11  (IGES 5.3)
+Drafting Standard:        0
+Protocol Description:     
+Model Create/Modify Date: 02/07/2006 12:16:37
+
+Entity Summary:
+
+ Type     Form    Description                                            Count
+------------------------------------------------------------------------------
+  100        0    Circular Arc                                               2
+  102        0    Composite Curve                                            1
+  106       40    Witness Line                                              68
+  108        0    Plane (Unbounded)                                         12
+  110        0    Line                                                     186
+  116        0    Point                                                      6
+  124        0    Transformation Matrix                                     17
+  126        0    Rational B-Spline Curve (General)                       2719
+  126        1    Rational B-Spline Curve (Line)                           337
+  128        0    Rational B-Spline Surface (General)                      325
+  141        0    Boundary Entity                                          395
+  143        0    Bounded Surface                                          325
+  206        0    Diameter Dimension                                         4
+  212        2    General Note (Font change)                                 4
+  212        7    General Note (Center justified)                           34
+  214        3    Leader (Filled triangle)                                  70
+  214        4    Leader (No arrowhead)                                      2
+  216        0    Linear dim - undetermined form                            34
+  304        2    Line Font Definition (Pattern)                             1
+  308        0    Subfigure Definition                                      12
+  314        0    Color Definition                                           7
+  404        0    Drawing (form 0)                                           3
+  406        3    Property (Level Function)                                  5
+  406        5    Property (Line Widening)                                   1
+  406       15    Property (Name)                                            7
+  406       16    Property (Drawing Size)                                    3
+  406       17    Property (Drawing Units)                                   3
+  408        0    Subfigure Instance                                        25
+  410        0    View                                                       3
+------------------------------------------------------------------------------
+                                                               Total      4611
+==============================================================================
+
+==============================================================================
+Error Summary:
+
+The following message was issued 7 time(s)
+
+Unable to process Active Part View of %s.
+
+Information: 0
+Status:      0
+Warning:     7
+Error:       0
+Fatal:       0
+
+Elapsed Time:
+
+Processor: 00:00:10
+Clock:     00:00:11
+==============================================================================
+

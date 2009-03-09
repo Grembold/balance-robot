@@ -1,0 +1,168 @@
+Title: IGESIN Journal (R2000i built May 19 2001 for 15.06s (LMS Tech) on
+Microsoft Windows NT Version 5.1 (x86))
+==============================================================================
+File: C:\Dokumente und Einstellungen\Olaf\Eigene Dateien\nBot\CAD\Robotter.xli
+Date: Thu, Dec 29, 2005
+Time: 17:09:45
+==============================================================================
+
+Translating IGES file:        C:\Dokumente und Einstellungen\Olaf\Eigene
+Dateien\nBot\CAD\Robotter.igs
+
+
+==============================================================================
+
+Options obtained from:  default settings
+
+Curves Approximated to Tolerance of         0.0001
+
+Surfaces Approximated to Tolerance of         0.01
+
+Surfaces mapped to Mechanical Desktop surfaces using a direct interface.
+
+C0 surfaces may be split up to 500 times.
+Surfaces exceeding this number will be refined to maintain a single surface.
+
+B-REP solids mapped to AutoCAD solids.
+
+Text Font/Style mapping:
+IGES Text font      Style Name       ACAD Font
+         0                 SYMBOL0        iges0
+         1                STANDARD          txt
+         2                   LEROY          txt
+         3                  FUTURA          txt
+         6                  COMP80          txt
+        12                 GOTHICE      gothice
+        13                 GOTHICI      gothici
+        14                  ROMANS       romans
+        17                  ROMANT       romant
+        18                  ROMAND       romand
+        19                     OCR          txt
+      1001                 SYMBOL1     iges1001
+      1002                 SYMBOL2     iges1002
+      1003                 SYMBOL3     iges1003
+      2001                   KANJI      bigfont
+      3001               ISO8859-1   eur_____.pfb
+
+IGES Linefont/AutoCAD Linetype mapping
+IGES Line Font      AutoCAD linetype        Shape file
+         0                   ByLayer                     
+         1                CONTINUOUS                     
+         2                    DASHED             acad.lin
+         3                   PHANTOM             acad.lin
+         4                    CENTER             acad.lin
+         5                       DOT             acad.lin
+
+
+Mechanical Desktop application present and loaded.
+
+
+==============================================================================
+
+Parse phase
+
+==============================================================================
+Start Section:
+
+                                                                        
+
+Global Section:
+
+Parameter Delimiter:      ,
+Record Delimiter:         ;
+Sending Product ID:       Robotter.iam
+File Name:                No Iges File Name specified
+System ID:                AutoDesk Inventor R5.0
+Preprocessor Version:     AutoDesk Inventor Iges Exporter R5.0
+Size of Integer:          32
+Sgl. Precision Mag:       38
+Sgl. Precision Sig:       6
+Dbl. Precision Mag:       99
+Dbl. Precision Sig:       15
+Receiving Product ID:     Robotter.iam
+Model Space Scale:        1.000000e+000
+Unit Flag:                2
+Unit String:              MM
+# of Line Weights:        1
+Maximum Line Width:       8.000000e-002
+Creation Date:            12/27/2005 00:13:03
+Minimum Resolution:       1.000000e-006
+Maximum Coordinate:       1.000000e+004
+Author:                   No Author specified
+Organization:             No Organization specified
+IGES Version Number:      11  (IGES 5.3)
+Drafting Standard:        0
+Protocol Description:     No Application Protocol specified
+Model Create/Modify Date: Not Specified
+
+Entity Summary:
+
+ Type     Form    Description                                            Count
+------------------------------------------------------------------------------
+  100        0    Circular Arc                                             133
+  110        0    Line                                                     277
+  116        0    Point                                                     47
+  120        0    Surface of Revolution                                     26
+  123        0    Direction                                                 94
+  124        0    Transformation Matrix                                     64
+  126        0    Rational B-Spline Curve (General)                          4
+  128        0    Rational B-Spline Surface (General)                        6
+  141        0    Boundary Entity                                          123
+  143        0    Bounded Surface                                           79
+  190        1    Plane Surface (parameterized)                             47
+  308        0    Subfigure Definition                                       4
+  314        0    Color Definition                                           3
+  408        0    Subfigure Instance                                         6
+------------------------------------------------------------------------------
+                                                               Total       913
+==============================================================================
+
+ 
+
+==============================================================================
+
+Translation phase
+
+
+
+IGES Entity Summary
+
+ Type   Form  Description                              Count Processed Errors
+====== ====== ======================================== ===== ========= ======
+   143      0 Bounded Surface                             79        79      0
+   308      0 Subfigure Definition                         4         4      0
+   314      0 Color Definition                             3         3      0
+   408      0 Subfigure Instance                           6         6      0
+                                                       ===== ========= ======
+Totals                                                    92        92      0
+
+
+AutoCAD Entity Summary
+
+Entity                                     Created  Errors
+=========================================  =======  ======
+Mechanical Desktop Surface                      79       0
+Block                                            4       0
+Block Reference (Insert)                         6       0
+                                           =======  ======
+Totals                                          89       0
+
+==============================================================================
+Error Summary:
+
+The following message was issued 4 time(s)
+The Entity Use flag in the Status Value field in this entity's DE section was
+set to %d, which is invalid for this entity.
+
+Information: 0
+Status:      0
+Warning:     4
+Error:       0
+Fatal:       0
+
+Elapsed Time:
+
+Processor: 00:00:01
+Clock:     00:00:02
+==============================================================================
+
