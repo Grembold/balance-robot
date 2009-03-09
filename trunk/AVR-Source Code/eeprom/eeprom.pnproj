@@ -1,1 +1,0 @@
-<Project name="eeprom"><File path="Makefile"></File><File path="i2cmaster.h"></File><File path="twimaster.c"></File><File path="24C64P.c"></File><File path="uart.c"></File><File path="uart.h"></File><File path="main.c"></File><File path="24C64P.h"></File></Project>
