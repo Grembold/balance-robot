@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: fifo.c Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_bddd7dc27b566f4752845b32911ef2d1.html">nbot_lib</a></div>
+<h1>fifo.c</h1><a href="fifo_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/**************************************************************************/</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include "<a class="code" href="fifo_8h.html" title="Definitionen und Funktionen eines FIFO Puffers.">fifo.h</a>"</span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment">/**************************************************************************/</span>
+<a name="l00030"></a><a class="code" href="fifo_8h.html#5d82ac1e843b9255d2b860c604a33809">00030</a> <span class="keywordtype">void</span> <a class="code" href="fifo_8c.html#5d82ac1e843b9255d2b860c604a33809" title="Initialisiert einen FIFO puffer aus dem Speicherbereich buffer.">fifo_init</a> (<a class="code" href="structfifo__t.html" title="Struct eines FIFO Puffers.">fifo_t</a> *f, uint8_t *buffer, <span class="keyword">const</span> uint8_t size)
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032         f-&gt;<a class="code" href="structfifo__t.html#ac8f651266b8b08e968553fbb95307c1" title="n Zeichen im Puffer">count</a> = 0;           <span class="comment">// kein Eintrag im Puffer</span>
+<a name="l00033"></a>00033         f-&gt;<a class="code" href="structfifo__t.html#312105eed789782596a69b57ad61c249" title="Lesezeiger.">pread</a> = f-&gt;<a class="code" href="structfifo__t.html#696924a47186578525a762e99c7462ad" title="Schreibzeiger.">pwrite</a> = buffer;  <span class="comment">// lessezeiger auf Anfang setzen</span>
+<a name="l00034"></a>00034         f-&gt;<a class="code" href="structfifo__t.html#cde95ea4ed38d2f96137e6c132e074b8" title="n Zeichen bis zum ‹berlauf Lesezeiger">read2end</a> = f-&gt;<a class="code" href="structfifo__t.html#7dd239249b2326dcdf2850c0abe3390f" title="n Zeichen bis zum ‹berlauf Schreibzeiger">write2end</a> = f-&gt;<a class="code" href="structfifo__t.html#4a82f7fd1625c1abebf4f161120856f0" title="Puffer-Grˆﬂe.">size</a> = size;    <span class="comment">// schreibzeiger auf anfang setzen</span>
+<a name="l00035"></a>00035 }
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="comment">/**************************************************************************/</span>
+<a name="l00043"></a><a class="code" href="fifo_8h.html#2334d425b07cee6278bdcf3ec976ece1">00043</a> uint8_t <a class="code" href="fifo_8c.html#2334d425b07cee6278bdcf3ec976ece1" title="Funktion f¸gt dem Puffer einen weiteren Wert hinzu.">fifo_put</a> (<a class="code" href="structfifo__t.html" title="Struct eines FIFO Puffers.">fifo_t</a> *f, <span class="keyword">const</span> uint8_t data)
+<a name="l00044"></a>00044 {
+<a name="l00045"></a>00045         <span class="keywordflow">if</span> (f-&gt;<a class="code" href="structfifo__t.html#ac8f651266b8b08e968553fbb95307c1" title="n Zeichen im Puffer">count</a> &gt;= f-&gt;<a class="code" href="structfifo__t.html#4a82f7fd1625c1abebf4f161120856f0" title="Puffer-Grˆﬂe.">size</a>)
+<a name="l00046"></a>00046                 <span class="keywordflow">return</span> 0;
+<a name="l00047"></a>00047                 
+<a name="l00048"></a>00048         uint8_t sreg = SREG;
+<a name="l00049"></a>00049         cli();
+<a name="l00050"></a>00050         
+<a name="l00051"></a>00051         uint8_t * pwrite = f-&gt;<a class="code" href="structfifo__t.html#696924a47186578525a762e99c7462ad" title="Schreibzeiger.">pwrite</a>;
+<a name="l00052"></a>00052         
+<a name="l00053"></a>00053         *(pwrite++) = data;
+<a name="l00054"></a>00054         
+<a name="l00055"></a>00055         uint8_t write2end = f-&gt;<a class="code" href="structfifo__t.html#7dd239249b2326dcdf2850c0abe3390f" title="n Zeichen bis zum ‹berlauf Schreibzeiger">write2end</a>;
+<a name="l00056"></a>00056         
+<a name="l00057"></a>00057         <span class="keywordflow">if</span> (--write2end == 0)
+<a name="l00058"></a>00058         {
+<a name="l00059"></a>00059                 write2end = f-&gt;<a class="code" href="structfifo__t.html#4a82f7fd1625c1abebf4f161120856f0" title="Puffer-Grˆﬂe.">size</a>;
+<a name="l00060"></a>00060                 pwrite -= write2end;
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062         
+<a name="l00063"></a>00063         f-&gt;<a class="code" href="structfifo__t.html#7dd239249b2326dcdf2850c0abe3390f" title="n Zeichen bis zum ‹berlauf Schreibzeiger">write2end</a> = write2end;
+<a name="l00064"></a>00064         f-&gt;<a class="code" href="structfifo__t.html#696924a47186578525a762e99c7462ad" title="Schreibzeiger.">pwrite</a> = pwrite;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         f-&gt;<a class="code" href="structfifo__t.html#ac8f651266b8b08e968553fbb95307c1" title="n Zeichen im Puffer">count</a>++;
+<a name="l00068"></a>00068         SREG = sreg;
+<a name="l00069"></a>00069         
+<a name="l00070"></a>00070         <span class="keywordflow">return</span> 1;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 <span class="comment">/**************************************************************************/</span>
+<a name="l00080"></a><a class="code" href="fifo_8h.html#17fb0c85a83653aac8974f611142d68a">00080</a> uint8_t <a class="code" href="fifo_8c.html#17fb0c85a83653aac8974f611142d68a" title="Liest den n‰chsten Wert aus dem Puffer.">fifo_get</a> (<a class="code" href="structfifo__t.html" title="Struct eines FIFO Puffers.">fifo_t</a> *f, uint8_t *data)
+<a name="l00081"></a>00081 {
+<a name="l00082"></a>00082         <span class="keywordflow">if</span> (!f-&gt;<a class="code" href="structfifo__t.html#ac8f651266b8b08e968553fbb95307c1" title="n Zeichen im Puffer">count</a>)          <span class="keywordflow">return</span> 1;
+<a name="l00083"></a>00083         
+<a name="l00084"></a>00084         uint8_t sreg = SREG;                            <span class="comment">// Interruptregister speichern</span>
+<a name="l00085"></a>00085         cli();                                                                                  <span class="comment">// Interrupts verbieten (atomarer code)</span>
+<a name="l00086"></a>00086         
+<a name="l00087"></a>00087         uint8_t *pread = f-&gt;<a class="code" href="structfifo__t.html#312105eed789782596a69b57ad61c249" title="Lesezeiger.">pread</a>;      <span class="comment">// lesezeiger speichern</span>
+<a name="l00088"></a>00088         uint8_t read2end = f-&gt;<a class="code" href="structfifo__t.html#cde95ea4ed38d2f96137e6c132e074b8" title="n Zeichen bis zum ‹berlauf Lesezeiger">read2end</a>; <span class="comment">// Eintr‰ge bis Bufferende</span>
+<a name="l00089"></a>00089         *data = *(pread++);                             <span class="comment">// daten auslesen</span>
+<a name="l00090"></a>00090         
+<a name="l00091"></a>00091         <span class="keywordflow">if</span> (--read2end == 0)                            <span class="comment">// Zeiger hat ende erreicht</span>
+<a name="l00092"></a>00092         {
+<a name="l00093"></a>00093                 read2end = f-&gt;<a class="code" href="structfifo__t.html#4a82f7fd1625c1abebf4f161120856f0" title="Puffer-Grˆﬂe.">size</a>;                             <span class="comment">// noch size eintr‰ge bis bufferende</span>
+<a name="l00094"></a>00094                 pread -= read2end;                              <span class="comment">// lese Zeiger beginnt von vorn</span>
+<a name="l00095"></a>00095         }
+<a name="l00096"></a>00096         
+<a name="l00097"></a>00097         f-&gt;<a class="code" href="structfifo__t.html#312105eed789782596a69b57ad61c249" title="Lesezeiger.">pread</a> = pread;                                               <span class="comment">// speichern des neuen Lesezeigers</span>
+<a name="l00098"></a>00098         f-&gt;<a class="code" href="structfifo__t.html#cde95ea4ed38d2f96137e6c132e074b8" title="n Zeichen bis zum ‹berlauf Lesezeiger">read2end</a> = read2end;                 <span class="comment">// anzahl der eintr‰ge bis bufferende</span>
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         f-&gt;<a class="code" href="structfifo__t.html#ac8f651266b8b08e968553fbb95307c1" title="n Zeichen im Puffer">count</a>--;                                                                     <span class="comment">// ein Eintrag weniger im Buffer</span>
+<a name="l00101"></a>00101         SREG = sreg;                                                            <span class="comment">// Interrupts wiederherstellen</span>
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <span class="keywordflow">return</span> 0;
+<a name="l00104"></a>00104 }
+</pre></div><hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Nov 16 12:25:20 2008 f√ºr nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

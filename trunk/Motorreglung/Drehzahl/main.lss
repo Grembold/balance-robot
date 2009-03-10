@@ -1,0 +1,1147 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000882  00000000  00000000  00000094  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000019a  00800060  00000882  00000916  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000001e  008001fa  008001fa  00000ab0  2**0
+                  ALLOC
+  3 .noinit       00000000  00800218  00800218  00000ab0  2**0
+                  CONTENTS
+  4 .eeprom       00000000  00810000  00810000  00000ab0  2**0
+                  CONTENTS
+  5 .stab         00000f54  00000000  00000000  00000ab0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  6 .stabstr      00000ab7  00000000  00000000  00001a04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54 <__ctors_end>
+   4:	0c 94 11 02 	jmp	0x422 <__vector_1>
+   8:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+   c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  10:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  14:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  18:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  1c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  20:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  24:	0c 94 42 03 	jmp	0x684 <__vector_9>
+  28:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  2c:	0c 94 ff 02 	jmp	0x5fe <__vector_11>
+  30:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  34:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  38:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  3c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  40:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  44:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  48:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  4c:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+  50:	0c 94 45 00 	jmp	0x8a <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e2 e8       	ldi	r30, 0x82	; 130
+  68:	f8 e0       	ldi	r31, 0x08	; 8
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	aa 3f       	cpi	r26, 0xFA	; 250
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	12 e0       	ldi	r17, 0x02	; 2
+  78:	aa ef       	ldi	r26, 0xFA	; 250
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a8 31       	cpi	r26, 0x18	; 24
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0c 94 47 00 	jmp	0x8e <main>
+
+0000008a <__bad_interrupt>:
+  8a:	0c 94 00 00 	jmp	0x0 <__vectors>
+
+0000008e <main>:
+uint16_t m1,m2,m3,m4,m5,m6,m7,m8,m9,m0; //Mittelwertbildung
+uint8_t sm;
+uint8_t alt;
+
+int main(void){	
+  8e:	cf e5       	ldi	r28, 0x5F	; 95
+  90:	d4 e0       	ldi	r29, 0x04	; 4
+  92:	de bf       	out	0x3e, r29	; 62
+  94:	cd bf       	out	0x3d, r28	; 61
+	
+	init();			// Allgemeine Port initialisierung
+  96:	0e 94 6e 00 	call	0xdc <init>
+	timer0_init();	// Timer0 initialisieren
+  9a:	0e 94 28 03 	call	0x650 <timer0_init>
+	uart_init();	// UART initialisieren
+  9e:	0e 94 80 02 	call	0x500 <uart_init>
+	
+	sei();	//global Interrupts Aktivieren
+  a2:	78 94       	sei
+	
+	uart_putc('*');			//senden eines einzelenen Zeichen
+  a4:	8a e2       	ldi	r24, 0x2A	; 42
+  a6:	0e 94 96 02 	call	0x52c <uart_putc>
+	uart_puts(" UART inizialisierung ... OK \n\r\n\r");	//sendet einen string
+  aa:	80 e6       	ldi	r24, 0x60	; 96
+  ac:	90 e0       	ldi	r25, 0x00	; 0
+  ae:	0e 94 b5 02 	call	0x56a <uart_puts>
+uart_puts("* Drehzahl1\r\n* Mit hilfe dieses Programmes soll die Drehzal \r\n");
+  b2:	82 e8       	ldi	r24, 0x82	; 130
+  b4:	90 e0       	ldi	r25, 0x00	; 0
+  b6:	0e 94 b5 02 	call	0x56a <uart_puts>
+uart_puts("* ueber ein UART interfase am PC ansgegeben werden.\r\n* Hierfuer wird die Drehzal wie folgt ermittelt. \r\n");
+  ba:	81 ec       	ldi	r24, 0xC1	; 193
+  bc:	90 e0       	ldi	r25, 0x00	; 0
+  be:	0e 94 b5 02 	call	0x56a <uart_puts>
+uart_puts("* Zeit(Timer0) zwischen zwei Impulsen\r\n");
+  c2:	8a e2       	ldi	r24, 0x2A	; 42
+  c4:	91 e0       	ldi	r25, 0x01	; 1
+  c6:	0e 94 b5 02 	call	0x56a <uart_puts>
+uart_puts("* Hierzu wird alle durch einen Externen Interrupt(INT0) \r\n");
+  ca:	82 e5       	ldi	r24, 0x52	; 82
+  cc:	91 e0       	ldi	r25, 0x01	; 1
+  ce:	0e 94 b5 02 	call	0x56a <uart_puts>
+uart_puts("* Die Bisher vergangene Zeit des Timers0 über Uart ausgegeben\r\n\r\n");
+  d2:	8d e8       	ldi	r24, 0x8D	; 141
+  d4:	91 e0       	ldi	r25, 0x01	; 1
+  d6:	0e 94 b5 02 	call	0x56a <uart_puts>
+
+
+	while(1)
+  da:	ff cf       	rjmp	.-2      	; 0xda <main+0x4c>
+
+000000dc <init>:
+	{	}
+	//never reached   i hope ;)
+}
+
+
+void init(void)
+{
+  dc:	cf 93       	push	r28
+  de:	df 93       	push	r29
+  e0:	cd b7       	in	r28, 0x3d	; 61
+  e2:	de b7       	in	r29, 0x3e	; 62
+	/* STATUS_LED1 und 2 als Ausgang  */
+	DDRB |= (1 << STATUS_LED1) | (1 << STATUS_LED2);
+  e4:	80 91 37 00 	lds	r24, 0x0037
+  e8:	8c 60       	ori	r24, 0x0C	; 12
+  ea:	80 93 37 00 	sts	0x0037, r24
+	PORTB &= ~((1 << STATUS_LED1) | (1 << STATUS_LED2));
+  ee:	80 91 38 00 	lds	r24, 0x0038
+  f2:	83 7f       	andi	r24, 0xF3	; 243
+  f4:	80 93 38 00 	sts	0x0038, r24
+
+	/* INT0 init */	
+	DDRD &= ~(1<<PD2);		//PORTD.2 als Eingang
+  f8:	80 91 31 00 	lds	r24, 0x0031
+  fc:	8b 7f       	andi	r24, 0xFB	; 251
+  fe:	80 93 31 00 	sts	0x0031, r24
+	PORTD |= (1<<PD2);		//PORTD.2 mit Pullup
+ 102:	80 91 32 00 	lds	r24, 0x0032
+ 106:	84 60       	ori	r24, 0x04	; 4
+ 108:	80 93 32 00 	sts	0x0032, r24
+	GICR |= (1<<INT0);		// External Interrupt Request 0 Enable
+ 10c:	80 91 5b 00 	lds	r24, 0x005B
+ 110:	80 64       	ori	r24, 0x40	; 64
+ 112:	80 93 5b 00 	sts	0x005B, r24
+	MCUCR |= (1<<ISC00)|(1<<ISC00);	// Die steigende Flanke an INT0 erzeugt einen Interrupt. 
+ 116:	80 91 55 00 	lds	r24, 0x0055
+ 11a:	81 60       	ori	r24, 0x01	; 1
+ 11c:	80 93 55 00 	sts	0x0055, r24
+	
+	/* globale Variablen vorbelegen */
+	counter_alt = 0; 		
+ 120:	10 92 fd 01 	sts	0x01FD, r1
+ 124:	10 92 fc 01 	sts	0x01FC, r1
+	counter_neu = 0;
+ 128:	10 92 11 02 	sts	0x0211, r1
+ 12c:	10 92 10 02 	sts	0x0210, r1
+	m1=m2=m3=m4=m5=m6=m7=m8=m9=m0=0xffff;
+ 130:	8f ef       	ldi	r24, 0xFF	; 255
+ 132:	9f ef       	ldi	r25, 0xFF	; 255
+ 134:	90 93 fb 01 	sts	0x01FB, r25
+ 138:	80 93 fa 01 	sts	0x01FA, r24
+ 13c:	8f ef       	ldi	r24, 0xFF	; 255
+ 13e:	9f ef       	ldi	r25, 0xFF	; 255
+ 140:	90 93 15 02 	sts	0x0215, r25
+ 144:	80 93 14 02 	sts	0x0214, r24
+ 148:	8f ef       	ldi	r24, 0xFF	; 255
+ 14a:	9f ef       	ldi	r25, 0xFF	; 255
+ 14c:	90 93 09 02 	sts	0x0209, r25
+ 150:	80 93 08 02 	sts	0x0208, r24
+ 154:	8f ef       	ldi	r24, 0xFF	; 255
+ 156:	9f ef       	ldi	r25, 0xFF	; 255
+ 158:	90 93 17 02 	sts	0x0217, r25
+ 15c:	80 93 16 02 	sts	0x0216, r24
+ 160:	8f ef       	ldi	r24, 0xFF	; 255
+ 162:	9f ef       	ldi	r25, 0xFF	; 255
+ 164:	90 93 03 02 	sts	0x0203, r25
+ 168:	80 93 02 02 	sts	0x0202, r24
+ 16c:	8f ef       	ldi	r24, 0xFF	; 255
+ 16e:	9f ef       	ldi	r25, 0xFF	; 255
+ 170:	90 93 0c 02 	sts	0x020C, r25
+ 174:	80 93 0b 02 	sts	0x020B, r24
+ 178:	8f ef       	ldi	r24, 0xFF	; 255
+ 17a:	9f ef       	ldi	r25, 0xFF	; 255
+ 17c:	90 93 ff 01 	sts	0x01FF, r25
+ 180:	80 93 fe 01 	sts	0x01FE, r24
+ 184:	8f ef       	ldi	r24, 0xFF	; 255
+ 186:	9f ef       	ldi	r25, 0xFF	; 255
+ 188:	90 93 13 02 	sts	0x0213, r25
+ 18c:	80 93 12 02 	sts	0x0212, r24
+ 190:	8f ef       	ldi	r24, 0xFF	; 255
+ 192:	9f ef       	ldi	r25, 0xFF	; 255
+ 194:	90 93 01 02 	sts	0x0201, r25
+ 198:	80 93 00 02 	sts	0x0200, r24
+ 19c:	8f ef       	ldi	r24, 0xFF	; 255
+ 19e:	9f ef       	ldi	r25, 0xFF	; 255
+ 1a0:	90 93 0e 02 	sts	0x020E, r25
+ 1a4:	80 93 0d 02 	sts	0x020D, r24
+	alt=0;
+ 1a8:	10 92 07 02 	sts	0x0207, r1
+ 1ac:	df 91       	pop	r29
+ 1ae:	cf 91       	pop	r28
+ 1b0:	08 95       	ret
+
+000001b2 <auswerten>:
+}
+
+void auswerten(void)
+{
+ 1b2:	cf 93       	push	r28
+ 1b4:	df 93       	push	r29
+ 1b6:	cd b7       	in	r28, 0x3d	; 61
+ 1b8:	de b7       	in	r29, 0x3e	; 62
+ 1ba:	68 97       	sbiw	r28, 0x18	; 24
+ 1bc:	0f b6       	in	r0, 0x3f	; 63
+ 1be:	f8 94       	cli
+ 1c0:	de bf       	out	0x3e, r29	; 62
+ 1c2:	0f be       	out	0x3f, r0	; 63
+ 1c4:	cd bf       	out	0x3d, r28	; 61
+	/* gibt Zählerstand über UART aus */
+	unsigned char s[20]; 		// max -65536 entspricht 7 Zeichen
+	uint32_t drehzahl;			// Drehzahl in U/min
+
+	if(alt<4)
+ 1c6:	80 91 07 02 	lds	r24, 0x0207
+ 1ca:	84 30       	cpi	r24, 0x04	; 4
+ 1cc:	08 f0       	brcs	.+2      	; 0x1d0 <auswerten+0x1e>
+ 1ce:	c4 c0       	rjmp	.+392    	; 0x358 <auswerten+0x1a6>
+	{
+		/* gleitender Mittelwert über 10 Messugen */
+		m9=m8;m8=m7;m7=m6;m6=m5;m5=m4;m4=m3;m3=m2;m2=m1;m1=m0;m0=time_delta;
+ 1d0:	80 91 08 02 	lds	r24, 0x0208
+ 1d4:	90 91 09 02 	lds	r25, 0x0209
+ 1d8:	90 93 15 02 	sts	0x0215, r25
+ 1dc:	80 93 14 02 	sts	0x0214, r24
+ 1e0:	80 91 16 02 	lds	r24, 0x0216
+ 1e4:	90 91 17 02 	lds	r25, 0x0217
+ 1e8:	90 93 09 02 	sts	0x0209, r25
+ 1ec:	80 93 08 02 	sts	0x0208, r24
+ 1f0:	80 91 02 02 	lds	r24, 0x0202
+ 1f4:	90 91 03 02 	lds	r25, 0x0203
+ 1f8:	90 93 17 02 	sts	0x0217, r25
+ 1fc:	80 93 16 02 	sts	0x0216, r24
+ 200:	80 91 0b 02 	lds	r24, 0x020B
+ 204:	90 91 0c 02 	lds	r25, 0x020C
+ 208:	90 93 03 02 	sts	0x0203, r25
+ 20c:	80 93 02 02 	sts	0x0202, r24
+ 210:	80 91 fe 01 	lds	r24, 0x01FE
+ 214:	90 91 ff 01 	lds	r25, 0x01FF
+ 218:	90 93 0c 02 	sts	0x020C, r25
+ 21c:	80 93 0b 02 	sts	0x020B, r24
+ 220:	80 91 12 02 	lds	r24, 0x0212
+ 224:	90 91 13 02 	lds	r25, 0x0213
+ 228:	90 93 ff 01 	sts	0x01FF, r25
+ 22c:	80 93 fe 01 	sts	0x01FE, r24
+ 230:	80 91 00 02 	lds	r24, 0x0200
+ 234:	90 91 01 02 	lds	r25, 0x0201
+ 238:	90 93 13 02 	sts	0x0213, r25
+ 23c:	80 93 12 02 	sts	0x0212, r24
+ 240:	80 91 0d 02 	lds	r24, 0x020D
+ 244:	90 91 0e 02 	lds	r25, 0x020E
+ 248:	90 93 01 02 	sts	0x0201, r25
+ 24c:	80 93 00 02 	sts	0x0200, r24
+ 250:	80 91 fa 01 	lds	r24, 0x01FA
+ 254:	90 91 fb 01 	lds	r25, 0x01FB
+ 258:	90 93 0e 02 	sts	0x020E, r25
+ 25c:	80 93 0d 02 	sts	0x020D, r24
+ 260:	80 91 05 02 	lds	r24, 0x0205
+ 264:	90 91 06 02 	lds	r25, 0x0206
+ 268:	90 93 fb 01 	sts	0x01FB, r25
+ 26c:	80 93 fa 01 	sts	0x01FA, r24
+		drehzahl=(m1+m2+m3+m4+m5+m6+m7+m8+m9+m0)/10;	
+ 270:	20 91 0d 02 	lds	r18, 0x020D
+ 274:	30 91 0e 02 	lds	r19, 0x020E
+ 278:	80 91 00 02 	lds	r24, 0x0200
+ 27c:	90 91 01 02 	lds	r25, 0x0201
+ 280:	28 0f       	add	r18, r24
+ 282:	39 1f       	adc	r19, r25
+ 284:	80 91 12 02 	lds	r24, 0x0212
+ 288:	90 91 13 02 	lds	r25, 0x0213
+ 28c:	28 0f       	add	r18, r24
+ 28e:	39 1f       	adc	r19, r25
+ 290:	80 91 fe 01 	lds	r24, 0x01FE
+ 294:	90 91 ff 01 	lds	r25, 0x01FF
+ 298:	28 0f       	add	r18, r24
+ 29a:	39 1f       	adc	r19, r25
+ 29c:	80 91 0b 02 	lds	r24, 0x020B
+ 2a0:	90 91 0c 02 	lds	r25, 0x020C
+ 2a4:	28 0f       	add	r18, r24
+ 2a6:	39 1f       	adc	r19, r25
+ 2a8:	80 91 02 02 	lds	r24, 0x0202
+ 2ac:	90 91 03 02 	lds	r25, 0x0203
+ 2b0:	28 0f       	add	r18, r24
+ 2b2:	39 1f       	adc	r19, r25
+ 2b4:	80 91 16 02 	lds	r24, 0x0216
+ 2b8:	90 91 17 02 	lds	r25, 0x0217
+ 2bc:	28 0f       	add	r18, r24
+ 2be:	39 1f       	adc	r19, r25
+ 2c0:	80 91 08 02 	lds	r24, 0x0208
+ 2c4:	90 91 09 02 	lds	r25, 0x0209
+ 2c8:	28 0f       	add	r18, r24
+ 2ca:	39 1f       	adc	r19, r25
+ 2cc:	80 91 14 02 	lds	r24, 0x0214
+ 2d0:	90 91 15 02 	lds	r25, 0x0215
+ 2d4:	28 0f       	add	r18, r24
+ 2d6:	39 1f       	adc	r19, r25
+ 2d8:	80 91 fa 01 	lds	r24, 0x01FA
+ 2dc:	90 91 fb 01 	lds	r25, 0x01FB
+ 2e0:	82 0f       	add	r24, r18
+ 2e2:	93 1f       	adc	r25, r19
+ 2e4:	2a e0       	ldi	r18, 0x0A	; 10
+ 2e6:	30 e0       	ldi	r19, 0x00	; 0
+ 2e8:	b9 01       	movw	r22, r18
+ 2ea:	0e 94 0b 04 	call	0x816 <__udivmodhi4>
+ 2ee:	cb 01       	movw	r24, r22
+ 2f0:	aa 27       	eor	r26, r26
+ 2f2:	bb 27       	eor	r27, r27
+ 2f4:	8d 8b       	std	Y+21, r24	; 0x15
+ 2f6:	9e 8b       	std	Y+22, r25	; 0x16
+ 2f8:	af 8b       	std	Y+23, r26	; 0x17
+ 2fa:	b8 8f       	std	Y+24, r27	; 0x18
+	
+		drehzahl=(uint32_t)drehzahl*256*2;	//
+ 2fc:	8d 89       	ldd	r24, Y+21	; 0x15
+ 2fe:	9e 89       	ldd	r25, Y+22	; 0x16
+ 300:	af 89       	ldd	r26, Y+23	; 0x17
+ 302:	b8 8d       	ldd	r27, Y+24	; 0x18
+ 304:	20 e0       	ldi	r18, 0x00	; 0
+ 306:	32 e0       	ldi	r19, 0x02	; 2
+ 308:	40 e0       	ldi	r20, 0x00	; 0
+ 30a:	50 e0       	ldi	r21, 0x00	; 0
+ 30c:	bc 01       	movw	r22, r24
+ 30e:	cd 01       	movw	r24, r26
+ 310:	0e 94 e0 03 	call	0x7c0 <__mulsi3>
+ 314:	dc 01       	movw	r26, r24
+ 316:	cb 01       	movw	r24, r22
+ 318:	8d 8b       	std	Y+21, r24	; 0x15
+ 31a:	9e 8b       	std	Y+22, r25	; 0x16
+ 31c:	af 8b       	std	Y+23, r26	; 0x17
+ 31e:	b8 8f       	std	Y+24, r27	; 0x18
+		if(drehzahl!=0)
+ 320:	8d 89       	ldd	r24, Y+21	; 0x15
+ 322:	9e 89       	ldd	r25, Y+22	; 0x16
+ 324:	af 89       	ldd	r26, Y+23	; 0x17
+ 326:	b8 8d       	ldd	r27, Y+24	; 0x18
+ 328:	00 97       	sbiw	r24, 0x00	; 0
+ 32a:	a1 05       	cpc	r26, r1
+ 32c:	b1 05       	cpc	r27, r1
+ 32e:	09 f4       	brne	.+2      	; 0x332 <auswerten+0x180>
+ 330:	53 c0       	rjmp	.+166    	; 0x3d8 <auswerten+0x226>
+			drehzahl=(11059000*60)/drehzahl;	//
+ 332:	80 e2       	ldi	r24, 0x20	; 32
+ 334:	91 ed       	ldi	r25, 0xD1	; 209
+ 336:	ac e8       	ldi	r26, 0x8C	; 140
+ 338:	b7 e2       	ldi	r27, 0x27	; 39
+ 33a:	2d 89       	ldd	r18, Y+21	; 0x15
+ 33c:	3e 89       	ldd	r19, Y+22	; 0x16
+ 33e:	4f 89       	ldd	r20, Y+23	; 0x17
+ 340:	58 8d       	ldd	r21, Y+24	; 0x18
+ 342:	bc 01       	movw	r22, r24
+ 344:	cd 01       	movw	r24, r26
+ 346:	0e 94 1f 04 	call	0x83e <__udivmodsi4>
+ 34a:	da 01       	movw	r26, r20
+ 34c:	c9 01       	movw	r24, r18
+ 34e:	8d 8b       	std	Y+21, r24	; 0x15
+ 350:	9e 8b       	std	Y+22, r25	; 0x16
+ 352:	af 8b       	std	Y+23, r26	; 0x17
+ 354:	b8 8f       	std	Y+24, r27	; 0x18
+ 356:	40 c0       	rjmp	.+128    	; 0x3d8 <auswerten+0x226>
+	}
+	else
+	{
+		m1=m2=m3=m4=m5=m6=m7=m8=m9=m0=0xffff;
+ 358:	8f ef       	ldi	r24, 0xFF	; 255
+ 35a:	9f ef       	ldi	r25, 0xFF	; 255
+ 35c:	90 93 fb 01 	sts	0x01FB, r25
+ 360:	80 93 fa 01 	sts	0x01FA, r24
+ 364:	8f ef       	ldi	r24, 0xFF	; 255
+ 366:	9f ef       	ldi	r25, 0xFF	; 255
+ 368:	90 93 15 02 	sts	0x0215, r25
+ 36c:	80 93 14 02 	sts	0x0214, r24
+ 370:	8f ef       	ldi	r24, 0xFF	; 255
+ 372:	9f ef       	ldi	r25, 0xFF	; 255
+ 374:	90 93 09 02 	sts	0x0209, r25
+ 378:	80 93 08 02 	sts	0x0208, r24
+ 37c:	8f ef       	ldi	r24, 0xFF	; 255
+ 37e:	9f ef       	ldi	r25, 0xFF	; 255
+ 380:	90 93 17 02 	sts	0x0217, r25
+ 384:	80 93 16 02 	sts	0x0216, r24
+ 388:	8f ef       	ldi	r24, 0xFF	; 255
+ 38a:	9f ef       	ldi	r25, 0xFF	; 255
+ 38c:	90 93 03 02 	sts	0x0203, r25
+ 390:	80 93 02 02 	sts	0x0202, r24
+ 394:	8f ef       	ldi	r24, 0xFF	; 255
+ 396:	9f ef       	ldi	r25, 0xFF	; 255
+ 398:	90 93 0c 02 	sts	0x020C, r25
+ 39c:	80 93 0b 02 	sts	0x020B, r24
+ 3a0:	8f ef       	ldi	r24, 0xFF	; 255
+ 3a2:	9f ef       	ldi	r25, 0xFF	; 255
+ 3a4:	90 93 ff 01 	sts	0x01FF, r25
+ 3a8:	80 93 fe 01 	sts	0x01FE, r24
+ 3ac:	8f ef       	ldi	r24, 0xFF	; 255
+ 3ae:	9f ef       	ldi	r25, 0xFF	; 255
+ 3b0:	90 93 13 02 	sts	0x0213, r25
+ 3b4:	80 93 12 02 	sts	0x0212, r24
+ 3b8:	8f ef       	ldi	r24, 0xFF	; 255
+ 3ba:	9f ef       	ldi	r25, 0xFF	; 255
+ 3bc:	90 93 01 02 	sts	0x0201, r25
+ 3c0:	80 93 00 02 	sts	0x0200, r24
+ 3c4:	8f ef       	ldi	r24, 0xFF	; 255
+ 3c6:	9f ef       	ldi	r25, 0xFF	; 255
+ 3c8:	90 93 0e 02 	sts	0x020E, r25
+ 3cc:	80 93 0d 02 	sts	0x020D, r24
+		drehzahl=0;
+ 3d0:	1d 8a       	std	Y+21, r1	; 0x15
+ 3d2:	1e 8a       	std	Y+22, r1	; 0x16
+ 3d4:	1f 8a       	std	Y+23, r1	; 0x17
+ 3d6:	18 8e       	std	Y+24, r1	; 0x18
+	}
+	
+	
+//	uart_puts("Drehzahl: ");	// Textausgabe
+//	utoa(time_delta, s, 10);	// Uint_16 in Asci-String wandeln
+//	uart_puts(s);				// Textausgabe	
+//	uart_putc('\t');			// 
+	ultoa(drehzahl, s, 10);		// Uint_16 in Asci-String wandeln
+ 3d8:	2a e0       	ldi	r18, 0x0A	; 10
+ 3da:	30 e0       	ldi	r19, 0x00	; 0
+ 3dc:	ae 01       	movw	r20, r28
+ 3de:	4f 5f       	subi	r20, 0xFF	; 255
+ 3e0:	5f 4f       	sbci	r21, 0xFF	; 255
+ 3e2:	6d 89       	ldd	r22, Y+21	; 0x15
+ 3e4:	7e 89       	ldd	r23, Y+22	; 0x16
+ 3e6:	8f 89       	ldd	r24, Y+23	; 0x17
+ 3e8:	98 8d       	ldd	r25, Y+24	; 0x18
+ 3ea:	0e 94 ab 03 	call	0x756 <ultoa>
+	uart_puts(s);				// Textausgabe	
+ 3ee:	ce 01       	movw	r24, r28
+ 3f0:	01 96       	adiw	r24, 0x01	; 1
+ 3f2:	0e 94 b5 02 	call	0x56a <uart_puts>
+	uart_puts("    \r\n");		// Textausgabe		
+ 3f6:	8f ec       	ldi	r24, 0xCF	; 207
+ 3f8:	91 e0       	ldi	r25, 0x01	; 1
+ 3fa:	0e 94 b5 02 	call	0x56a <uart_puts>
+	
+	if(alt<0xfe)	alt++;
+ 3fe:	80 91 07 02 	lds	r24, 0x0207
+ 402:	8e 3f       	cpi	r24, 0xFE	; 254
+ 404:	28 f4       	brcc	.+10     	; 0x410 <auswerten+0x25e>
+ 406:	80 91 07 02 	lds	r24, 0x0207
+ 40a:	8f 5f       	subi	r24, 0xFF	; 255
+ 40c:	80 93 07 02 	sts	0x0207, r24
+ 410:	68 96       	adiw	r28, 0x18	; 24
+ 412:	0f b6       	in	r0, 0x3f	; 63
+ 414:	f8 94       	cli
+ 416:	de bf       	out	0x3e, r29	; 62
+ 418:	0f be       	out	0x3f, r0	; 63
+ 41a:	cd bf       	out	0x3d, r28	; 61
+ 41c:	df 91       	pop	r29
+ 41e:	cf 91       	pop	r28
+ 420:	08 95       	ret
+
+00000422 <__vector_1>:
+}
+
+
+// Interrupt Service Routine bei Flanke an int0(extern) */
+ISR(INT0_vect)
+{
+ 422:	1f 92       	push	r1
+ 424:	0f 92       	push	r0
+ 426:	0f b6       	in	r0, 0x3f	; 63
+ 428:	0f 92       	push	r0
+ 42a:	11 24       	eor	r1, r1
+ 42c:	2f 93       	push	r18
+ 42e:	3f 93       	push	r19
+ 430:	4f 93       	push	r20
+ 432:	5f 93       	push	r21
+ 434:	8f 93       	push	r24
+ 436:	9f 93       	push	r25
+ 438:	cf 93       	push	r28
+ 43a:	df 93       	push	r29
+ 43c:	cd b7       	in	r28, 0x3d	; 61
+ 43e:	de b7       	in	r29, 0x3e	; 62
+	PORTB ^=(1<<PB2);								// Toggel Led, wildes blinken ist immer gut
+ 440:	90 91 38 00 	lds	r25, 0x0038
+ 444:	84 e0       	ldi	r24, 0x04	; 4
+ 446:	89 27       	eor	r24, r25
+ 448:	80 93 38 00 	sts	0x0038, r24
+	counter_neu = (timer0_counter_D1*256) + TCNT0;	// Merke mir die Uhrzeit
+ 44c:	80 91 04 02 	lds	r24, 0x0204
+ 450:	28 2f       	mov	r18, r24
+ 452:	33 27       	eor	r19, r19
+ 454:	80 e0       	ldi	r24, 0x00	; 0
+ 456:	91 e0       	ldi	r25, 0x01	; 1
+ 458:	28 9f       	mul	r18, r24
+ 45a:	a0 01       	movw	r20, r0
+ 45c:	29 9f       	mul	r18, r25
+ 45e:	50 0d       	add	r21, r0
+ 460:	38 9f       	mul	r19, r24
+ 462:	50 0d       	add	r21, r0
+ 464:	11 24       	eor	r1, r1
+ 466:	9a 01       	movw	r18, r20
+ 468:	80 91 52 00 	lds	r24, 0x0052
+ 46c:	99 27       	eor	r25, r25
+ 46e:	82 0f       	add	r24, r18
+ 470:	93 1f       	adc	r25, r19
+ 472:	90 93 11 02 	sts	0x0211, r25
+ 476:	80 93 10 02 	sts	0x0210, r24
+	//timer0_counter_D1=0;							// sezte den Umrundungsmerker zurück
+	if(counter_neu > counter_alt){
+ 47a:	20 91 10 02 	lds	r18, 0x0210
+ 47e:	30 91 11 02 	lds	r19, 0x0211
+ 482:	80 91 fc 01 	lds	r24, 0x01FC
+ 486:	90 91 fd 01 	lds	r25, 0x01FD
+ 48a:	82 17       	cp	r24, r18
+ 48c:	93 07       	cpc	r25, r19
+ 48e:	78 f4       	brcc	.+30     	; 0x4ae <__stack+0x4f>
+		time_delta = counter_neu - counter_alt;}	// ermittel die Zeitdifferenz
+ 490:	80 91 10 02 	lds	r24, 0x0210
+ 494:	90 91 11 02 	lds	r25, 0x0211
+ 498:	20 91 fc 01 	lds	r18, 0x01FC
+ 49c:	30 91 fd 01 	lds	r19, 0x01FD
+ 4a0:	82 1b       	sub	r24, r18
+ 4a2:	93 0b       	sbc	r25, r19
+ 4a4:	90 93 06 02 	sts	0x0206, r25
+ 4a8:	80 93 05 02 	sts	0x0205, r24
+ 4ac:	12 c0       	rjmp	.+36     	; 0x4d2 <__stack+0x73>
+	else{
+		time_delta = (65535-counter_alt) + counter_neu;}	// ermittel die Zeitdifferenz
+ 4ae:	20 91 10 02 	lds	r18, 0x0210
+ 4b2:	30 91 11 02 	lds	r19, 0x0211
+ 4b6:	80 91 fc 01 	lds	r24, 0x01FC
+ 4ba:	90 91 fd 01 	lds	r25, 0x01FD
+ 4be:	28 1b       	sub	r18, r24
+ 4c0:	39 0b       	sbc	r19, r25
+ 4c2:	8f ef       	ldi	r24, 0xFF	; 255
+ 4c4:	9f ef       	ldi	r25, 0xFF	; 255
+ 4c6:	82 0f       	add	r24, r18
+ 4c8:	93 1f       	adc	r25, r19
+ 4ca:	90 93 06 02 	sts	0x0206, r25
+ 4ce:	80 93 05 02 	sts	0x0205, r24
+	
+	counter_alt = counter_neu;						// Merke mir die Uhrzeit für die nächste Messung
+ 4d2:	80 91 10 02 	lds	r24, 0x0210
+ 4d6:	90 91 11 02 	lds	r25, 0x0211
+ 4da:	90 93 fd 01 	sts	0x01FD, r25
+ 4de:	80 93 fc 01 	sts	0x01FC, r24
+	alt=0;
+ 4e2:	10 92 07 02 	sts	0x0207, r1
+ 4e6:	df 91       	pop	r29
+ 4e8:	cf 91       	pop	r28
+ 4ea:	9f 91       	pop	r25
+ 4ec:	8f 91       	pop	r24
+ 4ee:	5f 91       	pop	r21
+ 4f0:	4f 91       	pop	r20
+ 4f2:	3f 91       	pop	r19
+ 4f4:	2f 91       	pop	r18
+ 4f6:	0f 90       	pop	r0
+ 4f8:	0f be       	out	0x3f, r0	; 63
+ 4fa:	0f 90       	pop	r0
+ 4fc:	1f 90       	pop	r1
+ 4fe:	18 95       	reti
+
+00000500 <uart_init>:
+#include "uart.h"
+
+
+void uart_init(void)
+{
+ 500:	cf 93       	push	r28
+ 502:	df 93       	push	r29
+ 504:	cd b7       	in	r28, 0x3d	; 61
+ 506:	de b7       	in	r29, 0x3e	; 62
+	/* Baudrate einstellen ( Normaler Modus ) */
+	UBRRH = (unsigned char) (UBRR_BAUD>>8);
+ 508:	10 92 40 00 	sts	0x0040, r1
+	UBRRL = (unsigned char) UBRR_BAUD;
+ 50c:	85 e0       	ldi	r24, 0x05	; 5
+ 50e:	80 93 29 00 	sts	0x0029, r24
+
+	/* Aktivieren des Empfängers, des Senders und des "Daten empfangen"-Interrupts */
+	UCSRB = (1<<RXCIE)|(1<<RXEN)|(1<<TXEN);
+ 512:	88 e9       	ldi	r24, 0x98	; 152
+ 514:	80 93 2a 00 	sts	0x002A, r24
+
+	/* Einstellen des Datenformats: 8 Datenbits, 1 Stoppbit */
+	UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);
+ 518:	86 e8       	ldi	r24, 0x86	; 134
+ 51a:	80 93 40 00 	sts	0x0040, r24
+	
+	uart_puts("Uart wurde richtig initialisiert\n\r");
+ 51e:	86 ed       	ldi	r24, 0xD6	; 214
+ 520:	91 e0       	ldi	r25, 0x01	; 1
+ 522:	0e 94 b5 02 	call	0x56a <uart_puts>
+ 526:	df 91       	pop	r29
+ 528:	cf 91       	pop	r28
+ 52a:	08 95       	ret
+
+0000052c <uart_putc>:
+}
+
+/** sendet ein einzelnes Zeichen **/
+void uart_putc(char c)
+{
+ 52c:	cf 93       	push	r28
+ 52e:	df 93       	push	r29
+ 530:	cd b7       	in	r28, 0x3d	; 61
+ 532:	de b7       	in	r29, 0x3e	; 62
+ 534:	21 97       	sbiw	r28, 0x01	; 1
+ 536:	0f b6       	in	r0, 0x3f	; 63
+ 538:	f8 94       	cli
+ 53a:	de bf       	out	0x3e, r29	; 62
+ 53c:	0f be       	out	0x3f, r0	; 63
+ 53e:	cd bf       	out	0x3d, r28	; 61
+ 540:	89 83       	std	Y+1, r24	; 0x01
+	/* warten bis der Sendepuffer leer ist */
+	while ( !( UCSRA & (1<<UDRE)) );
+ 542:	80 91 2b 00 	lds	r24, 0x002B
+ 546:	99 27       	eor	r25, r25
+ 548:	80 72       	andi	r24, 0x20	; 32
+ 54a:	90 70       	andi	r25, 0x00	; 0
+ 54c:	00 97       	sbiw	r24, 0x00	; 0
+ 54e:	09 f4       	brne	.+2      	; 0x552 <uart_putc+0x26>
+ 550:	f8 cf       	rjmp	.-16     	; 0x542 <uart_putc+0x16>
+	
+	/* Zeichen senden */
+	UDR = c;
+ 552:	89 81       	ldd	r24, Y+1	; 0x01
+ 554:	80 93 2c 00 	sts	0x002C, r24
+ 558:	21 96       	adiw	r28, 0x01	; 1
+ 55a:	0f b6       	in	r0, 0x3f	; 63
+ 55c:	f8 94       	cli
+ 55e:	de bf       	out	0x3e, r29	; 62
+ 560:	0f be       	out	0x3f, r0	; 63
+ 562:	cd bf       	out	0x3d, r28	; 61
+ 564:	df 91       	pop	r29
+ 566:	cf 91       	pop	r28
+ 568:	08 95       	ret
+
+0000056a <uart_puts>:
+}
+
+/** sendet einen string **/
+void uart_puts(char *s)
+{
+ 56a:	cf 93       	push	r28
+ 56c:	df 93       	push	r29
+ 56e:	cd b7       	in	r28, 0x3d	; 61
+ 570:	de b7       	in	r29, 0x3e	; 62
+ 572:	22 97       	sbiw	r28, 0x02	; 2
+ 574:	0f b6       	in	r0, 0x3f	; 63
+ 576:	f8 94       	cli
+ 578:	de bf       	out	0x3e, r29	; 62
+ 57a:	0f be       	out	0x3f, r0	; 63
+ 57c:	cd bf       	out	0x3d, r28	; 61
+ 57e:	9a 83       	std	Y+2, r25	; 0x02
+ 580:	89 83       	std	Y+1, r24	; 0x01
+	while (*s) // so lange senden, bis das ende des Strings erreicht ist
+ 582:	e9 81       	ldd	r30, Y+1	; 0x01
+ 584:	fa 81       	ldd	r31, Y+2	; 0x02
+ 586:	80 81       	ld	r24, Z
+ 588:	88 23       	and	r24, r24
+ 58a:	59 f0       	breq	.+22     	; 0x5a2 <uart_puts+0x38>
+	{
+		uart_putc(*s);
+ 58c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 58e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 590:	80 81       	ld	r24, Z
+ 592:	0e 94 96 02 	call	0x52c <uart_putc>
+		s++;
+ 596:	89 81       	ldd	r24, Y+1	; 0x01
+ 598:	9a 81       	ldd	r25, Y+2	; 0x02
+ 59a:	01 96       	adiw	r24, 0x01	; 1
+ 59c:	9a 83       	std	Y+2, r25	; 0x02
+ 59e:	89 83       	std	Y+1, r24	; 0x01
+ 5a0:	f0 cf       	rjmp	.-32     	; 0x582 <uart_puts+0x18>
+ 5a2:	22 96       	adiw	r28, 0x02	; 2
+ 5a4:	0f b6       	in	r0, 0x3f	; 63
+ 5a6:	f8 94       	cli
+ 5a8:	de bf       	out	0x3e, r29	; 62
+ 5aa:	0f be       	out	0x3f, r0	; 63
+ 5ac:	cd bf       	out	0x3d, r28	; 61
+ 5ae:	df 91       	pop	r29
+ 5b0:	cf 91       	pop	r28
+ 5b2:	08 95       	ret
+
+000005b4 <uart_puti>:
+	}
+	//uart_putc('\r');
+}
+
+/** sendet einen Integer **/
+void uart_puti(uint8_t *i)
+{
+ 5b4:	cf 93       	push	r28
+ 5b6:	df 93       	push	r29
+ 5b8:	cd b7       	in	r28, 0x3d	; 61
+ 5ba:	de b7       	in	r29, 0x3e	; 62
+ 5bc:	27 97       	sbiw	r28, 0x07	; 7
+ 5be:	0f b6       	in	r0, 0x3f	; 63
+ 5c0:	f8 94       	cli
+ 5c2:	de bf       	out	0x3e, r29	; 62
+ 5c4:	0f be       	out	0x3f, r0	; 63
+ 5c6:	cd bf       	out	0x3d, r28	; 61
+ 5c8:	9a 83       	std	Y+2, r25	; 0x02
+ 5ca:	89 83       	std	Y+1, r24	; 0x01
+	unsigned char s[5];
+	itoa(*i, s,10);
+ 5cc:	9e 01       	movw	r18, r28
+ 5ce:	2d 5f       	subi	r18, 0xFD	; 253
+ 5d0:	3f 4f       	sbci	r19, 0xFF	; 255
+ 5d2:	e9 81       	ldd	r30, Y+1	; 0x01
+ 5d4:	fa 81       	ldd	r31, Y+2	; 0x02
+ 5d6:	80 81       	ld	r24, Z
+ 5d8:	99 27       	eor	r25, r25
+ 5da:	4a e0       	ldi	r20, 0x0A	; 10
+ 5dc:	50 e0       	ldi	r21, 0x00	; 0
+ 5de:	b9 01       	movw	r22, r18
+ 5e0:	0e 94 8a 03 	call	0x714 <itoa>
+	uart_puts(s);
+ 5e4:	ce 01       	movw	r24, r28
+ 5e6:	03 96       	adiw	r24, 0x03	; 3
+ 5e8:	0e 94 b5 02 	call	0x56a <uart_puts>
+ 5ec:	27 96       	adiw	r28, 0x07	; 7
+ 5ee:	0f b6       	in	r0, 0x3f	; 63
+ 5f0:	f8 94       	cli
+ 5f2:	de bf       	out	0x3e, r29	; 62
+ 5f4:	0f be       	out	0x3f, r0	; 63
+ 5f6:	cd bf       	out	0x3d, r28	; 61
+ 5f8:	df 91       	pop	r29
+ 5fa:	cf 91       	pop	r28
+ 5fc:	08 95       	ret
+
+000005fe <__vector_11>:
+}
+
+
+
+/* Interrupt wird ausgelöst sobald neue Daten im USART-Empfangspuffer liegen */
+ISR(USART_RXC_vect)
+{
+ 5fe:	1f 92       	push	r1
+ 600:	0f 92       	push	r0
+ 602:	0f b6       	in	r0, 0x3f	; 63
+ 604:	0f 92       	push	r0
+ 606:	11 24       	eor	r1, r1
+ 608:	8f 93       	push	r24
+ 60a:	9f 93       	push	r25
+ 60c:	cf 93       	push	r28
+ 60e:	df 93       	push	r29
+ 610:	cd b7       	in	r28, 0x3d	; 61
+ 612:	de b7       	in	r29, 0x3e	; 62
+ 614:	21 97       	sbiw	r28, 0x01	; 1
+ 616:	de bf       	out	0x3e, r29	; 62
+ 618:	cd bf       	out	0x3d, r28	; 61
+	 
+	unsigned char buffer;
+
+	/* Daten aus dem Puffer lesen */
+	buffer = UDR;
+ 61a:	80 91 2c 00 	lds	r24, 0x002C
+ 61e:	89 83       	std	Y+1, r24	; 0x01
+
+	/* warten bis der Sendepuffer leer ist */
+	while ( !( UCSRA & (1<<UDRE)) );
+ 620:	80 91 2b 00 	lds	r24, 0x002B
+ 624:	99 27       	eor	r25, r25
+ 626:	80 72       	andi	r24, 0x20	; 32
+ 628:	90 70       	andi	r25, 0x00	; 0
+ 62a:	00 97       	sbiw	r24, 0x00	; 0
+ 62c:	09 f4       	brne	.+2      	; 0x630 <__vector_11+0x32>
+ 62e:	f8 cf       	rjmp	.-16     	; 0x620 <__vector_11+0x22>
+		
+	/* und gleich wieder zurück schicken */
+	UDR = buffer;
+ 630:	89 81       	ldd	r24, Y+1	; 0x01
+ 632:	80 93 2c 00 	sts	0x002C, r24
+ 636:	21 96       	adiw	r28, 0x01	; 1
+ 638:	f8 94       	cli
+ 63a:	de bf       	out	0x3e, r29	; 62
+ 63c:	cd bf       	out	0x3d, r28	; 61
+ 63e:	df 91       	pop	r29
+ 640:	cf 91       	pop	r28
+ 642:	9f 91       	pop	r25
+ 644:	8f 91       	pop	r24
+ 646:	0f 90       	pop	r0
+ 648:	0f be       	out	0x3f, r0	; 63
+ 64a:	0f 90       	pop	r0
+ 64c:	1f 90       	pop	r1
+ 64e:	18 95       	reti
+
+00000650 <timer0_init>:
+#include "timer0.h"
+
+/* Timer0 initialisieren */
+void timer0_init(void)
+{
+ 650:	cf 93       	push	r28
+ 652:	df 93       	push	r29
+ 654:	cd b7       	in	r28, 0x3d	; 61
+ 656:	de b7       	in	r29, 0x3e	; 62
+	/* Prescaler auf 64: Clock alle 5,78us (172,8KHz). */
+	/* Überlauf alle 1,48ms (675 Hz)  */
+	TCCR0 |= ((1<<CS01) | (1<<CS00));// Prescaler 64, entspricht 5,8usec und 1,48ms bis zum Überlauf
+ 658:	80 91 53 00 	lds	r24, 0x0053
+ 65c:	83 60       	ori	r24, 0x03	; 3
+ 65e:	80 93 53 00 	sts	0x0053, r24
+	
+	/* Prescaler auf 8: Clock alle 0,72us (1386kHz). */
+	/* Überlauf alle 185us ms (5400 Hz)  */
+	//TCCR0 |= (1<<CS01);// Prescaler 8, entspricht 0,72usec und 185us bis zum Überlauf
+
+	/* Interrupts für Timer0 aktivieren */	
+	TIMSK |= (1<<TOIE0);
+ 662:	80 91 59 00 	lds	r24, 0x0059
+ 666:	81 60       	ori	r24, 0x01	; 1
+ 668:	80 93 59 00 	sts	0x0059, r24
+	
+	DDRB |= (1<<PB3);		// toggel led
+ 66c:	80 91 37 00 	lds	r24, 0x0037
+ 670:	88 60       	ori	r24, 0x08	; 8
+ 672:	80 93 37 00 	sts	0x0037, r24
+	
+	timer0_counter_D1=0;	// sezte den Anfangswert
+ 676:	10 92 04 02 	sts	0x0204, r1
+	timer0_counter=0;		// sezte den Anfangswert
+ 67a:	10 92 0a 02 	sts	0x020A, r1
+ 67e:	df 91       	pop	r29
+ 680:	cf 91       	pop	r28
+ 682:	08 95       	ret
+
+00000684 <__vector_9>:
+
+}	
+
+/* Interrupt Service Rountine bei Überlauf des Timer0 */
+ISR(TIMER0_OVF_vect) /* veraltet: SIGNAL(SIG_OVERFLOW1) */
+{
+ 684:	1f 92       	push	r1
+ 686:	0f 92       	push	r0
+ 688:	0f b6       	in	r0, 0x3f	; 63
+ 68a:	0f 92       	push	r0
+ 68c:	11 24       	eor	r1, r1
+ 68e:	2f 93       	push	r18
+ 690:	3f 93       	push	r19
+ 692:	4f 93       	push	r20
+ 694:	5f 93       	push	r21
+ 696:	6f 93       	push	r22
+ 698:	7f 93       	push	r23
+ 69a:	8f 93       	push	r24
+ 69c:	9f 93       	push	r25
+ 69e:	af 93       	push	r26
+ 6a0:	bf 93       	push	r27
+ 6a2:	ef 93       	push	r30
+ 6a4:	ff 93       	push	r31
+ 6a6:	cf 93       	push	r28
+ 6a8:	df 93       	push	r29
+ 6aa:	cd b7       	in	r28, 0x3d	; 61
+ 6ac:	de b7       	in	r29, 0x3e	; 62
+    /* Interrupt Code */
+	timer0_counter++;			// Merker für Überläufe des Timers
+ 6ae:	80 91 0a 02 	lds	r24, 0x020A
+ 6b2:	8f 5f       	subi	r24, 0xFF	; 255
+ 6b4:	80 93 0a 02 	sts	0x020A, r24
+	timer0_counter_D1++;		// Merker für Überläufe des Timers, für die Drehzahl1
+ 6b8:	80 91 04 02 	lds	r24, 0x0204
+ 6bc:	8f 5f       	subi	r24, 0xFF	; 255
+ 6be:	80 93 04 02 	sts	0x0204, r24
+
+	if(timer0_counter % 15){ 	// alle 44ms 
+ 6c2:	80 91 0a 02 	lds	r24, 0x020A
+ 6c6:	9f e0       	ldi	r25, 0x0F	; 15
+ 6c8:	69 2f       	mov	r22, r25
+ 6ca:	0e 94 ff 03 	call	0x7fe <__udivmodqi4>
+ 6ce:	89 2f       	mov	r24, r25
+ 6d0:	88 23       	and	r24, r24
+ 6d2:	09 f0       	breq	.+2      	; 0x6d6 <__vector_9+0x52>
+ 6d4:	02 c0       	rjmp	.+4      	; 0x6da <__vector_9+0x56>
+	}else {
+		auswerten();			// den Wert über UART ausgeben
+ 6d6:	0e 94 d9 00 	call	0x1b2 <auswerten>
+	}	
+
+	if( (timer0_counter >= 255)){	// alle 380ms 
+ 6da:	80 91 0a 02 	lds	r24, 0x020A
+ 6de:	8f 3f       	cpi	r24, 0xFF	; 255
+ 6e0:	31 f4       	brne	.+12     	; 0x6ee <__vector_9+0x6a>
+		PORTB ^=(1<<PB3);			// eine LED getoggelt
+ 6e2:	80 91 38 00 	lds	r24, 0x0038
+ 6e6:	98 e0       	ldi	r25, 0x08	; 8
+ 6e8:	89 27       	eor	r24, r25
+ 6ea:	80 93 38 00 	sts	0x0038, r24
+ 6ee:	df 91       	pop	r29
+ 6f0:	cf 91       	pop	r28
+ 6f2:	ff 91       	pop	r31
+ 6f4:	ef 91       	pop	r30
+ 6f6:	bf 91       	pop	r27
+ 6f8:	af 91       	pop	r26
+ 6fa:	9f 91       	pop	r25
+ 6fc:	8f 91       	pop	r24
+ 6fe:	7f 91       	pop	r23
+ 700:	6f 91       	pop	r22
+ 702:	5f 91       	pop	r21
+ 704:	4f 91       	pop	r20
+ 706:	3f 91       	pop	r19
+ 708:	2f 91       	pop	r18
+ 70a:	0f 90       	pop	r0
+ 70c:	0f be       	out	0x3f, r0	; 63
+ 70e:	0f 90       	pop	r0
+ 710:	1f 90       	pop	r1
+ 712:	18 95       	reti
+
+00000714 <itoa>:
+ 714:	fb 01       	movw	r30, r22
+ 716:	9f 01       	movw	r18, r30
+ 718:	e8 94       	clt
+ 71a:	42 30       	cpi	r20, 0x02	; 2
+ 71c:	c4 f0       	brlt	.+48     	; 0x74e <itoa+0x3a>
+ 71e:	45 32       	cpi	r20, 0x25	; 37
+ 720:	b4 f4       	brge	.+44     	; 0x74e <itoa+0x3a>
+ 722:	4a 30       	cpi	r20, 0x0A	; 10
+ 724:	29 f4       	brne	.+10     	; 0x730 <itoa+0x1c>
+ 726:	97 fb       	bst	r25, 7
+ 728:	1e f4       	brtc	.+6      	; 0x730 <itoa+0x1c>
+ 72a:	90 95       	com	r25
+ 72c:	81 95       	neg	r24
+ 72e:	9f 4f       	sbci	r25, 0xFF	; 255
+ 730:	64 2f       	mov	r22, r20
+ 732:	77 27       	eor	r23, r23
+ 734:	0e 94 0b 04 	call	0x816 <__udivmodhi4>
+ 738:	80 5d       	subi	r24, 0xD0	; 208
+ 73a:	8a 33       	cpi	r24, 0x3A	; 58
+ 73c:	0c f0       	brlt	.+2      	; 0x740 <itoa+0x2c>
+ 73e:	89 5d       	subi	r24, 0xD9	; 217
+ 740:	81 93       	st	Z+, r24
+ 742:	cb 01       	movw	r24, r22
+ 744:	00 97       	sbiw	r24, 0x00	; 0
+ 746:	a1 f7       	brne	.-24     	; 0x730 <itoa+0x1c>
+ 748:	16 f4       	brtc	.+4      	; 0x74e <itoa+0x3a>
+ 74a:	5d e2       	ldi	r21, 0x2D	; 45
+ 74c:	51 93       	st	Z+, r21
+ 74e:	10 82       	st	Z, r1
+ 750:	c9 01       	movw	r24, r18
+ 752:	0c 94 d0 03 	jmp	0x7a0 <strrev>
+
+00000756 <ultoa>:
+ 756:	fa 01       	movw	r30, r20
+ 758:	cf 93       	push	r28
+ 75a:	ff 93       	push	r31
+ 75c:	ef 93       	push	r30
+ 75e:	22 30       	cpi	r18, 0x02	; 2
+ 760:	cc f0       	brlt	.+50     	; 0x794 <ultoa+0x3e>
+ 762:	25 32       	cpi	r18, 0x25	; 37
+ 764:	bc f4       	brge	.+46     	; 0x794 <ultoa+0x3e>
+ 766:	c2 2f       	mov	r28, r18
+ 768:	2c 2f       	mov	r18, r28
+ 76a:	33 27       	eor	r19, r19
+ 76c:	44 27       	eor	r20, r20
+ 76e:	55 27       	eor	r21, r21
+ 770:	ff 93       	push	r31
+ 772:	ef 93       	push	r30
+ 774:	0e 94 1f 04 	call	0x83e <__udivmodsi4>
+ 778:	ef 91       	pop	r30
+ 77a:	ff 91       	pop	r31
+ 77c:	60 5d       	subi	r22, 0xD0	; 208
+ 77e:	6a 33       	cpi	r22, 0x3A	; 58
+ 780:	0c f0       	brlt	.+2      	; 0x784 <ultoa+0x2e>
+ 782:	69 5d       	subi	r22, 0xD9	; 217
+ 784:	61 93       	st	Z+, r22
+ 786:	b9 01       	movw	r22, r18
+ 788:	ca 01       	movw	r24, r20
+ 78a:	60 50       	subi	r22, 0x00	; 0
+ 78c:	70 40       	sbci	r23, 0x00	; 0
+ 78e:	80 40       	sbci	r24, 0x00	; 0
+ 790:	90 40       	sbci	r25, 0x00	; 0
+ 792:	51 f7       	brne	.-44     	; 0x768 <ultoa+0x12>
+ 794:	10 82       	st	Z, r1
+ 796:	8f 91       	pop	r24
+ 798:	9f 91       	pop	r25
+ 79a:	cf 91       	pop	r28
+ 79c:	0c 94 d0 03 	jmp	0x7a0 <strrev>
+
+000007a0 <strrev>:
+ 7a0:	dc 01       	movw	r26, r24
+ 7a2:	fc 01       	movw	r30, r24
+ 7a4:	01 90       	ld	r0, Z+
+ 7a6:	00 20       	and	r0, r0
+ 7a8:	e9 f7       	brne	.-6      	; 0x7a4 <strrev+0x4>
+ 7aa:	32 97       	sbiw	r30, 0x02	; 2
+ 7ac:	ae 17       	cp	r26, r30
+ 7ae:	bf 07       	cpc	r27, r31
+ 7b0:	30 f4       	brcc	.+12     	; 0x7be <strrev+0x1e>
+ 7b2:	7c 91       	ld	r23, X
+ 7b4:	60 81       	ld	r22, Z
+ 7b6:	70 83       	st	Z, r23
+ 7b8:	31 97       	sbiw	r30, 0x01	; 1
+ 7ba:	6d 93       	st	X+, r22
+ 7bc:	f7 cf       	rjmp	.-18     	; 0x7ac <strrev+0xc>
+ 7be:	08 95       	ret
+
+000007c0 <__mulsi3>:
+ 7c0:	62 9f       	mul	r22, r18
+ 7c2:	d0 01       	movw	r26, r0
+ 7c4:	73 9f       	mul	r23, r19
+ 7c6:	f0 01       	movw	r30, r0
+ 7c8:	82 9f       	mul	r24, r18
+ 7ca:	e0 0d       	add	r30, r0
+ 7cc:	f1 1d       	adc	r31, r1
+ 7ce:	64 9f       	mul	r22, r20
+ 7d0:	e0 0d       	add	r30, r0
+ 7d2:	f1 1d       	adc	r31, r1
+ 7d4:	92 9f       	mul	r25, r18
+ 7d6:	f0 0d       	add	r31, r0
+ 7d8:	83 9f       	mul	r24, r19
+ 7da:	f0 0d       	add	r31, r0
+ 7dc:	74 9f       	mul	r23, r20
+ 7de:	f0 0d       	add	r31, r0
+ 7e0:	65 9f       	mul	r22, r21
+ 7e2:	f0 0d       	add	r31, r0
+ 7e4:	99 27       	eor	r25, r25
+ 7e6:	72 9f       	mul	r23, r18
+ 7e8:	b0 0d       	add	r27, r0
+ 7ea:	e1 1d       	adc	r30, r1
+ 7ec:	f9 1f       	adc	r31, r25
+ 7ee:	63 9f       	mul	r22, r19
+ 7f0:	b0 0d       	add	r27, r0
+ 7f2:	e1 1d       	adc	r30, r1
+ 7f4:	f9 1f       	adc	r31, r25
+ 7f6:	bd 01       	movw	r22, r26
+ 7f8:	cf 01       	movw	r24, r30
+ 7fa:	11 24       	eor	r1, r1
+ 7fc:	08 95       	ret
+
+000007fe <__udivmodqi4>:
+ 7fe:	99 1b       	sub	r25, r25
+ 800:	79 e0       	ldi	r23, 0x09	; 9
+ 802:	04 c0       	rjmp	.+8      	; 0x80c <__udivmodqi4_ep>
+
+00000804 <__udivmodqi4_loop>:
+ 804:	99 1f       	adc	r25, r25
+ 806:	96 17       	cp	r25, r22
+ 808:	08 f0       	brcs	.+2      	; 0x80c <__udivmodqi4_ep>
+ 80a:	96 1b       	sub	r25, r22
+
+0000080c <__udivmodqi4_ep>:
+ 80c:	88 1f       	adc	r24, r24
+ 80e:	7a 95       	dec	r23
+ 810:	c9 f7       	brne	.-14     	; 0x804 <__udivmodqi4_loop>
+ 812:	80 95       	com	r24
+ 814:	08 95       	ret
+
+00000816 <__udivmodhi4>:
+ 816:	aa 1b       	sub	r26, r26
+ 818:	bb 1b       	sub	r27, r27
+ 81a:	51 e1       	ldi	r21, 0x11	; 17
+ 81c:	07 c0       	rjmp	.+14     	; 0x82c <__udivmodhi4_ep>
+
+0000081e <__udivmodhi4_loop>:
+ 81e:	aa 1f       	adc	r26, r26
+ 820:	bb 1f       	adc	r27, r27
+ 822:	a6 17       	cp	r26, r22
+ 824:	b7 07       	cpc	r27, r23
+ 826:	10 f0       	brcs	.+4      	; 0x82c <__udivmodhi4_ep>
+ 828:	a6 1b       	sub	r26, r22
+ 82a:	b7 0b       	sbc	r27, r23
+
+0000082c <__udivmodhi4_ep>:
+ 82c:	88 1f       	adc	r24, r24
+ 82e:	99 1f       	adc	r25, r25
+ 830:	5a 95       	dec	r21
+ 832:	a9 f7       	brne	.-22     	; 0x81e <__udivmodhi4_loop>
+ 834:	80 95       	com	r24
+ 836:	90 95       	com	r25
+ 838:	bc 01       	movw	r22, r24
+ 83a:	cd 01       	movw	r24, r26
+ 83c:	08 95       	ret
+
+0000083e <__udivmodsi4>:
+ 83e:	a1 e2       	ldi	r26, 0x21	; 33
+ 840:	1a 2e       	mov	r1, r26
+ 842:	aa 1b       	sub	r26, r26
+ 844:	bb 1b       	sub	r27, r27
+ 846:	fd 01       	movw	r30, r26
+ 848:	0d c0       	rjmp	.+26     	; 0x864 <__udivmodsi4_ep>
+
+0000084a <__udivmodsi4_loop>:
+ 84a:	aa 1f       	adc	r26, r26
+ 84c:	bb 1f       	adc	r27, r27
+ 84e:	ee 1f       	adc	r30, r30
+ 850:	ff 1f       	adc	r31, r31
+ 852:	a2 17       	cp	r26, r18
+ 854:	b3 07       	cpc	r27, r19
+ 856:	e4 07       	cpc	r30, r20
+ 858:	f5 07       	cpc	r31, r21
+ 85a:	20 f0       	brcs	.+8      	; 0x864 <__udivmodsi4_ep>
+ 85c:	a2 1b       	sub	r26, r18
+ 85e:	b3 0b       	sbc	r27, r19
+ 860:	e4 0b       	sbc	r30, r20
+ 862:	f5 0b       	sbc	r31, r21
+
+00000864 <__udivmodsi4_ep>:
+ 864:	66 1f       	adc	r22, r22
+ 866:	77 1f       	adc	r23, r23
+ 868:	88 1f       	adc	r24, r24
+ 86a:	99 1f       	adc	r25, r25
+ 86c:	1a 94       	dec	r1
+ 86e:	69 f7       	brne	.-38     	; 0x84a <__udivmodsi4_loop>
+ 870:	60 95       	com	r22
+ 872:	70 95       	com	r23
+ 874:	80 95       	com	r24
+ 876:	90 95       	com	r25
+ 878:	9b 01       	movw	r18, r22
+ 87a:	ac 01       	movw	r20, r24
+ 87c:	bd 01       	movw	r22, r26
+ 87e:	cf 01       	movw	r24, r30
+ 880:	08 95       	ret

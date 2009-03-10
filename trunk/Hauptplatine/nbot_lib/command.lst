@@ -1,0 +1,813 @@
+   1               		.file	"command.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	Str_BOT
+  19               		.section	.progmem.data,"a",@progbits
+  22               	Str_BOT:
+  23 0000 424F 543A 		.string	"BOT:\\>"
+  23      5C3E 00
+  24               	.global	Str_CR
+  27               	Str_CR:
+  28 0007 0D0A 00   		.string	"\r\n"
+  29               	.global	command
+  30               	.global	command
+  31               		.section .bss
+  34               	command:
+  35 0000 00        		.skip 1,0
+  36               	.global	ptext
+  37               		.data
+  40               	ptext:
+  41 0000 0000      		.word	text
+  42               	.LC0:
+  43 0002 3F00      		.string	"?"
+  44               	.LC1:
+  45 0004 6865 6C70 		.string	"help"
+  45      00
+  46               	.LC2:
+  47 0009 7374 6174 		.string	"status"
+  47      7573 00
+  48               	.LC3:
+  49 0010 636C 7300 		.string	"cls"
+  50               	.LC4:
+  51 0014 6D6F 7665 		.string	"move"
+  51      00
+  52               	.LC5:
+  53 0019 6465 6D6F 		.string	"demo"
+  53      00
+  54               	.LC6:
+  55 001e 6465 6275 		.string	"debug"
+  55      6700 
+  56               	.LC7:
+  57 0024 6465 6275 		.string	"debug cmd"
+  57      6720 636D 
+  57      6400 
+  58               	.LC8:
+  59 002e 6465 6275 		.string	"debug enc"
+  59      6720 656E 
+  59      6300 
+  60               	.LC9:
+  61 0038 6465 6275 		.string	"debug reg"
+  61      6720 7265 
+  61      6700 
+  62               		.text
+  63               	.global	command_put
+  65               	command_put:
+  66               	.LFB2:
+  67               	.LM1:
+  68               	/* prologue: frame size=0 */
+  69 0000 CF93      		push r28
+  70 0002 DF93      		push r29
+  71               	/* prologue end (size=2) */
+  72 0004 982F      		mov r25,r24
+  73               	.LM2:
+  74 0006 8F3F      		cpi r24,lo8(-1)
+  75 0008 09F4      		brne .+2
+  76 000a 9EC0      		rjmp .L2
+  77               	.LM3:
+  78 000c 8D30      		cpi r24,lo8(13)
+  79 000e 09F0      		breq .+2
+  80 0010 68C0      		rjmp .L3
+  81               	.LM4:
+  82 0012 E091 0000 		lds r30,ptext
+  83 0016 F091 0000 		lds r31,(ptext)+1
+  84 001a 1082      		st Z,__zero_reg__
+  85               	.LM5:
+  86 001c C0E0      		ldi r28,lo8(text)
+  87 001e D0E0      		ldi r29,hi8(text)
+  88 0020 D093 0000 		sts (ptext)+1,r29
+  89 0024 C093 0000 		sts ptext,r28
+  90               	.LM6:
+  91 0028 1092 0000 		sts nText,__zero_reg__
+  92               	.LM7:
+  93 002c 60E0      		ldi r22,lo8(.LC0)
+  94 002e 70E0      		ldi r23,hi8(.LC0)
+  95 0030 CE01      		movw r24,r28
+  96 0032 0E94 0000 		call strcmp
+  97 0036 892B      		or r24,r25
+  98 0038 39F0      		breq .L5
+  99 003a 60E0      		ldi r22,lo8(.LC1)
+ 100 003c 70E0      		ldi r23,hi8(.LC1)
+ 101 003e CE01      		movw r24,r28
+ 102 0040 0E94 0000 		call strcmp
+ 103 0044 892B      		or r24,r25
+ 104 0046 11F4      		brne .L4
+ 105               	.L5:
+ 106               	.LM8:
+ 107 0048 84E0      		ldi r24,lo8(4)
+ 108 004a 62C0      		rjmp .L37
+ 109               	.L4:
+ 110               	.LM9:
+ 111 004c 60E0      		ldi r22,lo8(.LC2)
+ 112 004e 70E0      		ldi r23,hi8(.LC2)
+ 113 0050 CE01      		movw r24,r28
+ 114 0052 0E94 0000 		call strcmp
+ 115 0056 892B      		or r24,r25
+ 116 0058 11F4      		brne .L7
+ 117               	.LM10:
+ 118 005a 83E0      		ldi r24,lo8(3)
+ 119 005c 59C0      		rjmp .L37
+ 120               	.L7:
+ 121               	.LM11:
+ 122 005e 60E0      		ldi r22,lo8(.LC3)
+ 123 0060 70E0      		ldi r23,hi8(.LC3)
+ 124 0062 CE01      		movw r24,r28
+ 125 0064 0E94 0000 		call strcmp
+ 126 0068 892B      		or r24,r25
+ 127 006a 11F4      		brne .L9
+ 128               	.LM12:
+ 129 006c 82E0      		ldi r24,lo8(2)
+ 130 006e 50C0      		rjmp .L37
+ 131               	.L9:
+ 132               	.LM13:
+ 133 0070 60E0      		ldi r22,lo8(.LC4)
+ 134 0072 70E0      		ldi r23,hi8(.LC4)
+ 135 0074 CE01      		movw r24,r28
+ 136 0076 0E94 0000 		call strcmp
+ 137 007a 892B      		or r24,r25
+ 138 007c 11F4      		brne .L11
+ 139               	.LM14:
+ 140 007e 85E0      		ldi r24,lo8(5)
+ 141 0080 47C0      		rjmp .L37
+ 142               	.L11:
+ 143               	.LM15:
+ 144 0082 60E0      		ldi r22,lo8(.LC5)
+ 145 0084 70E0      		ldi r23,hi8(.LC5)
+ 146 0086 CE01      		movw r24,r28
+ 147 0088 0E94 0000 		call strcmp
+ 148 008c 892B      		or r24,r25
+ 149 008e 11F4      		brne .L13
+ 150               	.LM16:
+ 151 0090 86E0      		ldi r24,lo8(6)
+ 152 0092 3EC0      		rjmp .L37
+ 153               	.L13:
+ 154               	.LM17:
+ 155 0094 60E0      		ldi r22,lo8(.LC6)
+ 156 0096 70E0      		ldi r23,hi8(.LC6)
+ 157 0098 CE01      		movw r24,r28
+ 158 009a 0E94 0000 		call strcmp
+ 159 009e 892B      		or r24,r25
+ 160 00a0 11F4      		brne .L15
+ 161               	.LM18:
+ 162 00a2 8AE0      		ldi r24,lo8(10)
+ 163 00a4 35C0      		rjmp .L37
+ 164               	.L15:
+ 165               	.LM19:
+ 166 00a6 60E0      		ldi r22,lo8(.LC7)
+ 167 00a8 70E0      		ldi r23,hi8(.LC7)
+ 168 00aa CE01      		movw r24,r28
+ 169 00ac 0E94 0000 		call strcmp
+ 170 00b0 892B      		or r24,r25
+ 171 00b2 11F4      		brne .L17
+ 172               	.LM20:
+ 173 00b4 8BE0      		ldi r24,lo8(11)
+ 174 00b6 2CC0      		rjmp .L37
+ 175               	.L17:
+ 176               	.LM21:
+ 177 00b8 60E0      		ldi r22,lo8(.LC8)
+ 178 00ba 70E0      		ldi r23,hi8(.LC8)
+ 179 00bc CE01      		movw r24,r28
+ 180 00be 0E94 0000 		call strcmp
+ 181 00c2 892B      		or r24,r25
+ 182 00c4 11F4      		brne .L19
+ 183               	.LM22:
+ 184 00c6 8CE0      		ldi r24,lo8(12)
+ 185 00c8 23C0      		rjmp .L37
+ 186               	.L19:
+ 187               	.LM23:
+ 188 00ca 60E0      		ldi r22,lo8(.LC9)
+ 189 00cc 70E0      		ldi r23,hi8(.LC9)
+ 190 00ce 80E0      		ldi r24,lo8(text)
+ 191 00d0 90E0      		ldi r25,hi8(text)
+ 192 00d2 0E94 0000 		call strcmp
+ 193 00d6 892B      		or r24,r25
+ 194 00d8 11F4      		brne .L21
+ 195               	.LM24:
+ 196 00da 8DE0      		ldi r24,lo8(13)
+ 197 00dc 19C0      		rjmp .L37
+ 198               	.L21:
+ 199               	.LM25:
+ 200 00de 81E0      		ldi r24,lo8(1)
+ 201 00e0 17C0      		rjmp .L37
+ 202               	.L3:
+ 203               	.LM26:
+ 204 00e2 8B31      		cpi r24,lo8(27)
+ 205 00e4 C1F4      		brne .L24
+ 206               	.LM27:
+ 207 00e6 0E94 0000 		call uart_getc
+ 208               	.LM28:
+ 209 00ea 8B35      		cpi r24,lo8(91)
+ 210 00ec 81F4      		brne .L25
+ 211               	.LM29:
+ 212 00ee 0E94 0000 		call uart_getc
+ 213 00f2 982F      		mov r25,r24
+ 214               	.LM30:
+ 215 00f4 8134      		cpi r24,lo8(65)
+ 216 00f6 41F0      		breq .L38
+ 217               	.LM31:
+ 218 00f8 8234      		cpi r24,lo8(66)
+ 219 00fa 31F0      		breq .L38
+ 220               	.LM32:
+ 221 00fc 8334      		cpi r24,lo8(67)
+ 222 00fe 11F4      		brne .L30
+ 223               	.LM33:
+ 224 0100 85E4      		ldi r24,lo8(69)
+ 225 0102 06C0      		rjmp .L37
+ 226               	.L30:
+ 227               	.LM34:
+ 228 0104 8434      		cpi r24,lo8(68)
+ 229 0106 01F5      		brne .L2
+ 230               	.L38:
+ 231               	.LM35:
+ 232 0108 9093 0000 		sts command,r25
+ 233               	.LM36:
+ 234 010c 1FC0      		rjmp .L1
+ 235               	.L25:
+ 236               	.LM37:
+ 237 010e 8BE1      		ldi r24,lo8(27)
+ 238               	.L37:
+ 239 0110 8093 0000 		sts command,r24
+ 240               	.LM38:
+ 241 0114 1BC0      		rjmp .L1
+ 242               	.L24:
+ 243               	.LM39:
+ 244 0116 8A30      		cpi r24,lo8(10)
+ 245 0118 B9F0      		breq .L2
+ 246 011a 8830      		cpi r24,lo8(8)
+ 247 011c A9F0      		breq .L2
+ 248 011e 8091 0000 		lds r24,nText
+ 249 0122 8036      		cpi r24,lo8(96)
+ 250 0124 89F0      		breq .L2
+ 251               	.LM40:
+ 252 0126 E091 0000 		lds r30,ptext
+ 253 012a F091 0000 		lds r31,(ptext)+1
+ 254 012e 9193      		st Z+,r25
+ 255 0130 F093 0000 		sts (ptext)+1,r31
+ 256 0134 E093 0000 		sts ptext,r30
+ 257               	.LM41:
+ 258 0138 892F      		mov r24,r25
+ 259 013a 0E94 0000 		call uart_putc
+ 260               	.LM42:
+ 261 013e 8091 0000 		lds r24,nText
+ 262 0142 8F5F      		subi r24,lo8(-(1))
+ 263 0144 8093 0000 		sts nText,r24
+ 264               	.L2:
+ 265               	.LM43:
+ 266 0148 1092 0000 		sts command,__zero_reg__
+ 267               	.L1:
+ 268               	/* epilogue: frame size=0 */
+ 269 014c DF91      		pop r29
+ 270 014e CF91      		pop r28
+ 271 0150 0895      		ret
+ 272               	/* epilogue end (size=3) */
+ 273               	/* function command_put size 169 (164) */
+ 274               	.LFE2:
+ 276               	.global	command_get
+ 278               	command_get:
+ 279               	.LFB3:
+ 280               	.LM44:
+ 281               	/* prologue: frame size=0 */
+ 282               	/* prologue end (size=0) */
+ 283               	.LM45:
+ 284 0152 8091 0000 		lds r24,command
+ 285               	.LM46:
+ 286 0156 9927      		clr r25
+ 287               	/* epilogue: frame size=0 */
+ 288 0158 0895      		ret
+ 289               	/* epilogue end (size=1) */
+ 290               	/* function command_get size 4 (3) */
+ 291               	.LFE3:
+ 293               	.global	command_text
+ 295               	command_text:
+ 296               	.LFB4:
+ 297               	.LM47:
+ 298               	/* prologue: frame size=0 */
+ 299               	/* prologue end (size=0) */
+ 300               	.LM48:
+ 301 015a 80E0      		ldi r24,lo8(text)
+ 302 015c 90E0      		ldi r25,hi8(text)
+ 303               	/* epilogue: frame size=0 */
+ 304 015e 0895      		ret
+ 305               	/* epilogue end (size=1) */
+ 306               	/* function command_text size 3 (2) */
+ 307               	.LFE4:
+ 309               		.section	.progmem.data
+ 312               	__c.0:
+ 313 000a 0D0A 2044 		.string	"\r\n Diesen Befehl kenne ich nicht.\r\n"
+ 313      6965 7365 
+ 313      6E20 4265 
+ 313      6665 686C 
+ 313      206B 656E 
+ 316               	__c.1:
+ 317 002e 2044 7520 		.string	" Du hast \""
+ 317      6861 7374 
+ 317      2022 00
+ 320               	__c.2:
+ 321 0039 2220 6569 		.string	"\" eingegeben. "
+ 321      6E67 6567 
+ 321      6562 656E 
+ 321      2E20 00
+ 324               	__c.3:
+ 325 0048 0C20 2A2A 		.string	"\f *** Hallo! ***"
+ 325      2A20 4861 
+ 325      6C6C 6F21 
+ 325      202A 2A2A 
+ 325      00
+ 328               	__c.4:
+ 329 0059 2049 6368 		.string	" Ich bin ein kleiner Roboter. Was moechtest du mit mir machen?"
+ 329      2062 696E 
+ 329      2065 696E 
+ 329      206B 6C65 
+ 329      696E 6572 
+ 332               	__c.5:
+ 333 0098 204D 6974 		.string	" Mit dem Befehl:"
+ 333      2064 656D 
+ 333      2042 6566 
+ 333      6568 6C3A 
+ 333      00
+ 336               	__c.6:
+ 337 00a9 202D 203F 		.string	" - ?       Zeige ich die alle Befehle die ich verstehe."
+ 337      2020 2020 
+ 337      2020 205A 
+ 337      6569 6765 
+ 337      2069 6368 
+ 340               	__c.7:
+ 341 00e1 202D 2073 		.string	" - status  kannst du sehen, wie ich mich fuehle."
+ 341      7461 7475 
+ 341      7320 206B 
+ 341      616E 6E73 
+ 341      7420 6475 
+ 344               	__c.8:
+ 345 0112 202D 2063 		.string	" - cls     loescht du den Bildschirm."
+ 345      6C73 2020 
+ 345      2020 206C 
+ 345      6F65 7363 
+ 345      6874 2064 
+ 348               	__c.9:
+ 349 0138 202D 206D 		.string	" - move    kannst du mich fahren lassen."
+ 349      6F76 6520 
+ 349      2020 206B 
+ 349      616E 6E73 
+ 349      7420 6475 
+ 352               	__c.10:
+ 353 0161 202D 2064 		.string	" - demo    fahre ich ein wenig hin und her."
+ 353      656D 6F20 
+ 353      2020 2066 
+ 353      6168 7265 
+ 353      2069 6368 
+ 356               	__c.11:
+ 357 018d 202D 2064 		.string	" - debug   Zeige ich dir Aktuelle Statusmeldungen."
+ 357      6562 7567 
+ 357      2020 205A 
+ 357      6569 6765 
+ 357      2069 6368 
+ 360               	__c.12:
+ 361 01c0 0C20 2A2A 		.string	"\f *** Hi! ***\r\n"
+ 361      2A20 4869 
+ 361      2120 2A2A 
+ 361      2A0D 0A00 
+ 364               	__c.13:
+ 365 01d0 2049 6368 		.string	" Ich bin heute schon seit "
+ 365      2062 696E 
+ 365      2068 6575 
+ 365      7465 2073 
+ 365      6368 6F6E 
+ 368               	__c.14:
+ 369 01eb 2075 6E74 		.string	" unterwegs.\r\n"
+ 369      6572 7765 
+ 369      6773 2E0D 
+ 369      0A00 
+ 372               	__c.15:
+ 373 01f9 2049 6368 		.string	" Ich fuehle mich gut und meine Akkuspannung betraegt noch:"
+ 373      2066 7565 
+ 373      686C 6520 
+ 373      6D69 6368 
+ 373      2067 7574 
+ 376               	__c.16:
+ 377 0234 2031 3256 		.string	" 12V\r\n"
+ 377      0D0A 00
+ 380               	__c.17:
+ 381 023b 0C20 2A2A 		.string	"\f *** Gib Gas! ***\r\n"
+ 381      2A20 4769 
+ 381      6220 4761 
+ 381      7321 202A 
+ 381      2A2A 0D0A 
+ 384               	__c.18:
+ 385 0250 204D 6974 		.string	" Mit den Pfeiltasten kannst du mich nun steuern.\r\n"
+ 385      2064 656E 
+ 385      2050 6665 
+ 385      696C 7461 
+ 385      7374 656E 
+ 388               	__c.19:
+ 389 0283 204D 6974 		.string	" Mit Esc beendest du die Fahrt."
+ 389      2045 7363 
+ 389      2062 6565 
+ 389      6E64 6573 
+ 389      7420 6475 
+ 392               	__c.20:
+ 393 02a3 0C20 2A2A 		.string	"\f *** DEMO *** \r\n"
+ 393      2A20 4445 
+ 393      4D4F 202A 
+ 393      2A2A 200D 
+ 393      0A00 
+ 396               	__c.21:
+ 397 02b5 2049 6368 		.string	" Ich fahre ein wenig hin und her.\r\n"
+ 397      2066 6168 
+ 397      7265 2065 
+ 397      696E 2077 
+ 397      656E 6967 
+ 400               	__c.22:
+ 401 02d9 204D 6974 		.string	" Mit Esc beendest du die Fahrt."
+ 401      2045 7363 
+ 401      2062 6565 
+ 401      6E64 6573 
+ 401      7420 6475 
+ 404               	__c.23:
+ 405 02f9 0C20 2A2A 		.string	"\f *** DEBUG *** \r\n"
+ 405      2A20 4445 
+ 405      4255 4720 
+ 405      2A2A 2A20 
+ 405      0D0A 00
+ 408               	__c.24:
+ 409 030c 2049 6368 		.string	" Ich kann dir verschiedene DEBUGinfomationen ausgeben:\r\n"
+ 409      206B 616E 
+ 409      6E20 6469 
+ 409      7220 7665 
+ 409      7273 6368 
+ 412               	__c.25:
+ 413 0345 204D 6974 		.string	" Mit dem Befehl:\r\n"
+ 413      2064 656D 
+ 413      2042 6566 
+ 413      6568 6C3A 
+ 413      0D0A 00
+ 416               	__c.26:
+ 417 0358 202D 2064 		.string	" - debug cmd      gebe ich dir alle gesendete Zeichen aus.\r\n"
+ 417      6562 7567 
+ 417      2063 6D64 
+ 417      2020 2020 
+ 417      2020 6765 
+ 420               	__c.27:
+ 421 0395 202D 2064 		.string	" - debug enc      gebe ich die die aktuellen Encoderwerte aus.\r\n"
+ 421      6562 7567 
+ 421      2065 6E63 
+ 421      2020 2020 
+ 421      2020 6765 
+ 424               	__c.28:
+ 425 03d6 202D 2064 		.string	" - debug reg      gebe ich dir aktuelle Reglerwerte aus.\r\n"
+ 425      6562 7567 
+ 425      2072 6567 
+ 425      2020 2020 
+ 425      2020 6765 
+ 428               	__c.29:
+ 429 0411 202D 2044 		.string	" - Die Anzeige beendest du mit escape.\r\n"
+ 429      6965 2041 
+ 429      6E7A 6569 
+ 429      6765 2062 
+ 429      6565 6E64 
+ 432               	__c.30:
+ 433 043a 0C00      		.string	"\f"
+ 436               	__c.31:
+ 437 043c 0C20 4665 		.string	"\f Fehler in der Commandline!!\r\n"
+ 437      686C 6572 
+ 437      2069 6E20 
+ 437      6465 7220 
+ 437      436F 6D6D 
+ 438               		.text
+ 439               	.global	command_prompt
+ 441               	command_prompt:
+ 442               	.LFB5:
+ 443               	.LM49:
+ 444               	/* prologue: frame size=0 */
+ 445               	/* prologue end (size=0) */
+ 446               	.LM50:
+ 447 0160 9927      		clr r25
+ 448 0162 8A30      		cpi r24,10
+ 449 0164 9105      		cpc r25,__zero_reg__
+ 450 0166 09F4      		brne .+2
+ 451 0168 C5C0      		rjmp .L49
+ 452               	.LM51:
+ 453 016a 8B30      		cpi r24,11
+ 454 016c 9105      		cpc r25,__zero_reg__
+ 455 016e ECF4      		brge .L60
+ 456 0170 8330      		cpi r24,3
+ 457 0172 9105      		cpc r25,__zero_reg__
+ 458 0174 09F4      		brne .+2
+ 459 0176 93C0      		rjmp .L46
+ 460 0178 8430      		cpi r24,4
+ 461 017a 9105      		cpc r25,__zero_reg__
+ 462 017c 5CF4      		brge .L61
+ 463 017e 8130      		cpi r24,1
+ 464 0180 9105      		cpc r25,__zero_reg__
+ 465 0182 41F1      		breq .L44
+ 466 0184 8230      		cpi r24,2
+ 467 0186 9105      		cpc r25,__zero_reg__
+ 468 0188 0CF0      		brlt .+2
+ 469 018a CFC0      		rjmp .L50
+ 470 018c 892B      		or r24,r25
+ 471 018e 09F4      		brne .+2
+ 472 0190 D3C0      		rjmp .L41
+ 473 0192 CEC0      		rjmp .L59
+ 474               	.L61:
+ 475 0194 8530      		cpi r24,5
+ 476 0196 9105      		cpc r25,__zero_reg__
+ 477 0198 09F4      		brne .+2
+ 478 019a 96C0      		rjmp .L47
+ 479 019c 8530      		cpi r24,5
+ 480 019e 9105      		cpc r25,__zero_reg__
+ 481 01a0 8CF1      		brlt .L45
+ 482 01a2 0697      		sbiw r24,6
+ 483 01a4 09F4      		brne .+2
+ 484 01a6 9BC0      		rjmp .L48
+ 485 01a8 C3C0      		rjmp .L59
+ 486               	.L60:
+ 487 01aa 8334      		cpi r24,67
+ 488 01ac 9105      		cpc r25,__zero_reg__
+ 489 01ae 64F4      		brge .L62
+ 490 01b0 8134      		cpi r24,65
+ 491 01b2 9105      		cpc r25,__zero_reg__
+ 492 01b4 0CF0      		brlt .+2
+ 493 01b6 C0C0      		rjmp .L41
+ 494 01b8 8E30      		cpi r24,14
+ 495 01ba 9105      		cpc r25,__zero_reg__
+ 496 01bc 0CF4      		brge .+2
+ 497 01be BCC0      		rjmp .L41
+ 498 01c0 4B97      		sbiw r24,27
+ 499 01c2 09F4      		brne .+2
+ 500 01c4 63C0      		rjmp .L63
+ 501 01c6 B4C0      		rjmp .L59
+ 502               	.L62:
+ 503 01c8 8454      		subi r24,lo8(-(-68))
+ 504 01ca 9040      		sbci r25,hi8(-(-68))
+ 505 01cc 0297      		sbiw r24,2
+ 506 01ce 08F0      		brlo .+2
+ 507 01d0 AFC0      		rjmp .L59
+ 508 01d2 0895      		ret
+ 509               	.L44:
+ 510               	.LM52:
+ 511 01d4 80E0      		ldi r24,lo8(__c.0)
+ 512 01d6 90E0      		ldi r25,hi8(__c.0)
+ 513 01d8 0E94 0000 		call uart_puts_p
+ 514               	.LM53:
+ 515 01dc 80E0      		ldi r24,lo8(__c.1)
+ 516 01de 90E0      		ldi r25,hi8(__c.1)
+ 517 01e0 0E94 0000 		call uart_puts_p
+ 518               	.LM54:
+ 519 01e4 0E94 0000 		call command_text
+ 520 01e8 0E94 0000 		call uart_puts
+ 521               	.LM55:
+ 522 01ec 80E0      		ldi r24,lo8(__c.2)
+ 523 01ee 90E0      		ldi r25,hi8(__c.2)
+ 524 01f0 0E94 0000 		call uart_puts_p
+ 525               	.LM56:
+ 526 01f4 0E94 0000 		call command_text
+ 527 01f8 FC01      		movw r30,r24
+ 528 01fa 8081      		ld r24,Z
+ 529 01fc 9927      		clr r25
+ 530 01fe 0E94 0000 		call uart_puti
+ 531 0202 44C0      		rjmp .L63
+ 532               	.L45:
+ 533               	.LM57:
+ 534 0204 80E0      		ldi r24,lo8(__c.3)
+ 535 0206 90E0      		ldi r25,hi8(__c.3)
+ 536 0208 0E94 0000 		call uart_puts_p
+ 537               	.LM58:
+ 538 020c 80E0      		ldi r24,lo8(Str_CR)
+ 539 020e 90E0      		ldi r25,hi8(Str_CR)
+ 540 0210 0E94 0000 		call uart_puts_p
+ 541               	.LM59:
+ 542 0214 80E0      		ldi r24,lo8(__c.4)
+ 543 0216 90E0      		ldi r25,hi8(__c.4)
+ 544 0218 0E94 0000 		call uart_puts_p
+ 545               	.LM60:
+ 546 021c 80E0      		ldi r24,lo8(Str_CR)
+ 547 021e 90E0      		ldi r25,hi8(Str_CR)
+ 548 0220 0E94 0000 		call uart_puts_p
+ 549               	.LM61:
+ 550 0224 80E0      		ldi r24,lo8(__c.5)
+ 551 0226 90E0      		ldi r25,hi8(__c.5)
+ 552 0228 0E94 0000 		call uart_puts_p
+ 553               	.LM62:
+ 554 022c 80E0      		ldi r24,lo8(Str_CR)
+ 555 022e 90E0      		ldi r25,hi8(Str_CR)
+ 556 0230 0E94 0000 		call uart_puts_p
+ 557               	.LM63:
+ 558 0234 80E0      		ldi r24,lo8(__c.6)
+ 559 0236 90E0      		ldi r25,hi8(__c.6)
+ 560 0238 0E94 0000 		call uart_puts_p
+ 561               	.LM64:
+ 562 023c 80E0      		ldi r24,lo8(Str_CR)
+ 563 023e 90E0      		ldi r25,hi8(Str_CR)
+ 564 0240 0E94 0000 		call uart_puts_p
+ 565               	.LM65:
+ 566 0244 80E0      		ldi r24,lo8(__c.7)
+ 567 0246 90E0      		ldi r25,hi8(__c.7)
+ 568 0248 0E94 0000 		call uart_puts_p
+ 569               	.LM66:
+ 570 024c 80E0      		ldi r24,lo8(Str_CR)
+ 571 024e 90E0      		ldi r25,hi8(Str_CR)
+ 572 0250 0E94 0000 		call uart_puts_p
+ 573               	.LM67:
+ 574 0254 80E0      		ldi r24,lo8(__c.8)
+ 575 0256 90E0      		ldi r25,hi8(__c.8)
+ 576 0258 0E94 0000 		call uart_puts_p
+ 577               	.LM68:
+ 578 025c 80E0      		ldi r24,lo8(Str_CR)
+ 579 025e 90E0      		ldi r25,hi8(Str_CR)
+ 580 0260 0E94 0000 		call uart_puts_p
+ 581               	.LM69:
+ 582 0264 80E0      		ldi r24,lo8(__c.9)
+ 583 0266 90E0      		ldi r25,hi8(__c.9)
+ 584 0268 0E94 0000 		call uart_puts_p
+ 585               	.LM70:
+ 586 026c 80E0      		ldi r24,lo8(Str_CR)
+ 587 026e 90E0      		ldi r25,hi8(Str_CR)
+ 588 0270 0E94 0000 		call uart_puts_p
+ 589               	.LM71:
+ 590 0274 80E0      		ldi r24,lo8(__c.10)
+ 591 0276 90E0      		ldi r25,hi8(__c.10)
+ 592 0278 0E94 0000 		call uart_puts_p
+ 593               	.LM72:
+ 594 027c 80E0      		ldi r24,lo8(Str_CR)
+ 595 027e 90E0      		ldi r25,hi8(Str_CR)
+ 596 0280 0E94 0000 		call uart_puts_p
+ 597               	.LM73:
+ 598 0284 80E0      		ldi r24,lo8(__c.11)
+ 599 0286 90E0      		ldi r25,hi8(__c.11)
+ 600 0288 0E94 0000 		call uart_puts_p
+ 601               	.L63:
+ 602               	.LM74:
+ 603 028c 80E0      		ldi r24,lo8(Str_CR)
+ 604 028e 90E0      		ldi r25,hi8(Str_CR)
+ 605               	.L64:
+ 606 0290 0E94 0000 		call uart_puts_p
+ 607               	.LM75:
+ 608 0294 80E0      		ldi r24,lo8(Str_BOT)
+ 609 0296 90E0      		ldi r25,hi8(Str_BOT)
+ 610               	.L65:
+ 611 0298 0E94 0000 		call uart_puts_p
+ 612               	.LM76:
+ 613 029c 0895      		ret
+ 614               	.L46:
+ 615               	.LM77:
+ 616 029e 80E0      		ldi r24,lo8(__c.12)
+ 617 02a0 90E0      		ldi r25,hi8(__c.12)
+ 618 02a2 0E94 0000 		call uart_puts_p
+ 619               	.LM78:
+ 620 02a6 80E0      		ldi r24,lo8(__c.13)
+ 621 02a8 90E0      		ldi r25,hi8(__c.13)
+ 622 02aa 0E94 0000 		call uart_puts_p
+ 623               	.LM79:
+ 624 02ae 0E94 0000 		call uart_printtime
+ 625               	.LM80:
+ 626 02b2 80E0      		ldi r24,lo8(__c.14)
+ 627 02b4 90E0      		ldi r25,hi8(__c.14)
+ 628 02b6 0E94 0000 		call uart_puts_p
+ 629               	.LM81:
+ 630 02ba 80E0      		ldi r24,lo8(__c.15)
+ 631 02bc 90E0      		ldi r25,hi8(__c.15)
+ 632 02be 0E94 0000 		call uart_puts_p
+ 633               	.LM82:
+ 634 02c2 80E0      		ldi r24,lo8(__c.16)
+ 635 02c4 90E0      		ldi r25,hi8(__c.16)
+ 636 02c6 E4CF      		rjmp .L64
+ 637               	.L47:
+ 638               	.LM83:
+ 639 02c8 80E0      		ldi r24,lo8(__c.17)
+ 640 02ca 90E0      		ldi r25,hi8(__c.17)
+ 641 02cc 0E94 0000 		call uart_puts_p
+ 642               	.LM84:
+ 643 02d0 80E0      		ldi r24,lo8(__c.18)
+ 644 02d2 90E0      		ldi r25,hi8(__c.18)
+ 645 02d4 0E94 0000 		call uart_puts_p
+ 646               	.LM85:
+ 647 02d8 80E0      		ldi r24,lo8(__c.19)
+ 648 02da 90E0      		ldi r25,hi8(__c.19)
+ 649 02dc DDCF      		rjmp .L65
+ 650               	.L48:
+ 651               	.LM86:
+ 652 02de 80E0      		ldi r24,lo8(__c.20)
+ 653 02e0 90E0      		ldi r25,hi8(__c.20)
+ 654 02e2 0E94 0000 		call uart_puts_p
+ 655               	.LM87:
+ 656 02e6 80E0      		ldi r24,lo8(__c.21)
+ 657 02e8 90E0      		ldi r25,hi8(__c.21)
+ 658 02ea 0E94 0000 		call uart_puts_p
+ 659               	.LM88:
+ 660 02ee 80E0      		ldi r24,lo8(__c.22)
+ 661 02f0 90E0      		ldi r25,hi8(__c.22)
+ 662 02f2 D2CF      		rjmp .L65
+ 663               	.L49:
+ 664               	.LM89:
+ 665 02f4 80E0      		ldi r24,lo8(__c.23)
+ 666 02f6 90E0      		ldi r25,hi8(__c.23)
+ 667 02f8 0E94 0000 		call uart_puts_p
+ 668               	.LM90:
+ 669 02fc 80E0      		ldi r24,lo8(__c.24)
+ 670 02fe 90E0      		ldi r25,hi8(__c.24)
+ 671 0300 0E94 0000 		call uart_puts_p
+ 672               	.LM91:
+ 673 0304 80E0      		ldi r24,lo8(__c.25)
+ 674 0306 90E0      		ldi r25,hi8(__c.25)
+ 675 0308 0E94 0000 		call uart_puts_p
+ 676               	.LM92:
+ 677 030c 80E0      		ldi r24,lo8(__c.26)
+ 678 030e 90E0      		ldi r25,hi8(__c.26)
+ 679 0310 0E94 0000 		call uart_puts_p
+ 680               	.LM93:
+ 681 0314 80E0      		ldi r24,lo8(__c.27)
+ 682 0316 90E0      		ldi r25,hi8(__c.27)
+ 683 0318 0E94 0000 		call uart_puts_p
+ 684               	.LM94:
+ 685 031c 80E0      		ldi r24,lo8(__c.28)
+ 686 031e 90E0      		ldi r25,hi8(__c.28)
+ 687 0320 0E94 0000 		call uart_puts_p
+ 688               	.LM95:
+ 689 0324 80E0      		ldi r24,lo8(__c.29)
+ 690 0326 90E0      		ldi r25,hi8(__c.29)
+ 691 0328 B3CF      		rjmp .L64
+ 692               	.L50:
+ 693               	.LM96:
+ 694 032a 80E0      		ldi r24,lo8(__c.30)
+ 695 032c 90E0      		ldi r25,hi8(__c.30)
+ 696 032e B0CF      		rjmp .L64
+ 697               	.L59:
+ 698               	.LM97:
+ 699 0330 80E0      		ldi r24,lo8(__c.31)
+ 700 0332 90E0      		ldi r25,hi8(__c.31)
+ 701 0334 0E94 0000 		call uart_puts_p
+ 702               	.L41:
+ 703 0338 0895      		ret
+ 704               	/* epilogue: frame size=0 */
+ 705               	/* epilogue: noreturn */
+ 706               	/* epilogue end (size=0) */
+ 707               	/* function command_prompt size 240 (240) */
+ 708               	.LFE5:
+ 710               		.comm text,100,1
+ 711               		.comm nText,1,1
+ 712               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 command.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:22     .progmem.data:00000000 Str_BOT
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:27     .progmem.data:00000007 Str_CR
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:34     .bss:00000000 command
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:40     .data:00000000 ptext
+                            *COM*:00000064 text
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:65     .text:00000000 command_put
+                            *COM*:00000001 nText
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:278    .text:00000152 command_get
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:295    .text:0000015a command_text
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:312    .progmem.data:0000000a __c.0
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:316    .progmem.data:0000002e __c.1
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:320    .progmem.data:00000039 __c.2
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:324    .progmem.data:00000048 __c.3
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:328    .progmem.data:00000059 __c.4
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:332    .progmem.data:00000098 __c.5
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:336    .progmem.data:000000a9 __c.6
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:340    .progmem.data:000000e1 __c.7
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:344    .progmem.data:00000112 __c.8
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:348    .progmem.data:00000138 __c.9
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:352    .progmem.data:00000161 __c.10
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:356    .progmem.data:0000018d __c.11
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:360    .progmem.data:000001c0 __c.12
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:364    .progmem.data:000001d0 __c.13
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:368    .progmem.data:000001eb __c.14
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:372    .progmem.data:000001f9 __c.15
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:376    .progmem.data:00000234 __c.16
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:380    .progmem.data:0000023b __c.17
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:384    .progmem.data:00000250 __c.18
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:388    .progmem.data:00000283 __c.19
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:392    .progmem.data:000002a3 __c.20
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:396    .progmem.data:000002b5 __c.21
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:400    .progmem.data:000002d9 __c.22
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:404    .progmem.data:000002f9 __c.23
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:408    .progmem.data:0000030c __c.24
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:412    .progmem.data:00000345 __c.25
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:416    .progmem.data:00000358 __c.26
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:420    .progmem.data:00000395 __c.27
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:424    .progmem.data:000003d6 __c.28
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:428    .progmem.data:00000411 __c.29
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:432    .progmem.data:0000043a __c.30
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:436    .progmem.data:0000043c __c.31
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccqUaaaa.s:441    .text:00000160 command_prompt
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+strcmp
+uart_getc
+uart_putc
+uart_puts_p
+uart_puts
+uart_puti
+uart_printtime

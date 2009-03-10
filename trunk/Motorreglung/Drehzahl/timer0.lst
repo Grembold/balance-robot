@@ -1,0 +1,188 @@
+   1               		.file	"timer0.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  11               		.text
+  12               	.Ltext0:
+  74               	.global	timer0_init
+  76               	timer0_init:
+   1:timer0.c      **** #include <avr/io.h>
+   2:timer0.c      **** #include <avr/interrupt.h>
+   3:timer0.c      **** #include "timer0.h"
+   4:timer0.c      **** 
+   5:timer0.c      **** /* Timer0 initialisieren */
+   6:timer0.c      **** void timer0_init(void)
+   7:timer0.c      **** {
+  78               	.LM1:
+  79               	/* prologue: frame size=0 */
+  80 0000 CF93      		push r28
+  81 0002 DF93      		push r29
+  82 0004 CDB7      		in r28,__SP_L__
+  83 0006 DEB7      		in r29,__SP_H__
+  84               	/* prologue end (size=4) */
+   8:timer0.c      **** 	/* Prescaler auf 64: Clock alle 5,78us (172,8KHz). */
+   9:timer0.c      **** 	/* Überlauf alle 1,48ms (675 Hz)  */
+  10:timer0.c      **** 	TCCR0 |= ((1<<CS01) | (1<<CS00));// Prescaler 64, entspricht 5,8usec und 1,48ms bis zum Überlauf
+  86               	.LM2:
+  87 0008 8091 5300 		lds r24,83
+  88 000c 8360      		ori r24,lo8(3)
+  89 000e 8093 5300 		sts 83,r24
+  11:timer0.c      **** 	
+  12:timer0.c      **** 	/* Prescaler auf 8: Clock alle 0,72us (1386kHz). */
+  13:timer0.c      **** 	/* Überlauf alle 185us ms (5400 Hz)  */
+  14:timer0.c      **** 	//TCCR0 |= (1<<CS01);// Prescaler 8, entspricht 0,72usec und 185us bis zum Überlauf
+  15:timer0.c      **** 
+  16:timer0.c      **** 	/* Interrupts für Timer0 aktivieren */	
+  17:timer0.c      **** 	TIMSK |= (1<<TOIE0);
+  91               	.LM3:
+  92 0012 8091 5900 		lds r24,89
+  93 0016 8160      		ori r24,lo8(1)
+  94 0018 8093 5900 		sts 89,r24
+  18:timer0.c      **** 	
+  19:timer0.c      **** 	DDRB |= (1<<PB3);		// toggel led
+  96               	.LM4:
+  97 001c 8091 3700 		lds r24,55
+  98 0020 8860      		ori r24,lo8(8)
+  99 0022 8093 3700 		sts 55,r24
+  20:timer0.c      **** 	
+  21:timer0.c      **** 	timer0_counter_D1=0;	// sezte den Anfangswert
+ 101               	.LM5:
+ 102 0026 1092 0000 		sts timer0_counter_D1,__zero_reg__
+  22:timer0.c      **** 	timer0_counter=0;		// sezte den Anfangswert
+ 104               	.LM6:
+ 105 002a 1092 0000 		sts timer0_counter,__zero_reg__
+ 106               	/* epilogue: frame size=0 */
+ 107 002e DF91      		pop r29
+ 108 0030 CF91      		pop r28
+ 109 0032 0895      		ret
+ 110               	/* epilogue end (size=3) */
+ 111               	/* function timer0_init size 26 (19) */
+ 113               	.Lscope0:
+ 115               	.global	__vector_9
+ 117               	__vector_9:
+  23:timer0.c      **** 
+  24:timer0.c      **** }	
+  25:timer0.c      **** 
+  26:timer0.c      **** /* Interrupt Service Rountine bei Überlauf des Timer0 */
+  27:timer0.c      **** ISR(TIMER0_OVF_vect) /* veraltet: SIGNAL(SIG_OVERFLOW1) */
+  28:timer0.c      **** {
+ 119               	.LM7:
+ 120               	/* prologue: frame size=0 */
+ 121 0034 1F92      		push __zero_reg__
+ 122 0036 0F92      		push __tmp_reg__
+ 123 0038 0FB6      		in __tmp_reg__,__SREG__
+ 124 003a 0F92      		push __tmp_reg__
+ 125 003c 1124      		clr __zero_reg__
+ 126 003e 2F93      		push r18
+ 127 0040 3F93      		push r19
+ 128 0042 4F93      		push r20
+ 129 0044 5F93      		push r21
+ 130 0046 6F93      		push r22
+ 131 0048 7F93      		push r23
+ 132 004a 8F93      		push r24
+ 133 004c 9F93      		push r25
+ 134 004e AF93      		push r26
+ 135 0050 BF93      		push r27
+ 136 0052 EF93      		push r30
+ 137 0054 FF93      		push r31
+ 138 0056 CF93      		push r28
+ 139 0058 DF93      		push r29
+ 140 005a CDB7      		in r28,__SP_L__
+ 141 005c DEB7      		in r29,__SP_H__
+ 142               	/* prologue end (size=21) */
+  29:timer0.c      ****     /* Interrupt Code */
+  30:timer0.c      **** 	timer0_counter++;			// Merker für Überläufe des Timers
+ 144               	.LM8:
+ 145 005e 8091 0000 		lds r24,timer0_counter
+ 146 0062 8F5F      		subi r24,lo8(-(1))
+ 147 0064 8093 0000 		sts timer0_counter,r24
+  31:timer0.c      **** 	timer0_counter_D1++;		// Merker für Überläufe des Timers, für die Drehzahl1
+ 149               	.LM9:
+ 150 0068 8091 0000 		lds r24,timer0_counter_D1
+ 151 006c 8F5F      		subi r24,lo8(-(1))
+ 152 006e 8093 0000 		sts timer0_counter_D1,r24
+  32:timer0.c      **** 
+  33:timer0.c      **** 	if(timer0_counter % 15){ 	// alle 44ms 
+ 154               	.LM10:
+ 155 0072 8091 0000 		lds r24,timer0_counter
+ 156 0076 9FE0      		ldi r25,lo8(15)
+ 157 0078 692F      		mov r22,r25
+ 158 007a 0E94 0000 		call __udivmodqi4
+ 159 007e 892F      		mov r24,r25
+ 160 0080 8823      		tst r24
+ 161 0082 09F0      		breq .L3
+ 163               	.LM11:
+ 164 0084 02C0      		rjmp .L4
+ 165               	.L3:
+ 166               	.LBB2:
+  34:timer0.c      **** 	}else {
+  35:timer0.c      **** 		auswerten();			// den Wert über UART ausgeben
+ 168               	.LM12:
+ 169 0086 0E94 0000 		call auswerten
+ 170               	.L4:
+ 171               	.LBE2:
+  36:timer0.c      **** 	}	
+  37:timer0.c      **** 
+  38:timer0.c      **** 	if( (timer0_counter >= 255)){	// alle 380ms 
+ 173               	.LM13:
+ 174 008a 8091 0000 		lds r24,timer0_counter
+ 175 008e 8F3F      		cpi r24,lo8(-1)
+ 176 0090 31F4      		brne .L2
+  39:timer0.c      **** 		PORTB ^=(1<<PB3);			// eine LED getoggelt
+ 178               	.LM14:
+ 179 0092 8091 3800 		lds r24,56
+ 180 0096 98E0      		ldi r25,lo8(8)
+ 181 0098 8927      		eor r24,r25
+ 182 009a 8093 3800 		sts 56,r24
+ 183               	.L2:
+ 184               	/* epilogue: frame size=0 */
+ 185 009e DF91      		pop r29
+ 186 00a0 CF91      		pop r28
+ 187 00a2 FF91      		pop r31
+ 188 00a4 EF91      		pop r30
+ 189 00a6 BF91      		pop r27
+ 190 00a8 AF91      		pop r26
+ 191 00aa 9F91      		pop r25
+ 192 00ac 8F91      		pop r24
+ 193 00ae 7F91      		pop r23
+ 194 00b0 6F91      		pop r22
+ 195 00b2 5F91      		pop r21
+ 196 00b4 4F91      		pop r20
+ 197 00b6 3F91      		pop r19
+ 198 00b8 2F91      		pop r18
+ 199 00ba 0F90      		pop __tmp_reg__
+ 200 00bc 0FBE      		out __SREG__,__tmp_reg__
+ 201 00be 0F90      		pop __tmp_reg__
+ 202 00c0 1F90      		pop __zero_reg__
+ 203 00c2 1895      		reti
+ 204               	/* epilogue end (size=19) */
+ 205               	/* function __vector_9 size 72 (32) */
+ 207               	.Lscope1:
+ 208               		.comm timer0_counter,1,1
+ 209               		.comm timer0_counter_D1,1,1
+ 212               		.text
+ 214               	Letext:
+ 215               	/* File "timer0.c": code   98 = 0x0062 (  51), prologues  25, epilogues  22 */
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer0.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:76     .text:00000000 timer0_init
+                            *COM*:00000001 timer0_counter_D1
+                            *COM*:00000001 timer0_counter
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:117    .text:00000034 __vector_9
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccKyaaaa.s:214    .text:000000c4 Letext
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__udivmodqi4
+auswerten
