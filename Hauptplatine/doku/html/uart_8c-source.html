@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: uart.c Quellcode</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_bddd7dc27b566f4752845b32911ef2d1.html">nbot_lib</a></div>
+<h1>uart.c</h1><a href="uart_8c.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/****************************************************************************/</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;avr/interrupt.h&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;avr/pgmspace.h&gt;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#include "<a class="code" href="uart_8h.html" title="Definitionen und Funktionen der UART kommunikation.">uart.h</a>"</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include "<a class="code" href="fifo_8h.html" title="Definitionen und Funktionen eines FIFO Puffers.">fifo.h</a>"</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="uart_8c.html#6821bafc3c88dfb2e433a095df9940c6">00022</a> <span class="preprocessor">#define BUF_SIZE 10                                     </span>
+<a name="l00023"></a><a class="code" href="uart_8c.html#8891e71f2622e24d5be3cd95fe05a06e">00023</a> <span class="preprocessor">uint8_t inbuf[BUF_SIZE];                </span>
+<a name="l00024"></a><a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9">00024</a> <span class="preprocessor">fifo_t infifo;                                                  </span>
+<a name="l00027"></a>00027 <span class="preprocessor"></span><span class="comment">/****************************************************************************/</span>
+<a name="l00028"></a>00028 
+<a name="l00063"></a><a class="code" href="uart_8h.html#0c0ca72359ddf28dcd15900dfba19343">00063</a> <span class="keywordtype">void</span> <a class="code" href="uart_8c.html#0c0ca72359ddf28dcd15900dfba19343" title="Die Uart übbertragung initialisieren und starten.">uart_init</a>(<span class="keywordtype">void</span>)
+<a name="l00064"></a>00064 {
+<a name="l00065"></a>00065         <span class="comment">/* Baudrate einstellen ( Normaler Modus ) */</span>
+<a name="l00066"></a>00066         UBRRH = (<span class="keywordtype">unsigned</span> char) (<a class="code" href="uart_8h.html#87fae5749a808309b1733598a87fd3e2">UBRR_BAUD</a>&gt;&gt;8);
+<a name="l00067"></a>00067         UBRRL = (<span class="keywordtype">unsigned</span> char) <a class="code" href="uart_8h.html#87fae5749a808309b1733598a87fd3e2">UBRR_BAUD</a>;      
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         <span class="comment">/* Aktivieren des Empfängers, des Senders und des "Daten empfangen"-Interrupts */</span>
+<a name="l00070"></a>00070         UCSRB = (1&lt;&lt;RXCIE)|(1&lt;&lt;RXEN)|(1&lt;&lt;TXEN);
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072         <span class="comment">/* Einstellen des Datenformats: 8 Datenbits, 1 Stoppbit */</span>
+<a name="l00073"></a>00073         UCSRC = (1&lt;&lt;URSEL)|(1&lt;&lt;UCSZ1)|(1&lt;&lt;UCSZ0);
+<a name="l00074"></a>00074         
+<a name="l00075"></a>00075         <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(<span class="stringliteral">"Uart wurde richtig initialisiert\n"</span>);
+<a name="l00076"></a>00076         
+<a name="l00077"></a>00077         <span class="comment">// FIFOs für Eingabe initialisieren </span>
+<a name="l00078"></a>00078         <a class="code" href="fifo_8c.html#5d82ac1e843b9255d2b860c604a33809" title="Initialisiert einen FIFO puffer aus dem Speicherbereich buffer.">fifo_init</a> (&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>,   <a class="code" href="uart_8c.html#8891e71f2622e24d5be3cd95fe05a06e" title="Speicher für FIFO Puffer.">inbuf</a>, <a class="code" href="uart_8c.html#6821bafc3c88dfb2e433a095df9940c6" title="Puffergröße für Lesepuffer.">BUF_SIZE</a>);
+<a name="l00079"></a>00079 }
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 <span class="comment">/****************************************************************************/</span>
+<a name="l00104"></a><a class="code" href="uart_8h.html#a599232c1438c5addd971e05e1dd46a2">00104</a> <span class="keywordtype">void</span> <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(<span class="keywordtype">char</span> c)
+<a name="l00105"></a>00105 {
+<a name="l00106"></a>00106         <span class="comment">/* warten bis der Sendepuffer leer ist */</span>
+<a name="l00107"></a>00107         <span class="keywordflow">while</span> ( !( UCSRA &amp; (1&lt;&lt;UDRE)) );
+<a name="l00108"></a>00108         
+<a name="l00109"></a>00109         <span class="comment">/* Zeichen senden */</span>
+<a name="l00110"></a>00110         UDR = c;
+<a name="l00111"></a>00111 }
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114 <span class="comment">/****************************************************************************/</span>
+<a name="l00132"></a><a class="code" href="uart_8h.html#2e065279ae8db44201c28eaaf6f430b5">00132</a> <span class="keywordtype">void</span> <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(<span class="keywordtype">char</span> *s)
+<a name="l00133"></a>00133 {
+<a name="l00134"></a>00134         <span class="keywordflow">while</span>(*s) <span class="comment">// so lange senden, bis das ende des Strings erreicht ist</span>
+<a name="l00135"></a>00135         {
+<a name="l00136"></a>00136                 <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(*s++);
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138 }
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140 <span class="comment">/****************************************************************************/</span>
+<a name="l00156"></a><a class="code" href="uart_8h.html#96e6be20fc906a91e5ec4cb6a20c0372">00156</a> <span class="keywordtype">void</span> <a class="code" href="uart_8c.html#96e6be20fc906a91e5ec4cb6a20c0372" title="Senden eines null-terminierten Strings der im Flash-Speicher steht.">uart_puts_p</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *text)
+<a name="l00157"></a>00157 {
+<a name="l00158"></a>00158     <span class="keywordtype">char</span> Zeichen;
+<a name="l00159"></a>00159  
+<a name="l00160"></a>00160     <span class="keywordflow">while</span> ((Zeichen = pgm_read_byte(text)))
+<a name="l00161"></a>00161     {   <span class="comment">/* so lange, wie mittels pgm_read_byte ein Zeichen vom Flash gelesen</span>
+<a name="l00162"></a>00162 <span class="comment">           werden konnte, welches nicht das "String-Endezeichen" darstellt */</span>
+<a name="l00163"></a>00163  
+<a name="l00164"></a>00164         <span class="comment">/* Das gelesene Zeichen über die normalen Kanäle verschicken */</span>
+<a name="l00165"></a>00165         <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(Zeichen);
+<a name="l00166"></a>00166         text++;
+<a name="l00167"></a>00167     }
+<a name="l00168"></a>00168 }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170 <span class="comment">/****************************************************************************/</span>
+<a name="l00189"></a><a class="code" href="uart_8h.html#a219466c990ade5307f388484b43ea91">00189</a> <span class="keywordtype">void</span> <a class="code" href="uart_8c.html#a219466c990ade5307f388484b43ea91" title="Ausgabe eines Integer Wertes als String ueber die serielle Schnittstelle.">uart_puti</a>(uint16_t i)
+<a name="l00190"></a>00190 {
+<a name="l00191"></a>00191         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> s[7];     <span class="comment">// "-12345"</span>
+<a name="l00192"></a>00192         
+<a name="l00193"></a>00193         <span class="comment">/* Wandeln eines Integers in einen String */</span>
+<a name="l00194"></a>00194         itoa(i, s, 10);         
+<a name="l00195"></a>00195         <span class="comment">/* String versenden */</span>
+<a name="l00196"></a>00196         <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(s);                   
+<a name="l00197"></a>00197 }
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201 <span class="comment">/****************************************************************************/</span>
+<a name="l00209"></a><a class="code" href="uart_8h.html#4831fa5195d8c540912058f6612352b7">00209</a> int8_t <a class="code" href="uart_8c.html#4831fa5195d8c540912058f6612352b7" title="Einzelnes Zeichen empfangen.">uart_getc</a>(<span class="keywordtype">void</span>)
+<a name="l00210"></a>00210 {
+<a name="l00211"></a>00211         uint8_t data;
+<a name="l00212"></a>00212         
+<a name="l00213"></a>00213         <span class="keywordflow">if</span> (<a class="code" href="fifo_8c.html#17fb0c85a83653aac8974f611142d68a" title="Liest den nächsten Wert aus dem Puffer.">fifo_get</a>(&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>, &amp;data)==0){
+<a name="l00214"></a>00214                 <span class="keywordflow">return</span> data;
+<a name="l00215"></a>00215         } <span class="keywordflow">else</span> {
+<a name="l00216"></a>00216                 <span class="keywordflow">return</span> -1;
+<a name="l00217"></a>00217         }
+<a name="l00218"></a>00218 }
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221 <span class="comment">/****************************************************************************/</span>
+<a name="l00230"></a><a class="code" href="uart_8c.html#68f52df99eb21e6ef4cf3dbcf0527f97">00230</a> <a class="code" href="encoder_8c.html#dd2d7cdddfb682dcc0391e60cf42c7d6" title="timer mit 5,4kHz zur Encoder auswertung">ISR</a>(USART_RXC_vect)
+<a name="l00231"></a>00231 {
+<a name="l00232"></a>00232          
+<a name="l00233"></a>00233         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> buffer;
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235         <span class="comment">/* Daten aus dem Puffer lesen */</span>
+<a name="l00236"></a>00236         buffer = UDR;
+<a name="l00237"></a>00237         <a class="code" href="fifo_8c.html#2334d425b07cee6278bdcf3ec976ece1" title="Funktion fügt dem Puffer einen weiteren Wert hinzu.">fifo_put</a>(&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>, buffer);
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="comment">/* warten bis der Sendepuffer leer ist */</span>
+<a name="l00240"></a>00240         <span class="keywordflow">while</span> ( !( UCSRA &amp; (1&lt;&lt;UDRE)) );
+<a name="l00241"></a>00241                 
+<a name="l00242"></a>00242         <span class="comment">/* ECHO und gleich wieder zurück schicken */</span>
+<a name="l00243"></a>00243         <span class="comment">//UDR = buffer;</span>
+<a name="l00244"></a>00244 }
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246 
+</pre></div><hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Nov 16 12:25:22 2008 fÃ¼r nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

@@ -1,0 +1,143 @@
+   1               		.file	"timer0.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	timer0_init
+  20               	timer0_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=0 */
+  24               	/* prologue end (size=0) */
+  25               	.LM2:
+  26 0000 23E0      		ldi r18,lo8(3)
+  27 0002 23BF      		out 83-0x20,r18
+  28               	.LM3:
+  29 0004 89B7      		in r24,89-0x20
+  30 0006 8160      		ori r24,lo8(1)
+  31 0008 89BF      		out 89-0x20,r24
+  32               	.LM4:
+  33 000a BB9A      		sbi 55-0x20,3
+  34               	.LM5:
+  35 000c 1092 0000 		sts timer0_counter_D1,__zero_reg__
+  36               	.LM6:
+  37 0010 1092 0000 		sts timer0_counter,__zero_reg__
+  38               	.LM7:
+  39 0014 1092 0000 		sts d1_error,__zero_reg__
+  40               	/* epilogue: frame size=0 */
+  41 0018 0895      		ret
+  42               	/* epilogue end (size=1) */
+  43               	/* function timer0_init size 13 (12) */
+  44               	.LFE2:
+  46               	.global	__vector_9
+  48               	__vector_9:
+  49               	.LFB3:
+  50               	.LM8:
+  51               	/* prologue: frame size=0 */
+  52 001a 1F92      		push __zero_reg__
+  53 001c 0F92      		push __tmp_reg__
+  54 001e 0FB6      		in __tmp_reg__,__SREG__
+  55 0020 0F92      		push __tmp_reg__
+  56 0022 1124      		clr __zero_reg__
+  57 0024 2F93      		push r18
+  58 0026 3F93      		push r19
+  59 0028 4F93      		push r20
+  60 002a 5F93      		push r21
+  61 002c 6F93      		push r22
+  62 002e 7F93      		push r23
+  63 0030 8F93      		push r24
+  64 0032 9F93      		push r25
+  65 0034 AF93      		push r26
+  66 0036 BF93      		push r27
+  67 0038 EF93      		push r30
+  68 003a FF93      		push r31
+  69               	/* prologue end (size=17) */
+  70               	.LM9:
+  71 003c 3091 0000 		lds r19,timer0_counter
+  72 0040 3F5F      		subi r19,lo8(-(1))
+  73 0042 3093 0000 		sts timer0_counter,r19
+  74               	.LM10:
+  75 0046 2091 0000 		lds r18,timer0_counter_D1
+  76 004a 2F5F      		subi r18,lo8(-(1))
+  77 004c 2093 0000 		sts timer0_counter_D1,r18
+  78               	.LM11:
+  79 0050 8091 0000 		lds r24,timer0_counter_D1
+  80 0054 8F3F      		cpi r24,lo8(-1)
+  81 0056 79F0      		breq .L8
+  82               	.L3:
+  83               	.LM12:
+  84 0058 6091 0000 		lds r22,timer0_counter
+  85 005c 6623      		tst r22
+  86 005e 21F4      		brne .L5
+  87               	.LM13:
+  88 0060 78B3      		in r23,56-0x20
+  89 0062 98E0      		ldi r25,lo8(8)
+  90 0064 7927      		eor r23,r25
+  91 0066 78BB      		out 56-0x20,r23
+  92               	.L5:
+  93               	.LM14:
+  94 0068 A091 0000 		lds r26,timer0_counter
+  95 006c A370      		andi r26,lo8(3)
+  96 006e 79F4      		brne .L2
+  97               	.LM15:
+  98 0070 0E94 0000 		call tasten
+  99 0074 0CC0      		rjmp .L2
+ 100               	.L8:
+ 101               	.LM16:
+ 102 0076 1092 0000 		sts timer0_counter_D1,__zero_reg__
+ 103               	.LM17:
+ 104 007a 4091 0000 		lds r20,d1_error
+ 105 007e 4F3F      		cpi r20,lo8(-1)
+ 106 0080 59F3      		breq .L3
+ 107 0082 5091 0000 		lds r21,d1_error
+ 108 0086 5F5F      		subi r21,lo8(-(1))
+ 109 0088 5093 0000 		sts d1_error,r21
+ 110 008c E5CF      		rjmp .L3
+ 111               	.L2:
+ 112               	/* epilogue: frame size=0 */
+ 113 008e FF91      		pop r31
+ 114 0090 EF91      		pop r30
+ 115 0092 BF91      		pop r27
+ 116 0094 AF91      		pop r26
+ 117 0096 9F91      		pop r25
+ 118 0098 8F91      		pop r24
+ 119 009a 7F91      		pop r23
+ 120 009c 6F91      		pop r22
+ 121 009e 5F91      		pop r21
+ 122 00a0 4F91      		pop r20
+ 123 00a2 3F91      		pop r19
+ 124 00a4 2F91      		pop r18
+ 125 00a6 0F90      		pop __tmp_reg__
+ 126 00a8 0FBE      		out __SREG__,__tmp_reg__
+ 127 00aa 0F90      		pop __tmp_reg__
+ 128 00ac 1F90      		pop __zero_reg__
+ 129 00ae 1895      		reti
+ 130               	/* epilogue end (size=17) */
+ 131               	/* function __vector_9 size 76 (42) */
+ 132               	.LFE3:
+ 134               		.comm timer0_counter,1,1
+ 135               		.comm timer0_counter_D1,1,1
+ 136               		.comm d1_error,1,1
+ 137               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer0.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:20     .text:00000000 timer0_init
+                            *COM*:00000001 timer0_counter_D1
+                            *COM*:00000001 timer0_counter
+                            *COM*:00000001 d1_error
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/ccO2aaaa.s:48     .text:0000001a __vector_9
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+tasten

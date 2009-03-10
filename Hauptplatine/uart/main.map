@@ -1,0 +1,565 @@
+Archive member included because of file (symbol)
+
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_mulsi3.o)
+                              ../nbot_lib/encoder.o (__mulsi3)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodsi4.o)
+                              ../nbot_lib/uart.o (__udivmodsi4)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_divmodsi4.o)
+                              ../nbot_lib/encoder.o (__divmodsi4)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                              main.o (__do_copy_data)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                              main.o (__do_clear_bss)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                              ../nbot_lib/command.o (strcmp)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                              ../nbot_lib/uart.o (itoa)
+C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o) (strrev)
+C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+inbuf               0xa               ../nbot_lib/uart.o
+nText               0x1               ../nbot_lib/command.o
+text                0x64              ../nbot_lib/command.o
+infifo              0x8               ../nbot_lib/uart.o
+count36kHz          0x1               main.o
+timebase            0x4               main.o
+enc_delta           0x4               ../nbot_lib/encoder.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+LOAD main.o
+LOAD ../nbot_lib/encoder.o
+LOAD ../nbot_lib/uart.o
+LOAD ../nbot_lib/timer.o
+LOAD ../nbot_lib/motor.o
+LOAD ../nbot_lib/fifo.o
+LOAD ../nbot_lib/command.o
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libm.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a
+LOAD C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a
+LOAD C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x11a0
+ *(.vectors)
+ .vectors       0x00000000       0x54 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+                0x00000054                __ctors_start = .
+ *(.ctors)
+                0x00000054                __ctors_end = .
+                0x00000054                __dtors_start = .
+ *(.dtors)
+                0x00000054                __dtors_end = .
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00000054      0x45c ../nbot_lib/command.o
+                0x0000005b                Str_CR
+                0x00000054                Str_BOT
+                0x000004b0                . = ALIGN (0x2)
+ *(.init0)
+ *(.init1)
+ *(.init2)
+ .init2         0x000004b0        0xc C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+ *(.init3)
+ *(.init4)
+ .init4         0x000004bc       0x16 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                0x000004bc                __do_copy_data
+ .init4         0x000004d2       0x10 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                0x000004d2                __do_clear_bss
+ *(.init5)
+ *(.init6)
+ *(.init7)
+ *(.init8)
+ *(.init9)
+ .init9         0x000004e2        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+ *(.text)
+ .text          0x000004e6        0x4 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                0x000004e6                __vector_1
+                0x000004e6                __vector_12
+                0x000004e6                __bad_interrupt
+                0x000004e6                __vector_6
+                0x000004e6                __vector_3
+                0x000004e6                __vector_13
+                0x000004e6                __vector_17
+                0x000004e6                __vector_19
+                0x000004e6                __vector_7
+                0x000004e6                __vector_5
+                0x000004e6                __vector_2
+                0x000004e6                __vector_15
+                0x000004e6                __vector_8
+                0x000004e6                __vector_14
+                0x000004e6                __vector_10
+                0x000004e6                __vector_16
+                0x000004e6                __vector_18
+                0x000004e6                __vector_20
+ .text          0x000004ea       0x4c main.o
+                0x000004ea                main
+ .text          0x00000536      0x11e ../nbot_lib/encoder.o
+                0x00000552                encoder_init
+                0x000005a4                __vector_9
+                0x00000576                encoderToMM
+                0x00000536                encoderGet
+ .text          0x00000654      0x482 ../nbot_lib/uart.o
+                0x000006cc                uart_puts
+                0x00000a58                __vector_11
+                0x00000712                uart_puts_p
+                0x00000654                uart_init
+                0x00000a06                uart_getc
+                0x0000068e                uart_putc
+                0x000007aa                uart_printtime
+                0x00000766                uart_puti
+ .text          0x00000ad6       0xe4 ../nbot_lib/timer.o
+                0x00000ad6                timer2_init
+                0x00000b1c                sleep
+                0x00000b58                __vector_4
+                0x00000ae2                Gettime
+                0x00000b2c                msleep
+ .text          0x00000bba       0xc4 ../nbot_lib/motor.o
+                0x00000c12                motor_speed
+                0x00000c44                motor_init
+                0x00000bba                motor_dir
+ .text          0x00000c7e       0x92 ../nbot_lib/fifo.o
+                0x00000c92                fifo_put
+                0x00000c7e                fifo_init
+                0x00000ccc                fifo_get
+ .text          0x00000d10      0x33a ../nbot_lib/command.o
+                0x00000d10                command_put
+                0x00000e70                command_prompt
+                0x00000e62                command_get
+                0x00000e6a                command_text
+ .text          0x0000104a       0x14 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x0000104a                strcmp
+ .text          0x0000105e       0x42 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x0000105e                itoa
+ .text          0x000010a0       0x20 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x000010a0                strrev
+                0x000010c0                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x000010c0       0x3e C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_mulsi3.o)
+                0x000010c0                __mulsi3
+ .text.libgcc   0x000010fe       0x44 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodsi4.o)
+                0x000010fe                __udivmodsi4
+ .text.libgcc   0x00001142       0x36 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_divmodsi4.o)
+                0x00001142                __divmodsi4
+ .text.libgcc   0x00001178       0x28 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                0x00001178                __udivmodhi4
+                0x000011a0                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini8)
+ *(.fini7)
+ *(.fini6)
+ *(.fini5)
+ *(.fini4)
+ *(.fini3)
+ *(.fini2)
+ *(.fini1)
+ *(.fini0)
+                0x000011a0                _etext = .
+
+.data           0x00800060       0xc2 load address 0x000011a0
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060       0x5b main.o
+ .data          0x008000bb        0x2 ../nbot_lib/encoder.o
+ .data          0x008000bd       0x22 ../nbot_lib/uart.o
+ .data          0x008000df       0x42 ../nbot_lib/command.o
+                0x008000df                ptext
+ *(.gnu.linkonce.d*)
+                0x00800122                . = ALIGN (0x2)
+ *fill*         0x00800121        0x1 00
+                0x00800122                _edata = .
+                0x00800122                PROVIDE (__data_end, .)
+
+.bss            0x00800122       0x81
+                0x00800122                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800122        0x1 ../nbot_lib/command.o
+                0x00800122                command
+ *(COMMON)
+ COMMON         0x00800123        0x5 main.o
+                0x00800123                count36kHz
+                0x00800124                timebase
+ COMMON         0x00800128        0x4 ../nbot_lib/encoder.o
+                0x00800128                enc_delta
+ COMMON         0x0080012c       0x12 ../nbot_lib/uart.o
+                0x0080012c                inbuf
+                0x00800136                infifo
+ COMMON         0x0080013e       0x65 ../nbot_lib/command.o
+                0x0080013e                nText
+                0x0080013f                text
+                0x008001a3                PROVIDE (__bss_end, .)
+                0x000011a0                __data_load_start = LOADADDR (.data)
+                0x00001262                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008001a3        0x0
+                0x008001a3                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008001a3                PROVIDE (__noinit_end, .)
+                0x008001a3                _end = .
+                0x008001a3                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.stab           0x00000000      0x36c
+ *(.stab)
+ .stab          0x00000000      0x36c C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+
+.stabstr        0x00000000       0x84
+ *(.stabstr)
+ .stabstr       0x00000000       0x84 C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x8c
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x14 main.o
+ .debug_aranges
+                0x00000014       0x14 ../nbot_lib/encoder.o
+ .debug_aranges
+                0x00000028       0x14 ../nbot_lib/uart.o
+ .debug_aranges
+                0x0000003c       0x14 ../nbot_lib/timer.o
+ .debug_aranges
+                0x00000050       0x14 ../nbot_lib/motor.o
+ .debug_aranges
+                0x00000064       0x14 ../nbot_lib/fifo.o
+ .debug_aranges
+                0x00000078       0x14 ../nbot_lib/command.o
+
+.debug_pubnames
+                0x00000000      0x2eb
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x37 main.o
+ .debug_pubnames
+                0x00000037       0x7b ../nbot_lib/encoder.o
+ .debug_pubnames
+                0x000000b2       0xbc ../nbot_lib/uart.o
+ .debug_pubnames
+                0x0000016e       0x6e ../nbot_lib/timer.o
+ .debug_pubnames
+                0x000001dc       0x3f ../nbot_lib/motor.o
+ .debug_pubnames
+                0x0000021b       0x3a ../nbot_lib/fifo.o
+ .debug_pubnames
+                0x00000255       0x96 ../nbot_lib/command.o
+
+.debug_info     0x00000000      0xdc3
+ *(.debug_info)
+ .debug_info    0x00000000      0x17a main.o
+ .debug_info    0x0000017a      0x1d1 ../nbot_lib/encoder.o
+ .debug_info    0x0000034b      0x46c ../nbot_lib/uart.o
+ .debug_info    0x000007b7      0x13a ../nbot_lib/timer.o
+ .debug_info    0x000008f1       0xf2 ../nbot_lib/motor.o
+ .debug_info    0x000009e3      0x1fe ../nbot_lib/fifo.o
+ .debug_info    0x00000be1      0x1e2 ../nbot_lib/command.o
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev   0x00000000      0x521
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x6c main.o
+ .debug_abbrev  0x0000006c       0xd3 ../nbot_lib/encoder.o
+ .debug_abbrev  0x0000013f      0x12c ../nbot_lib/uart.o
+ .debug_abbrev  0x0000026b       0xb0 ../nbot_lib/timer.o
+ .debug_abbrev  0x0000031b       0x81 ../nbot_lib/motor.o
+ .debug_abbrev  0x0000039c       0xde ../nbot_lib/fifo.o
+ .debug_abbrev  0x0000047a       0xa7 ../nbot_lib/command.o
+
+.debug_line     0x00000000      0xc7c
+ *(.debug_line)
+ .debug_line    0x00000000      0x122 main.o
+ .debug_line    0x00000122      0x1a3 ../nbot_lib/encoder.o
+ .debug_line    0x000002c5      0x226 ../nbot_lib/uart.o
+ .debug_line    0x000004eb      0x13f ../nbot_lib/timer.o
+ .debug_line    0x0000062a      0x1d0 ../nbot_lib/motor.o
+ .debug_line    0x000007fa      0x16c ../nbot_lib/fifo.o
+ .debug_line    0x00000966      0x316 ../nbot_lib/command.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x00000000      0x2eb
+ *(.debug_str)
+ .debug_str     0x00000000      0x10b ../nbot_lib/encoder.o
+                                0x15e (size before relaxing)
+ .debug_str     0x0000010b       0x36 ../nbot_lib/uart.o
+ .debug_str     0x00000141       0x4f ../nbot_lib/timer.o
+                                0x125 (size before relaxing)
+ .debug_str     0x00000190       0x5f ../nbot_lib/motor.o
+                                0x12c (size before relaxing)
+ .debug_str     0x000001ef       0x6d ../nbot_lib/fifo.o
+                                0x136 (size before relaxing)
+ .debug_str     0x0000025c       0x8f ../nbot_lib/command.o
+                                0x17c (size before relaxing)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(main.elf elf32-avr)
+
+Cross Reference Table
+
+Symbol                                            File
+Gettime                                           ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+Str_BOT                                           ../nbot_lib/command.o
+Str_CR                                            ../nbot_lib/command.o
+__bad_interrupt                                   C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__bss_end                                         C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+__bss_start                                       C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__data_start                                      C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+__divmodsi4                                       C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_divmodsi4.o)
+                                                  ../nbot_lib/encoder.o
+__do_clear_bss                                    C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_clear_bss.o)
+                                                  ../nbot_lib/command.o
+                                                  ../nbot_lib/fifo.o
+                                                  ../nbot_lib/motor.o
+                                                  ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+                                                  ../nbot_lib/encoder.o
+                                                  main.o
+__do_copy_data                                    C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_copy_data.o)
+                                                  ../nbot_lib/command.o
+                                                  ../nbot_lib/fifo.o
+                                                  ../nbot_lib/motor.o
+                                                  ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+                                                  ../nbot_lib/encoder.o
+                                                  main.o
+__heap_end                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__init                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__mulsi3                                          C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_mulsi3.o)
+                                                  ../nbot_lib/uart.o
+                                                  ../nbot_lib/encoder.o
+__stack                                           C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+                                                  main.o
+__udivmodhi4                                      C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodhi4.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+__udivmodsi4                                      C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_udivmodsi4.o)
+                                                  C:/WinAVR/lib/gcc/avr/3.4.5/avr5\libgcc.a(_divmodsi4.o)
+                                                  ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+__vector_1                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_10                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_11                                       ../nbot_lib/uart.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_12                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_13                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_14                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_15                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_16                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_17                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_18                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_19                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_2                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_20                                       C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_3                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_4                                        ../nbot_lib/timer.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_5                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_6                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_7                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_8                                        C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_9                                        ../nbot_lib/encoder.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vector_default                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+__vectors                                         C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+command                                           ../nbot_lib/command.o
+command_get                                       ../nbot_lib/command.o
+                                                  main.o
+command_prompt                                    ../nbot_lib/command.o
+                                                  main.o
+command_put                                       ../nbot_lib/command.o
+                                                  main.o
+command_text                                      ../nbot_lib/command.o
+count36kHz                                        ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+                                                  ../nbot_lib/encoder.o
+                                                  main.o
+enc_delta                                         ../nbot_lib/encoder.o
+encoderGet                                        ../nbot_lib/encoder.o
+encoderToMM                                       ../nbot_lib/encoder.o
+encoder_init                                      ../nbot_lib/encoder.o
+fifo_get                                          ../nbot_lib/fifo.o
+                                                  ../nbot_lib/uart.o
+fifo_init                                         ../nbot_lib/fifo.o
+                                                  ../nbot_lib/uart.o
+fifo_put                                          ../nbot_lib/fifo.o
+                                                  ../nbot_lib/uart.o
+inbuf                                             ../nbot_lib/uart.o
+infifo                                            ../nbot_lib/uart.o
+itoa                                              C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+                                                  ../nbot_lib/uart.o
+main                                              main.o
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5/crtm16.o
+motor_dir                                         ../nbot_lib/motor.o
+motor_init                                        ../nbot_lib/motor.o
+motor_speed                                       ../nbot_lib/motor.o
+msleep                                            ../nbot_lib/timer.o
+                                                  main.o
+nText                                             ../nbot_lib/command.o
+ptext                                             ../nbot_lib/command.o
+sleep                                             ../nbot_lib/timer.o
+strcmp                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                                                  ../nbot_lib/command.o
+strrev                                            C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(strrev.o)
+                                                  C:/WinAVR/bin/../lib/gcc/avr/3.4.5/../../../../avr/lib/avr5\libc.a(itoa.o)
+text                                              ../nbot_lib/command.o
+timebase                                          ../nbot_lib/timer.o
+                                                  ../nbot_lib/uart.o
+                                                  ../nbot_lib/encoder.o
+                                                  main.o
+timer2_init                                       ../nbot_lib/timer.o
+                                                  main.o
+uart_getc                                         ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o
+                                                  main.o
+uart_init                                         ../nbot_lib/uart.o
+                                                  main.o
+uart_printtime                                    ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o
+uart_putc                                         ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o
+uart_puti                                         ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o
+uart_puts                                         ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o
+                                                  main.o
+uart_puts_p                                       ../nbot_lib/uart.o
+                                                  ../nbot_lib/command.o

@@ -1,0 +1,431 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>nBot: uart.c-Dateireferenz</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Erzeugt von Doxygen 1.5.2 -->
+<div class="tabs">
+  <ul>
+    <li><a href="main.html"><span>Hauptseite</span></a></li>
+    <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+    <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+    <li><a href="dirs.html"><span>Verzeichnisse</span></a></li>
+  </ul>
+</div>
+<div class="tabs">
+  <ul>
+    <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+    <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+  </ul>
+</div>
+<div class="nav">
+<a class="el" href="dir_bddd7dc27b566f4752845b32911ef2d1.html">nbot_lib</a></div>
+<h1>uart.c-Dateireferenz</h1>Funktionen zur Kommunikation über die Serielle Schnittstelle\. <a href="#_details">Mehr ...</a>
+<p>
+<code>#include &lt;avr/interrupt.h&gt;</code><br>
+<code>#include &lt;stdlib.h&gt;</code><br>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br>
+<code>#include &quot;<a class="el" href="uart_8h-source.html">uart.h</a>&quot;</code><br>
+<code>#include &quot;<a class="el" href="fifo_8h-source.html">fifo.h</a>&quot;</code><br>
+
+<p>
+Include-AbhÃ¤ngigkeitsdiagramm fÃ¼r uart.c:<p><center><img src="uart_8c__incl.png" border="0" usemap="#uart.c_map" alt=""></center>
+<map name="uart.c_map">
+<area shape="rect" title="Funktionen zur Kommunikation über die Serielle Schnittstelle\." alt="" coords="276,61,380,88"><area shape="rect" title="Funktionen zur Kommunikation über die Serielle Schnittstelle\." alt="" coords="136,36,200,63"><area shape="rect" title="Funktionen zur Kommunikation über die Serielle Schnittstelle\." alt="" coords="109,87,227,113"><area shape="rect" href="uart_8h.html" title="Funktionen zur Kommunikation über die Serielle Schnittstelle\." alt="" coords="140,137,196,164"><area shape="rect" href="fifo_8h.html" title="Funktionen zur Kommunikation über die Serielle Schnittstelle\." alt="" coords="143,188,193,215"><area shape="rect" title="Definitionen und Funktionen eines FIFO Puffers." alt="" coords="295,188,361,215"></map>
+
+<p>
+<a href="uart_8c-source.html">gehe zum Quellcode dieser Datei</a><table border="0" cellpadding="0" cellspacing="0">
+<tr><td></td></tr>
+<tr><td colspan="2"><br><h2>Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6821bafc3c88dfb2e433a095df9940c6"></a><!-- doxytag: member="uart.c::BUF_SIZE" ref="6821bafc3c88dfb2e433a095df9940c6" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#6821bafc3c88dfb2e433a095df9940c6">BUF_SIZE</a>&nbsp;&nbsp;&nbsp;10</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Puffergröße für Lesepuffer. <br></td></tr>
+<tr><td colspan="2"><br><h2>Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#0c0ca72359ddf28dcd15900dfba19343">uart_init</a> (void)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Die Uart übbertragung initialisieren und starten.  <a href="#0c0ca72359ddf28dcd15900dfba19343"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2">uart_putc</a> (char c)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Senden eine einzelnes Zeichen über die serielle Schnittstelle.  <a href="#a599232c1438c5addd971e05e1dd46a2"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5">uart_puts</a> (char *s)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Senden eines null-terminierten Strings.  <a href="#2e065279ae8db44201c28eaaf6f430b5"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#96e6be20fc906a91e5ec4cb6a20c0372">uart_puts_p</a> (const char *text)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Senden eines null-terminierten Strings der im Flash-Speicher steht.  <a href="#96e6be20fc906a91e5ec4cb6a20c0372"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#a219466c990ade5307f388484b43ea91">uart_puti</a> (uint16_t i)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Ausgabe eines Integer Wertes als String ueber die serielle Schnittstelle.  <a href="#a219466c990ade5307f388484b43ea91"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#4831fa5195d8c540912058f6612352b7">uart_getc</a> (void)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Einzelnes Zeichen empfangen.  <a href="#4831fa5195d8c540912058f6612352b7"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#68f52df99eb21e6ef4cf3dbcf0527f97">ISR</a> (USART_RXC_vect)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Interrupt wird ausgelöst sobald neue Daten im USART-Empfangspuffer liegen.  <a href="#68f52df99eb21e6ef4cf3dbcf0527f97"></a><br></td></tr>
+<tr><td colspan="2"><br><h2>Variablen</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="8891e71f2622e24d5be3cd95fe05a06e"></a><!-- doxytag: member="uart.c::inbuf" ref="8891e71f2622e24d5be3cd95fe05a06e" args="[BUF_SIZE]" -->
+uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#8891e71f2622e24d5be3cd95fe05a06e">inbuf</a> [BUF_SIZE]</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Speicher für FIFO Puffer. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="2cbe2e0e2b5bd9e6caaa3c2490082ea9"></a><!-- doxytag: member="uart.c::infifo" ref="2cbe2e0e2b5bd9e6caaa3c2490082ea9" args="" -->
+<a class="el" href="structfifo__t.html">fifo_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9">infifo</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fifo struct. <br></td></tr>
+</table>
+<hr><a name="_details"></a><h2>AusfÃ¼hrliche Beschreibung</h2>
+Funktionen zur Kommunikation über die Serielle Schnittstelle\. 
+<p>
+<dl class="version" compact><dt><b>Version:</b></dt><dd>V001 - 25.02.2007 - Olaf Petersen<br>
+ first build<p>
+V002 - 30.03.2007 - Olaf Petersen<br>
+ uart_puts korrigiert<br>
+ <a class="el" href="uart_8c.html#4831fa5195d8c540912058f6612352b7" title="Einzelnes Zeichen empfangen.">uart_getc()</a> hinzugefügt<br>
+ </dd></dl>
+
+<p>
+Definiert in Datei <a class="el" href="uart_8c-source.html">uart.c</a>.<hr><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" name="68f52df99eb21e6ef4cf3dbcf0527f97"></a><!-- doxytag: member="uart.c::ISR" ref="68f52df99eb21e6ef4cf3dbcf0527f97" args="(USART_RXC_vect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR           </td>
+          <td>(</td>
+          <td class="paramtype">USART_RXC_vect&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Interrupt wird ausgelöst sobald neue Daten im USART-Empfangspuffer liegen. 
+<p>
+Der Interrupt sendet das empfangene Zeichen gleich wieder zurück.<br>
+ Als <code>echo</code> Funktion zur Fehlersuche.<br>
+ 
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00230">230</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="fifo_8c-source.html#l00043">fifo_put()</a> und <a class="el" href="uart_8c-source.html#l00024">infifo</a>.<div class="fragment"><pre class="fragment"><a name="l00231"></a>00231 {
+<a name="l00232"></a>00232          
+<a name="l00233"></a>00233         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> buffer;
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235         <span class="comment">/* Daten aus dem Puffer lesen */</span>
+<a name="l00236"></a>00236         buffer = UDR;
+<a name="l00237"></a>00237         <a class="code" href="fifo_8c.html#2334d425b07cee6278bdcf3ec976ece1" title="Funktion fügt dem Puffer einen weiteren Wert hinzu.">fifo_put</a>(&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>, buffer);
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="comment">/* warten bis der Sendepuffer leer ist */</span>
+<a name="l00240"></a>00240         <span class="keywordflow">while</span> ( !( UCSRA &amp; (1&lt;&lt;UDRE)) );
+<a name="l00241"></a>00241                 
+<a name="l00242"></a>00242         <span class="comment">/* ECHO und gleich wieder zurück schicken */</span>
+<a name="l00243"></a>00243         <span class="comment">//UDR = buffer;</span>
+<a name="l00244"></a>00244 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="4831fa5195d8c540912058f6612352b7"></a><!-- doxytag: member="uart.c::uart_getc" ref="4831fa5195d8c540912058f6612352b7" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t uart_getc           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Einzelnes Zeichen empfangen. 
+<p>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>empfangenes Zeichen, ist der Empfangspuffer leer liefert die Funktion -1 zurück </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00209">209</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="fifo_8c-source.html#l00080">fifo_get()</a> und <a class="el" href="uart_8c-source.html#l00024">infifo</a>.<div class="fragment"><pre class="fragment"><a name="l00210"></a>00210 {
+<a name="l00211"></a>00211         uint8_t data;
+<a name="l00212"></a>00212         
+<a name="l00213"></a>00213         <span class="keywordflow">if</span> (<a class="code" href="fifo_8c.html#17fb0c85a83653aac8974f611142d68a" title="Liest den nächsten Wert aus dem Puffer.">fifo_get</a>(&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>, &amp;data)==0){
+<a name="l00214"></a>00214                 <span class="keywordflow">return</span> data;
+<a name="l00215"></a>00215         } <span class="keywordflow">else</span> {
+<a name="l00216"></a>00216                 <span class="keywordflow">return</span> -1;
+<a name="l00217"></a>00217         }
+<a name="l00218"></a>00218 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="0c0ca72359ddf28dcd15900dfba19343"></a><!-- doxytag: member="uart.c::uart_init" ref="0c0ca72359ddf28dcd15900dfba19343" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uart_init           </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Die Uart übbertragung initialisieren und starten. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>keine</em>&nbsp;</td><td></td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>nichts</dd></dl>
+<dl class="user" compact><dt><b>Funktionsweise:</b></dt><dd>Stellt die gewünschte Baudrate in den entsprechenden register ein<br>
+ Aktivieren der Interrupts den Empfänger, den sneder und des "Daten empfangen"-Interrupts<br>
+ einstellen ders Datenformates auf<br>
+ 8 Datenbits<br>
+ Keine Parität<br>
+ 1 Soppbit<br>
+</dd></dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment">        <span class="keywordtype">int</span> main(<span class="keywordtype">void</span>){ 
+                
+                <a class="code" href="uart_8c.html#0c0ca72359ddf28dcd15900dfba19343" title="Die Uart übbertragung initialisieren und starten.">uart_init</a>();    <span class="comment">// USART initialisieren </span>
+                
+                sei();                  <span class="comment">// global Interrupts Aktivieren</span>
+                
+                <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(<span class="charliteral">'*'</span>);                                                                 <span class="comment">// senden eines einzelenen Zeichen</span>
+                <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(<span class="stringliteral">" UART inizialisierung ... OK\n"</span>);    <span class="comment">// sendet einen string</span>
+                
+                <span class="keywordflow">return</span> 0;
+        }
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00063">63</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="uart_8c-source.html#l00022">BUF_SIZE</a>, <a class="el" href="fifo_8c-source.html#l00030">fifo_init()</a>, <a class="el" href="uart_8c-source.html#l00023">inbuf</a>, <a class="el" href="uart_8c-source.html#l00024">infifo</a>, <a class="el" href="uart_8c-source.html#l00132">uart_puts()</a> und <a class="el" href="uart_8h-source.html#l00031">UBRR_BAUD</a>.<div class="fragment"><pre class="fragment"><a name="l00064"></a>00064 {
+<a name="l00065"></a>00065         <span class="comment">/* Baudrate einstellen ( Normaler Modus ) */</span>
+<a name="l00066"></a>00066         UBRRH = (<span class="keywordtype">unsigned</span> char) (<a class="code" href="uart_8h.html#87fae5749a808309b1733598a87fd3e2">UBRR_BAUD</a>&gt;&gt;8);
+<a name="l00067"></a>00067         UBRRL = (<span class="keywordtype">unsigned</span> char) <a class="code" href="uart_8h.html#87fae5749a808309b1733598a87fd3e2">UBRR_BAUD</a>;      
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         <span class="comment">/* Aktivieren des Empfängers, des Senders und des "Daten empfangen"-Interrupts */</span>
+<a name="l00070"></a>00070         UCSRB = (1&lt;&lt;RXCIE)|(1&lt;&lt;RXEN)|(1&lt;&lt;TXEN);
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072         <span class="comment">/* Einstellen des Datenformats: 8 Datenbits, 1 Stoppbit */</span>
+<a name="l00073"></a>00073         UCSRC = (1&lt;&lt;URSEL)|(1&lt;&lt;UCSZ1)|(1&lt;&lt;UCSZ0);
+<a name="l00074"></a>00074         
+<a name="l00075"></a>00075         <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(<span class="stringliteral">"Uart wurde richtig initialisiert\n"</span>);
+<a name="l00076"></a>00076         
+<a name="l00077"></a>00077         <span class="comment">// FIFOs für Eingabe initialisieren </span>
+<a name="l00078"></a>00078         <a class="code" href="fifo_8c.html#5d82ac1e843b9255d2b860c604a33809" title="Initialisiert einen FIFO puffer aus dem Speicherbereich buffer.">fifo_init</a> (&amp;<a class="code" href="uart_8c.html#2cbe2e0e2b5bd9e6caaa3c2490082ea9" title="Fifo struct.">infifo</a>,   <a class="code" href="uart_8c.html#8891e71f2622e24d5be3cd95fe05a06e" title="Speicher für FIFO Puffer.">inbuf</a>, <a class="code" href="uart_8c.html#6821bafc3c88dfb2e433a095df9940c6" title="Puffergröße für Lesepuffer.">BUF_SIZE</a>);
+<a name="l00079"></a>00079 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="a599232c1438c5addd971e05e1dd46a2"></a><!-- doxytag: member="uart.c::uart_putc" ref="a599232c1438c5addd971e05e1dd46a2" args="(char c)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uart_putc           </td>
+          <td>(</td>
+          <td class="paramtype">char&nbsp;</td>
+          <td class="paramname"> <em>c</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Senden eine einzelnes Zeichen über die serielle Schnittstelle. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>c</em>&nbsp;</td><td>zu sendendes Zeichen</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>nichts</dd></dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment">  <span class="comment">// Einzerlne Zeichen senden</span>
+  <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a> (<span class="charliteral">'H'</span>);
+  <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a> (<span class="charliteral">'e'</span>);
+  <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a> (<span class="charliteral">'l'</span>);
+  <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a> (<span class="charliteral">'l'</span>);
+  <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a> (<span class="charliteral">'o'</span>);
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00104">104</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Wird benutzt von <a class="el" href="uart_8c-source.html#l00132">uart_puts()</a> und <a class="el" href="uart_8c-source.html#l00156">uart_puts_p()</a>.<div class="fragment"><pre class="fragment"><a name="l00105"></a>00105 {
+<a name="l00106"></a>00106         <span class="comment">/* warten bis der Sendepuffer leer ist */</span>
+<a name="l00107"></a>00107         <span class="keywordflow">while</span> ( !( UCSRA &amp; (1&lt;&lt;UDRE)) );
+<a name="l00108"></a>00108         
+<a name="l00109"></a>00109         <span class="comment">/* Zeichen senden */</span>
+<a name="l00110"></a>00110         UDR = c;
+<a name="l00111"></a>00111 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="a219466c990ade5307f388484b43ea91"></a><!-- doxytag: member="uart.c::uart_puti" ref="a219466c990ade5307f388484b43ea91" args="(uint16_t i)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uart_puti           </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&nbsp;</td>
+          <td class="paramname"> <em>i</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Ausgabe eines Integer Wertes als String ueber die serielle Schnittstelle. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>i</em>&nbsp;</td><td>Auszugebender Integer Wert (16Bit)</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>nichts</dd></dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment">  <span class="comment">// Beispiel ausgabe eines Wertes</span>
+  <a class="code" href="uart_8c.html#a219466c990ade5307f388484b43ea91" title="Ausgabe eines Integer Wertes als String ueber die serielle Schnittstelle.">uart_puti</a>( wert[0] );
+  <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(<span class="stringliteral">"\r\n"</span>);
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00189">189</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="uart_8c-source.html#l00132">uart_puts()</a>.<div class="fragment"><pre class="fragment"><a name="l00190"></a>00190 {
+<a name="l00191"></a>00191         <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> s[7];     <span class="comment">// "-12345"</span>
+<a name="l00192"></a>00192         
+<a name="l00193"></a>00193         <span class="comment">/* Wandeln eines Integers in einen String */</span>
+<a name="l00194"></a>00194         itoa(i, s, 10);         
+<a name="l00195"></a>00195         <span class="comment">/* String versenden */</span>
+<a name="l00196"></a>00196         <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a>(s);                   
+<a name="l00197"></a>00197 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="2e065279ae8db44201c28eaaf6f430b5"></a><!-- doxytag: member="uart.c::uart_puts" ref="2e065279ae8db44201c28eaaf6f430b5" args="(char *s)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uart_puts           </td>
+          <td>(</td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>s</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Senden eines null-terminierten Strings. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>s</em>&nbsp;</td><td>Pointer auf null-terminierten String</td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>RÃ¼ckgabe:</b></dt><dd>nichts</dd></dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment">  <span class="comment">// Beispiel fuer uart_puts</span>
+  <a class="code" href="uart_8c.html#2e065279ae8db44201c28eaaf6f430b5" title="Senden eines null-terminierten Strings.">uart_puts</a> (<span class="stringliteral">"Hello World!\r\n"</span>);
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00132">132</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="uart_8c-source.html#l00104">uart_putc()</a>.
+<p>
+Wird benutzt von <a class="el" href="uart_8c-source.html#l00063">uart_init()</a> und <a class="el" href="uart_8c-source.html#l00189">uart_puti()</a>.<div class="fragment"><pre class="fragment"><a name="l00133"></a>00133 {
+<a name="l00134"></a>00134         <span class="keywordflow">while</span>(*s) <span class="comment">// so lange senden, bis das ende des Strings erreicht ist</span>
+<a name="l00135"></a>00135         {
+<a name="l00136"></a>00136                 <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(*s++);
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="96e6be20fc906a91e5ec4cb6a20c0372"></a><!-- doxytag: member="uart.c::uart_puts_p" ref="96e6be20fc906a91e5ec4cb6a20c0372" args="(const char *text)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uart_puts_p           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>text</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Senden eines null-terminierten Strings der im Flash-Speicher steht. 
+<p>
+<dl compact><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"><tt>[in]</tt>&nbsp;</td><td valign="top"><em>text</em>&nbsp;</td><td>Pointer auf Flashadresse</td></tr>
+  </table>
+</dl>
+<dl class="user" compact><dt><b>Beispiel:</b></dt><dd>(Nur zur Demonstration der Parameter/Returnwerte) <div class="fragment"><pre class="fragment">  <span class="comment">// Beispiel fuer uart_puts</span>
+  <a class="code" href="uart_8c.html#96e6be20fc906a91e5ec4cb6a20c0372" title="Senden eines null-terminierten Strings der im Flash-Speicher steht.">uart_puts_p</a>(PSTR(<span class="stringliteral">"Hallo Herr Mustermann!\r\n"</span>));
+</pre></div> </dd></dl>
+
+<p>
+Definiert in Zeile <a class="el" href="uart_8c-source.html#l00156">156</a> der Datei <a class="el" href="uart_8c-source.html">uart.c</a>.
+<p>
+Benutzt <a class="el" href="uart_8c-source.html#l00104">uart_putc()</a>.<div class="fragment"><pre class="fragment"><a name="l00157"></a>00157 {
+<a name="l00158"></a>00158     <span class="keywordtype">char</span> Zeichen;
+<a name="l00159"></a>00159  
+<a name="l00160"></a>00160     <span class="keywordflow">while</span> ((Zeichen = pgm_read_byte(text)))
+<a name="l00161"></a>00161     {   <span class="comment">/* so lange, wie mittels pgm_read_byte ein Zeichen vom Flash gelesen</span>
+<a name="l00162"></a>00162 <span class="comment">           werden konnte, welches nicht das "String-Endezeichen" darstellt */</span>
+<a name="l00163"></a>00163  
+<a name="l00164"></a>00164         <span class="comment">/* Das gelesene Zeichen über die normalen Kanäle verschicken */</span>
+<a name="l00165"></a>00165         <a class="code" href="uart_8c.html#a599232c1438c5addd971e05e1dd46a2" title="Senden eine einzelnes Zeichen über die serielle Schnittstelle.">uart_putc</a>(Zeichen);
+<a name="l00166"></a>00166         text++;
+<a name="l00167"></a>00167     }
+<a name="l00168"></a>00168 }
+</pre></div>
+<p>
+
+</div>
+</div><p>
+<hr size="1"><address style="text-align: right;"><small>Erzeugt am Sun Nov 16 12:26:05 2008 fÃ¼r nBot von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.2 </small></address>
+</body>
+</html>

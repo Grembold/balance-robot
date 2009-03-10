@@ -1,0 +1,134 @@
+   1               		.file	"adconvert.c"
+   2               		.arch atmega16
+   3               	__SREG__ = 0x3f
+   4               	__SP_H__ = 0x3e
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	ReadChannel
+  20               	ReadChannel:
+  21               	.LFB2:
+  22               	.LM1:
+  23               	/* prologue: frame size=4 */
+  24 0000 CF93      		push r28
+  25 0002 DF93      		push r29
+  26 0004 CDB7      		in r28,__SP_L__
+  27 0006 DEB7      		in r29,__SP_H__
+  28 0008 2497      		sbiw r28,4
+  29 000a 0FB6      		in __tmp_reg__,__SREG__
+  30 000c F894      		cli
+  31 000e DEBF      		out __SP_H__,r29
+  32 0010 0FBE      		out __SREG__,__tmp_reg__
+  33 0012 CDBF      		out __SP_L__,r28
+  34               	/* prologue end (size=10) */
+  35 0014 8983      		std Y+1,r24
+  36               	.LM2:
+  37 0016 1C82      		std Y+4,__zero_reg__
+  38 0018 1B82      		std Y+3,__zero_reg__
+  39               	.LM3:
+  40 001a 87E8      		ldi r24,lo8(-121)
+  41 001c 8093 2600 		sts 38,r24
+  42               	.LM4:
+  43 0020 8981      		ldd r24,Y+1
+  44 0022 8093 2700 		sts 39,r24
+  45               	.LM5:
+  46 0026 8091 2700 		lds r24,39
+  47 002a 806C      		ori r24,lo8(-64)
+  48 002c 8093 2700 		sts 39,r24
+  49               	.LM6:
+  50 0030 8091 2600 		lds r24,38
+  51 0034 8064      		ori r24,lo8(64)
+  52 0036 8093 2600 		sts 38,r24
+  53               	.L2:
+  54               	.LM7:
+  55 003a 8091 2600 		lds r24,38
+  56 003e 9927      		clr r25
+  57 0040 8074      		andi r24,lo8(64)
+  58 0042 9070      		andi r25,hi8(64)
+  59 0044 0097      		sbiw r24,0
+  60 0046 09F0      		breq .L3
+  61 0048 F8CF      		rjmp .L2
+  62               	.L3:
+  63               	.LM8:
+  64 004a 1A82      		std Y+2,__zero_reg__
+  65               	.L4:
+  66 004c 8A81      		ldd r24,Y+2
+  67 004e 8830      		cpi r24,lo8(8)
+  68 0050 D8F4      		brsh .L5
+  69               	.LM9:
+  70 0052 8091 2600 		lds r24,38
+  71 0056 8064      		ori r24,lo8(64)
+  72 0058 8093 2600 		sts 38,r24
+  73               	.L7:
+  74               	.LM10:
+  75 005c 8091 2600 		lds r24,38
+  76 0060 9927      		clr r25
+  77 0062 8074      		andi r24,lo8(64)
+  78 0064 9070      		andi r25,hi8(64)
+  79 0066 0097      		sbiw r24,0
+  80 0068 09F0      		breq .L8
+  81 006a F8CF      		rjmp .L7
+  82               	.L8:
+  83               	.LM11:
+  84 006c 2B81      		ldd r18,Y+3
+  85 006e 3C81      		ldd r19,Y+4
+  86 0070 8091 2400 		lds r24,36
+  87 0074 9091 2500 		lds r25,(36)+1
+  88 0078 820F      		add r24,r18
+  89 007a 931F      		adc r25,r19
+  90 007c 9C83      		std Y+4,r25
+  91 007e 8B83      		std Y+3,r24
+  92               	.LM12:
+  93 0080 8A81      		ldd r24,Y+2
+  94 0082 8F5F      		subi r24,lo8(-(1))
+  95 0084 8A83      		std Y+2,r24
+  96 0086 E2CF      		rjmp .L4
+  97               	.L5:
+  98               	.LM13:
+  99 0088 9FE7      		ldi r25,lo8(127)
+ 100 008a 8091 2600 		lds r24,38
+ 101 008e 8923      		and r24,r25
+ 102 0090 8093 2600 		sts 38,r24
+ 103               	.LM14:
+ 104 0094 8B81      		ldd r24,Y+3
+ 105 0096 9C81      		ldd r25,Y+4
+ 106 0098 9695      		lsr r25
+ 107 009a 8795      		ror r24
+ 108 009c 9695      		lsr r25
+ 109 009e 8795      		ror r24
+ 110 00a0 9695      		lsr r25
+ 111 00a2 8795      		ror r24
+ 112 00a4 9C83      		std Y+4,r25
+ 113 00a6 8B83      		std Y+3,r24
+ 114               	.LM15:
+ 115 00a8 8B81      		ldd r24,Y+3
+ 116 00aa 9C81      		ldd r25,Y+4
+ 117               	/* epilogue: frame size=4 */
+ 118 00ac 2496      		adiw r28,4
+ 119 00ae 0FB6      		in __tmp_reg__,__SREG__
+ 120 00b0 F894      		cli
+ 121 00b2 DEBF      		out __SP_H__,r29
+ 122 00b4 0FBE      		out __SREG__,__tmp_reg__
+ 123 00b6 CDBF      		out __SP_L__,r28
+ 124 00b8 DF91      		pop r29
+ 125 00ba CF91      		pop r28
+ 126 00bc 0895      		ret
+ 127               	/* epilogue end (size=9) */
+ 128               	/* function ReadChannel size 95 (76) */
+ 129               	.LFE2:
+ 131               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 adconvert.c
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:3      *ABS*:0000003f __SREG__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:4      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:5      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\ArnePe\LOKALE~1\Temp/cc4Uaaaa.s:20     .text:00000000 ReadChannel
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss

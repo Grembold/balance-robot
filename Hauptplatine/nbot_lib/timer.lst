@@ -1,0 +1,237 @@
+   1               		.file	"timer.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	timer2_init
+  20               	timer2_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23 0000 DF93      		push r29
+  24 0002 CF93      		push r28
+  25 0004 CDB7      		in r28,__SP_L__
+  26 0006 DEB7      		in r29,__SP_H__
+  27               	/* prologue: function */
+  28               	/* frame size = 0 */
+  29               	/* epilogue start */
+  30               	.LM2:
+  31 0008 CF91      		pop r28
+  32 000a DF91      		pop r29
+  33 000c 0895      		ret
+  34               	.LFE2:
+  36               	.global	Gettime
+  38               	Gettime:
+  39               	.LFB3:
+  40               	.LM3:
+  41 000e DF93      		push r29
+  42 0010 CF93      		push r28
+  43 0012 CDB7      		in r28,__SP_L__
+  44 0014 DEB7      		in r29,__SP_H__
+  45               	/* prologue: function */
+  46               	/* frame size = 0 */
+  47               	.LM4:
+  48 0016 8091 0000 		lds r24,timebase
+  49 001a 9091 0000 		lds r25,(timebase)+1
+  50 001e A091 0000 		lds r26,(timebase)+2
+  51 0022 B091 0000 		lds r27,(timebase)+3
+  52 0026 2227      		clr r18
+  53 0028 382F      		mov r19,r24
+  54 002a 492F      		mov r20,r25
+  55 002c 5A2F      		mov r21,r26
+  56 002e 8091 0000 		lds r24,count36kHz
+  57 0032 882F      		mov r24,r24
+  58 0034 90E0      		ldi r25,lo8(0)
+  59 0036 A0E0      		ldi r26,lo8(0)
+  60 0038 B0E0      		ldi r27,hi8(0)
+  61 003a 820F      		add r24,r18
+  62 003c 931F      		adc r25,r19
+  63 003e A41F      		adc r26,r20
+  64 0040 B51F      		adc r27,r21
+  65 0042 24E2      		ldi r18,lo8(36)
+  66 0044 30E0      		ldi r19,hi8(36)
+  67 0046 40E0      		ldi r20,hlo8(36)
+  68 0048 50E0      		ldi r21,hhi8(36)
+  69 004a BC01      		movw r22,r24
+  70 004c CD01      		movw r24,r26
+  71 004e 0E94 0000 		call __udivmodsi4
+  72 0052 DA01      		movw r26,r20
+  73 0054 C901      		movw r24,r18
+  74               	.LM5:
+  75 0056 BC01      		movw r22,r24
+  76 0058 CD01      		movw r24,r26
+  77               	/* epilogue start */
+  78 005a CF91      		pop r28
+  79 005c DF91      		pop r29
+  80 005e 0895      		ret
+  81               	.LFE3:
+  83               	.global	sleep
+  85               	sleep:
+  86               	.LFB4:
+  87               	.LM6:
+  88 0060 DF93      		push r29
+  89 0062 CF93      		push r28
+  90 0064 00D0      		rcall .
+  91 0066 CDB7      		in r28,__SP_L__
+  92 0068 DEB7      		in r29,__SP_H__
+  93               	/* prologue: function */
+  94               	/* frame size = 2 */
+  95 006a 8A83      		std Y+2,r24
+  96               	.LM7:
+  97 006c 8091 0000 		lds r24,count36kHz
+  98 0070 9A81      		ldd r25,Y+2
+  99 0072 890F      		add r24,r25
+ 100 0074 8983      		std Y+1,r24
+ 101               	.L6:
+ 102               	.LM8:
+ 103 0076 9091 0000 		lds r25,count36kHz
+ 104 007a 8981      		ldd r24,Y+1
+ 105 007c 9817      		cp r25,r24
+ 106 007e 01F4      		brne .L6
+ 107               	/* epilogue start */
+ 108               	.LM9:
+ 109 0080 0F90      		pop __tmp_reg__
+ 110 0082 0F90      		pop __tmp_reg__
+ 111 0084 CF91      		pop r28
+ 112 0086 DF91      		pop r29
+ 113 0088 0895      		ret
+ 114               	.LFE4:
+ 116               	.global	msleep
+ 118               	msleep:
+ 119               	.LFB5:
+ 120               	.LM10:
+ 121 008a DF93      		push r29
+ 122 008c CF93      		push r28
+ 123 008e 00D0      		rcall .
+ 124 0090 00D0      		rcall .
+ 125 0092 CDB7      		in r28,__SP_L__
+ 126 0094 DEB7      		in r29,__SP_H__
+ 127               	/* prologue: function */
+ 128               	/* frame size = 4 */
+ 129 0096 9C83      		std Y+4,r25
+ 130 0098 8B83      		std Y+3,r24
+ 131               	.LM11:
+ 132 009a 1A82      		std Y+2,__zero_reg__
+ 133 009c 1982      		std Y+1,__zero_reg__
+ 134 009e 00C0      		rjmp .L9
+ 135               	.L10:
+ 136               	.LM12:
+ 137 00a0 84E2      		ldi r24,lo8(36)
+ 138 00a2 0E94 0000 		call sleep
+ 139               	.LM13:
+ 140 00a6 8981      		ldd r24,Y+1
+ 141 00a8 9A81      		ldd r25,Y+2
+ 142 00aa 0196      		adiw r24,1
+ 143 00ac 9A83      		std Y+2,r25
+ 144 00ae 8983      		std Y+1,r24
+ 145               	.L9:
+ 146 00b0 2981      		ldd r18,Y+1
+ 147 00b2 3A81      		ldd r19,Y+2
+ 148 00b4 8B81      		ldd r24,Y+3
+ 149 00b6 9C81      		ldd r25,Y+4
+ 150 00b8 2817      		cp r18,r24
+ 151 00ba 3907      		cpc r19,r25
+ 152 00bc 04F0      		brlt .L10
+ 153               	/* epilogue start */
+ 154               	.LM14:
+ 155 00be 0F90      		pop __tmp_reg__
+ 156 00c0 0F90      		pop __tmp_reg__
+ 157 00c2 0F90      		pop __tmp_reg__
+ 158 00c4 0F90      		pop __tmp_reg__
+ 159 00c6 CF91      		pop r28
+ 160 00c8 DF91      		pop r29
+ 161 00ca 0895      		ret
+ 162               	.LFE5:
+ 164               	.global	__vector_9
+ 166               	__vector_9:
+ 167               	.LFB6:
+ 168               	.LM15:
+ 169 00cc 1F92      		push __zero_reg__
+ 170 00ce 0F92      		push r0
+ 171 00d0 0FB6      		in r0,__SREG__
+ 172 00d2 0F92      		push r0
+ 173 00d4 1124      		clr __zero_reg__
+ 174 00d6 8F93      		push r24
+ 175 00d8 9F93      		push r25
+ 176 00da AF93      		push r26
+ 177 00dc BF93      		push r27
+ 178 00de EF93      		push r30
+ 179 00e0 FF93      		push r31
+ 180 00e2 DF93      		push r29
+ 181 00e4 CF93      		push r28
+ 182 00e6 CDB7      		in r28,__SP_L__
+ 183 00e8 DEB7      		in r29,__SP_H__
+ 184               	/* prologue: Signal */
+ 185               	/* frame size = 0 */
+ 186               	.LM16:
+ 187 00ea A2EB      		ldi r26,lo8(178)
+ 188 00ec B0E0      		ldi r27,hi8(178)
+ 189 00ee E2EB      		ldi r30,lo8(178)
+ 190 00f0 F0E0      		ldi r31,hi8(178)
+ 191 00f2 8081      		ld r24,Z
+ 192 00f4 805E      		subi r24,lo8(-(32))
+ 193 00f6 8C93      		st X,r24
+ 194               	.LM17:
+ 195 00f8 8091 0000 		lds r24,count36kHz
+ 196 00fc 8F5F      		subi r24,lo8(-(1))
+ 197 00fe 8093 0000 		sts count36kHz,r24
+ 198               	.LM18:
+ 199 0102 8091 0000 		lds r24,count36kHz
+ 200 0106 8823      		tst r24
+ 201 0108 01F4      		brne .L14
+ 202               	.LM19:
+ 203 010a 8091 0000 		lds r24,timebase
+ 204 010e 9091 0000 		lds r25,(timebase)+1
+ 205 0112 A091 0000 		lds r26,(timebase)+2
+ 206 0116 B091 0000 		lds r27,(timebase)+3
+ 207 011a 0196      		adiw r24,1
+ 208 011c A11D      		adc r26,__zero_reg__
+ 209 011e B11D      		adc r27,__zero_reg__
+ 210 0120 8093 0000 		sts timebase,r24
+ 211 0124 9093 0000 		sts (timebase)+1,r25
+ 212 0128 A093 0000 		sts (timebase)+2,r26
+ 213 012c B093 0000 		sts (timebase)+3,r27
+ 214               	.L14:
+ 215               	/* epilogue start */
+ 216               	.LM20:
+ 217 0130 CF91      		pop r28
+ 218 0132 DF91      		pop r29
+ 219 0134 FF91      		pop r31
+ 220 0136 EF91      		pop r30
+ 221 0138 BF91      		pop r27
+ 222 013a AF91      		pop r26
+ 223 013c 9F91      		pop r25
+ 224 013e 8F91      		pop r24
+ 225 0140 0F90      		pop r0
+ 226 0142 0FBE      		out __SREG__,r0
+ 227 0144 0F90      		pop r0
+ 228 0146 1F90      		pop __zero_reg__
+ 229 0148 1895      		reti
+ 230               	.LFE6:
+ 232               		.comm count36kHz,1,1
+ 233               		.comm timebase,4,1
+ 290               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 timer.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:5      *ABS*:00000034 __CCP__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:20     .text:00000000 timer2_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:38     .text:0000000e Gettime
+                            *COM*:00000004 timebase
+                            *COM*:00000001 count36kHz
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:85     .text:00000060 sleep
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:118    .text:0000008a msleep
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc5rJN7P.s:166    .text:000000cc __vector_9
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+__udivmodsi4

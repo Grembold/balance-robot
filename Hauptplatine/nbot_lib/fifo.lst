@@ -1,0 +1,358 @@
+   1               		.file	"fifo.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+  17               	.Ltext0:
+  18               	.global	fifo_init
+  20               	fifo_init:
+  21               	.LFB2:
+  22               	.LM1:
+  23 0000 DF93      		push r29
+  24 0002 CF93      		push r28
+  25 0004 00D0      		rcall .
+  26 0006 00D0      		rcall .
+  27 0008 0F92      		push __tmp_reg__
+  28 000a CDB7      		in r28,__SP_L__
+  29 000c DEB7      		in r29,__SP_H__
+  30               	/* prologue: function */
+  31               	/* frame size = 5 */
+  32 000e 9A83      		std Y+2,r25
+  33 0010 8983      		std Y+1,r24
+  34 0012 7C83      		std Y+4,r23
+  35 0014 6B83      		std Y+3,r22
+  36 0016 4D83      		std Y+5,r20
+  37               	.LM2:
+  38 0018 E981      		ldd r30,Y+1
+  39 001a FA81      		ldd r31,Y+2
+  40 001c 1082      		st Z,__zero_reg__
+  41               	.LM3:
+  42 001e E981      		ldd r30,Y+1
+  43 0020 FA81      		ldd r31,Y+2
+  44 0022 8B81      		ldd r24,Y+3
+  45 0024 9C81      		ldd r25,Y+4
+  46 0026 9583      		std Z+5,r25
+  47 0028 8483      		std Z+4,r24
+  48 002a E981      		ldd r30,Y+1
+  49 002c FA81      		ldd r31,Y+2
+  50 002e 8481      		ldd r24,Z+4
+  51 0030 9581      		ldd r25,Z+5
+  52 0032 E981      		ldd r30,Y+1
+  53 0034 FA81      		ldd r31,Y+2
+  54 0036 9383      		std Z+3,r25
+  55 0038 8283      		std Z+2,r24
+  56               	.LM4:
+  57 003a E981      		ldd r30,Y+1
+  58 003c FA81      		ldd r31,Y+2
+  59 003e 8D81      		ldd r24,Y+5
+  60 0040 8183      		std Z+1,r24
+  61 0042 E981      		ldd r30,Y+1
+  62 0044 FA81      		ldd r31,Y+2
+  63 0046 8181      		ldd r24,Z+1
+  64 0048 E981      		ldd r30,Y+1
+  65 004a FA81      		ldd r31,Y+2
+  66 004c 8783      		std Z+7,r24
+  67 004e E981      		ldd r30,Y+1
+  68 0050 FA81      		ldd r31,Y+2
+  69 0052 8781      		ldd r24,Z+7
+  70 0054 E981      		ldd r30,Y+1
+  71 0056 FA81      		ldd r31,Y+2
+  72 0058 8683      		std Z+6,r24
+  73               	/* epilogue start */
+  74               	.LM5:
+  75 005a 0F90      		pop __tmp_reg__
+  76 005c 0F90      		pop __tmp_reg__
+  77 005e 0F90      		pop __tmp_reg__
+  78 0060 0F90      		pop __tmp_reg__
+  79 0062 0F90      		pop __tmp_reg__
+  80 0064 CF91      		pop r28
+  81 0066 DF91      		pop r29
+  82 0068 0895      		ret
+  83               	.LFE2:
+  85               	.global	fifo_put
+  87               	fifo_put:
+  88               	.LFB3:
+  89               	.LM6:
+  90 006a DF93      		push r29
+  91 006c CF93      		push r28
+  92 006e CDB7      		in r28,__SP_L__
+  93 0070 DEB7      		in r29,__SP_H__
+  94 0072 2897      		sbiw r28,8
+  95 0074 0FB6      		in __tmp_reg__,__SREG__
+  96 0076 F894      		cli
+  97 0078 DEBF      		out __SP_H__,r29
+  98 007a 0FBE      		out __SREG__,__tmp_reg__
+  99 007c CDBF      		out __SP_L__,r28
+ 100               	/* prologue: function */
+ 101               	/* frame size = 8 */
+ 102 007e 9E83      		std Y+6,r25
+ 103 0080 8D83      		std Y+5,r24
+ 104 0082 6F83      		std Y+7,r22
+ 105               	.LM7:
+ 106 0084 ED81      		ldd r30,Y+5
+ 107 0086 FE81      		ldd r31,Y+6
+ 108 0088 9081      		ld r25,Z
+ 109 008a ED81      		ldd r30,Y+5
+ 110 008c FE81      		ldd r31,Y+6
+ 111 008e 8181      		ldd r24,Z+1
+ 112 0090 9817      		cp r25,r24
+ 113 0092 00F0      		brlo .L4
+ 114               	.LM8:
+ 115 0094 1886      		std Y+8,__zero_reg__
+ 116 0096 00C0      		rjmp .L5
+ 117               	.L4:
+ 118               	.LM9:
+ 119 0098 EFE5      		ldi r30,lo8(95)
+ 120 009a F0E0      		ldi r31,hi8(95)
+ 121 009c 8081      		ld r24,Z
+ 122 009e 8C83      		std Y+4,r24
+ 123               	.LM10:
+ 124               	/* #APP */
+ 125               	 ;  49 "../nbot_lib/fifo.c" 1
+ 126 00a0 F894      		cli
+ 127               	 ;  0 "" 2
+ 128               	.LM11:
+ 129               	/* #NOAPP */
+ 130 00a2 ED81      		ldd r30,Y+5
+ 131 00a4 FE81      		ldd r31,Y+6
+ 132 00a6 8481      		ldd r24,Z+4
+ 133 00a8 9581      		ldd r25,Z+5
+ 134 00aa 9B83      		std Y+3,r25
+ 135 00ac 8A83      		std Y+2,r24
+ 136               	.LM12:
+ 137 00ae EA81      		ldd r30,Y+2
+ 138 00b0 FB81      		ldd r31,Y+3
+ 139 00b2 8F81      		ldd r24,Y+7
+ 140 00b4 8083      		st Z,r24
+ 141 00b6 8A81      		ldd r24,Y+2
+ 142 00b8 9B81      		ldd r25,Y+3
+ 143 00ba 0196      		adiw r24,1
+ 144 00bc 9B83      		std Y+3,r25
+ 145 00be 8A83      		std Y+2,r24
+ 146               	.LM13:
+ 147 00c0 ED81      		ldd r30,Y+5
+ 148 00c2 FE81      		ldd r31,Y+6
+ 149 00c4 8781      		ldd r24,Z+7
+ 150 00c6 8983      		std Y+1,r24
+ 151               	.LM14:
+ 152 00c8 8981      		ldd r24,Y+1
+ 153 00ca 8150      		subi r24,lo8(-(-1))
+ 154 00cc 8983      		std Y+1,r24
+ 155 00ce 8981      		ldd r24,Y+1
+ 156 00d0 8823      		tst r24
+ 157 00d2 01F4      		brne .L6
+ 158               	.LM15:
+ 159 00d4 ED81      		ldd r30,Y+5
+ 160 00d6 FE81      		ldd r31,Y+6
+ 161 00d8 8181      		ldd r24,Z+1
+ 162 00da 8983      		std Y+1,r24
+ 163               	.LM16:
+ 164 00dc 8981      		ldd r24,Y+1
+ 165 00de 882F      		mov r24,r24
+ 166 00e0 90E0      		ldi r25,lo8(0)
+ 167 00e2 2227      		clr r18
+ 168 00e4 3327      		clr r19
+ 169 00e6 281B      		sub r18,r24
+ 170 00e8 390B      		sbc r19,r25
+ 171 00ea 8A81      		ldd r24,Y+2
+ 172 00ec 9B81      		ldd r25,Y+3
+ 173 00ee 820F      		add r24,r18
+ 174 00f0 931F      		adc r25,r19
+ 175 00f2 9B83      		std Y+3,r25
+ 176 00f4 8A83      		std Y+2,r24
+ 177               	.L6:
+ 178               	.LM17:
+ 179 00f6 ED81      		ldd r30,Y+5
+ 180 00f8 FE81      		ldd r31,Y+6
+ 181 00fa 8981      		ldd r24,Y+1
+ 182 00fc 8783      		std Z+7,r24
+ 183               	.LM18:
+ 184 00fe ED81      		ldd r30,Y+5
+ 185 0100 FE81      		ldd r31,Y+6
+ 186 0102 8A81      		ldd r24,Y+2
+ 187 0104 9B81      		ldd r25,Y+3
+ 188 0106 9583      		std Z+5,r25
+ 189 0108 8483      		std Z+4,r24
+ 190               	.LM19:
+ 191 010a ED81      		ldd r30,Y+5
+ 192 010c FE81      		ldd r31,Y+6
+ 193 010e 8081      		ld r24,Z
+ 194 0110 8F5F      		subi r24,lo8(-(1))
+ 195 0112 ED81      		ldd r30,Y+5
+ 196 0114 FE81      		ldd r31,Y+6
+ 197 0116 8083      		st Z,r24
+ 198               	.LM20:
+ 199 0118 EFE5      		ldi r30,lo8(95)
+ 200 011a F0E0      		ldi r31,hi8(95)
+ 201 011c 8C81      		ldd r24,Y+4
+ 202 011e 8083      		st Z,r24
+ 203               	.LM21:
+ 204 0120 81E0      		ldi r24,lo8(1)
+ 205 0122 8887      		std Y+8,r24
+ 206               	.L5:
+ 207 0124 8885      		ldd r24,Y+8
+ 208               	/* epilogue start */
+ 209               	.LM22:
+ 210 0126 2896      		adiw r28,8
+ 211 0128 0FB6      		in __tmp_reg__,__SREG__
+ 212 012a F894      		cli
+ 213 012c DEBF      		out __SP_H__,r29
+ 214 012e 0FBE      		out __SREG__,__tmp_reg__
+ 215 0130 CDBF      		out __SP_L__,r28
+ 216 0132 CF91      		pop r28
+ 217 0134 DF91      		pop r29
+ 218 0136 0895      		ret
+ 219               	.LFE3:
+ 221               	.global	fifo_get
+ 223               	fifo_get:
+ 224               	.LFB4:
+ 225               	.LM23:
+ 226 0138 DF93      		push r29
+ 227 013a CF93      		push r28
+ 228 013c CDB7      		in r28,__SP_L__
+ 229 013e DEB7      		in r29,__SP_H__
+ 230 0140 2997      		sbiw r28,9
+ 231 0142 0FB6      		in __tmp_reg__,__SREG__
+ 232 0144 F894      		cli
+ 233 0146 DEBF      		out __SP_H__,r29
+ 234 0148 0FBE      		out __SREG__,__tmp_reg__
+ 235 014a CDBF      		out __SP_L__,r28
+ 236               	/* prologue: function */
+ 237               	/* frame size = 9 */
+ 238 014c 9E83      		std Y+6,r25
+ 239 014e 8D83      		std Y+5,r24
+ 240 0150 7887      		std Y+8,r23
+ 241 0152 6F83      		std Y+7,r22
+ 242               	.LM24:
+ 243 0154 ED81      		ldd r30,Y+5
+ 244 0156 FE81      		ldd r31,Y+6
+ 245 0158 8081      		ld r24,Z
+ 246 015a 8823      		tst r24
+ 247 015c 01F4      		brne .L9
+ 248 015e 81E0      		ldi r24,lo8(1)
+ 249 0160 8987      		std Y+9,r24
+ 250 0162 00C0      		rjmp .L10
+ 251               	.L9:
+ 252               	.LM25:
+ 253 0164 EFE5      		ldi r30,lo8(95)
+ 254 0166 F0E0      		ldi r31,hi8(95)
+ 255 0168 8081      		ld r24,Z
+ 256 016a 8C83      		std Y+4,r24
+ 257               	.LM26:
+ 258               	/* #APP */
+ 259               	 ;  85 "../nbot_lib/fifo.c" 1
+ 260 016c F894      		cli
+ 261               	 ;  0 "" 2
+ 262               	.LM27:
+ 263               	/* #NOAPP */
+ 264 016e ED81      		ldd r30,Y+5
+ 265 0170 FE81      		ldd r31,Y+6
+ 266 0172 8281      		ldd r24,Z+2
+ 267 0174 9381      		ldd r25,Z+3
+ 268 0176 9B83      		std Y+3,r25
+ 269 0178 8A83      		std Y+2,r24
+ 270               	.LM28:
+ 271 017a ED81      		ldd r30,Y+5
+ 272 017c FE81      		ldd r31,Y+6
+ 273 017e 8681      		ldd r24,Z+6
+ 274 0180 8983      		std Y+1,r24
+ 275               	.LM29:
+ 276 0182 EA81      		ldd r30,Y+2
+ 277 0184 FB81      		ldd r31,Y+3
+ 278 0186 8081      		ld r24,Z
+ 279 0188 EF81      		ldd r30,Y+7
+ 280 018a F885      		ldd r31,Y+8
+ 281 018c 8083      		st Z,r24
+ 282 018e 8A81      		ldd r24,Y+2
+ 283 0190 9B81      		ldd r25,Y+3
+ 284 0192 0196      		adiw r24,1
+ 285 0194 9B83      		std Y+3,r25
+ 286 0196 8A83      		std Y+2,r24
+ 287               	.LM30:
+ 288 0198 8981      		ldd r24,Y+1
+ 289 019a 8150      		subi r24,lo8(-(-1))
+ 290 019c 8983      		std Y+1,r24
+ 291 019e 8981      		ldd r24,Y+1
+ 292 01a0 8823      		tst r24
+ 293 01a2 01F4      		brne .L11
+ 294               	.LM31:
+ 295 01a4 ED81      		ldd r30,Y+5
+ 296 01a6 FE81      		ldd r31,Y+6
+ 297 01a8 8181      		ldd r24,Z+1
+ 298 01aa 8983      		std Y+1,r24
+ 299               	.LM32:
+ 300 01ac 8981      		ldd r24,Y+1
+ 301 01ae 882F      		mov r24,r24
+ 302 01b0 90E0      		ldi r25,lo8(0)
+ 303 01b2 2227      		clr r18
+ 304 01b4 3327      		clr r19
+ 305 01b6 281B      		sub r18,r24
+ 306 01b8 390B      		sbc r19,r25
+ 307 01ba 8A81      		ldd r24,Y+2
+ 308 01bc 9B81      		ldd r25,Y+3
+ 309 01be 820F      		add r24,r18
+ 310 01c0 931F      		adc r25,r19
+ 311 01c2 9B83      		std Y+3,r25
+ 312 01c4 8A83      		std Y+2,r24
+ 313               	.L11:
+ 314               	.LM33:
+ 315 01c6 ED81      		ldd r30,Y+5
+ 316 01c8 FE81      		ldd r31,Y+6
+ 317 01ca 8A81      		ldd r24,Y+2
+ 318 01cc 9B81      		ldd r25,Y+3
+ 319 01ce 9383      		std Z+3,r25
+ 320 01d0 8283      		std Z+2,r24
+ 321               	.LM34:
+ 322 01d2 ED81      		ldd r30,Y+5
+ 323 01d4 FE81      		ldd r31,Y+6
+ 324 01d6 8981      		ldd r24,Y+1
+ 325 01d8 8683      		std Z+6,r24
+ 326               	.LM35:
+ 327 01da ED81      		ldd r30,Y+5
+ 328 01dc FE81      		ldd r31,Y+6
+ 329 01de 8081      		ld r24,Z
+ 330 01e0 8150      		subi r24,lo8(-(-1))
+ 331 01e2 ED81      		ldd r30,Y+5
+ 332 01e4 FE81      		ldd r31,Y+6
+ 333 01e6 8083      		st Z,r24
+ 334               	.LM36:
+ 335 01e8 EFE5      		ldi r30,lo8(95)
+ 336 01ea F0E0      		ldi r31,hi8(95)
+ 337 01ec 8C81      		ldd r24,Y+4
+ 338 01ee 8083      		st Z,r24
+ 339               	.LM37:
+ 340 01f0 1986      		std Y+9,__zero_reg__
+ 341               	.L10:
+ 342 01f2 8985      		ldd r24,Y+9
+ 343               	/* epilogue start */
+ 344               	.LM38:
+ 345 01f4 2996      		adiw r28,9
+ 346 01f6 0FB6      		in __tmp_reg__,__SREG__
+ 347 01f8 F894      		cli
+ 348 01fa DEBF      		out __SP_H__,r29
+ 349 01fc 0FBE      		out __SREG__,__tmp_reg__
+ 350 01fe CDBF      		out __SP_L__,r28
+ 351 0200 CF91      		pop r28
+ 352 0202 DF91      		pop r29
+ 353 0204 0895      		ret
+ 354               	.LFE4:
+ 396               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 fifo.c
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:2      *ABS*:0000003f __SREG__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:3      *ABS*:0000003e __SP_H__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:4      *ABS*:0000003d __SP_L__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:5      *ABS*:00000034 __CCP__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:6      *ABS*:00000000 __tmp_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:7      *ABS*:00000001 __zero_reg__
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:20     .text:00000000 fifo_init
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:87     .text:0000006a fifo_put
+C:\DOKUME~1\Olaf\LOKALE~1\Temp/cc7Ssdfk.s:223    .text:00000138 fifo_get
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
