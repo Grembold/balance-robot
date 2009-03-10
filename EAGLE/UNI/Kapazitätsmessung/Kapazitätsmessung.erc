@@ -1,0 +1,14 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.15/projects/Kapazitätsmessung/Kapazitätsmessung.sch am 03.11.2005 21:05:24 
+
+WARNUNG: Seite 1/1: POWER-Pin IC2 V+ verbunden mit +5V
+WARNUNG: Seite 1/1: POWER-Pin IC2 V- verbunden mit GND
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC5 R2IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC5 T2IN
+WARNUNG: Seite 1/1: POWER-Pin IC5 VCC verbunden mit N$18
+
+Board und Schaltplan sind konsistent
+
+    2 Fehler
+    3 Warnungen

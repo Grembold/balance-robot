@@ -1,0 +1,13 @@
+EAGLE Version 4.16 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.16/projects/usb-seriell/USB-RS232 Adapter FT232RL.sch am 16.03.2006 22:48:36 
+
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X2-G G2
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC3G$1 T4IN
+WARNUNG: Nur 1 Pin an Netz SHIELD
+WARNUNG: Seite 1/1, Netz SHIELD: Wire überlappt Pin an Position (6.5 1.4)
+
+Board und Schaltplan sind konsistent
+
+    1 Fehler
+    3 Warnungen

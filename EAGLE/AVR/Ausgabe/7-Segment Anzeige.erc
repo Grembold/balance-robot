@@ -1,0 +1,13 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.15/projects/AVR Board/Ausgabe/7-Segment Anzeige.sch am 30.10.2005 19:07:25 
+
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC1 LT
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC1 BI
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC1 LE
+WARNUNG: Seite 1/1: POWER-Pin IC1P VSS verbunden mit GND
+
+Board und Schaltplan sind konsistent
+
+    3 Fehler
+    1 Warnungen

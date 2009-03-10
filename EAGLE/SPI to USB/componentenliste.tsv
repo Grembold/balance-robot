@@ -1,0 +1,18 @@
+Key	Description
+MOUNT-PAD-ROUND2.8	Befestigungslöcher 2.8 mm
+MAX3420E	MAX3420EECJ+ USB peripheral controller (32-pin, TQFP)
+JP2E:	3-pin headers
+LEDCHIPLED_1206:	Red LED (1206)
+R-EU_R1206:33,2 1%	33.2Ohm 1% resistor (0603)
+R-EU_R1206:150	150Ohm 5% resistor (0603)
+USB-B-H	USB type B right-angle receptacle
+MAX6349	MAX6349TLUT+ (SOT-23-6)
+CRYTALHC49U-V:12MHz	12MHz crystal, 18pF load (HCM49)
+MA07-1:	Single-row, 7-pin Header
+C-EUC0805:2,2µ	2.2µF 20%, 6.3V X5R veramic capacitors (0805)
+C-EUC0805:1µ	1µF 20%, 6.3V X5R ceramic capacitors (0805)
+C-EUC0805:18p	18pF 5%, 50V C0G ceramic capacitors (0805)
+MOUNT-PAD-ROUND3.2	Befestigungslöcher 3.2 mm
+LEDCHIPLED_0805:	RED LED (0805)
+R-EU_R0805:33,2 1%	33.2 Ohm 1% resistor (0805)
+R-EU_R0805:150	150 Ohm 5% resistor (0805)

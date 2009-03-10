@@ -1,0 +1,12 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.15/projects/nBot/Motor_Leistung/ct-Motor2.sch am 31.01.2006 23:43:53 
+
+WARNUNG: Seite 1/1: POWER-Pin IC1 VS verbunden mit +12V
+WARNUNG: Seite 1/1: Netze N$1 und GND zu nahe an (5.2 2.2)
+WARNUNG: Seite 1/1, Netz N$1: Wire überlappt Pin an Position (5.2 2.2)
+
+Board und Schaltplan sind konsistent
+
+    0 Fehler
+    3 Warnungen

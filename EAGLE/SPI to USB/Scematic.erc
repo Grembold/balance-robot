@@ -1,0 +1,13 @@
+EAGLE Version 4.16r2 Copyright (c) 1988-2006 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.16r2/projects/SPI to USB/Scematic.sch am 05.05.2007 22:48:37 
+
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H1 MOUNT
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H2 MOUNT
+WARNUNG: Keine Pins an Netz N$2
+WARNUNG: Keine Pins an Netz N$5
+
+Board und Schaltplan sind konsistent
+
+    0 Fehler
+    4 Warnungen

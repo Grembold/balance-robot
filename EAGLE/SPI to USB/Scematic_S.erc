@@ -1,0 +1,20 @@
+EAGLE Version 4.16 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.16/projects/SPI to USB/Scematic_S.sch am 09.05.2007 07:30:21 
+
+WARNUNG: Nur 1 Pin an Netz GPI0
+WARNUNG: Nur 1 Pin an Netz GPI1
+WARNUNG: Nur 1 Pin an Netz GPI2
+WARNUNG: Nur 1 Pin an Netz GPI3
+WARNUNG: Nur 1 Pin an Netz GPO0
+WARNUNG: Nur 1 Pin an Netz GPO1
+WARNUNG: Nur 1 Pin an Netz GPO2
+WARNUNG: Nur 1 Pin an Netz GPO3
+WARNUNG: Nur 1 Pin an Netz GPX
+WARNUNG: Keine Pins an Netz N$2
+WARNUNG: Keine Pins an Netz N$5
+
+Board und Schaltplan sind konsistent
+
+    0 Fehler
+   11 Warnungen

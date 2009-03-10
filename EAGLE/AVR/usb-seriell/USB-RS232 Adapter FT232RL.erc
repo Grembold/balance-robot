@@ -1,0 +1,26 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.15/projects/AVR/usb-seriell/USB-RS232 Adapter FT232RL.sch am 18.02.2006 18:45:25 
+
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X2-G G2
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R3IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R5IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R2IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R1IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R4IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 T4IN
+WARNUNG: Nur 1 Pin an Netz CTS
+WARNUNG: Nur 1 Pin an Netz DCD
+WARNUNG: Nur 1 Pin an Netz DSR
+WARNUNG: Nur 1 Pin an Netz DTR
+WARNUNG: Nur 1 Pin an Netz RI
+WARNUNG: Nur 1 Pin an Netz RTS
+WARNUNG: Nur 1 Pin an Netz RXDATA
+WARNUNG: Nur 1 Pin an Netz SHIELD
+WARNUNG: Nur 1 Pin an Netz TXDATA
+WARNUNG: Seite 1/1, Netz SHIELD: Wire überlappt Pin an Position (6.5 1.4)
+
+Board und Schaltplan sind konsistent
+
+    6 Fehler
+   11 Warnungen

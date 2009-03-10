@@ -1,0 +1,20 @@
+Stückliste exportiert aus C:/Programme/EAGLE-4.15/projects/AVR Board/Tiny15L-Board.sch am 25.10.2005 10:19:44 
+
+Bauteil Wert     Device          Package      Description                          Bestellnummer Reichelt Preis
+C1      100nF    C-EU025-030X050 C025-030X050 CAPACITOR, European symbol           Z5U-2,5 100N           0.06 
+C3      100nF    C-EU025-030X050 C025-030X050 CAPACITOR, European symbol           Z5U-2,5 100N           0.06 
+C4      100nF    C-EU025-030X050 C025-030X050 CAPACITOR, European symbol           Z5U-2,5 100N           0.06 
+C5      10uF     CPOL-EUE2.5-7   E2,5-7       POLARIZED CAPACITOR, European symbol RAD 10/35              0.04 
+C6      1uF      CPOL-EUE2.5-5   E2,5-5       POLARIZED CAPACITOR, European symbol RAD 1/63               0.04 
+IC1     TINY15LS TINY15LS        SOIC8        MICROCONTROLLER                      ATTINY 15L SO8         1.25 
+IC2     7805T    7805T           TO220H       Positive VOLTAGE REGULATOR           µA 7805                0.17 
+LED1    rot      LED3MM          LED3MM       LED                                  LED 3MM 2MA RT         0.09 
+LED2    grün     LED3MM          LED3MM       LED                                  LED 3MM 2MA GN         0.09 
+LED3    grün     LED3MM          LED3MM       LED                                  LED 3MM 2MA GN         0.09 
+LED4    grün     LED3MM          LED3MM       LED                                  LED 3MM 2MA GN         0.09 
+R1      150      R-EU_0207/10    0207/10      RESISTOR, European symbol            1/4W 150               0.10 
+R2      150      R-EU_0207/10    0207/10      RESISTOR, European symbol            1/4W 150               0.10 
+R3      150      R-EU_0207/10    0207/10      RESISTOR, European symbol            1/4W 150               0.10 
+R4      150      R-EU_0207/10    0207/10      RESISTOR, European symbol            1/4W 150               0.10 
+SV1              ML10            ML10         HARTING                              WSL 10G                0.07 
+X2               W237-02P        W237-132     WAGO SREW CLAMP                      AKL 055-02             0.14 

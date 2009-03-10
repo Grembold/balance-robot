@@ -1,0 +1,31 @@
+EAGLE Version 4.16 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Dokumente und Einstellungen/Olaf/Desktop/Prototypen/ATmega16 Testboard v2.2.sch am 12.05.2007 17:31:57 
+
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H1 MOUNT
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H2 MOUNT
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H3 MOUNT
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: H4 MOUNT
+WARNUNG: Seite 1/1: POWER-Pin JP11 GND1 verbunden mit GND
+WARNUNG: Seite 1/1: POWER-Pin JP11 GND2 verbunden mit GND
+WARNUNG: Seite 1/1: POWER-Pin JP11 GND3 verbunden mit GND
+WARNUNG: Seite 1/1: POWER-Pin JP11 GND4 verbunden mit GND
+FEHLER: Seite 1/1: kein SUPPLY für POWER-Pin JP11 LED
+WARNUNG: Seite 1/1: POWER-Pin JP11 +5V verbunden mit VCC
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC4 WP
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 T1IN
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: IC2 R1IN
+WARNUNG: Nur 1 Pin an Netz GPI0
+WARNUNG: Nur 1 Pin an Netz GPI1
+WARNUNG: Nur 1 Pin an Netz GPI2
+WARNUNG: Nur 1 Pin an Netz GPI3
+WARNUNG: Nur 1 Pin an Netz GPO0
+WARNUNG: Nur 1 Pin an Netz GPO1
+WARNUNG: Nur 1 Pin an Netz GPO2
+WARNUNG: Nur 1 Pin an Netz GPO3
+WARNUNG: Nur 1 Pin an Netz GPX
+
+Board und Schaltplan sind konsistent
+
+    4 Fehler
+   18 Warnungen

@@ -1,0 +1,24 @@
+EAGLE Version 4.15 Copyright (c) 1988-2005 CadSoft
+
+Electrical Rule Check für C:/Programme/EAGLE-4.15/projects/AVR/ISP Adapter/LTP-ISP ADAPTER.sch am 26.11.2005 17:11:29 
+
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-2 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-3 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-11 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-12 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-13 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-14 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-15 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-16 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-17 M
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-G G2
+WARNUNG: Seite 1/1: Nicht angeschlossener Pin: X1-1 M
+WARNUNG: Nur 1 Pin an Netz N$8
+WARNUNG: Seite 1/1, Netz N$9: Wire überlappt Pin an Position (4.1 2.4)
+WARNUNG: Seite 1/1, Netz N$8: Wire überlappt Pin an Position (6.35 1.8)
+WARNUNG: Seite 1/1, Netz GND: Wire überlappt Pin an Position (0.2 0.2)
+
+Board und Schaltplan sind konsistent
+
+    0 Fehler
+   15 Warnungen
