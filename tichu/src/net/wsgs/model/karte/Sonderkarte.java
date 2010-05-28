@@ -1,4 +1,4 @@
-package net.wsgs.tichu.model.karte;
+package net.wsgs.model.karte;
 
 /**
  * Diese Klasse erweitert eine normale Karte zu einer Sonderkarte

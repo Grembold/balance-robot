@@ -1,9 +1,9 @@
-package net.wsgs.tichu.model.spieler;
+package net.wsgs.model.spieler;
 
 import java.util.List;
 
-import net.wsgs.tichu.model.karte.Karte;
-import net.wsgs.tichu.model.karte.Stich;
+import net.wsgs.model.karte.Karte;
+import net.wsgs.model.karte.Stich;
 
 public class Spieler {
 

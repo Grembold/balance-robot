@@ -1,4 +1,4 @@
-package net.wsgs.tichu.model.karte;
+package net.wsgs.model.karte;
 
 /**
  * Diese Klasse repräsentiert eine Spielkarte

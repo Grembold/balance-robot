@@ -1,7 +1,6 @@
-package net.wsgs.tichu.model.spiel;
+package net.wsgs.model.spiel;
 
-import net.wsgs.tichu.model.spieler.Team;
-
+import net.wsgs.model.spieler.Team;
 
 public class Spiel {
 	private Spielpartie spielpartie;

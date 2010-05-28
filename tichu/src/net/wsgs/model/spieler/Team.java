@@ -1,4 +1,4 @@
-package net.wsgs.tichu.model.spieler;
+package net.wsgs.model.spieler;
 
 public class Team {
 

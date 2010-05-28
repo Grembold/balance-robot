@@ -1,8 +1,8 @@
-package net.wsgs.tichu.model.spiel;
+package net.wsgs.model.spiel;
 
 import java.util.List;
 
-import net.wsgs.tichu.model.spieler.Spieler;
+import net.wsgs.model.spieler.Spieler;
 
 public class Spielpartie {
 	private List<Spieler> spieler;
