@@ -20,6 +20,7 @@ public class Tichu {
 		// Spieler mit dem Mahjongg (Die 1) fängt an und darf sich eine Karte
 		// wünschen
 
+		// [Runden Beginn]
 		// Der Spieler beginnt die Runde und legt eine Kartenkombination (oder
 		// eine Einzelkarte)
 
@@ -30,9 +31,10 @@ public class Tichu {
 		 * 
 		 * [ENDE] Wenn drei Spieler infolge Passen.
 		 */
-		
-		// Punkte werden gezählt und dem Team des Spielers zugewiesen der nicht gepasst hat.
-		
+
+		// Punkte werden gezählt und dem Team des Spielers zugewiesen der nicht
+		// gepasst hat.
+
 		// Dieser Spieler beginnt die nächste Runde.
 	}
 
