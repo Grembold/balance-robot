@@ -48,6 +48,7 @@ public class KartenManager {
 				kartenMitGleichenWert.add(karte);
 			else {
 
+				// Karten vom gleichem Wert durchlaufen
 				for (Karte k1 : kartenMitGleichenWert) {
 					for (Karte k2 : kartenMitGleichenWert) {
 						// Keine Kombination mit sich selber möglich
