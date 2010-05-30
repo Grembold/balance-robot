@@ -5,7 +5,7 @@ package net.wsgs.model.karte;
  * 
  * @author Arne
  */
-public class Karte {
+public class Karte implements Comparable<Karte> {
 
 	private Kartenfarbe farbe;
 	private int wert;
@@ -40,6 +40,23 @@ public class Karte {
 
 	public void setPunkte(int punkte) {
 		this.punkte = punkte;
+	}
+
+	public boolean equals(Object other) {
+		if (other instanceof Karte) {
+			Karte k = (Karte) other;
+
+			return k.wert == this.wert;
+		}
+		return false;
+	}
+
+	public String toString() {
+		return this.wert + "(" + farbe.toString() + ")";
+	}
+	
+	public int compareTo(Karte other){
+		return this.wert - other.wert;
 	}
 
 }
