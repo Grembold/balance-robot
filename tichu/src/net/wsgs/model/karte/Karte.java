@@ -11,11 +11,18 @@ public class Karte implements Comparable<Karte> {
 	private int wert;
 	private int punkte;
 
-	public Karte(Kartenfarbe farbe, int wert, int punkte) {
+	public Karte(Kartenfarbe farbe, int wert) {
 		super();
 		this.farbe = farbe;
 		this.wert = wert;
-		this.punkte = punkte;
+
+		if (wert == 5) {
+			this.punkte = 5;
+		} else if (wert == 10) {
+			this.punkte = 10;
+		} else {
+			this.punkte = 0;
+		}
 	}
 
 	public Kartenfarbe getFarbe() {
@@ -54,8 +61,8 @@ public class Karte implements Comparable<Karte> {
 	public String toString() {
 		return this.wert + "(" + farbe.toString() + ")";
 	}
-	
-	public int compareTo(Karte other){
+
+	public int compareTo(Karte other) {
 		return this.wert - other.wert;
 	}
 

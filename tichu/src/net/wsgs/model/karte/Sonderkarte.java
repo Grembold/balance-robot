@@ -19,10 +19,29 @@ public class Sonderkarte extends Karte {
 
 	private SonderkartenTyp typ;
 
-	public Sonderkarte(Kartenfarbe farbe, int wert, int punkte,
-			SonderkartenTyp typ) {
-		super(farbe, wert, punkte);
+	public Sonderkarte(SonderkartenTyp typ) {
+		super(null, 0);
 		this.typ = typ;
+		
+		// Kartenwert setzen
+		switch (typ) {
+		case HUND:
+			setWert(0);
+			break;
+		case DRACHE:
+			setWert(25);
+			break;
+		case PHOENIX:
+			setWert(-25);
+			break;
+		case MAHJONGG:
+			setWert(0);
+			break;
+		default:
+			throw new RuntimeException("Unbekannter KartenTyp");
+		}
+		
+		//TODO KartenwPunkte setzten
 	}
 
 	public SonderkartenTyp getTyp() {

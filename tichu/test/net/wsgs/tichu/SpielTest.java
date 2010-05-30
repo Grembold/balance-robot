@@ -26,7 +26,7 @@ public class SpielTest {
 		generateSpielerAndTeams();
 
 	}
-
+	
 	private List<Spieler> generateSpielerAndTeams() {
 		Team teamA = new Team("TeamA", 0);
 		Team teamB = new Team("TeamB", 0);
@@ -43,4 +43,5 @@ public class SpielTest {
 
 		return spieler;
 	}
+	
 }

@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import net.wsgs.model.karte.Karte;
+import net.wsgs.model.karte.Kartenfarbe;
+import net.wsgs.model.karte.Sonderkarte;
+import net.wsgs.model.karte.SonderkartenTyp;
 
 public class KartenManager {
 
@@ -44,7 +47,7 @@ public class KartenManager {
 
 			// Alle Karten mit gleiche Wert zusammensammeln
 			if (kartenMitGleichenWert.isEmpty()
-					&& kartenMitGleichenWert.get(0).equals(karte))
+					|| kartenMitGleichenWert.get(0).equals(karte))
 				kartenMitGleichenWert.add(karte);
 			else {
 
@@ -63,5 +66,30 @@ public class KartenManager {
 				}
 			}
 		}
+	}
+
+	public List<Karte> getGesamtesKartenDeck() {
+		List<Karte> alleKarten = new ArrayList<Karte>();
+		/*
+		 * Für alle KartenFarben eine Karte mit den Werte von 2 bis 14
+		 * anlengen.<br> Die folgenden Codezeilen könnte man in prosa wie folgt
+		 * aus sprechen.<br> Durchlaufe alle Werte die es als Kartenfabe gibt.
+		 * Die jeweilige Farbe sei <code>farbe</code>.<br> Durchlaufe die Werte
+		 * von 2 bis 14. Der jeweilige Wert sei i.<br> Füge der Liste
+		 * allerKarten eine neue Karte in der Farbe und dem Wert hinzu.
+		 */
+		for (Kartenfarbe farbe : Kartenfarbe.values()) {
+			for (int i = 2; i >= 14; i++) {
+				alleKarten.add(new Karte(farbe, i));
+			}
+		}
+
+		// Sonderkarten hinzufügen
+		alleKarten.add(new Sonderkarte(SonderkartenTyp.HUND));
+		alleKarten.add(new Sonderkarte(SonderkartenTyp.MAHJONGG));
+		alleKarten.add(new Sonderkarte(SonderkartenTyp.DRACHE));
+		alleKarten.add(new Sonderkarte(SonderkartenTyp.PHOENIX));
+
+		return alleKarten;
 	}
 }
