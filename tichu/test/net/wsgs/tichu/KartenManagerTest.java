@@ -1,6 +1,5 @@
 package net.wsgs.tichu;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +30,10 @@ public class KartenManagerTest {
 			List<Karte> karten = iterator.next();
 			if (karten.size() == 2) {
 				kombinationenMitZweiKarten.add(karten);
+				for(Karte k3 : karten){
+					System.out.print(k3.toString() + "  --  " );
+				}
+				System.out.println("");
 			}
 		}
 
@@ -39,6 +42,6 @@ public class KartenManagerTest {
 		 */
 		// Anzahl der Pärchen prüfen. 6 Paare pro Wert * 13 verschiedene Werte +
 		// 13 mit Phoenix
-		assertEquals(91, kombinationen.size());
+		assertEquals(130, kombinationen.size());
 	}
 }

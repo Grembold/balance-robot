@@ -1,5 +1,6 @@
 package net.wsgs.model.spieler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.wsgs.model.karte.Karte;
@@ -13,14 +14,18 @@ public class Spieler {
 	private SpielerAnsage ansage;
 	private List<Stich> stiche;
 
-	public Spieler(String name, Team team, List<Karte> karten,
-			SpielerAnsage ansage, List<Stich> stiche) {
+	public Spieler(String name, Team team) {
 		super();
 		this.name = name;
 		this.team = team;
-		this.karten = karten;
-		this.ansage = ansage;
-		this.stiche = stiche;
+		this.karten = new ArrayList<Karte>();
+		this.ansage = SpielerAnsage.KEINE;
+		this.stiche = new ArrayList<Stich>();
+	}
+
+	public Spieler(String string, Team teamA, ArrayList<Karte> arrayList,
+			SpielerAnsage keine, ArrayList<Stich> arrayList2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {

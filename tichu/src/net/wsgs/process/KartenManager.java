@@ -25,26 +25,45 @@ public class KartenManager {
 		erlaubteZwillingeErmitteln(karten, alleErlaubtenKombinationen);
 
 		// TODO Erlaubte Drillinge hinzufügen
+		erlaubteDrillingeErmitteln(karten, alleErlaubtenKombinationen);
 		// TODO Erlaubte FullHouse hinzufügen
 		// TODO Erlaubte Straßen hinzufügen
 		// TODO Erlaubte Treppen hinzufügen
 
 		return alleErlaubtenKombinationen;
 	}
+	
+	/**
+	 * TODO Tobi!!
+	 * @param karten
+	 * @param alleErlaubtenKombinationen
+	 */
+	private void erlaubteDrillingeErmitteln(List<Karte> karten,
+			List<List<Karte>> alleErlaubtenKombinationen) {
+		
+		
+		
+	}
 
 	/**
 	 * Ermitteln alle erlaubten Paare/Zwillinge und fügt diese der Liste aller
-	 * erlaubten Kartenkombinationen hinzu.
+	 * erlaubten Kartenkombinationen hinzu. Die übergebene Karten müssen
+	 * sortiert sein.
 	 * 
 	 * @param karten
 	 * @param alleErlaubtenKombinationen
 	 */
 	private void erlaubteZwillingeErmitteln(List<Karte> karten,
 			List<List<Karte>> alleErlaubtenKombinationen) {
+		Sonderkarte phoenix = null;
+		
 		// Alle möglichen Zwillinge ermitteln
 		List<Karte> kartenMitGleichenWert = new ArrayList<Karte>();
 		for (Karte karte : karten) {
-
+			if(karte.getWert() == Sonderkarte.PHOENIX_WERT){
+				phoenix = (Sonderkarte) karte;
+			}
+			
 			// Alle Karten mit gleiche Wert zusammensammeln
 			if (kartenMitGleichenWert.isEmpty()
 					|| kartenMitGleichenWert.get(0).equals(karte))
@@ -52,18 +71,38 @@ public class KartenManager {
 			else {
 
 				// Karten vom gleichem Wert durchlaufen
-				for (Karte k1 : kartenMitGleichenWert) {
-					for (Karte k2 : kartenMitGleichenWert) {
+				int kartenAnzahl = kartenMitGleichenWert.size();
+				for (int indexKarte1 = 0; indexKarte1 < kartenAnzahl; indexKarte1++) {
+					Karte k1 = kartenMitGleichenWert.get(indexKarte1);
+					for (int indexKarte2 = indexKarte1; indexKarte2 < kartenAnzahl; indexKarte2++) {
+						Karte k2 = kartenMitGleichenWert.get(indexKarte2);
+						
 						// Keine Kombination mit sich selber möglich
-						if (karte.equals(k1))
+						if (k2.getFarbe() == null || k1.getFarbe() == null || k2.getFarbe().equals(k1.getFarbe()))
 							continue;
-						List<Karte> paarKombination = new ArrayList<Karte>();
+												
+						List<Karte> paarKombination = new ArrayList<Karte>(2);
 						paarKombination.add(k1);
 						paarKombination.add(k2);
 
 						alleErlaubtenKombinationen.add(paarKombination);
 					}
 				}
+				kartenMitGleichenWert = new ArrayList<Karte>();
+				kartenMitGleichenWert.add(karte);
+			}
+		}
+		
+		if(phoenix != null){
+			for (Karte karte : karten) {
+				if(karte instanceof Sonderkarte)
+					continue;
+				
+				List<Karte> paarKombination = new ArrayList<Karte>(2);
+				paarKombination.add(karte);
+				paarKombination.add(phoenix);
+	
+				alleErlaubtenKombinationen.add(paarKombination);
 			}
 		}
 	}
@@ -79,7 +118,7 @@ public class KartenManager {
 		 * allerKarten eine neue Karte in der Farbe und dem Wert hinzu.
 		 */
 		for (Kartenfarbe farbe : Kartenfarbe.values()) {
-			for (int i = 2; i >= 14; i++) {
+			for (int i = 2; i <= 14; i++) {
 				alleKarten.add(new Karte(farbe, i));
 			}
 		}

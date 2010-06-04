@@ -26,22 +26,24 @@ public class Sonderkarte extends Karte {
 		// Kartenwert setzen
 		switch (typ) {
 		case HUND:
-			setWert(0);
+			setPunkte(0);
+			setWert(HUND_WERT);
 			break;
 		case DRACHE:
-			setWert(25);
+			setPunkte(25);
+			setWert(DRACHEN_WERT);
 			break;
 		case PHOENIX:
-			setWert(-25);
+			setPunkte(-25);
+			setWert(PHOENIX_WERT);
 			break;
 		case MAHJONGG:
-			setWert(0);
+			setPunkte(0);
+			setWert(MAHJONGG_WERT);
 			break;
 		default:
 			throw new RuntimeException("Unbekannter KartenTyp");
 		}
-		
-		//TODO KartenwPunkte setzten
 	}
 
 	public SonderkartenTyp getTyp() {
@@ -50,6 +52,10 @@ public class Sonderkarte extends Karte {
 
 	public void setTyp(SonderkartenTyp typ) {
 		this.typ = typ;
+	}
+	
+	public String toString(){
+		return this.typ.toString();
 	}
 
 }

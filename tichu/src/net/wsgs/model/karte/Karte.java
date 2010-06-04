@@ -18,7 +18,7 @@ public class Karte implements Comparable<Karte> {
 
 		if (wert == 5) {
 			this.punkte = 5;
-		} else if (wert == 10) {
+		} else if (wert == 10 || wert == 13) {
 			this.punkte = 10;
 		} else {
 			this.punkte = 0;
