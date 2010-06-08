@@ -41,9 +41,8 @@ public class KartenManagerTest {
 			List<Karte> karten = iterator.next();
 			if (karten.size() == 2) {
 				kombinationenMitZweiKarten.add(karten);
-				System.out.println(String.format("%14s %14s", 
-						karten.get(0).toString(), 
-						karten.get(1).toString()));
+				System.out.println(String.format("%14s %14s", karten.get(0)
+						.toString(), karten.get(1).toString()));
 			}
 		}
 
@@ -77,10 +76,9 @@ public class KartenManagerTest {
 			List<Karte> karten = iterator.next();
 			if (karten.size() == 3) {
 				kombinationenMitDreiKarten.add(karten);
-				System.out.println(String.format("%14s %14s %14s", 
-						karten.get(0).toString(), 
-						karten.get(1).toString(), 
-						karten.get(2).toString()));
+				System.out.println(String.format("%14s %14s %14s", karten
+						.get(0).toString(), karten.get(1).toString(), karten
+						.get(2).toString()));
 			}
 		}
 
@@ -93,7 +91,6 @@ public class KartenManagerTest {
 		assertEquals(130, kombinationenMitDreiKarten.size());
 	}
 
-	
 	@Test
 	public void testGetAllowKartenkombinatinenVierlinge() {
 		// ein gesammtes KartenDeck holen
@@ -110,11 +107,9 @@ public class KartenManagerTest {
 			List<Karte> karten = iterator.next();
 			if (karten.size() == 4) {
 				kombinationenMitDreiKarten.add(karten);
-				System.out.println(String.format("%14s %14s %14s %14s", 
-						karten.get(0).toString(), 
-						karten.get(1).toString(), 
-						karten.get(2).toString(),
-						karten.get(3).toString()));
+				System.out.println(String.format("%14s %14s %14s %14s", karten
+						.get(0).toString(), karten.get(1).toString(), karten
+						.get(2).toString(), karten.get(3).toString()));
 			}
 		}
 
@@ -125,4 +120,37 @@ public class KartenManagerTest {
 		// Werte + 52 Drillinge mit Phoenix
 		assertEquals(65, kombinationenMitDreiKarten.size());
 	}
+
+	@Test
+	public void testGetAllowKartenkombinatinenFuenferStrasse() {
+		// ein gesammtes KartenDeck holen
+		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
+
+		// Alle möglichen Kartenkombinationen ermitteln
+		List<List<Karte>> kombinationen = kartenManager
+				.getAllowKartenkombinationen(deck);
+
+		// Nur Kombinationen betrachen die 5 Karten beinhalten
+		Iterator<List<Karte>> iterator = kombinationen.iterator();
+		List<List<Karte>> kombinationenMitDreiKarten = new ArrayList<List<Karte>>();
+		while (iterator.hasNext()) {
+			List<Karte> karten = iterator.next();
+			if (karten.size() == 5) {
+				kombinationenMitDreiKarten.add(karten);
+				System.out.println(String.format("%14s %14s %14s %14s %14s",
+						karten.get(0).toString(), karten.get(1).toString(),
+						karten.get(2).toString(), karten.get(3).toString(),
+						karten.get(4).toString()));
+			}
+		}
+
+		/*
+		 * Prüfen ob auch alles richtig ist!
+		 */
+		/*
+		 * Es gibt: 9472 ohne Phoenix davon Strassen mit Mahjongg gibt es: 256
+		 */
+		assertEquals(21248, kombinationenMitDreiKarten.size());
+	}
+
 }

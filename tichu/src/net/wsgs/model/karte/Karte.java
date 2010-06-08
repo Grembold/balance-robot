@@ -53,7 +53,7 @@ public class Karte implements Comparable<Karte> {
 		if (other instanceof Karte) {
 			Karte k = (Karte) other;
 
-			return k.wert == this.wert;
+			return k.wert == this.wert && k.farbe == this.farbe;
 		}
 		return false;
 	}

@@ -32,17 +32,16 @@ public class KartenManager {
 
 		return alleErlaubtenKombinationen;
 	}
-	
+
 	/**
 	 * TODO Tobi!!
+	 * 
 	 * @param karten
 	 * @param alleErlaubtenKombinationen
 	 */
 	private void erlaubteDrillingeErmitteln(List<Karte> karten,
 			List<List<Karte>> alleErlaubtenKombinationen) {
-		
-		
-		
+
 	}
 
 	/**
@@ -56,17 +55,18 @@ public class KartenManager {
 	private void erlaubteZwillingeErmitteln(List<Karte> karten,
 			List<List<Karte>> alleErlaubtenKombinationen) {
 		Sonderkarte phoenix = null;
-		
+
 		// Alle möglichen Zwillinge ermitteln
 		List<Karte> kartenMitGleichenWert = new ArrayList<Karte>();
 		for (Karte karte : karten) {
-			if(karte.getWert() == Sonderkarte.PHOENIX_WERT){
+			if (karte.getWert() == Sonderkarte.PHOENIX_WERT) {
 				phoenix = (Sonderkarte) karte;
 			}
-			
+
 			// Alle Karten mit gleiche Wert zusammensammeln
 			if (kartenMitGleichenWert.isEmpty()
-					|| kartenMitGleichenWert.get(0).equals(karte))
+					|| kartenMitGleichenWert.get(0).getWert() == karte
+							.getWert())
 				kartenMitGleichenWert.add(karte);
 			else {
 
@@ -76,11 +76,12 @@ public class KartenManager {
 					Karte k1 = kartenMitGleichenWert.get(indexKarte1);
 					for (int indexKarte2 = indexKarte1; indexKarte2 < kartenAnzahl; indexKarte2++) {
 						Karte k2 = kartenMitGleichenWert.get(indexKarte2);
-						
+
 						// Keine Kombination mit sich selber möglich
-						if (k2.getFarbe() == null || k1.getFarbe() == null || k2.getFarbe().equals(k1.getFarbe()))
+						if (k2.getFarbe() == null || k1.getFarbe() == null
+								|| k2.getFarbe().equals(k1.getFarbe()))
 							continue;
-												
+
 						List<Karte> paarKombination = new ArrayList<Karte>(2);
 						paarKombination.add(k1);
 						paarKombination.add(k2);
@@ -92,16 +93,16 @@ public class KartenManager {
 				kartenMitGleichenWert.add(karte);
 			}
 		}
-		
-		if(phoenix != null){
+
+		if (phoenix != null) {
 			for (Karte karte : karten) {
-				if(karte instanceof Sonderkarte)
+				if (karte instanceof Sonderkarte)
 					continue;
-				
+
 				List<Karte> paarKombination = new ArrayList<Karte>(2);
 				paarKombination.add(karte);
 				paarKombination.add(phoenix);
-	
+
 				alleErlaubtenKombinationen.add(paarKombination);
 			}
 		}
