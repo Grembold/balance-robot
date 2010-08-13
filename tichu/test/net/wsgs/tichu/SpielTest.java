@@ -21,8 +21,11 @@ public class SpielTest {
 
 	@Test
 	public void testSpiel() {
+		// Alle vier Spieler anlegen und in zwei Teams verteilen.
+		List<Spieler> spieler = generateSpielerAndTeams();
 		
-		generateSpielerAndTeams();
+		// Kartengeben.
+		
 
 	}
 	
