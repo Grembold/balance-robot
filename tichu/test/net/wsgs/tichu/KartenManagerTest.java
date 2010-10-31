@@ -8,7 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.wsgs.model.karte.Karte;
+import net.wsgs.model.karte.Kartenfarbe;
+import net.wsgs.model.karte.Sonderkarte;
+import net.wsgs.model.karte.SonderkartenTyp;
 import net.wsgs.process.KartenManager;
+import net.wsgs.util.KartenUtil;
 
 import org.junit.Test;
 
@@ -21,8 +25,41 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Prüfung ob im Deck 56 Karten enthalten sind
+		// Prï¿½fung ob im Deck 56 Karten enthalten sind
 		assertEquals(56, deck.size());
+	}
+
+	@Test
+	public void testErlaubteDrillingeErmitteln() {
+		// ein gesammtes KartenDeck holen
+		List<Karte> handKarten = new ArrayList<Karte>();
+		handKarten.add(new Karte(Kartenfarbe.BLAU, 1));
+		handKarten.add(new Karte(Kartenfarbe.GRUEN, 1));
+		handKarten.add(new Karte(Kartenfarbe.ROT, 1));
+		handKarten.add(new Karte(Kartenfarbe.SCHWARTZ, 1));
+
+		List<List<Karte>> erlaubteDrillinge = new ArrayList<List<Karte>>();
+		kartenManager.erlaubteDrillingeErmitteln(handKarten, erlaubteDrillinge);
+
+		System.out.println("Die erlaubten Drillinge fÃ¼r die Karten: "
+				+ KartenUtil.kartenListToString(handKarten));
+		for (List<Karte> kompi : erlaubteDrillinge) {
+			System.out.println(KartenUtil.kartenListToString(kompi));
+		}
+		assertEquals(4, erlaubteDrillinge.size());
+
+		// jetzt mit Phoenix
+		handKarten.add(new Sonderkarte(SonderkartenTyp.PHOENIX));
+
+		erlaubteDrillinge = new ArrayList<List<Karte>>();
+		kartenManager.erlaubteDrillingeErmitteln(handKarten, erlaubteDrillinge);
+
+		System.out.println("Die erlaubten Drillinge fÃ¼r die Karten: "
+				+ KartenUtil.kartenListToString(handKarten));
+		for (List<Karte> kompi : erlaubteDrillinge) {
+			System.out.println(KartenUtil.kartenListToString(kompi));
+		}
+		assertEquals(10, erlaubteDrillinge.size());
 	}
 
 	@Test
@@ -30,7 +67,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle möglichen Kartenkombinationen ermitteln
+		// Alle mï¿½glichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -47,13 +84,13 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Prüfen ob auch alles richtig ist!
+		 * Prï¿½fen ob auch alles richtig ist!
 		 */
-		// Anzahl der Pärchen prüfen. 6 Paare pro Wert * 13 verschiedene Werte +
+		// Anzahl der Pï¿½rchen prï¿½fen. 6 Paare pro Wert * 13 verschiedene Werte +
 		// 13 mit Phoenix
 		assertEquals(130, kombinationenMitZweiKarten.size());
 
-		// Es dürfen keine Pärchen existieren, wo beide Karten die gleiche Farbe
+		// Es dï¿½rfen keine Pï¿½rchen existieren, wo beide Karten die gleiche Farbe
 		// haben.
 		for (List<Karte> kombi : kombinationenMitZweiKarten) {
 			assertTrue(!(kombi.get(0).getFarbe() == kombi.get(1).getFarbe()));
@@ -65,7 +102,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle möglichen Kartenkombinationen ermitteln
+		// Alle mï¿½glichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -83,9 +120,9 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Prüfen ob auch alles richtig ist!
+		 * Prï¿½fen ob auch alles richtig ist!
 		 */
-		// Anzahl der Drillinge prüfen. 4 Drillinge pro Wert * 13 verschiedene
+		// Anzahl der Drillinge prï¿½fen. 4 Drillinge pro Wert * 13 verschiedene
 		// Werte +
 		// 78 Zwillinge mit Phoenix
 		assertEquals(130, kombinationenMitDreiKarten.size());
@@ -96,7 +133,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle möglichen Kartenkombinationen ermitteln
+		// Alle mï¿½glichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -114,9 +151,9 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Prüfen ob auch alles richtig ist!
+		 * Prï¿½fen ob auch alles richtig ist!
 		 */
-		// Anzahl der Vierlinge prüfen. 1 Vierling pro Wert * 13 verschiedene
+		// Anzahl der Vierlinge prï¿½fen. 1 Vierling pro Wert * 13 verschiedene
 		// Werte + 52 Drillinge mit Phoenix
 		assertEquals(65, kombinationenMitDreiKarten.size());
 	}
@@ -126,7 +163,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle möglichen Kartenkombinationen ermitteln
+		// Alle mï¿½glichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -145,7 +182,7 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Prüfen ob auch alles richtig ist!
+		 * Prï¿½fen ob auch alles richtig ist!
 		 */
 		/*
 		 * Es gibt: 9472 ohne Phoenix davon Strassen mit Mahjongg gibt es: 256

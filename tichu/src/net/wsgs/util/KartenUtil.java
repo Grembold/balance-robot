@@ -13,7 +13,7 @@ public class KartenUtil {
 			return "LEER";
 		String komiInStrng = "";
 		for (int i = 0; i < kombi.size(); i++) {
-			komiInStrng += String.format("%14s ", kombi.get(0).toString());
+			komiInStrng += String.format("%14s ", kombi.get(i).toString());
 		}
 		return komiInStrng;
 	}
@@ -28,7 +28,7 @@ public class KartenUtil {
 		if (kombi == null || kombi.size() < 5)
 			return false;
 
-		// Pr�fen ob das eine Strasse ist
+		// Prüfen ob das eine Strasse ist
 		Collections.sort(kombi);
 		int ersterWert = 0;
 		boolean isStrasse = true;
