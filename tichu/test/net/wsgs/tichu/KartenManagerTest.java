@@ -45,6 +45,7 @@ public class KartenManagerTest {
 				+ KartenUtil.kartenListToString(handKarten));
 		for (List<Karte> kompi : erlaubteDrillinge) {
 			System.out.println(KartenUtil.kartenListToString(kompi));
+			assertEquals(3, kompi.size());
 		}
 		assertEquals(4, erlaubteDrillinge.size());
 
@@ -58,6 +59,7 @@ public class KartenManagerTest {
 				+ KartenUtil.kartenListToString(handKarten));
 		for (List<Karte> kompi : erlaubteDrillinge) {
 			System.out.println(KartenUtil.kartenListToString(kompi));
+			assertEquals(3, kompi.size());
 		}
 		assertEquals(10, erlaubteDrillinge.size());
 	}
