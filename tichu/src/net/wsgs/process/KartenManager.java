@@ -2,7 +2,9 @@ package net.wsgs.process;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.wsgs.model.karte.Karte;
 import net.wsgs.model.karte.Kartenfarbe;
@@ -41,6 +43,69 @@ public class KartenManager {
 	 */
 	private void erlaubteDrillingeErmitteln(List<Karte> karten,
 			List<List<Karte>> alleErlaubtenKombinationen) {
+		if (karten.size() > 14) {
+			System.err
+					.println("Es konnten nicht alle Drillinge ermittelt werden");
+			return;
+		}
+		Sonderkarte phoenix = null;
+		Map<Integer, List<Karte>> sortierstapel = new HashMap<Integer, List<Karte>>();
+
+		for (Karte k : karten) {
+			// Wir hatten schon mal eine Karte mit diesem Wert
+			if (sortierstapel.containsKey(k.getWert())) {
+				List<Karte> stapel = sortierstapel.get(k.getWert());
+				stapel.add(k);
+			} else {
+				// Wir hatten noch keine Karte mit diesem Wert
+				List<Karte> neuerStapel = new ArrayList<Karte>();
+				neuerStapel.add(k);
+				sortierstapel.put(k.getWert(), neuerStapel);
+			}
+
+		}
+		// Hatten wir einen Phönix?
+		if (sortierstapel.containsKey(Sonderkarte.PHOENIX_WERT)) {
+			phoenix = (Sonderkarte) sortierstapel.get(Sonderkarte.PHOENIX_WERT)
+					.get(0);
+		}
+		// Sortierstapel durchgehen
+		for (List<Karte> stapel : sortierstapel.values()) {
+			// Ohne Phönix
+			if (phoenix == null) {
+				if (stapel.size() == 3) {
+					// für 3 Karten
+					alleErlaubtenKombinationen.add(stapel);
+				} else if (stapel.size() == 4) {
+					// für 4 Karten
+					List<Karte> dieKombination = new ArrayList<Karte>();
+					for (int i = 0; i < 4; i++) {
+						dieKombination.addAll(stapel);
+						dieKombination.remove(i);
+						alleErlaubtenKombinationen.add(dieKombination);
+					}
+				}
+			} else {
+				// Mit Phönix
+				stapel.add(phoenix);
+				if (stapel.size() == 3) {
+					alleErlaubtenKombinationen.add(stapel);
+				} else if (stapel.size() == 4) {
+					List<Karte> dieKombination = new ArrayList<Karte>();
+					for (int i = 0; i < 4; i++) {
+						dieKombination.addAll(stapel);
+						dieKombination.remove(i);
+						alleErlaubtenKombinationen.add(dieKombination);
+					}
+				} else if (stapel.size() == 5) {
+for (int x = 0; x < 5; x++){
+	for (int y = 0; y < 4 ; y++){
+		
+	}
+}
+				}
+			}
+		}
 
 	}
 
