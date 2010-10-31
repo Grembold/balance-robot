@@ -41,7 +41,7 @@ public class KartenManager {
 	 * @param karten
 	 * @param alleErlaubtenKombinationen
 	 */
-	private void erlaubteDrillingeErmitteln(List<Karte> karten,
+	public void erlaubteDrillingeErmitteln(List<Karte> karten,
 			List<List<Karte>> alleErlaubtenKombinationen) {
 		if (karten.size() > 14) {
 			System.err
