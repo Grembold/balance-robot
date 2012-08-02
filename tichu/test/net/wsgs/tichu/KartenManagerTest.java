@@ -25,7 +25,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Pr�fung ob im Deck 56 Karten enthalten sind
+		// Prüfung ob im Deck 56 Karten enthalten sind
 		assertEquals(56, deck.size());
 	}
 
@@ -69,7 +69,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle m�glichen Kartenkombinationen ermitteln
+		// Alle möglichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -86,13 +86,13 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Pr�fen ob auch alles richtig ist!
+		 * Prüfen ob auch alles richtig ist!
 		 */
-		// Anzahl der P�rchen pr�fen. 6 Paare pro Wert * 13 verschiedene Werte +
+		// Anzahl der Pärchen prüfen. 6 Paare pro Wert * 13 verschiedene Werte +
 		// 13 mit Phoenix
 		assertEquals(130, kombinationenMitZweiKarten.size());
 
-		// Es d�rfen keine P�rchen existieren, wo beide Karten die gleiche Farbe
+		// Es dürfen keine Pärchen existieren, wo beide Karten die gleiche Farbe
 		// haben.
 		for (List<Karte> kombi : kombinationenMitZweiKarten) {
 			assertTrue(!(kombi.get(0).getFarbe() == kombi.get(1).getFarbe()));
@@ -104,7 +104,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle m�glichen Kartenkombinationen ermitteln
+		// Alle möglichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -122,9 +122,9 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Pr�fen ob auch alles richtig ist!
+		 * Prüfen ob auch alles richtig ist!
 		 */
-		// Anzahl der Drillinge pr�fen. 4 Drillinge pro Wert * 13 verschiedene
+		// Anzahl der Drillinge pröfen. 4 Drillinge pro Wert * 13 verschiedene
 		// Werte +
 		// 78 Zwillinge mit Phoenix
 		assertEquals(130, kombinationenMitDreiKarten.size());
@@ -135,7 +135,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle m�glichen Kartenkombinationen ermitteln
+		// Alle möglichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -153,9 +153,9 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Pr�fen ob auch alles richtig ist!
+		 * Prüfen ob auch alles richtig ist!
 		 */
-		// Anzahl der Vierlinge pr�fen. 1 Vierling pro Wert * 13 verschiedene
+		// Anzahl der Vierlinge Prüfen. 1 Vierling pro Wert * 13 verschiedene
 		// Werte + 52 Drillinge mit Phoenix
 		assertEquals(65, kombinationenMitDreiKarten.size());
 	}
@@ -165,7 +165,7 @@ public class KartenManagerTest {
 		// ein gesammtes KartenDeck holen
 		List<Karte> deck = kartenManager.getGesamtesKartenDeck();
 
-		// Alle m�glichen Kartenkombinationen ermitteln
+		// Alle möglichen Kartenkombinationen ermitteln
 		List<List<Karte>> kombinationen = kartenManager
 				.getAllowKartenkombinationen(deck);
 
@@ -184,7 +184,7 @@ public class KartenManagerTest {
 		}
 
 		/*
-		 * Pr�fen ob auch alles richtig ist!
+		 * Prüfen ob auch alles richtig ist!
 		 */
 		/*
 		 * Es gibt: 9472 ohne Phoenix davon Strassen mit Mahjongg gibt es: 256

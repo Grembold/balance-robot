@@ -78,8 +78,8 @@ public class KartenManager {
 					alleErlaubtenKombinationen.add(stapel);
 				} else if (stapel.size() == 4) {
 					// für 4 Karten
-					List<Karte> dieKombination = new ArrayList<Karte>();
 					for (int i = 0; i < 4; i++) {
+						List<Karte> dieKombination = new ArrayList<Karte>();
 						dieKombination.addAll(stapel);
 						dieKombination.remove(i);
 						alleErlaubtenKombinationen.add(dieKombination);
@@ -91,18 +91,24 @@ public class KartenManager {
 				if (stapel.size() == 3) {
 					alleErlaubtenKombinationen.add(stapel);
 				} else if (stapel.size() == 4) {
-					List<Karte> dieKombination = new ArrayList<Karte>();
 					for (int i = 0; i < 4; i++) {
+						List<Karte> dieKombination = new ArrayList<Karte>();
 						dieKombination.addAll(stapel);
 						dieKombination.remove(i);
 						alleErlaubtenKombinationen.add(dieKombination);
 					}
 				} else if (stapel.size() == 5) {
-for (int x = 0; x < 5; x++){
-	for (int y = 0; y < 4 ; y++){
-		
-	}
-}
+					for (int x = 0; x < 5; x++) {
+						for (int y = 0; y < 5; y++) {
+							List<Karte> kombi = new ArrayList<Karte>();
+							kombi.addAll(stapel);
+							if (y < x) {
+								kombi.remove(x);
+								kombi.remove(y);
+								alleErlaubtenKombinationen.add(kombi);
+							}
+						}
+					}
 				}
 			}
 		}

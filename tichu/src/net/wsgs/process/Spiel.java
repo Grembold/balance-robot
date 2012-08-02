@@ -21,7 +21,7 @@ public class Spiel extends JFrame {
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation((d.width - getSize().width) / 2,
 				(d.height - getSize().height) / 2);
-		setSize(400, 300);
+		setSize(800, 600);
 		
 		// Alle Sternkarten als Button anlegen
 		List<JButton> sternKarten = new ArrayList<JButton>();
