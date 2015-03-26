@@ -1,0 +1,1 @@
+Bau eines zweirädrigen balancierenden Roboters nach Vorlage des nBot von Anderson; funktioniert nach dem Prinzip des invertierten Pendels.
